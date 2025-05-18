@@ -1,0 +1,8 @@
+grafana:
+  image:
+    repository: grafana/grafana
+    tag: "12.0.0"
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: false
