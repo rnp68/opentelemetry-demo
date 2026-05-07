@@ -1,0 +1,33 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Noop collector config: accepts all OTLP traffic and silently drops it.
+# Used by docker-compose.no-otel.yml to disable telemetry collection while
+# keeping the otelcol service running (so all depends_on: otelcol entries
+# are satisfied and services start without connection errors).
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+        cors:
+          allowed_origins:
+            - "http://*"
+            - "https://*"
+
+exporters:
+  debug:
+    verbosity: basic
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [debug]
+    metrics:
+      receivers: [otlp]
+      exporters: [debug]
+    logs:
+      receivers: [otlp]
+      exporters: [debug]

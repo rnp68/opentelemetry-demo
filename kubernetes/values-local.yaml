@@ -1,0 +1,37 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Helm values for running the OpenTelemetry Demo on Docker Desktop Kubernetes.
+# Full mode — all services enabled (app + Jaeger, Prometheus, Grafana, OpenSearch).
+#
+# Usage:
+#   make local-k8s
+#   # or manually:
+#   helm upgrade --install opentelemetry-demo open-telemetry/opentelemetry-demo \
+#     --namespace otel-demo --create-namespace \
+#     -f kubernetes/values-local.yaml
+#
+# After deploy, access the demo:
+#   kubectl port-forward -n otel-demo svc/opentelemetry-demo-frontend-proxy 8080:8080
+#   open http://localhost:8080
+#
+# To view available values:
+#   helm show values open-telemetry/opentelemetry-demo
+
+# Use ClusterIP for frontend-proxy — access via kubectl port-forward
+# NOTE: chart renamed `frontendProxy` → `frontend-proxy` (kebab-case) in recent versions.
+components:
+  frontend-proxy:
+    service:
+      type: ClusterIP
+
+# Keep all backends enabled (default). This section is here as a reference —
+# set any of these to false to disable a backend.
+# jaeger:
+#   enabled: true
+# prometheus:
+#   enabled: true
+# grafana:
+#   enabled: true
+# opensearch:
+#   enabled: true
