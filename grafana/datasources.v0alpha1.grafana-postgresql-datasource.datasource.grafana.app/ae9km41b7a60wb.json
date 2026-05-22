@@ -1,0 +1,28 @@
+{
+  "apiVersion": "grafana-postgresql-datasource.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "ae9km41b7a60wb",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "jsonData": {
+      "connMaxLifetime": 300,
+      "database": "postgres",
+      "enableSecureSocksProxy": true,
+      "maxIdleConns": 100,
+      "maxIdleConnsAuto": true,
+      "maxOpenConns": 100,
+      "postgresVersion": 1400,
+      "secureSocksProxyUsername": "0d1c8230-864b-4de7-9242-a796ddb064fc",
+      "sslmode": "disable",
+      "timeInterval": "1m"
+    },
+    "title": "grafana-postgresql-datasource",
+    "url": "grafana-intro-to-mltp-mythical-database-1:5432",
+    "user": "test"
+  }
+}

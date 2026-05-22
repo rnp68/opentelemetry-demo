@@ -1,0 +1,18 @@
+{
+  "apiVersion": "prometheus.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "be1r55wi4xgxsb",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "jsonData": {
+      "httpMethod": "POST"
+    },
+    "title": "workshop-deleteme",
+    "url": "http://52.87.173.6:9090/"
+  }
+}

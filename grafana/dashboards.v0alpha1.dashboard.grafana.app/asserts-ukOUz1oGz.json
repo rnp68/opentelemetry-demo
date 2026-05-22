@@ -1,0 +1,1899 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts-ukOUz1oGz",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.1.0-90058"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "uid": "$ds"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "enable": false,
+          "expr": "asserts:alerts{asserts_env=~\"$env\",asserts_site=~\"$site\",alertgroup=\"kubernetes_release.alerts\"}*1000",
+          "hide": false,
+          "iconColor": "rgba(255, 96, 96, 1)",
+          "name": "Config Changes",
+          "showIn": 0,
+          "tagKeys": "",
+          "textFormat": "workload:{{workload}}",
+          "titleFormat": "{{alertname}}",
+          "useValueForTime": true
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 1,
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": false,
+        "title": "Service",
+        "tooltip": "",
+        "type": "link",
+        "url": "/d/asserts-AtmF3moGk/service-kpi?var-ds=$ds\u0026var-job=$job\u0026var-workload=$workload\u0026var-env=$env\u0026var-site=$site\u0026var-namespace=$namespace"
+      }
+    ],
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 10,
+          "x": 0,
+          "y": 0
+        },
+        "id": 40,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "editorMode": "code",
+            "expr": "sum by (asserts_request_type) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\",asserts_request_type!=\"logger\"}[$__rate_interval])) * 60",
+            "interval": "",
+            "legendFormat": "{{asserts_request_type}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "avg_over_time((sum by (asserts_request_type) ({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_request_type!=\"logger\"}))[$__rate_interval:]) * 60",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{asserts_request_type}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Requests (per minute)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 10,
+          "x": 10,
+          "y": 0
+        },
+        "id": 42,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "1000 * ((sum by (asserts_request_type) (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) or sum by (asserts_request_type) (rate({asserts_metric_latency=\"milliseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))/1e3 or sum by (asserts_request_type) (rate({asserts_metric_latency=\"microseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))/1e6)\n/\n(sum by (asserts_request_type)\n  (rate({asserts_metric_latency=\"count\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) \u003e 0) or histogram_avg(sum by (asserts_request_type) (rate({asserts_metric_latency=\"native_histogram_seconds\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))))",
+            "interval": "",
+            "legendFormat": "{{asserts_request_type}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Avg Latency",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 4,
+          "x": 20,
+          "y": 0
+        },
+        "id": 44,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum by (asserts_error_type)(rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) * 60 ",
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "avg_over_time((sum by (asserts_error_type)({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}))[$__rate_interval:]) * 60 ",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "",
+            "refId": "B"
+          }
+        ],
+        "title": "Error Rate (per minute)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 0,
+          "y": 5
+        },
+        "id": 49,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by (container) (rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"}[5m])) / on(container) group_left() (sum by (container)(kube_pod_container_resource_limits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"cpu\"}) or sum by (container)(kube_pod_container_resource_requests{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"cpu\"})) * 100\n  or  \navg by (job)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", workload=\"\", job=\"$job\", instance=~\"$instance.*\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"})) * 100",
+            "interval": "",
+            "legendFormat": "{{container}}",
+            "refId": "A"
+          }
+        ],
+        "title": "CPU",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 6,
+          "y": 5
+        },
+        "id": 50,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "lastNotNull",
+              "max"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by (container) (container_memory_working_set_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"}) / on(container) group_left() (sum by (container)(kube_pod_container_resource_limits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"memory\"}) or sum by (container)(kube_pod_container_resource_requests{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"memory\"})) * 100\n  or  \navg by (job)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"memory:usage\", workload=\"\", job=\"$job\", instance=~\"$instance.*\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"})) * 100",
+            "interval": "",
+            "legendFormat": "{{container}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Memory",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 12,
+          "y": 5
+        },
+        "id": 51,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum(rate(container_network_receive_bytes_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", pod!=\"\", container!=\"ecs-dockerstats-exporter\"}[$__rate_interval]) and on(pod) group by(pod)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",instance=~\"$instance.*\"})) \n or \nsum(asserts:resource:rate5m{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"network:rx_bytes\", pod=\"\", job=\"$job\", instance=~\"$instance.*\"})",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Received",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 18,
+          "y": 5
+        },
+        "id": 52,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum(rate(container_network_transmit_bytes_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", pod!=\"\", container!=\"ecs-dockerstats-exporter\"}[$__rate_interval]) and on(pod) group by(pod)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",instance=~\"$instance.*\"})) \n or \nsum(asserts:resource:rate5m{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"network:tx_bytes\", pod=\"\", job=\"$job\", instance=~\"$instance.*\"})",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Transmitted",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 11
+        },
+        "id": 12,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 12
+            },
+            "id": 16,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum by(asserts_request_type, asserts_error_type) ({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\", instance=~\"$instance.*\"} * 100 ) / ignoring(asserts_error_type) group_left() (sum by(asserts_request_type) ({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"}))",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} - {{asserts_error_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "group by (alertname, asserts_request_type, asserts_request_context, asserts_error_type) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", instance=~\"$instance.*\", alertname=~\"(ErrorRatioAnomaly|ErrorRatioBreach)\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\"}) * 0.001",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "sum by(asserts_request_type, asserts_error_type) ({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\", instance=~\"$instance.*\"} * 100 ) / ignoring(asserts_error_type) group_left() (sum by(asserts_request_type) ({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"}))",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} - {{asserts_error_type}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Error Rate by Type and Error (%)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 10,
+              "w": 24,
+              "x": 0,
+              "y": 20
+            },
+            "id": 6,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum by(asserts_request_type, asserts_error_type) ({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\", instance=~\"$instance.*\"} * 100 ) / ignoring(asserts_error_type) group_left() (sum by(asserts_request_type) ({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"})) and (topk(3,sum by(asserts_request_type, asserts_error_type) ({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\", instance=~\"$instance.*\"} * 100 )))",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} -{{asserts_request_context}} - {{asserts_error_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "sum by(asserts_request_type, asserts_error_type) ({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\", instance=~\"$instance.*\"} * 100 ) / ignoring(asserts_error_type) group_left() (sum by(asserts_request_type) ({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"})) and (topk(3,sum by(asserts_request_type, asserts_error_type) ({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\", instance=~\"$instance.*\"} * 100 )))",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} -{{asserts_request_context}} - {{asserts_error_type}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Top Affected Requests (Error %)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 10,
+              "w": 24,
+              "x": 0,
+              "y": 30
+            },
+            "id": 2,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "60 * sum by (asserts_request_context, asserts_error_type, error_code)(label_replace(label_join(rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\", instance=~\"$instance.*\"}[5m]),\"error_detail\",\"-\",\"status\",\"exception\",\"code\",\"response_code\"),\"error_code\",\"$2\",\"error_detail\",\"(\\\\-+)?(.*?)(.None)?(\\\\-+)?\")) \u003e 0",
+                "interval": "",
+                "legendFormat": "{{asserts_request_context}} - {{asserts_error_type}}  {{error_code}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "clamp_min(asserts:request:rate5m:prediction_st{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} - asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left asserts:request:rate:threshold_by_stddev, 0) * 60",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "short-term prediction lower bound",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "(asserts:request:rate5m:prediction_st{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} + asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left asserts:request:rate:threshold_by_stddev) * 60",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "short-term prediction upper bound",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "clamp_min(asserts:request:rate5m:prediction_lt{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\",  asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} - asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\",  asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left asserts:request:rate:threshold_by_stddev, 0) * 60",
+                "interval": "",
+                "legendFormat": "long-term prediction lower band",
+                "refId": "D"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "(asserts:request:rate5m:prediction_lt{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} + asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\",  asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left  asserts:request:rate:threshold_by_stddev) * 60",
+                "interval": "",
+                "legendFormat": "long-term prediction upper band",
+                "refId": "E"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "60 * sum by (asserts_request_context, asserts_error_type, error_code)(label_replace(label_join(avg_over_time({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\", instance=~\"$instance.*\"}[5m]),\"error_detail\",\"-\",\"status\",\"exception\",\"code\",\"response_code\"),\"error_code\",\"$2\",\"error_detail\",\"(\\\\-+)?(.*?)(.None)?(\\\\-+)?\")) \u003e 0",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_context}} - {{asserts_error_type}}  {{error_code}}",
+                "refId": "F"
+              }
+            ],
+            "title": "Error Details",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Errors",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 12
+        },
+        "id": 18,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 13
+            },
+            "id": 22,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "editorMode": "code",
+                "expr": "sum by (job, asserts_request_type, asserts_request_context)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\", asserts_request_type!=\"logger\"}[$__rate_interval])) * 60 ",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} :: {{asserts_request_context}}",
+                "range": true,
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "clamp_min(sum by (job, asserts_request_type, asserts_request_context)(asserts:request:rate5m:prediction_lower{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_prediction_type=\"short_term\", job=\"$job\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"${request_context:raw}\", instance=~\"$instance.*\"}),0) * 60 ",
+                "interval": "",
+                "legendFormat": "short term prediction lower",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum by (job, asserts_request_type, asserts_request_context)(asserts:request:rate5m:prediction_upper{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_prediction_type=\"short_term\", job=\"$job\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"${request_context:raw}\", instance=\"$instance.*\"}) * 60 ",
+                "interval": "",
+                "legendFormat": "short term prediction upper",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "clamp_min(sum by (job, asserts_request_type, asserts_request_context)(asserts:request:rate5m:prediction_lower{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_prediction_type=\"long_term\", job=\"$job\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"${request_context:raw}\", instance=\"$instance.*\"}),0) * 60 ",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "long term prediction lower",
+                "refId": "D"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum by (job, asserts_request_type, asserts_request_context)(asserts:request:rate5m:prediction_upper{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_prediction_type=\"long_term\", job=\"$job\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"${request_context:raw}\", instance=\"$instance.*\"}) * 60 ",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "long term prediction upper",
+                "refId": "E"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "group by (asserts_request_type, asserts_request_context) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", alertname=\"RequestRateAnomaly\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=\"$instance.*\"}) * 0.001",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "RequestRateAnomaly::{{asserts_request_context}}",
+                "refId": "F"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "editorMode": "code",
+                "exemplar": true,
+                "expr": "avg_over_time((sum by (job, asserts_request_type, asserts_request_context)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\", asserts_request_type!=\"logger\"}))[$__rate_interval:]) * 60 ",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} :: {{asserts_request_context}}",
+                "range": true,
+                "refId": "G"
+              }
+            ],
+            "title": "Request Rate (cpm)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 21
+            },
+            "id": 20,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "1000 * ((sum by (job, asserts_request_type, asserts_request_context)(rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"}[$__rate_interval])) or sum by (job, asserts_request_type, asserts_request_context)(rate({asserts_metric_latency=\"milliseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"}[$__rate_interval]))/1e3 or sum by (job, asserts_request_type, asserts_request_context)(rate({asserts_metric_latency=\"microseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"}[$__rate_interval]))/1e6) /\n(sum by (job, asserts_request_type, asserts_request_context)(rate({asserts_metric_latency=\"count\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"}[$__rate_interval])) \u003e 0) or histogram_avg(sum by (job, asserts_request_type, asserts_request_context)(rate({asserts_metric_latency=\"native_histogram_seconds\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"}[$__rate_interval]))))",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} :: {{asserts_request_context}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "min by (job, asserts_request_type, asserts_request_context)(clamp_min(asserts:latency:average:prediction_lower{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_prediction_type=\"stddev\", job=\"$job\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"${request_context:raw}\", instance=~\"$instance.*\"},0)) * 1000",
+                "interval": "",
+                "legendFormat": "prediction lower bound",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "max by (job, asserts_request_type, asserts_request_context)(asserts:latency:average:prediction_upper{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_prediction_type=\"stddev\", job=\"$job\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"${request_context:raw}\", instance=~\"$instance.*\"}) * 1000",
+                "interval": "",
+                "legendFormat": "prediction upper bound",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "group by (asserts_request_type, asserts_request_context) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", alertname=\"LatencyAverageAnomaly\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"${request_context:raw}\", instance=~\"$instance.*\"}) * 0.001",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "LatencyAverageAnomaly",
+                "refId": "D"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "group by (asserts_request_type, asserts_request_context) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", alertname=\"LatencyAverageBreach\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"${request_context:raw}\", instance=~\"$instance.*\"}) * 0.001",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "LatencyAverageBreach",
+                "refId": "E"
+              }
+            ],
+            "title": "Avg Request Latency (ms)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 29
+            },
+            "id": 24,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "max by (job, asserts_request_type, asserts_request_context)(asserts:latency:p99{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"}) * 1000",
+                "interval": "",
+                "legendFormat": "p99 :: {{asserts_request_type}} :: {{asserts_request_context}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "group by (asserts_request_type, asserts_request_context) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", alertname=\"LatencyP99ErrorBuildup\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", instance=~\"$instance.*\"})",
+                "interval": "",
+                "legendFormat": "LatencyP99ErrorBuildup :: {{asserts_request_type}} :: {{asserts_request_context}}",
+                "refId": "C"
+              }
+            ],
+            "title": "P99 Latency (ms)",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Requests",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 13
+        },
+        "id": 56,
+        "panels": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 14
+            },
+            "id": 58,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "sum by (container) (rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"}[5m])) / on(container) group_left() (sum by (container)(kube_pod_container_resource_limits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"cpu\"}) or sum by (container)(kube_pod_container_resource_requests{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"cpu\"})) * 100\n  or  \navg by (job)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", workload=\"\", job=\"$job\", instance=~\"$instance.*\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"})) * 100",
+                "interval": "",
+                "legendFormat": "{{container}}",
+                "refId": "A"
+              }
+            ],
+            "title": "CPU",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 14
+            },
+            "id": 59,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "sum by (container) (container_memory_working_set_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"}) / on(container) group_left() (sum by (container)(kube_pod_container_resource_limits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"memory\"}) or sum by (container)(kube_pod_container_resource_requests{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"memory\"})) * 100\n  or  \navg by (job)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"memory:usage\", workload=\"\", job=\"$job\", instance=~\"$instance.*\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"})) * 100",
+                "interval": "",
+                "legendFormat": "{{container}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Memory",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "unit": "none"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 22
+            },
+            "id": 60,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (container) (rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container=~\"$container\",container!=\"POD\",container!=\"\",image!=\"\"}[5m]))\n or  \navg by (job)(asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", workload=\"\", job=\"$job\", instance=~\"$instance.*\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{container}} :: usage",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "avg by (container) (kube_pod_container_resource_requests{namespace=~\"$namespace\",resource=\"cpu\", asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", container=\"$container\"})",
+                "interval": "",
+                "legendFormat": "{{container}} :: requests",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (container) (kube_pod_container_resource_limits{namespace=~\"$namespace\",resource=\"cpu\", asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", container=\"$container\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{container}} :: limits",
+                "refId": "B"
+              }
+            ],
+            "title": "CPU Cores Used",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "unit": "bytes"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 22
+            },
+            "id": 61,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "editorMode": "code",
+                "expr": "avg by (container) (container_memory_working_set_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container=~\"$container\",container!=\"POD\",container!=\"\",image!=\"\"})\n  or  \navg by (job)(asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"memory:usage\", workload=\"\", job=\"$job\", instance=~\"$instance.*\"})",
+                "interval": "",
+                "legendFormat": "{{container}} :: usage",
+                "range": true,
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "avg by (container) (kube_pod_container_resource_requests{namespace=~\"$namespace\",resource=\"memory\", asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", pod!=\"\", container=\"$container\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{container}} :: requests",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (container) (kube_pod_container_resource_limits{namespace=~\"$namespace\",resource=\"memory\", asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", container=\"$container\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{container}} :: limits",
+                "refId": "C"
+              }
+            ],
+            "title": "Memory Total",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "unit": "none"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 30
+            },
+            "id": 62,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (container)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:throttle\", pod=\"$pod\", pod!=\"\", container!=\"ecs-dockerstats-exporter\"} and on(pod) asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", pod!=\"\", instance=~\"$instance.*\"})\n  or  \navg by (job)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:throttle\", workload=\"\", job=\"$job\", instance=~\"$instance.*\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"}))",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{container}}",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "group by (asserts_severity) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$workload\", alertname=\"Saturation\", asserts_resource_type=\"cpu:throttle\", pod=~\"$pod\"}) * .001",
+                "interval": "",
+                "legendFormat": "Saturation :: {{asserts_severity}}",
+                "refId": "A"
+              }
+            ],
+            "title": "CPU Throttle",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "unit": "none"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 30
+            },
+            "id": 63,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum(rate(container_network_receive_bytes_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", pod!=\"\", container!=\"ecs-dockerstats-exporter\"}[$__rate_interval]))\n or \nsum(asserts:resource:rate5m{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"network:rx_bytes\", pod=\"\", job=\"$job\", instance=~\"$instance.*\"})",
+                "interval": "",
+                "legendFormat": "{{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Network Received Bytes",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "unit": "none"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 38
+            },
+            "id": 64,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum by(persistentvolumeclaim) (asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"disk:usage\", workload=\"$workload\", workload!=\"\", pod=\"$pod\", pod!=\"\", container!=\"ecs-dockerstats-exporter\"})\n or\navg by(device)(avg by(ip,device)(label_replace(asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"\",asserts_resource_type=\"disk:usage\"},\"ip\",\"$1\",\"instance\",\"(.+?):.+\")) and on(ip) group by (ip)(label_replace(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", job=\"$job\", instance=\"$instance\", workload=\"\"},\"ip\",\"$1\",\"instance\",\"(.+?):.+\")))",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "Persistent Volume Claim :: {{persistentvolumeclaim}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Disk Utilization",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "unit": "none"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 38
+            },
+            "id": 65,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.4.7",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum(rate(container_network_transmit_bytes_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", pod!=\"\", container!=\"ecs-dockerstats-exporter\"}[$__rate_interval]))\n or \nsum(asserts:resource:rate5m{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"network:tx_bytes\", pod=\"\", job=\"$job\", instance=~\"$instance.*\"})",
+                "interval": "",
+                "legendFormat": "{{pod}} :: {{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Network Transmitted Bytes",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Resources",
+        "type": "row"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 41,
+    "tags": [
+      "asserts"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job, asserts_env)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$ds"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$ds"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, workload)",
+          "includeAll": false,
+          "name": "workload",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, workload)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\"}, job)",
+          "includeAll": false,
+          "name": "job",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\"}, job)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$ds"
+          },
+          "definition": "label_values(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",job=\"$job\"}, instance)",
+          "includeAll": false,
+          "multi": true,
+          "name": "instance",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",job=\"$job\"}, instance)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 2,
+          "regex": "(.+):.*",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\", instance=~\"$instance.*\"}, pod)",
+          "includeAll": false,
+          "name": "pod",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\", instance=~\"$instance.*\"}, pod)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$ds"
+          },
+          "definition": "label_values(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\", job=\"$job\"}, container)",
+          "includeAll": false,
+          "name": "container",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\", job=\"$job\"}, container)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type!=\"logger\"}, asserts_request_type)",
+          "includeAll": true,
+          "name": "request_type",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type!=\"logger\"}, asserts_request_type)",
+            "refId": "$ds-request_type-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$ds"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type=\"${request_type:raw}\"}, asserts_request_context)",
+          "includeAll": true,
+          "name": "request_context",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type=\"${request_type:raw}\"}, asserts_request_context)",
+            "refId": "$ds-request_context-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_error\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type=\"${request_type:raw}\"}, asserts_error_type)",
+          "includeAll": true,
+          "name": "error_type",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_error\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", asserts_request_type=\"${request_type:raw}\"}, asserts_error_type)",
+            "refId": "$ds-error_type-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ]
+    },
+    "timezone": "",
+    "title": "ServiceInstance KPI",
+    "weekStart": ""
+  }
+}

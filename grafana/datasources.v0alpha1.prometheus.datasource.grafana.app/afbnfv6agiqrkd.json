@@ -1,0 +1,14 @@
+{
+  "apiVersion": "prometheus.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": null,
+    "labels": {},
+    "name": "afbnfv6agiqrkd",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "title": "prometheus-2"
+  }
+}

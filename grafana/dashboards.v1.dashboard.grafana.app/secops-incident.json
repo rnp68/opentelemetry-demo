@@ -1,0 +1,596 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "fl7p6c",
+      "grafana.app/saved-from-ui": "Grafana Cloud"
+    },
+    "labels": {},
+    "name": "secops-incident",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Once an alert fires, Grafana IRM spins up a dedicated incident room and pipes the full context directly into ServiceNow — shifting your team from digging for data to mitigating the threat.",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 1,
+    "links": [],
+    "panels": [
+      {
+        "gridPos": {
+          "h": 4,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "## Incident Response — Grafana IRM → ServiceNow\n\nWhen the correlated alert fires, Grafana IRM automatically:\n1. **Creates a dedicated incident room** with full context (host, CVE, threat name, CVSS score, analyst assignments)\n2. **Pushes a structured ticket** into ServiceNow via the ServiceNow contact point\n3. **Notifies on-call team** via PagerDuty / Slack / Teams routing rules\n\n\u003e **Enterprise demo:** Switch the datasource panel below to point to your live ServiceNow instance using the [ServiceNow Grafana plugin](https://grafana.com/grafana/plugins/grafana-servicenow-datasource/) to show real tickets.\n\n| Field | Value |\n|---|---|\n| Contact Point | ServiceNow REST API (`/api/now/table/incident`) |\n| Notification Policy | Critical → ServiceNow + PagerDuty; High → ServiceNow + Slack |\n| Auto-populate fields | `short_description`, `priority`, `assignment_group`, `description` from alert annotations |",
+          "mode": "markdown"
+        },
+        "pluginVersion": "10.4.1",
+        "type": "text"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "grafanacloud-logs"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "yellow",
+                  "value": 1
+                },
+                {
+                  "color": "red",
+                  "value": 3
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 0,
+          "y": 4
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "grafanacloud-logs"
+            },
+            "expr": "sum(count_over_time({job=\"secops\", source=\"servicenow\", event_type=\"incident_created\"}[24h]))",
+            "legendFormat": "Incidents",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Incidents (24h)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "grafanacloud-logs"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 4,
+          "y": 4
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "grafanacloud-logs"
+            },
+            "expr": "sum(count_over_time({job=\"secops\", source=\"servicenow\", severity=\"CRITICAL\", event_type=\"incident_created\"}[24h]))",
+            "legendFormat": "Critical",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Critical Priority",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "grafanacloud-logs"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue"
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 8,
+          "y": 4
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "grafanacloud-logs"
+            },
+            "expr": "sum(count_over_time({job=\"secops\", source=\"servicenow\", event_type=\"incident_updated\"}[24h]))",
+            "legendFormat": "Updates",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "In Progress",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "grafanacloud-logs"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 12,
+          "y": 4
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "grafanacloud-logs"
+            },
+            "expr": "sum(count_over_time({job=\"secops\", source=\"servicenow\"}[24h] |= \"Resolved\"))",
+            "legendFormat": "Resolved",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Resolved (24h)",
+        "type": "stat"
+      },
+      {
+        "gridPos": {
+          "h": 4,
+          "w": 8,
+          "x": 16,
+          "y": 4
+        },
+        "id": 6,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "**ServiceNow Contact Point**\n```\nURL: $SERVICENOW_INSTANCE_URL\n     /api/now/table/incident\nAuth: Basic (username/password)\nMethod: POST\n```\n_Set `SERVICENOW_INSTANCE_URL`, `SERVICENOW_USERNAME`, `SERVICENOW_PASSWORD` in `.env.secops`_",
+          "mode": "markdown"
+        },
+        "pluginVersion": "10.4.1",
+        "title": "ServiceNow Integration Config",
+        "type": "text"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "grafanacloud-logs"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "smooth",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 14,
+          "x": 0,
+          "y": 8
+        },
+        "id": 7,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "grafanacloud-logs"
+            },
+            "expr": "sum by (severity) (count_over_time({job=\"secops\", source=\"servicenow\", event_type=\"incident_created\"}[30m]))",
+            "legendFormat": "{{severity}} incidents",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Incident Creation Over Time",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "grafanacloud-logs"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 10,
+          "x": 14,
+          "y": 8
+        },
+        "id": 8,
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "values": [
+              "value",
+              "percent"
+            ]
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "grafanacloud-logs"
+            },
+            "expr": "sum by (severity) (count_over_time({job=\"secops\", source=\"servicenow\"}[24h]))",
+            "legendFormat": "{{severity}}",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Incidents by Severity",
+        "type": "piechart"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 16
+        },
+        "id": 9,
+        "title": "Incident Timeline",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "grafanacloud-logs"
+        },
+        "description": "Created by Grafana IRM, updated by SOC analysts. This is the single pane of glass your MDR team works from.",
+        "gridPos": {
+          "h": 12,
+          "w": 24,
+          "x": 0,
+          "y": 17
+        },
+        "id": 10,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": true,
+          "showLabels": true,
+          "showTime": true,
+          "sortOrder": "Descending",
+          "wrapLogMessage": true
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "grafanacloud-logs"
+            },
+            "expr": "{job=\"secops\", source=\"servicenow\"}",
+            "maxLines": 100,
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "title": "Incident Lifecycle — Full Audit Trail",
+        "type": "logs"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 29
+        },
+        "id": 11,
+        "panels": [
+          {
+            "gridPos": {
+              "h": 12,
+              "w": 24,
+              "x": 0,
+              "y": 30
+            },
+            "id": 12,
+            "options": {
+              "content": "## Grafana IRM Workflow\n\n### Automatic Actions (triggered by Grafana Alert)\n1. Alert fires → Grafana IRM creates incident\n2. Incident room provisioned with: host details, CVE context, threat name, CVSS score\n3. ServiceNow ticket created via REST contact point\n4. On-call engineer paged via PagerDuty / Slack\n\n### Manual Actions (SOC Analyst)\n| Step | Action |\n|---|---|\n| 1 | Open incident in Grafana IRM → review correlated events |\n| 2 | Pivot to SentinelOne → isolate endpoint |\n| 3 | Pivot to Rapid7 → confirm CVE patch availability |\n| 4 | Update ServiceNow ticket with investigation notes |\n| 5 | Confirm containment → close incident |\n\n### ServiceNow Field Mapping\n| Grafana Annotation | ServiceNow Field |\n|---|---|\n| `summary` | `short_description` |\n| `host` | `cmdb_ci` (asset lookup) |\n| `severity` | `priority` (1=Critical, 2=High) |\n| `description` | `description` |\n| `runbook_url` | `work_notes` |\n\n### Enterprise Plugin Configuration\nTo connect live ServiceNow data:\n1. Install [ServiceNow datasource plugin](https://grafana.com/grafana/plugins/grafana-servicenow-datasource/)\n2. Configure instance URL + OAuth in datasource settings\n3. Replace Loki query panels with ServiceNow queries\n4. Filters: `state=1` (New), `category=Security Incident`",
+              "mode": "markdown"
+            },
+            "title": "Grafana IRM — Incident Response Runbook",
+            "type": "text"
+          }
+        ],
+        "title": "IRM Runbook Reference",
+        "type": "row"
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 42,
+    "tags": [
+      "secops",
+      "incident",
+      "irm",
+      "servicenow"
+    ],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Incident Response — IRM \u0026 ServiceNow",
+    "weekStart": ""
+  }
+}

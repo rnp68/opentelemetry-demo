@@ -1,0 +1,28 @@
+{
+  "apiVersion": "grafana-pyroscope-datasource.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-profiles",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "1036148",
+    "jsonData": {
+      "keepCookies": [
+        "GitSession",
+        "pyroscope_git_session"
+      ],
+      "overridesDefault": true,
+      "streamingEnabled": {
+        "search": true
+      }
+    },
+    "readOnly": true,
+    "title": "grafanacloud-ramironagles-profiles",
+    "url": "https://profiles-prod-001.grafana.net"
+  }
+}

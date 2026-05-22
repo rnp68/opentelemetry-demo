@@ -1,0 +1,22 @@
+apiVersion: synthetic-monitoring.grafana.com/v1alpha1
+kind: Check
+metadata:
+  name: otel-demo-products
+spec:
+  job: otel-demo-products
+  target: http://MINIKUBE_IP:8080/api/products
+  frequency: 60000
+  timeout: 10000
+  enabled: true
+  labels:
+    app: otel-demo
+    env: minikube
+  settings:
+    http:
+      validStatusCodes:
+        - 200
+      validHTTPVersions:
+        - HTTP/1.1
+        - HTTP/2.0
+      failIfNotSSL: false
+      method: GET

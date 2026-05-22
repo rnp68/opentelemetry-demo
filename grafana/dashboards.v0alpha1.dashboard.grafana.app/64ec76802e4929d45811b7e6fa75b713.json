@@ -1,0 +1,385 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "cloud-provider---aws",
+      "grafana.app/message": "creating dashboard from the Cloud Connections plugin"
+    },
+    "labels": {},
+    "name": "64ec76802e4929d45811b7e6fa75b713",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "description": "Visualize Amazon ECS metrics",
+    "editable": false,
+    "graphTooltip": 1,
+    "id": null,
+    "panels": [
+      {
+        "content": "Showing metrics only for AWS ECS clusters and tasks that have tags assigned to them. For more information, see [Amazon ECS CloudWatch metrics](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-metrics.html).\n",
+        "datasource": "default",
+        "gridPos": {
+          "h": 3,
+          "w": 24
+        },
+        "id": 2,
+        "mode": "markdown",
+        "title": "Info",
+        "transparent": false,
+        "type": "text"
+      },
+      {
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 3
+        },
+        "hiddenSeries": false,
+        "id": 3,
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "points": false,
+        "renderer": "flot",
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "expr": "aws_ecs_cpuutilization_average{job=~\"$job\", region=~\"$region\", dimension_ClusterName=~\"$cluster_name\", dimension_ServiceName=~\"$service_name\"}",
+            "format": "time_series",
+            "legendFormat": "{{dimension_ClusterName}}/{{dimension_ServiceName}}"
+          }
+        ],
+        "title": "CPU utilization",
+        "tooltip": {
+          "value_type": "individual"
+        },
+        "transparent": false,
+        "type": "graph",
+        "yaxes": [
+          {
+            "format": "percent",
+            "logBase": 1,
+            "max": 100,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 3
+        },
+        "hiddenSeries": false,
+        "id": 4,
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "points": false,
+        "renderer": "flot",
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "expr": "aws_ecs_memory_utilization_average{job=~\"$job\", region=~\"$region\", dimension_ClusterName=~\"$cluster_name\", dimension_ServiceName=~\"$service_name\"}",
+            "format": "time_series",
+            "legendFormat": "{{dimension_ClusterName}}/{{dimension_ServiceName}}"
+          }
+        ],
+        "title": "Memory utilization",
+        "tooltip": {
+          "value_type": "individual"
+        },
+        "transparent": false,
+        "type": "graph",
+        "yaxes": [
+          {
+            "format": "percent",
+            "logBase": 1,
+            "max": 100,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 0,
+          "y": 11
+        },
+        "hiddenSeries": false,
+        "id": 5,
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "points": false,
+        "renderer": "flot",
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "expr": "aws_ecs_cpureservation_average{job=~\"$job\", region=~\"$region\", dimension_ClusterName=~\"$cluster_name\", dimension_ServiceName=~\"$service_name\"}",
+            "format": "time_series",
+            "legendFormat": "{{dimension_ClusterName}}/{{dimension_ServiceName}}"
+          }
+        ],
+        "title": "CPU reservation",
+        "tooltip": {
+          "value_type": "individual"
+        },
+        "transparent": false,
+        "type": "graph",
+        "yaxes": [
+          {
+            "format": "percent",
+            "logBase": 1,
+            "max": 100,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 8,
+          "y": 11
+        },
+        "hiddenSeries": false,
+        "id": 6,
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "points": false,
+        "renderer": "flot",
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "expr": "aws_ecs_memory_reservation_average{job=~\"$job\", region=~\"$region\", dimension_ClusterName=~\"$cluster_name\", dimension_ServiceName=~\"$service_name\"}",
+            "format": "time_series",
+            "legendFormat": "{{dimension_ClusterName}}/{{dimension_ServiceName}}"
+          }
+        ],
+        "title": "Memory reservation",
+        "tooltip": {
+          "value_type": "individual"
+        },
+        "transparent": false,
+        "type": "graph",
+        "yaxes": [
+          {
+            "format": "percent",
+            "logBase": 1,
+            "max": 100,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 16,
+          "y": 11
+        },
+        "hiddenSeries": false,
+        "id": 7,
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "points": false,
+        "renderer": "flot",
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "expr": "aws_ecs_gpureservation_average{job=~\"$job\", region=~\"$region\", dimension_ClusterName=~\"$cluster_name\", dimension_ServiceName=~\"$service_name\"}",
+            "format": "time_series",
+            "legendFormat": "{{dimension_ClusterName}}/{{dimension_ServiceName}}"
+          }
+        ],
+        "title": "GPU reservation",
+        "tooltip": {
+          "value_type": "individual"
+        },
+        "transparent": false,
+        "type": "graph",
+        "yaxes": [
+          {
+            "format": "percent",
+            "logBase": 1,
+            "max": 100,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ]
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 25,
+    "style": "dark",
+    "tags": [
+      "aws-cloud-provider"
+    ],
+    "templating": {
+      "list": [
+        {
+          "hide": 0,
+          "includeAll": false,
+          "label": "Data source",
+          "multi": false,
+          "name": "datasource",
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "(?!grafanacloud-usage|grafanacloud-ml-metrics).+",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
+          "allValue": ".+",
+          "datasource": "$datasource",
+          "hide": 0,
+          "includeAll": true,
+          "label": "job",
+          "multi": true,
+          "name": "job",
+          "query": "label_values(aws_ecs_info, job)",
+          "refresh": 2,
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "datasource": "$datasource",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Region",
+          "multi": true,
+          "name": "region",
+          "query": "label_values(aws_ecs_cpuutilization_average, region)",
+          "refresh": 2,
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": ".+",
+          "datasource": "$datasource",
+          "hide": 0,
+          "includeAll": true,
+          "label": "ClusterName",
+          "multi": true,
+          "name": "cluster_name",
+          "query": "label_values(aws_ecs_cpuutilization_average{job=~\"$job\", region=~\"$region\"}, dimension_ClusterName)",
+          "refresh": 2,
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": ".+",
+          "datasource": "$datasource",
+          "hide": 0,
+          "includeAll": true,
+          "label": "ServiceName",
+          "multi": true,
+          "name": "service_name",
+          "query": "label_values(aws_ecs_cpuutilization_average{job=~\"$job\", region=~\"$region\", dimension_ClusterName=~\"$cluster_name\"}, dimension_ServiceName)",
+          "refresh": 2,
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "title": "AWS ECS"
+  }
+}

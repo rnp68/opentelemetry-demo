@@ -1,0 +1,17 @@
+{
+  "apiVersion": "kg.ext.grafana.app/v1alpha1",
+  "kind": "Scope",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "site",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "name": "site",
+    "values": [
+      "none",
+      "us-east-1"
+    ]
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "febiat3mtdudce",
+      "grafana.com/provenance": "api",
+      "grafana.com/updateTimestamp": "2026-04-02T19:12:13Z",
+      "grafana.com/updatedBy": "edxoo2cb12neoc"
+    },
+    "labels": {
+      "grafana.app/folder": "febiat3mtdudce",
+      "grafana.com/group": "SLO-web_app_3 (Grafana SLO)",
+      "grafana.com/group-index": "0"
+    },
+    "name": "cebiasu49ineof",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "__dashboardUid__": "grafana_slo_app-zloqtn0urntvbf0vlwio4",
+      "__panelId__": "1",
+      "description": "Error budget is burning too fast.",
+      "grafana_slo_dashboard_url": "https://ramironagles.grafana.net/d/grafana_slo_app-zloqtn0urntvbf0vlwio4?orgId=1",
+      "name": "SLO Burn Rate Very High",
+      "runbook_url": "",
+      "slo_name": "SLO-web_app_3"
+    },
+    "execErrState": "KeepLast",
+    "expressions": {
+      "alert": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0,
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": []
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "expression": "(${lowNarrow} \u0026\u0026 ${lowWide}) || (${highNarrow} \u0026\u0026 ${highWide})",
+          "intervalMs": 1000,
+          "legendFormat": "__auto",
+          "maxDataPoints": 43200,
+          "refId": "alert",
+          "type": "math"
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        },
+        "source": true
+      },
+      "highNarrow": {
+        "datasourceUID": "grafanacloud-prom",
+        "model": {
+          "datasource": {
+            "dsType": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "expr": "(1 - grafana_slo_sli_5m{grafana_slo_uuid=\"pycanbaecxb9i4qc2559d\"}) \u003e bool 1.439968144723025e-11",
+          "instant": true,
+          "intervalMs": 1000,
+          "legendFormat": "__auto",
+          "maxDataPoints": 43200,
+          "refId": "highNarrow"
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        }
+      },
+      "highWide": {
+        "datasourceUID": "grafanacloud-prom",
+        "model": {
+          "datasource": {
+            "dsType": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "expr": "(1 - grafana_slo_sli_1h{grafana_slo_uuid=\"pycanbaecxb9i4qc2559d\"}) \u003e bool 1.439968144723025e-11",
+          "instant": true,
+          "intervalMs": 1000,
+          "legendFormat": "__auto",
+          "maxDataPoints": 43200,
+          "refId": "highWide"
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        }
+      },
+      "lowNarrow": {
+        "datasourceUID": "grafanacloud-prom",
+        "model": {
+          "datasource": {
+            "dsType": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "expr": "(1 - grafana_slo_sli_30m{grafana_slo_uuid=\"pycanbaecxb9i4qc2559d\"}) \u003e bool 5.999867269679271e-12",
+          "instant": true,
+          "intervalMs": 1000,
+          "legendFormat": "__auto",
+          "maxDataPoints": 43200,
+          "refId": "lowNarrow"
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        }
+      },
+      "lowWide": {
+        "datasourceUID": "grafanacloud-prom",
+        "model": {
+          "datasource": {
+            "dsType": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "expr": "(1 - grafana_slo_sli_6h{grafana_slo_uuid=\"pycanbaecxb9i4qc2559d\"}) \u003e bool 5.999867269679271e-12",
+          "instant": true,
+          "intervalMs": 1000,
+          "legendFormat": "__auto",
+          "maxDataPoints": 43200,
+          "refId": "lowWide"
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        }
+      }
+    },
+    "for": "2m0s",
+    "labels": {
+      "__grafana_origin": "plugin/grafana-slo-app",
+      "grafana_slo_severity": "critical",
+      "grafana_slo_uuid": "pycanbaecxb9i4qc2559d",
+      "service_name": "web_app_3",
+      "team_name": "NOC"
+    },
+    "noDataState": "OK",
+    "panelRef": {
+      "dashboardUID": "grafana_slo_app-zloqtn0urntvbf0vlwio4",
+      "panelID": 1
+    },
+    "title": "SLO-web_app_3 - Error Budget Burn Rate is Very High",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

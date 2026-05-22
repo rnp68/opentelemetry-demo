@@ -1,0 +1,39 @@
+{
+  "apiVersion": "slo.ext.grafana.app/v1alpha1",
+  "kind": "SLO",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "fh9i9i8jx3ciek89sffti",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "description": "HTTP success rate for recommendation service",
+    "destinationDatasource": {
+      "uid": "grafanacloud-prom"
+    },
+    "labels": [
+      {
+        "key": "team",
+        "value": "platform"
+      },
+      {
+        "key": "app",
+        "value": "otel-demo"
+      }
+    ],
+    "name": "Recommendation Availability",
+    "objectives": [
+      {
+        "value": 0.999,
+        "window": "28d"
+      }
+    ],
+    "query": {
+      "freeform": {
+        "query": "sum(rate(rpc_server_duration_count{rpc_service=~\".*Recommendation.*\",rpc_grpc_status_code=\"0\"}[$__rate_interval])) / sum(rate(rpc_server_duration_count{rpc_service=~\".*Recommendation.*\"}[$__rate_interval]))"
+      },
+      "type": "freeform"
+    }
+  }
+}

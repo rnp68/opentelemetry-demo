@@ -1,0 +1,87 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/provenance": "",
+      "grafana.com/updateTimestamp": "2026-02-06T13:44:39Z",
+      "grafana.com/updatedBy": "bfbazndswqry8e"
+    },
+    "labels": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/group": "Test-Evaluation-group",
+      "grafana.com/group-index": "3"
+    },
+    "name": "eebe5xahjmscgc",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "execErrState": "Error",
+    "expressions": {
+      "A": {
+        "datasourceUID": "fdxos61g0vyf4b",
+        "model": {
+          "csvContent": "device,views\ndesktop,120\nmobile,900",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "fdxos61g0vyf4b"
+          },
+          "instant": true,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "refId": "A",
+          "scenarioId": "csv_content",
+          "seriesCount": 1
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        }
+      },
+      "C": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  1000
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "C"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "last"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "A",
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "refId": "C",
+          "type": "threshold"
+        },
+        "source": true
+      }
+    },
+    "noDataState": "NoData",
+    "paused": true,
+    "title": "Alert-Routing",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

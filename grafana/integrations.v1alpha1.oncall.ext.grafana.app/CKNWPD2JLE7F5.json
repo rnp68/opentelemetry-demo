@@ -1,0 +1,17 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Integration",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "CKNWPD2JLE7F5",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "integration": "direct_paging",
+    "integration_url": "https://oncall-prod-us-central-0.grafana.net/oncall/integrations/v1/direct_paging/OOuoVhLNz3SHveDEvBOFVBeiY/",
+    "labels": [],
+    "team": "T29ND28NT8J2J",
+    "verbal_name": "Direct paging (test team)"
+  }
+}

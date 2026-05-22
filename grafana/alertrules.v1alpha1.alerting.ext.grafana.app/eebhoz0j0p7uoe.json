@@ -1,0 +1,35 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "eebhoz0j0p7uoe",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "grafana-ml-forecast-id": "cea6e9f4-065b-4333-ad81-ad27ade343be",
+      "grafana-ml-forecast-metric": "sitwifi_forecast_test",
+      "grafana-ml-forecast-name": "SitWiFi-Forecast-test",
+      "grafana-ml-forecast-url": "https://ramironagles.grafana.net/a/grafana-ml-app/metric-forecast/cea6e9f4-065b-4333-ad81-ad27ade343be",
+      "summary": "Forecast-test (Grafana ML) - Alert Rule"
+    },
+    "evaluationTime": 0,
+    "folderUid": "ee6qllfxlq41sb",
+    "health": "ok",
+    "isPaused": true,
+    "labels": {
+      "service_name": "web_app_3",
+      "team_name": "NOC"
+    },
+    "lastEvaluation": "0001-01-01T00:00:00Z",
+    "name": "Forecast-test (Grafana ML)",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-ml-metrics"
+    ],
+    "query": "sitwifi_forecast_test:anomalous",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

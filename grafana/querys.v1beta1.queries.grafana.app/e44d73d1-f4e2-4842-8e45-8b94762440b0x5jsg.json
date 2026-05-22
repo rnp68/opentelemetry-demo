@@ -1,0 +1,77 @@
+{
+  "apiVersion": "queries.grafana.app/v1beta1",
+  "kind": "Query",
+  "metadata": {
+    "annotations": {},
+    "labels": null,
+    "name": "e44d73d1-f4e2-4842-8e45-8b94762440b0x5jsg",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "description": "Couple of ways to calculate MTTx from a Jira JQL done through Infinity plugin",
+    "isLocked": true,
+    "isVisible": true,
+    "targets": [
+      {
+        "properties": {
+          "columns": [
+            {
+              "selector": "key",
+              "text": "key",
+              "type": "string"
+            },
+            {
+              "selector": "date_OPEN",
+              "text": "Open",
+              "type": "number"
+            },
+            {
+              "selector": "date_ACCEPTED",
+              "text": "Accepted",
+              "type": "number"
+            },
+            {
+              "selector": "duration",
+              "text": "duration2",
+              "type": "number"
+            }
+          ],
+          "computed_columns": [
+            {
+              "selector": " (Accepted - Open)/360000",
+              "text": "duration",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efc1ef8hk8gzkc"
+          },
+          "filters": [],
+          "format": "timeseries",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "issues[id!=null].{\n\"key\":key,\n\"id\":id,\n\"self\":self,\n\"date_OPEN\":$toMillis(fields.customfield_10109),\n\"date_ACCEPTED\":$toMillis(fields.customfield_10111),\n\"duration\":($toMillis(fields.customfield_10111)-$toMillis(fields.customfield_10109))/360000,\n\"summary\":fields.summary,\n\"fields\":fields\n}\n",
+          "source": "url",
+          "type": "json",
+          "url": "https://jiramttx2.atlassian.net/rest/api/3/search/jql",
+          "url_options": {
+            "body_content_type": "application/json",
+            "body_type": "raw",
+            "data": "{\n  \"jql\": \"project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC\",\n  \"maxResults\": 1000,\n  \"expand\":\"names,fields\",\n  \"fields\": [\n    \"key\",\n    \"id\",\n    \"self\",\n    \"customfield_10111\",\n    \"customfield_10109\",\n    \"summary\"\n  ]\n}",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          }
+        },
+        "variables": {}
+      }
+    ],
+    "title": "jira_fields_math"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "apiVersion": "advisor.grafana.app/v0alpha1",
+  "kind": "CheckType",
+  "metadata": {
+    "annotations": {
+      "advisor.grafana.app/checktype-name": "plugin",
+      "advisor.grafana.app/ignore-steps": "1",
+      "advisor.grafana.app/retry": "1"
+    },
+    "labels": {
+      "grafana-app-sdk-resource-version": "v0alpha1"
+    },
+    "name": "plugin",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "name": "plugin",
+    "steps": [
+      {
+        "description": "Check if any installed plugins are deprecated.",
+        "resolution": "Check the \u003ca href='https://grafana.com/legal/plugin-deprecation/#a-plugin-i-use-is-deprecated-what-should-i-do'target=_blank\u003edocumentation\u003c/a\u003e for recommended steps or delete the plugin.",
+        "stepID": "deprecation",
+        "title": "Deprecation check"
+      },
+      {
+        "description": "Checks if an installed plugins has a newer version available.",
+        "resolution": "There are newer versions available for the plugins listed below. We recommend going to the plugin admin page and upgrading to the latest version.",
+        "stepID": "update",
+        "title": "Update check"
+      },
+      {
+        "description": "Checks if the plugin's signature is missing or invalid.",
+        "resolution": "For security, we recommend only installing plugins from the catalog. Review the plugin's status and verify your allowlist if appropriate.",
+        "stepID": "unsigned",
+        "title": "Plugin signature check"
+      },
+      {
+        "description": "Warns when the Grafana IoT TwinMaker App is installed that the SceneViewer panel will stop working in Grafana 13.1.",
+        "resolution": "The SceneViewer panel in the TwinMaker App will stop working in Grafana 13.1. Ignore or silence this warning if you are not using the SceneViewer panel.",
+        "stepID": "twinmaker_sceneviewer",
+        "title": "TwinMaker SceneViewer deprecation check"
+      }
+    ]
+  }
+}

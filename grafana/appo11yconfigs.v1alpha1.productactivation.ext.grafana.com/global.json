@@ -1,0 +1,13 @@
+{
+  "apiVersion": "productactivation.ext.grafana.com/v1alpha1",
+  "kind": "AppO11yConfig",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "global",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "enabled": true
+  }
+}

@@ -1,0 +1,1183 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts-BzznFZEGz",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.0.0-85820.patch2-86140"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 9,
+        "panels": [],
+        "title": "Services",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 12,
+          "x": 0,
+          "y": 1
+        },
+        "id": 10,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Mean",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "sum by (job, service, asserts_source)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}[$__rate_interval])) * 60 ",
+            "legendFormat": "{{job}}::{{asserts_source}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "avg_over_time((sum by (job, service,asserts_source)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}))[$__rate_interval:]) * 60 ",
+            "hide": false,
+            "legendFormat": "{{job}}::{{asserts_source}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Request Rate (cpm)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "axisSoftMax": 100,
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "Availability SLO Target"
+              },
+              "properties": [
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 12,
+          "x": 12,
+          "y": 1
+        },
+        "id": 11,
+        "maxPerRow": 3,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Mean",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "100 * (sum by(job,service, asserts_source)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}[5m])) - sum by(job, service, asserts_source)(rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}[5m])) or sum by(job,service, asserts_source)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}[5m]))) / sum by(job,service, asserts_source)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}[5m]))",
+            "legendFormat": "{{job}}::{{asserts_source}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "100 * (avg_over_time((sum by(job,service, asserts_source)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}))[5m:]) - avg_over_time((sum by(job,service, asserts_source)({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}))[5m:]) or avg_over_time((sum by(job,service, asserts_source)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}))[5m:])) / avg_over_time((sum by(job,service, asserts_source)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}))[5m:])",
+            "hide": false,
+            "legendFormat": "{{job}}::{{asserts_source}}",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "asserts:error:slo",
+            "hide": false,
+            "legendFormat": "Availability SLO Target",
+            "range": true,
+            "refId": "C"
+          }
+        ],
+        "title": "Availability (%)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 12,
+          "x": 0,
+          "y": 12
+        },
+        "id": 12,
+        "maxPerRow": 3,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Mean",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "1000 * ((sum by (asserts_source, job, service) (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\"}[$__rate_interval])) or sum by (asserts_source, job, service) (rate({asserts_metric_latency=\"milliseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\"}[$__rate_interval]))/1e3 or sum by (asserts_source, job, service) (rate({asserts_metric_latency=\"microseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\"}[$__rate_interval]))/1e6)\n/\n(sum by (asserts_source, job, service) \n  (rate({asserts_metric_latency=\"count\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}[$__rate_interval])) \u003e 0) or histogram_avg(sum by (asserts_source, job, service) (rate({asserts_metric_latency=\"native_histogram_seconds\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\"}[$__rate_interval]))))",
+            "legendFormat": "{{job}}::{{asserts_source}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "1000 * avg by (asserts_source, job, service) \n  (asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\"}) unless on(job, service)  \n  group by (job, service) ({asserts_metric_latency=\"count\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"})",
+            "legendFormat": "{{job}}::{{asserts_source}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Avg Request Latency (ms)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 12,
+          "x": 12,
+          "y": 12
+        },
+        "id": 7,
+        "maxPerRow": 3,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Mean",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "max by (job, service, asserts_source)(asserts:latency:p99{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}) * 1000",
+            "legendFormat": "{{job}}::{{asserts_source}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "P99 Latency (ms)",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 23
+        },
+        "id": 6,
+        "panels": [],
+        "title": "Top $top Requests",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 14,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Mean",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "topk($top, sum by (job, service, asserts_source, asserts_request_type, asserts_request_context)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_type != \"client_connections\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) * 60) ",
+            "legendFormat": "{{job}}::{{asserts_source}}::{{asserts_request_type}}::{{asserts_request_context}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "topk($top, avg_over_time((sum by (job, service,asserts_source, asserts_request_type, asserts_request_context)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_type != \"client_connections\", asserts_request_context=~\"$request_context\"}))[$__rate_interval:]) * 60)",
+            "hide": false,
+            "legendFormat": "{{job}}::{{asserts_source}}::{{asserts_request_type}}::{{asserts_request_context}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Request Rate (cpm)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 14,
+          "w": 12,
+          "x": 12,
+          "y": 24
+        },
+        "id": 4,
+        "maxPerRow": 3,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Mean",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "topk($top, 100 * sum by (job, service, asserts_source, asserts_request_type, asserts_request_context, asserts_error_type) (increase({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))\n   / ignoring(asserts_error_type) group_left() \n (sum by (job, service, asserts_source, asserts_request_type, asserts_request_context)(increase({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))))",
+            "legendFormat": "{{job}}::{{asserts_source}}::{{asserts_request_type}}::{{asserts_request_context}}::{{asserts_error_type}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "topk($top, 100 * avg_over_time((sum by (job, service, asserts_source, asserts_request_type, asserts_request_context, asserts_error_type) ({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}))[$__rate_interval:])\n   / ignoring(asserts_error_type) group_left() \n (avg_over_time((sum by (job, asserts_source, asserts_request_type, asserts_request_context)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}))[$__rate_interval:])))",
+            "hide": false,
+            "legendFormat": "{{job}}::{{asserts_source}}::{{asserts_request_type}}::{{asserts_request_context}}::{{asserts_error_type}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Error Ratio (%)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 14,
+          "w": 12,
+          "x": 0,
+          "y": 38
+        },
+        "id": 3,
+        "maxPerRow": 3,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Mean",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "topk($top, 1000 * ((sum by (asserts_source, job, service, asserts_request_type, asserts_request_context) (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) or sum by (asserts_source, job, service, asserts_request_type, asserts_request_context) (rate({asserts_metric_latency=\"milliseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))/1e3 or sum by (asserts_source, job, service, asserts_request_type, asserts_request_context) (rate({asserts_metric_latency=\"microseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))/1e6)\n/\n(sum by (asserts_source, job, service, asserts_request_type, asserts_request_context) \n  (rate({asserts_metric_latency=\"count\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) \u003e 0) or histogram_avg(sum by (asserts_source, job, service, asserts_request_type, asserts_request_context) (rate({asserts_metric_latency=\"native_histogram_seconds\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])))))",
+            "legendFormat": "{{job}}::{{asserts_source}}::{{asserts_request_type}}::{{asserts_request_context}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "topk($top, 1000 * avg by (asserts_source, job, service, asserts_request_type, asserts_request_context) \n  (asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\"}) unless on(job, service)  \n  group by (job, service) ({asserts_metric_latency=\"count\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}))",
+            "legendFormat": "{{job}}::{{asserts_source}}::{{asserts_request_type}}::{{asserts_request_context}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Avg Request Latency (ms)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 14,
+          "w": 12,
+          "x": 12,
+          "y": 38
+        },
+        "id": 13,
+        "maxPerRow": 3,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "topk($top, max by (job, service, asserts_source, asserts_request_type, asserts_request_context)(asserts:latency:p99{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}) * 1000)",
+            "legendFormat": "{{job}}::{{asserts_source}}::{{asserts_request_type}}::{{asserts_request_context}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "P99 Latency (ms)",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job, asserts_env)",
+          "hide": 2,
+          "includeAll": false,
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": false,
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+          "includeAll": false,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, job)",
+          "includeAll": true,
+          "multi": true,
+          "name": "job",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, job)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\"}, service)",
+          "includeAll": true,
+          "multi": true,
+          "name": "service",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\"}, service)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\", asserts_request_type != \"client_connections\", job=~\"$job\", service=~\"$service\"}, asserts_request_type)",
+          "includeAll": true,
+          "multi": true,
+          "name": "request_type",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\", asserts_request_type != \"client_connections\", job=~\"$job\", service=~\"$service\"}, asserts_request_type)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\", service=~\"$service\",asserts_request_type=~\"$request_type\"}, asserts_request_context)",
+          "includeAll": true,
+          "multi": true,
+          "name": "request_context",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\", service=~\"$service\",asserts_request_type=~\"$request_type\"}, asserts_request_context)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "10",
+            "value": "10"
+          },
+          "name": "top",
+          "options": [
+            {
+              "selected": true,
+              "text": "10",
+              "value": "10"
+            }
+          ],
+          "query": "10",
+          "type": "textbox"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-2d",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Namespace KPI",
+    "weekStart": ""
+  }
+}

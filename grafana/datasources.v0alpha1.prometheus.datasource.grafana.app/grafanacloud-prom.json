@@ -1,0 +1,34 @@
+{
+  "apiVersion": "prometheus.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-prom",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "1789283",
+    "isDefault": true,
+    "jsonData": {
+      "exemplarTraceIdDestinations": [
+        {
+          "datasourceUid": "grafanacloud-traces",
+          "name": "traceID"
+        }
+      ],
+      "prometheusType": "Mimir",
+      "prometheusVersion": "2.15.0",
+      "streamingEnabled": {
+        "search": true
+      },
+      "timeInterval": "60s",
+      "timeout": "150"
+    },
+    "readOnly": true,
+    "title": "grafanacloud-ramironagles-prom",
+    "url": "https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "RecordingRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "integration---windows-exporter",
+      "grafana.com/provenance": "converted_prometheus",
+      "grafana.com/updateTimestamp": "2026-04-15T07:38:57Z",
+      "grafana.com/updatedBy": "bfbazndswqry8e"
+    },
+    "labels": {
+      "grafana.app/folder": "integration---windows-exporter",
+      "grafana.com/group": "windows-asserts-windows.rules",
+      "grafana.com/group-index": "4"
+    },
+    "name": "7f072e11-7897-56ca-b0d5-579027cb8750",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "expressions": {
+      "query": {
+        "datasourceUID": "grafanacloud-prom",
+        "model": {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "expr": "1 - windows_logical_disk_free_bytes{volume!~\"HarddiskVolume.*\", job=~\"integrations/windows_exporter\", asserts_env!=\"\"}/windows_logical_disk_size_bytes{volume!~\"HarddiskVolume.*\", job=~\"integrations/windows_exporter\", asserts_env!=\"\"}",
+          "instant": true,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "range": false,
+          "refId": "query"
+        },
+        "queryType": "prometheus",
+        "relativeTimeRange": {
+          "from": "11m0s",
+          "to": "1m0s"
+        },
+        "source": true
+      }
+    },
+    "labels": {
+      "__converted_prometheus_rule__": "true",
+      "asserts_entity_type": "Node",
+      "asserts_resource_type": "disk:usage",
+      "asserts_source": "windows-exporter"
+    },
+    "metric": "asserts:resource",
+    "targetDatasourceUID": "grafanacloud-prom",
+    "title": "asserts:resource",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "apiVersion": "grafana-labels-app.ext.grafana.com/v1alpha1",
+  "kind": "Label",
+  "metadata": {
+    "annotations": {
+      "grafana.com/updateTimestamp": "2025-01-30T01:44:13Z"
+    },
+    "labels": {
+      "grafana-app-sdk-resource-version": "v1alpha1",
+      "keyName": "team_name"
+    },
+    "name": "fd0208f2-7f6e-4ff0-b1d2-8179aac34687",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "key": {
+      "id": "fd0208f2-7f6e-4ff0-b1d2-8179aac34687",
+      "name": "team_name",
+      "prescribed": true
+    },
+    "values": [
+      {
+        "id": "4c58ce5a-27a4-4778-b5d1-95e09eeb0c9d",
+        "name": "NOC",
+        "prescribed": false
+      }
+    ]
+  }
+}

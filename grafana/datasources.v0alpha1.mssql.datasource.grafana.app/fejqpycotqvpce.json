@@ -1,0 +1,23 @@
+{
+  "apiVersion": "mssql.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "fejqpycotqvpce",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "jsonData": {
+      "connMaxLifetime": 14400,
+      "database": "master",
+      "maxIdleConns": 100,
+      "maxIdleConnsAuto": true,
+      "maxOpenConns": 100
+    },
+    "title": "mssql",
+    "url": "ec2-54-205-75-56.compute-1.amazonaws.com:1433",
+    "user": "sa"
+  }
+}

@@ -1,0 +1,708 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.app/saved-from-ui": "Grafana Cloud (steady)"
+    },
+    "labels": {},
+    "name": "mttx-trends-dashboard",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "efc1ef8hk8gzkc"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "footer": {
+                "reducers": []
+              },
+              "hideFrom": {
+                "viz": false
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "cellHeight": "sm",
+          "showHeader": true
+        },
+        "pluginVersion": "12.4.0-21125823918.patch5",
+        "targets": [
+          {
+            "columns": [
+              {
+                "selector": "date_OPEN",
+                "text": "Open",
+                "type": "string"
+              },
+              {
+                "selector": "date_ACCEPTED",
+                "text": "Accepted",
+                "type": "string"
+              }
+            ],
+            "computed_columns": [],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "efc1ef8hk8gzkc"
+            },
+            "filters": [],
+            "format": "timeseries",
+            "global_query_id": "",
+            "parser": "backend",
+            "refId": "A",
+            "root_selector": "issues[id!=null].{\n\"key\":key,\n\"id\":id,\n\"self\":self,\n\"date_OPEN\":fields.customfield_10109,\n\"ms_OPEN\":$toMillis(fields.customfield_10109),\n\"date_ACCEPTED\":fields.customfield_10111,\n\"ms_ACCEPTED\":$toMillis(fields.customfield_10111),\n\"duration\":($toMillis(fields.customfield_10111)-$toMillis(fields.customfield_10109))/360000,\n\"summary\":fields.summary,\n\"fields\":fields\n}\n",
+            "source": "url",
+            "type": "json",
+            "url": "https://jiramttx2.atlassian.net/rest/api/3/search/jql",
+            "url_options": {
+              "body_content_type": "application/json",
+              "body_type": "raw",
+              "data": "{\n  \"jql\": \"project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC\",\n  \"maxResults\": 2,\n  \"expand\":\"names,fields\",\n  \"fields\": [\n    \"key\",\n    \"id\",\n    \"self\",\n    \"customfield_10111\",\n    \"customfield_10109\",\n    \"summary\"\n  ]\n}",
+              "headers": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST"
+            }
+          }
+        ],
+        "title": "New panel",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "duration": true
+              },
+              "includeByName": {},
+              "indexByName": {
+                "Accepted": 3,
+                "Open": 1,
+                "duration": 5,
+                "duration2": 6,
+                "key": 0,
+                "ms_ACCEPTED": 4,
+                "ms_OPEN": 2
+              },
+              "renameByName": {}
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "dateFormat": "2025-05-25T15:23:00.000-0500",
+                  "destinationType": "time",
+                  "targetField": "Open"
+                },
+                {
+                  "dateFormat": "2025-05-25T15:23:00.000-0500",
+                  "destinationType": "time",
+                  "targetField": "Accepted"
+                }
+              ],
+              "fields": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "mode": "reduceRow",
+              "reduce": {
+                "include": [
+                  "Accepted",
+                  "Open"
+                ],
+                "reducer": "delta"
+              },
+              "window": {
+                "reducer": "mean",
+                "windowAlignment": "trailing",
+                "windowSize": 0.1,
+                "windowSizeMode": "percentage"
+              }
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "description": "7-day and 1-day rolling average of mean time to resolve",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "smooth",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "h"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.4.0-21125823918.patch5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "grafanacloud-prom"
+            },
+            "expr": "avg_over_time(jira_incident_mttr_hours[7d])",
+            "instant": false,
+            "legendFormat": "7-Day Average",
+            "queryType": "range",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "grafanacloud-prom"
+            },
+            "expr": "avg_over_time(jira_incident_mttr_hours[1d])",
+            "instant": false,
+            "legendFormat": "1-Day Average",
+            "queryType": "range",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "MTTR Trend (7-Day Rolling Average)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "efc1ef8hk8gzkc"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "footer": {
+                "reducers": []
+              },
+              "hideFrom": {
+                "viz": false
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "id": 5,
+        "options": {
+          "cellHeight": "sm",
+          "showHeader": true
+        },
+        "pluginVersion": "12.4.0-21125823918.patch5",
+        "targets": [
+          {
+            "columns": [
+              {
+                "selector": "date_OPEN",
+                "text": "Open",
+                "type": "string"
+              },
+              {
+                "selector": "date_ACCEPTED",
+                "text": "Accepted",
+                "type": "string"
+              },
+              {
+                "selector": "timestamp",
+                "text": "timestamp",
+                "type": "timestamp"
+              }
+            ],
+            "computed_columns": [],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "efc1ef8hk8gzkc"
+            },
+            "filters": [],
+            "format": "timeseries",
+            "global_query_id": "",
+            "parser": "backend",
+            "refId": "A",
+            "root_selector": "issues[id!=null].{\n\"date_OPEN\":fields.customfield_10109,\n\"date_ACCEPTED\":fields.customfield_10111\n}\n",
+            "source": "url",
+            "type": "json",
+            "url": "https://jiramttx2.atlassian.net/rest/api/3/search/jql",
+            "url_options": {
+              "body_content_type": "application/json",
+              "body_type": "raw",
+              "data": "{\n  \"jql\": \"project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC\",\n  \"maxResults\": 1000,\n  \"expand\":\"names,fields\",\n  \"fields\": [\n    \"key\",\n    \"id\",\n    \"self\",\n    \"customfield_10111\",\n    \"customfield_10109\",\n    \"summary\"\n  ]\n}",
+              "headers": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST"
+            }
+          }
+        ],
+        "title": "New panel",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "includeByName": {},
+              "indexByName": {
+                "Accepted": 2,
+                "Delta": 3,
+                "Open": 1,
+                "timestamp": 0
+              },
+              "renameByName": {}
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "dateFormat": "2025-05-25T03:17:00.000-0500",
+                  "destinationType": "time",
+                  "targetField": "Accepted"
+                },
+                {
+                  "dateFormat": "2025-05-25T03:17:00.000-0500",
+                  "destinationType": "time",
+                  "targetField": "Open"
+                }
+              ],
+              "fields": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "mode": "reduceRow",
+              "reduce": {
+                "include": [
+                  "Open",
+                  "Accepted"
+                ],
+                "reducer": "delta"
+              },
+              "replaceFields": false
+            }
+          },
+          {
+            "id": "reduce",
+            "options": {
+              "reducers": [
+                "median"
+              ]
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "description": "Comparison of MTTA, MTTR, and MTTR-Repair metrics over time",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "smooth",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "h"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "id": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.4.0-21125823918.patch5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "grafanacloud-prom"
+            },
+            "expr": "avg_over_time(jira_incident_mtta_hours[1h])",
+            "instant": false,
+            "legendFormat": "MTTA",
+            "queryType": "range",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "grafanacloud-prom"
+            },
+            "expr": "avg_over_time(jira_incident_mttr_hours[1h])",
+            "instant": false,
+            "legendFormat": "MTTR",
+            "queryType": "range",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "grafanacloud-prom"
+            },
+            "expr": "avg_over_time(jira_incident_mttr_repair_hours[1h])",
+            "instant": false,
+            "legendFormat": "MTTR-Repair",
+            "queryType": "range",
+            "range": true,
+            "refId": "C"
+          }
+        ],
+        "title": "MTTx Comparison",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "description": "7-day and 1-day rolling average of mean time to acknowledge",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "smooth",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "h"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 1,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.4.0-21125823918.patch5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "grafanacloud-prom"
+            },
+            "expr": "avg_over_time(jira_incident_mtta_hours[7d])",
+            "instant": false,
+            "legendFormat": "7-Day Average",
+            "queryType": "range",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "grafanacloud-prom"
+            },
+            "expr": "avg_over_time(jira_incident_mtta_hours[1d])",
+            "instant": false,
+            "legendFormat": "1-Day Average",
+            "queryType": "range",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "MTTA Trend (7-Day Rolling Average)",
+        "type": "timeseries"
+      }
+    ],
+    "preload": false,
+    "refresh": "",
+    "schemaVersion": 42,
+    "tags": [
+      "jira",
+      "mttx",
+      "trends"
+    ],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "MTTx Trends",
+    "weekStart": ""
+  }
+}

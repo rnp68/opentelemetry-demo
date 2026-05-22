@@ -1,0 +1,15 @@
+{
+  "apiVersion": "scim.grafana.app/v0alpha1",
+  "kind": "SCIMConfig",
+  "metadata": {
+    "annotations": {},
+    "labels": null,
+    "name": "default",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "enableGroupSync": false,
+    "enableUserSync": false,
+    "rejectNonProvisionedUsers": false
+  }
+}

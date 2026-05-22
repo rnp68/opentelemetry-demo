@@ -1,0 +1,24 @@
+{
+  "apiVersion": "alertmanager.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-ngalertmanager",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "892581",
+    "jsonData": {
+      "implementation": "mimir",
+      "streamingEnabled": {
+        "search": true
+      }
+    },
+    "readOnly": true,
+    "title": "grafanacloud-ramironagles-ngalertmanager",
+    "url": "https://alertmanager-prod-us-east-0.grafana.net"
+  }
+}

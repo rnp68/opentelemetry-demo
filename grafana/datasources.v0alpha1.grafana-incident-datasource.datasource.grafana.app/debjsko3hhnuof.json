@@ -1,0 +1,15 @@
+{
+  "apiVersion": "grafana-incident-datasource.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": null,
+    "labels": {},
+    "name": "debjsko3hhnuof",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "title": "Grafana Incident",
+    "url": "https://ramironagles.grafana.net/api/plugins/grafana-incident-app/resources/api/"
+  }
+}

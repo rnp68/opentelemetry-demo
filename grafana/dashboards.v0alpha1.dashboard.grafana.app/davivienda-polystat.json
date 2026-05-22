@@ -1,0 +1,400 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "davivienda-polystat",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Version preliminar vista 5",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "grafana-googlesheets-datasource",
+          "uid": "aeg4noqriapz4f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "displayMode": "auto"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#d44a3a",
+                  "value": null
+                },
+                {
+                  "color": "#eab839",
+                  "value": 50
+                },
+                {
+                  "color": "#299c46",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "animationSpeed": 1000,
+          "columnAutoSize": true,
+          "columns": 4,
+          "defaultColor": "dark-orange",
+          "displayLimit": 12,
+          "enableAlerts": true,
+          "enableTooltips": true,
+          "fontSize": "12px",
+          "fontSizeUnit": "px",
+          "globalDecimals": 2,
+          "globalDisplayMode": "all",
+          "globalDisplayTextTrigger": "all",
+          "globalOperatorName": "lastNotNull",
+          "globalThresholds": [
+            {
+              "color": "#d44a3a",
+              "value": 0
+            },
+            {
+              "color": "#eab839",
+              "value": 50
+            },
+            {
+              "color": "#299c46",
+              "value": 80
+            }
+          ],
+          "globalUnitFormat": "short",
+          "globalValueType": "last",
+          "hideAllLegends": false,
+          "hideEmpty": false,
+          "hideZero": false,
+          "legendDisplayMode": "list",
+          "legendFontSize": "12px",
+          "legendFontSizeUnit": "px",
+          "legendPosition": "bottom",
+          "legendSortBy": "alphabetical",
+          "legendSortDesc": false,
+          "legendWidth": 200,
+          "maxMetrics": 20,
+          "metricNameSeparator": " ",
+          "metrics": [
+            {
+              "color": "#299c46",
+              "decimals": 2,
+              "displayMode": "all",
+              "displayTextTrigger": "all",
+              "operatorName": "lastNotNull",
+              "prefix": "",
+              "suffix": "",
+              "thresholds": [
+                {
+                  "color": "#d44a3a",
+                  "value": 0
+                },
+                {
+                  "color": "#eab839",
+                  "value": 53
+                },
+                {
+                  "color": "#299c46",
+                  "value": 57
+                }
+              ],
+              "unitFormat": "short",
+              "valueName": "mesRef",
+              "valueType": "last"
+            }
+          ],
+          "orientation": "auto",
+          "pageSize": 12,
+          "polystat": {
+            "animationSpeed": 1000,
+            "columnAutoSize": true,
+            "columns": 4,
+            "defaultColor": "dark-orange",
+            "displayLimit": 12,
+            "enableAlerts": true,
+            "enableTooltips": true,
+            "fontSize": "12px",
+            "fontSizeUnit": "px",
+            "globalDecimals": 2,
+            "globalDisplayMode": "all",
+            "globalDisplayTextTrigger": "all",
+            "globalOperatorName": "lastNotNull",
+            "globalThresholds": [
+              {
+                "color": "#d44a3a",
+                "value": 0
+              },
+              {
+                "color": "#eab839",
+                "value": 50
+              },
+              {
+                "color": "#299c46",
+                "value": 80
+              }
+            ],
+            "globalUnitFormat": "short",
+            "globalValueType": "last",
+            "hideAllLegends": false,
+            "hideEmpty": false,
+            "hideZero": false,
+            "legendDisplayMode": "list",
+            "legendFontSize": "12px",
+            "legendFontSizeUnit": "px",
+            "legendPosition": "bottom",
+            "legendSortBy": "alphabetical",
+            "legendSortDesc": false,
+            "legendWidth": 200,
+            "maxMetrics": 20,
+            "metricNameSeparator": " ",
+            "metrics": [
+              {
+                "color": "#299c46",
+                "decimals": 2,
+                "displayMode": "all",
+                "displayTextTrigger": "all",
+                "operatorName": "lastNotNull",
+                "prefix": "",
+                "suffix": "",
+                "thresholds": [
+                  {
+                    "color": "#d44a3a",
+                    "value": 0
+                  },
+                  {
+                    "color": "#eab839",
+                    "value": 53
+                  },
+                  {
+                    "color": "#299c46",
+                    "value": 57
+                  }
+                ],
+                "unitFormat": "short",
+                "valueName": "mesRef",
+                "valueType": "last"
+              }
+            ],
+            "orientation": "auto",
+            "pageSize": 12,
+            "rowAutoSize": true,
+            "rows": 3,
+            "tooltipDisplayMode": "all",
+            "tooltipDisplayTextTrigger": "all",
+            "tooltipFontSize": "12px",
+            "tooltipFontSizeUnit": "px",
+            "tooltipMsResolution": false,
+            "tooltipSort": "none"
+          },
+          "rowAutoSize": true,
+          "rows": 3,
+          "tooltipDisplayMode": "all",
+          "tooltipDisplayTextTrigger": "all",
+          "tooltipFontSize": "12px",
+          "tooltipFontSizeUnit": "px",
+          "tooltipMsResolution": false,
+          "tooltipSort": "none"
+        },
+        "targets": [
+          {
+            "cacheDurationSeconds": 300,
+            "datasource": {
+              "type": "grafana-googlesheets-datasource",
+              "uid": "aeg4noqriapz4f"
+            },
+            "range": "NPS!A1:F100",
+            "refId": "A",
+            "spreadsheet": "1TMbKOOcDW7mhjK7IzsvY0GrYgiQC4-84SfY3DzYbsnk"
+          },
+          {
+            "cacheDurationSeconds": 300,
+            "datasource": {
+              "type": "grafana-googlesheets-datasource",
+              "uid": "aeg4noqriapz4f"
+            },
+            "range": "Satisfaccion!A1:F100",
+            "refId": "B",
+            "spreadsheet": "1TMbKOOcDW7mhjK7IzsvY0GrYgiQC4-84SfY3DzYbsnk"
+          },
+          {
+            "cacheDurationSeconds": 300,
+            "datasource": {
+              "type": "grafana-googlesheets-datasource",
+              "uid": "aeg4noqriapz4f"
+            },
+            "range": "Retencion!A1:F100",
+            "refId": "C",
+            "spreadsheet": "1TMbKOOcDW7mhjK7IzsvY0GrYgiQC4-84SfY3DzYbsnk"
+          }
+        ],
+        "title": "Davivienda KPI Overview",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "regex",
+                    "options": {
+                      "value": ".*${mesRefDy}|${mesComparacionDy}.*"
+                    }
+                  },
+                  "fieldName": "Fecha"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "filterFieldsByName",
+            "options": {
+              "include": {
+                "names": [
+                  "Valor",
+                  "Fecha",
+                  "Canal",
+                  "Metrica"
+                ]
+              }
+            }
+          },
+          {
+            "id": "rowsToFields",
+            "options": {}
+          },
+          {
+            "id": "renameByRegex",
+            "options": {
+              "regex": "/^(?=.*${mesRefDy}).*/",
+              "renamePattern": "mesRef"
+            }
+          },
+          {
+            "id": "renameByRegex",
+            "options": {
+              "regex": "/^(?=.*${mesComparacionDy}).*/",
+              "renamePattern": "mesComp"
+            }
+          }
+        ],
+        "type": "grafana-polystat-panel"
+      }
+    ],
+    "preload": false,
+    "schemaVersion": 41,
+    "tags": [
+      "produccion",
+      "overview"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "2024-01",
+            "value": "2024-01"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Mes Referencia",
+          "multi": false,
+          "name": "mesRefDy",
+          "options": [
+            {
+              "selected": true,
+              "text": "2024-01",
+              "value": "2024-01"
+            },
+            {
+              "selected": false,
+              "text": "2023-12",
+              "value": "2023-12"
+            }
+          ],
+          "query": "2024-01,2023-12",
+          "queryValue": "",
+          "skipUrlSync": false,
+          "type": "custom"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "2023-12",
+            "value": "2023-12"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Mes Comparación",
+          "multi": false,
+          "name": "mesComparacionDy",
+          "options": [
+            {
+              "selected": true,
+              "text": "2023-12",
+              "value": "2023-12"
+            },
+            {
+              "selected": false,
+              "text": "2023-11",
+              "value": "2023-11"
+            }
+          ],
+          "query": "2023-12,2023-11",
+          "queryValue": "",
+          "skipUrlSync": false,
+          "type": "custom"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {
+      "hidden": true
+    },
+    "timezone": "browser",
+    "title": "Overview-polystat"
+  }
+}

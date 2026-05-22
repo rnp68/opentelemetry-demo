@@ -1,0 +1,26 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "ffbhfwx7hj5kwa",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": null,
+    "evaluationTime": 2.916024623,
+    "folderUid": "ee6qllfxlq41sb",
+    "health": "error",
+    "isPaused": false,
+    "labels": null,
+    "lastEvaluation": "2026-05-22T00:31:21.985657102Z",
+    "name": "jira_incident_mttc_hours",
+    "queriedDatasourceUIDs": [
+      "efc1ef8hk8gzkc"
+    ],
+    "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"efc1ef8hk8gzkc\",\"model\":{\"columns\":[],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"efc1ef8hk8gzkc\"},\"filters\":[],\"format\":\"table\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"$average(issues[fields.customfield_10109 != null and fields.customfield_10114 != null].(($toMillis(fields.customfield_10114) - $toMillis(fields.customfield_10109)) / 3600000))\",\"source\":\"url\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"{\\n  \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\\\",\\n  \\\"maxResults\\\": 1000,\\n  \\\"fields\\\": [\\n    \\\"key\\\",\\n    \\\"customfield_10109\\\",\\n    \\\"customfield_10110\\\",\\n    \\\"customfield_10111\\\",\\n    \\\"customfield_10112\\\",\\n    \\\"customfield_10113\\\",\\n    \\\"customfield_10114\\\"\\n  ]\\n}\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[{\"key\":\"jql\",\"value\":\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\"},{\"key\":\"expand\",\"value\":\"names\"},{\"key\":\"maxResults\",\"value\":\"1000\"}]}}},{\"refId\":\"reducer\",\"queryType\":\"expression\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[0,0],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[]},\"reducer\":{\"params\":[],\"type\":\"avg\"},\"type\":\"query\"}],\"datasource\":{\"name\":\"Expression\",\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"reducer\":\"last\",\"refId\":\"reducer\",\"type\":\"reduce\"}},{\"refId\":\"C\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[0],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"reducer\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"C\",\"type\":\"threshold\"}}]",
+    "state": "inactive",
+    "type": "recording"
+  }
+}

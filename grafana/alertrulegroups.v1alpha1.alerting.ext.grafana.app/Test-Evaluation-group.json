@@ -1,0 +1,212 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRuleGroup",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "Test-Evaluation-group",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "evaluationTime": 0.000034455,
+    "file": "Test",
+    "folderUid": "ee6qllfxlq41sb",
+    "interval": 60,
+    "lastEvaluation": "2026-05-22T00:32:13.072510335Z",
+    "rules": [
+      {
+        "annotations": {
+          "__dashboardUid__": "be6r7iu38z08wa",
+          "__panelId__": "1"
+        },
+        "evaluationTime": 0,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "ok",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "0001-01-01T00:00:00Z",
+        "name": "Alert-Test",
+        "notificationSettings": {
+          "receiver": "grafana-default-email"
+        },
+        "queriedDatasourceUIDs": [
+          "ae6qkf61vtb0gd"
+        ],
+        "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"ae6qkf61vtb0gd\",\"model\":{\"alias\":\"Random Walk\",\"columns\":[{\"selector\":\"casesReported\",\"text\":\"\",\"type\":\"number\"}],\"dataOverrides\":[],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"ae6qkf61vtb0gd\"},\"filters\":[],\"format\":\"timeseries\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"casesByState\",\"source\":\"url\",\"summarizeExpression\":\"sum(casesReported)\",\"type\":\"json\",\"url\":\"https://api.apify.com/v2/key-value-stores/moxA3Q0aZh5LosewB/records/LATEST?disableRedirect=true\",\"url_options\":{\"data\":\"\",\"method\":\"GET\"}}},{\"refId\":\"C\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[0],\"type\":\"lt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[\"C\"]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"C\",\"type\":\"threshold\"}}]",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "fe6r8a25jzls0c"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 0,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "ok",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "0001-01-01T00:00:00Z",
+        "name": "IRM-Rule",
+        "notificationSettings": {
+          "receiver": "onCall-contactPoint-deleteme"
+        },
+        "queriedDatasourceUIDs": [
+          "grafanacloud-usage-insights"
+        ],
+        "query": "rate({org_id=\"1213604\"} [$__auto])",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "debdvmmzvrf28f"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 0,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "ok",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "0001-01-01T00:00:00Z",
+        "name": "Alert-Routing",
+        "queriedDatasourceUIDs": [
+          "fdxos61g0vyf4b"
+        ],
+        "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"fdxos61g0vyf4b\",\"model\":{\"csvContent\":\"device,views\\ndesktop,120\\nmobile,900\",\"datasource\":{\"type\":\"grafana-testdata-datasource\",\"uid\":\"fdxos61g0vyf4b\"},\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"A\",\"scenarioId\":\"csv_content\",\"seriesCount\":1}},{\"refId\":\"C\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[1000],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[\"C\"]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"C\",\"type\":\"threshold\"}}]",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "eebe5xahjmscgc"
+      },
+      {
+        "annotations": {
+          "grafana-ml-forecast-id": "cea6e9f4-065b-4333-ad81-ad27ade343be",
+          "grafana-ml-forecast-metric": "sitwifi_forecast_test",
+          "grafana-ml-forecast-name": "SitWiFi-Forecast-test",
+          "grafana-ml-forecast-url": "https://ramironagles.grafana.net/a/grafana-ml-app/metric-forecast/cea6e9f4-065b-4333-ad81-ad27ade343be",
+          "summary": "Forecast-test (Grafana ML) - Alert Rule"
+        },
+        "evaluationTime": 0,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "ok",
+        "isPaused": true,
+        "labels": {
+          "service_name": "web_app_3",
+          "team_name": "NOC"
+        },
+        "lastEvaluation": "0001-01-01T00:00:00Z",
+        "name": "Forecast-test (Grafana ML)",
+        "queriedDatasourceUIDs": [
+          "grafanacloud-ml-metrics"
+        ],
+        "query": "sitwifi_forecast_test:anomalous",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "eebhoz0j0p7uoe"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 0.000032089,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "unknown",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "2026-05-22T00:32:12.072585778Z",
+        "name": "InfinityJira-test",
+        "queriedDatasourceUIDs": [
+          "ffbeitosw2ghse"
+        ],
+        "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"ffbeitosw2ghse\",\"model\":{\"columns\":[{\"selector\":\"key\",\"text\":\"key\",\"type\":\"string\"},{\"selector\":\"id\",\"text\":\"id\",\"type\":\"number\"},{\"selector\":\"summary\",\"text\":\"test\",\"type\":\"string\"},{\"selector\":\"customfield_10111\",\"text\":\"fields_test\",\"type\":\"string\"}],\"computed_columns\":[{\"selector\":\"\",\"text\":\"\",\"type\":\"string\"}],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"ffbeitosw2ghse\"},\"filters\":[],\"format\":\"timeseries\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"issues[id!=null].{\\n\\\"key\\\":key,\\n\\\"id\\\":id,\\n\\\"self\\\":self,\\n\\\"customfield_10111\\\":fields.customfield_10111,\\n\\\"summary\\\":fields.summary,\\n\\\"expand\\\":expand,\\n\\\"fields\\\":fields\\n}\\n\",\"source\":\"url\",\"summarizeBy\":\"\",\"summarizeExpression\":\"\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"{\\n  \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\\\",\\n  \\\"maxResults\\\": 1000,\\n  \\\"expand\\\":\\\"names,fields\\\",\\n  \\\"fields\\\": [\\n    \\\"key\\\",\\n    \\\"id\\\",\\n    \\\"self\\\",\\n    \\\"customfield_10111\\\",\\n    \\\"summary\\\"\\n  ]\\n}\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[]}}}]",
+        "state": "inactive",
+        "type": "recording",
+        "uid": "cfbh9dljfiznkf"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 3.250540397,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "error",
+        "isPaused": false,
+        "labels": null,
+        "lastEvaluation": "2026-05-22T00:32:14.322992536Z",
+        "name": "jira_incident_mttr_hours",
+        "queriedDatasourceUIDs": [
+          "efc1ef8hk8gzkc"
+        ],
+        "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"efc1ef8hk8gzkc\",\"model\":{\"columns\":[{\"selector\":\"timestamp\",\"text\":\"time\",\"type\":\"timestamp\"},{\"selector\":\"duration_ms_avg\",\"text\":\"mttr\",\"type\":\"number\"}],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"efc1ef8hk8gzkc\"},\"filters\":[],\"format\":\"table\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"jq-backend\",\"refId\":\"A\",\"root_selector\":\"[.issues[] | select(.fields.customfield_10111 != null and .fields.customfield_10109 != null) |   \\n  (((.fields.customfield_10111 | .[0:19] + \\\"Z\\\" | fromdateiso8601) - (.fields.customfield_10109 | .[0:19] + \\\"Z\\\" | fromdateiso8601)) * 1000)  \\n] | {  \\n  timestamp: (now * 1000),  \\n  duration_ms_avg: (add / length)  \\n}  \",\"source\":\"url\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"    {\\n      \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -7d ORDER BY created DESC\\\",\\n      \\\"maxResults\\\": 10,\\n      \\\"fields\\\": [\\n        \\\"key\\\",\\n        \\\"customfield_10109\\\",\\n        \\\"customfield_10110\\\",\\n        \\\"customfield_10111\\\",\\n        \\\"customfield_10112\\\",\\n        \\\"customfield_10113\\\",\\n        \\\"customfield_10114\\\"\\n      ]\\n    }\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[{\"key\":\"jql\",\"value\":\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\"},{\"key\":\"expand\",\"value\":\"names\"},{\"key\":\"maxResults\",\"value\":\"1000\"}]}}},{\"refId\":\"B\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"reducer\":\"last\",\"refId\":\"B\",\"type\":\"reduce\"}}]",
+        "state": "inactive",
+        "type": "recording",
+        "uid": "bfbhdzd261rlsf"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 2.916024623,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "error",
+        "isPaused": false,
+        "labels": null,
+        "lastEvaluation": "2026-05-22T00:31:21.985657102Z",
+        "name": "jira_incident_mttc_hours",
+        "queriedDatasourceUIDs": [
+          "efc1ef8hk8gzkc"
+        ],
+        "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"efc1ef8hk8gzkc\",\"model\":{\"columns\":[],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"efc1ef8hk8gzkc\"},\"filters\":[],\"format\":\"table\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"$average(issues[fields.customfield_10109 != null and fields.customfield_10114 != null].(($toMillis(fields.customfield_10114) - $toMillis(fields.customfield_10109)) / 3600000))\",\"source\":\"url\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"{\\n  \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\\\",\\n  \\\"maxResults\\\": 1000,\\n  \\\"fields\\\": [\\n    \\\"key\\\",\\n    \\\"customfield_10109\\\",\\n    \\\"customfield_10110\\\",\\n    \\\"customfield_10111\\\",\\n    \\\"customfield_10112\\\",\\n    \\\"customfield_10113\\\",\\n    \\\"customfield_10114\\\"\\n  ]\\n}\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[{\"key\":\"jql\",\"value\":\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\"},{\"key\":\"expand\",\"value\":\"names\"},{\"key\":\"maxResults\",\"value\":\"1000\"}]}}},{\"refId\":\"reducer\",\"queryType\":\"expression\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[0,0],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[]},\"reducer\":{\"params\":[],\"type\":\"avg\"},\"type\":\"query\"}],\"datasource\":{\"name\":\"Expression\",\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"reducer\":\"last\",\"refId\":\"reducer\",\"type\":\"reduce\"}},{\"refId\":\"C\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[0],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"reducer\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"C\",\"type\":\"threshold\"}}]",
+        "state": "inactive",
+        "type": "recording",
+        "uid": "ffbhfwx7hj5kwa"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 0.000031337,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "unknown",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "2026-05-22T00:32:17.072609497Z",
+        "name": "InfinityJira-basic-fields-extraction",
+        "queriedDatasourceUIDs": [
+          "efc1ef8hk8gzkc"
+        ],
+        "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"efc1ef8hk8gzkc\",\"model\":{\"columns\":[{\"selector\":\"key\",\"text\":\"key\",\"type\":\"string\"},{\"selector\":\"summary\",\"text\":\"summary\",\"type\":\"string\"},{\"selector\":\"id\",\"text\":\"id\",\"type\":\"string\"},{\"selector\":\"customfield_10111\",\"text\":\"timestamp\",\"type\":\"timestamp_epoch\"},{\"selector\":\"id\",\"text\":\"id\",\"type\":\"number\"}],\"computed_columns\":[{\"selector\":\"\",\"text\":\"\",\"type\":\"string\"}],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"efc1ef8hk8gzkc\"},\"filters\":[],\"format\":\"table\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"issues[id!=null].{\\n\\\"key\\\":key,\\n\\\"id\\\":id,\\n\\\"self\\\":self,\\n\\\"customfield_10111\\\":fields.customfield_10111,\\n\\\"summary\\\":fields.summary,\\n\\\"expand\\\":expand,\\n\\\"fields\\\":fields\\n}\\n\",\"source\":\"url\",\"summarizeBy\":\"Accepted_month\",\"summarizeExpression\":\"\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"{\\n  \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\\\",\\n  \\\"maxResults\\\": 1000,\\n  \\\"expand\\\":\\\"names,fields\\\",\\n  \\\"fields\\\": [\\n    \\\"key\\\",\\n    \\\"id\\\",\\n    \\\"self\\\",\\n    \\\"customfield_10111\\\",\\n    \\\"summary\\\"\\n  ]\\n}\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[]}}}]",
+        "state": "inactive",
+        "type": "recording",
+        "uid": "efc1qlkqidgqoe"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 0.000023777,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "unknown",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "2026-05-22T00:32:10.072508099Z",
+        "name": "InfinityJira-perMonth-aggregation-test",
+        "queriedDatasourceUIDs": [
+          "ffbeitosw2ghse"
+        ],
+        "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"ffbeitosw2ghse\",\"model\":{\"columns\":[],\"computed_columns\":[{\"selector\":\"\",\"text\":\"\",\"type\":\"string\"}],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"ffbeitosw2ghse\"},\"filters\":[],\"format\":\"timeseries\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"(  \\n  $monthGroups := issues.(  \\n    $month := $substring(fields.customfield_10111, 0, 7);  \\n    {\\\"month\\\": $month}  \\n  );  \\n  $distinct($monthGroups.month).(  \\n    $currentMonth := $;  \\n    {  \\n      \\\"month\\\": $currentMonth,  \\n      \\\"value\\\": $count($monthGroups[month = $currentMonth])  \\n    }  \\n  )  \\n)  \",\"source\":\"url\",\"summarizeBy\":\"Accepted_month\",\"summarizeExpression\":\"\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"{\\n  \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\\\",\\n  \\\"maxResults\\\": 1000,\\n  \\\"expand\\\":\\\"names,fields\\\",\\n  \\\"fields\\\": [\\n    \\\"key\\\",\\n    \\\"id\\\",\\n    \\\"self\\\",\\n    \\\"customfield_10111\\\",\\n    \\\"summary\\\"\\n  ]\\n}\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[]}}}]",
+        "state": "inactive",
+        "type": "recording",
+        "uid": "afc1txph5sb28b"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 0.000034455,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "unknown",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "2026-05-22T00:32:13.072510335Z",
+        "name": "InfinityJira-complex-fields-extraction",
+        "queriedDatasourceUIDs": [
+          "efc1ef8hk8gzkc",
+          "efc1ef8hk8gzkc"
+        ],
+        "query": "[{\"refId\":\"accepted\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"efc1ef8hk8gzkc\",\"model\":{\"columns\":[{\"selector\":\"timestamp\",\"text\":\"time\",\"timestampFormat\":\"2006-01-02T15:04:05Z07:00\",\"type\":\"timestamp\"},{\"selector\":\"duration_ms_avg\",\"text\":\"duration\",\"type\":\"number\"}],\"computed_columns\":[{\"selector\":\"accepted_ms\",\"text\":\"am_test\",\"type\":\"string\"}],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"efc1ef8hk8gzkc\"},\"filters\":[],\"format\":\"timeseries\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"jq-backend\",\"refId\":\"accepted\",\"root_selector\":\"[.issues[] | select(.fields.customfield_10111 != null and .fields.customfield_10109 != null) |   \\n  (((.fields.customfield_10111 | .[0:19] + \\\"Z\\\" | fromdateiso8601) - (.fields.customfield_10109 | .[0:19] + \\\"Z\\\" | fromdateiso8601)) * 1000)  \\n] | {  \\n  timestamp: (now * 1000),  \\n  duration_ms_avg: (add / length)  \\n}  \",\"source\":\"url\",\"summarizeBy\":\"\",\"summarizeExpression\":\"\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"{\\n  \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\\\",\\n  \\\"maxResults\\\": 2,\\n  \\\"expand\\\":\\\"names,fields\\\",\\n  \\\"fields\\\": [\\n    \\\"customfield_10111\\\",\\n    \\\"customfield_10109\\\"\\n  ]\\n}\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[]}}},{\"refId\":\"B\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"efc1ef8hk8gzkc\",\"model\":{\"columns\":[],\"computed_columns\":[{\"selector\":\"accepted_ms\",\"text\":\"am_test\",\"type\":\"string\"}],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"efc1ef8hk8gzkc\"},\"filters\":[],\"format\":\"timeseries\",\"global_query_id\":\"\",\"hide\":false,\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"jq-backend\",\"refId\":\"B\",\"root_selector\":\".issues[] | select(.fields.customfield_10111 != null and .fields.customfield_10109 != null) | {    \\n  timestamp: (.fields.customfield_10111 | .[0:19] + \\\"Z\\\" | fromdateiso8601 * 1000),  \\n  accepted: .fields.customfield_10111,  \\n  open: .fields.customfield_10109  \\n}  \",\"source\":\"url\",\"summarizeBy\":\"\",\"summarizeExpression\":\"\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"{\\n  \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\\\",\\n  \\\"maxResults\\\": 2,\\n  \\\"expand\\\":\\\"names,fields\\\",\\n  \\\"fields\\\": [\\n    \\\"customfield_10111\\\",\\n    \\\"customfield_10109\\\"\\n  ]\\n}\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[]}}},{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[0,0],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[]},\"reducer\":{\"params\":[],\"type\":\"avg\"},\"type\":\"query\"}],\"datasource\":{\"name\":\"Expression\",\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"accepted\",\"hide\":false,\"intervalMs\":1000,\"maxDataPoints\":43200,\"reducer\":\"max\",\"refId\":\"A\",\"type\":\"reduce\"}}]",
+        "state": "inactive",
+        "type": "recording",
+        "uid": "cfc2dj1usgb28c"
+      }
+    ],
+    "totals": {
+      "error": 2,
+      "inactive": 10
+    }
+  }
+}

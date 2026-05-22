@@ -1,0 +1,15 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Team",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "T4B9LRMF8U9I9",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "avatar_url": "/avatar/d9a5754410687f9bc10a4cdeb7864d2a472267a5facd65be8700cda51a1ab61c",
+    "email": "ramiro.nagles@grafana.com",
+    "name": "NOC"
+  }
+}

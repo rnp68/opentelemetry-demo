@@ -1,0 +1,79 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "RecordingRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/provenance": "",
+      "grafana.com/updateTimestamp": "2026-02-06T13:44:39Z",
+      "grafana.com/updatedBy": "bfbazndswqry8e"
+    },
+    "labels": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/group": "Test-Evaluation-group",
+      "grafana.com/group-index": "9"
+    },
+    "name": "afc1txph5sb28b",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "expressions": {
+      "A": {
+        "datasourceUID": "ffbeitosw2ghse",
+        "model": {
+          "columns": [],
+          "computed_columns": [
+            {
+              "selector": "",
+              "text": "",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "ffbeitosw2ghse"
+          },
+          "filters": [],
+          "format": "timeseries",
+          "global_query_id": "",
+          "instant": true,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "(  \n  $monthGroups := issues.(  \n    $month := $substring(fields.customfield_10111, 0, 7);  \n    {\"month\": $month}  \n  );  \n  $distinct($monthGroups.month).(  \n    $currentMonth := $;  \n    {  \n      \"month\": $currentMonth,  \n      \"value\": $count($monthGroups[month = $currentMonth])  \n    }  \n  )  \n)  ",
+          "source": "url",
+          "summarizeBy": "Accepted_month",
+          "summarizeExpression": "",
+          "type": "json",
+          "url": "https://jiramttx2.atlassian.net/rest/api/3/search/jql",
+          "url_options": {
+            "body_content_type": "application/json",
+            "body_type": "raw",
+            "data": "{\n  \"jql\": \"project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC\",\n  \"maxResults\": 1000,\n  \"expand\":\"names,fields\",\n  \"fields\": [\n    \"key\",\n    \"id\",\n    \"self\",\n    \"customfield_10111\",\n    \"summary\"\n  ]\n}",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "params": []
+          }
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        },
+        "source": true
+      }
+    },
+    "metric": "mttx2",
+    "paused": true,
+    "targetDatasourceUID": "grafanacloud-prom",
+    "title": "InfinityJira-perMonth-aggregation-test",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

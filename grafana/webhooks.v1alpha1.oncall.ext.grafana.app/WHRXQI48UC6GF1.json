@@ -1,0 +1,20 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Webhook",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "WHRXQI48UC6GF1",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "forward_all": true,
+    "http_method": "POST",
+    "is_webhook_enabled": true,
+    "name": "test",
+    "preset": "simple_webhook",
+    "team": "",
+    "trigger_type": "escalation",
+    "url": "https://webhook.site/b0814d04-6dd9-4602-a341-5df57cdb9f47"
+  }
+}

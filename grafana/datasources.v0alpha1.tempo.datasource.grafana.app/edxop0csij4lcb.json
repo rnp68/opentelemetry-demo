@@ -1,0 +1,20 @@
+{
+  "apiVersion": "tempo.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "edxop0csij4lcb",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "78",
+    "jsonData": {
+      "oauthPassThru": false
+    },
+    "title": "TempoCorrelation",
+    "url": "https://tempo-us-central1.grafana.net/tempo"
+  }
+}

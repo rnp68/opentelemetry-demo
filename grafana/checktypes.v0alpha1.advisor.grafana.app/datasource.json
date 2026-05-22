@@ -1,0 +1,45 @@
+{
+  "apiVersion": "advisor.grafana.app/v0alpha1",
+  "kind": "CheckType",
+  "metadata": {
+    "annotations": {
+      "advisor.grafana.app/checktype-name": "data source",
+      "advisor.grafana.app/ignore-steps": "1",
+      "advisor.grafana.app/retry": "1"
+    },
+    "labels": {
+      "grafana-app-sdk-resource-version": "v0alpha1"
+    },
+    "name": "datasource",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "name": "datasource",
+    "steps": [
+      {
+        "description": "Checks if the UID of a data source is valid.",
+        "resolution": "Check the \u003ca href='https://grafana.com/docs/grafana/latest/upgrade-guide/upgrade-v11.2/#grafana-data-source-uid-format-enforcement'target=_blank\u003edocumentation\u003c/a\u003e for more information or delete the data source and create a new one.",
+        "stepID": "uid-validation",
+        "title": "UID validation"
+      },
+      {
+        "description": "Checks if a data source is healthy.",
+        "resolution": "Go to the data source configuration page and address the issues reported.",
+        "stepID": "health-check",
+        "title": "Health check"
+      },
+      {
+        "description": "Checks if the plugin associated with the data source is installed and available.",
+        "resolution": "Delete the datasource or install the plugin.",
+        "stepID": "missing-plugin",
+        "title": "Missing plugin check"
+      },
+      {
+        "description": "Checks if Prometheus data sources are using deprecated authentication methods (Azure auth and SigV4)",
+        "resolution": "Make sure that 'Azure Monitor Managed Service for Prometheus' and/or 'Amazon Managed Service for Prometheus' plugins are installed. If the data source is provisioned, edit data source type in the provisioning file to use 'grafana-amazonprometheus-datasource' or 'grafana-azureprometheus-datasource'.",
+        "stepID": "prom-dep-auth",
+        "title": "Prometheus deprecated authentication check"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "apiVersion": "faro.ext.grafana.app/v1alpha1",
+  "kind": "FaroApp",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "aws-lambda-cloudwatch-3807",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "appKey": "e0c0cc0b6644b28831e36a853a24bb16",
+    "collectEndpointURL": "https://faro-collector-prod-us-east-0.grafana.net/collect",
+    "corsOrigins": [
+      {
+        "url": "*"
+      }
+    ],
+    "name": "aws-lambda-cloudwatch",
+    "settings": {}
+  }
+}

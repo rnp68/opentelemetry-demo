@@ -1,0 +1,21 @@
+apiVersion: slo.ext.grafana.app/v1alpha1
+kind: SLO
+metadata:
+  name: fh9i9i8jx3ciek89sffti
+spec:
+  name: Recommendation Availability
+  description: HTTP success rate for recommendation service
+  labels:
+    - key: team
+      value: platform
+    - key: app
+      value: otel-demo
+  objectives:
+    - value: 0.999
+      window: 28d
+  destinationDatasource:
+    uid: grafanacloud-prom
+  query:
+    type: freeform
+    freeform:
+      query: sum(rate(rpc_server_duration_count{rpc_service=~".*Recommendation.*",rpc_grpc_status_code="0"}[$__rate_interval])) / sum(rate(rpc_server_duration_count{rpc_service=~".*Recommendation.*"}[$__rate_interval]))

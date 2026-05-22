@@ -1,0 +1,72 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "eebiasu49inepe",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerts": [
+      {
+        "activeAt": "2026-04-02T19:12:20Z",
+        "annotations": {
+          "__dashboardUid__": "grafana_slo_app-zloqtn0urntvbf0vlwio4",
+          "__panelId__": "1",
+          "datasource_uid": "grafanacloud-prom",
+          "description": "Error budget is burning more than expected",
+          "grafana_slo_dashboard_url": "https://ramironagles.grafana.net/d/grafana_slo_app-zloqtn0urntvbf0vlwio4?orgId=1",
+          "name": "SLO Burn Rate High",
+          "ref_id": "highNarrow,highWide,lowNarrow,lowWide",
+          "runbook_url": "",
+          "slo_name": "SLO-web_app_3"
+        },
+        "labels": {
+          "__grafana_origin": "plugin/grafana-slo-app",
+          "alertname": "SLO-web_app_3 - Error Budget Burn Rate is High",
+          "datasource_uid": "grafanacloud-prom",
+          "grafana_folder": "Grafana SLO",
+          "grafana_slo_severity": "warning",
+          "grafana_slo_uuid": "pycanbaecxb9i4qc2559d",
+          "ref_id": "highNarrow,highWide,lowNarrow,lowWide",
+          "service_name": "web_app_3",
+          "team_name": "NOC"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      }
+    ],
+    "annotations": {
+      "__dashboardUid__": "grafana_slo_app-zloqtn0urntvbf0vlwio4",
+      "__panelId__": "1",
+      "description": "Error budget is burning more than expected",
+      "grafana_slo_dashboard_url": "https://ramironagles.grafana.net/d/grafana_slo_app-zloqtn0urntvbf0vlwio4?orgId=1",
+      "name": "SLO Burn Rate High",
+      "runbook_url": "",
+      "slo_name": "SLO-web_app_3"
+    },
+    "evaluationTime": 0.083702267,
+    "folderUid": "febiat3mtdudce",
+    "health": "ok",
+    "isPaused": false,
+    "labels": {
+      "__grafana_origin": "plugin/grafana-slo-app",
+      "grafana_slo_severity": "warning",
+      "grafana_slo_uuid": "pycanbaecxb9i4qc2559d",
+      "service_name": "web_app_3",
+      "team_name": "NOC"
+    },
+    "lastEvaluation": "2026-05-22T00:31:20Z",
+    "name": "SLO-web_app_3 - Error Budget Burn Rate is High",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-prom",
+      "grafanacloud-prom",
+      "grafanacloud-prom",
+      "grafanacloud-prom"
+    ],
+    "query": "(1 - grafana_slo_sli_6h{grafana_slo_uuid=\"pycanbaecxb9i4qc2559d\"}) \u003e bool 9.999778782798785e-13 | (1 - grafana_slo_sli_3d{grafana_slo_uuid=\"pycanbaecxb9i4qc2559d\"}) \u003e bool 9.999778782798785e-13 | (1 - grafana_slo_sli_2h{grafana_slo_uuid=\"pycanbaecxb9i4qc2559d\"}) \u003e bool 2.9999336348396355e-12 | (1 - grafana_slo_sli_1d{grafana_slo_uuid=\"pycanbaecxb9i4qc2559d\"}) \u003e bool 2.9999336348396355e-12",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "apiVersion": "loki.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "cdxoosea6regwc",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "3965",
+    "jsonData": {
+      "derivedFields": [
+        {
+          "datasourceUid": "edxop0csij4lcb",
+          "matcherRegex": "\"tempo_trace_id\":\\s*\"([a-f0-9]+)\"",
+          "matcherType": "regex",
+          "name": "TraceId",
+          "url": "${__value.raw}",
+          "urlDisplayLabel": ""
+        },
+        {
+          "datasourceUid": "grafanacloud-traces",
+          "matcherRegex": "\"service\":\\s*\"([^\"]+)\"",
+          "matcherType": "regex",
+          "name": "service",
+          "url": "${__value.raw}",
+          "urlDisplayLabel": ""
+        }
+      ],
+      "enableSecureSocksProxy": false,
+      "oauthPassThru": false
+    },
+    "title": "LokiCorrelation",
+    "url": "https://logs-prod-us-central1.grafana.net/"
+  }
+}

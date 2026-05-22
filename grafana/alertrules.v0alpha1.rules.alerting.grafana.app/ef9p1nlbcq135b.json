@@ -1,0 +1,133 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ff9p1nkq236yob",
+      "grafana.com/provenance": "",
+      "grafana.com/updateTimestamp": "2026-01-09T23:49:51Z",
+      "grafana.com/updatedBy": "fdxoo6cwb8d8gb"
+    },
+    "labels": {
+      "grafana.app/folder": "ff9p1nkq236yob",
+      "grafana.com/group": "frontend-observability-alerts",
+      "grafana.com/group-index": "0"
+    },
+    "name": "ef9p1nlbcq135b",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "appName": "opentelemetry-demo-faro",
+      "description": "This alert fires when the number of errors increases day over day for the last 1d.",
+      "ruleId": "error_count",
+      "summary": "Errors Count - opentelemetry-demo-faro"
+    },
+    "execErrState": "Error",
+    "expressions": {
+      "Has error count increased above threshold": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0,
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "Increase in errors threshold"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "Increase in errors threshold",
+          "hide": false,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "reducer": "max",
+          "refId": "Has error count increased above threshold",
+          "type": "reduce"
+        },
+        "source": true
+      },
+      "Increase in errors": {
+        "datasourceUID": "grafanacloud-prom",
+        "model": {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "expr": "feo11y:error_count{service_name=\"opentelemetry-demo-faro\"} \u003e feo11y:error_count{service_name=\"opentelemetry-demo-faro\"} offset 24h",
+          "intervalMs": 1800000,
+          "maxDataPoints": 50000,
+          "queryType": "range",
+          "refId": "Increase in errors"
+        },
+        "queryType": "range",
+        "relativeTimeRange": {
+          "from": "48h0m0s",
+          "to": "0s"
+        }
+      },
+      "Increase in errors threshold": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0,
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "Increase in errors threshold"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "Increase in errors",
+          "hide": false,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "refId": "Increase in errors threshold",
+          "type": "threshold"
+        }
+      }
+    },
+    "for": "24h0m0s",
+    "noDataState": "OK",
+    "title": "Errors Count - opentelemetry-demo-faro",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

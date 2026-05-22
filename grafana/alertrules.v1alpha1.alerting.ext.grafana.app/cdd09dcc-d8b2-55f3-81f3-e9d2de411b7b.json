@@ -1,0 +1,59 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "cdd09dcc-d8b2-55f3-81f3-e9d2de411b7b",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerts": [
+      {
+        "activeAt": "2026-04-15T07:39:50Z",
+        "annotations": {
+          "datasource_uid": "grafanacloud-prom",
+          "description": "Node {{ $labels.instance }} has rebooted {{ $value | humanize }} seconds ago.",
+          "ref_id": "query",
+          "summary": "Node has rebooted."
+        },
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "alertname": "WindowsNodeHasRebooted",
+          "asserts_alert_category": "amend",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "info",
+          "datasource_uid": "grafanacloud-prom",
+          "grafana_folder": "Integration - Windows Exporter",
+          "ref_id": "query",
+          "severity": "info"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      }
+    ],
+    "annotations": {
+      "description": "Node {{ $labels.instance }} has rebooted {{ $value | humanize }} seconds ago.",
+      "summary": "Node has rebooted."
+    },
+    "evaluationTime": 0.028913261,
+    "folderUid": "integration---windows-exporter",
+    "health": "ok",
+    "isPaused": false,
+    "labels": {
+      "__converted_prometheus_rule__": "true",
+      "asserts_alert_category": "amend",
+      "asserts_entity_type": "Node",
+      "asserts_severity": "info",
+      "severity": "info"
+    },
+    "lastEvaluation": "2026-05-22T00:31:50Z",
+    "name": "WindowsNodeHasRebooted",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-prom"
+    ],
+    "query": "(time() - windows_system_boot_time_timestamp_seconds{job=~\"integrations/windows_exporter\"}\nor\ntime() - windows_system_boot_time_timestamp{job=~\"integrations/windows_exporter\"}\nor\ntime() - windows_system_system_up_time{job=~\"integrations/windows_exporter\"}) \u003c 600\nand\n((time() - windows_system_boot_time_timestamp_seconds{job=~\"integrations/windows_exporter\"} offset 10m)\nor\n(time() - windows_system_boot_time_timestamp{job=~\"integrations/windows_exporter\"} offset 10m)\nor\n(time() - windows_system_system_up_time{job=~\"integrations/windows_exporter\"} offset 10m)) \u003e 600\n",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

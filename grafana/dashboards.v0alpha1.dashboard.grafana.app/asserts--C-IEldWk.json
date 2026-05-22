@@ -1,0 +1,3226 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts--C-IEldWk",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.0.0-85820.patch2-86140"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "uid": "$ds"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 7,
+          "x": 0,
+          "y": 0
+        },
+        "id": 52,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "max"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value_and_name",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "count(count by(topic) (kafka_producer_topic_record_send_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"}))",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "producer",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "count(count by(topic)(kafka_consumer_fetch_manager_records_consumed_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\", topic!=\"\"}))",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "consumer",
+            "refId": "B"
+          }
+        ],
+        "title": "Connected Topics ",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 7,
+          "y": 0
+        },
+        "id": 53,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value_and_name",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum(rate(kafka_producer_record_send_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"}[$__rate_interval])\u003e0)",
+            "interval": "",
+            "legendFormat": "producer",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum(rate(kafka_consumer_fetch_manager_records_consumed_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\"}[$__rate_interval])\u003e0)",
+            "interval": "",
+            "legendFormat": "consumer",
+            "refId": "B"
+          }
+        ],
+        "title": "Messages Processed Rate/s",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 9,
+          "x": 15,
+          "y": 0
+        },
+        "id": 55,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum(rate(kafka_producer_outgoing_byte_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"}[$__rate_interval]))",
+            "interval": "",
+            "legendFormat": "producer",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum(rate(kafka_consumer_fetch_manager_bytes_consumed_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", client_id=~\"$consumer_client_id\"}[$__rate_interval]))",
+            "interval": "",
+            "legendFormat": "consumer",
+            "refId": "B"
+          }
+        ],
+        "title": " Network throughput",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 7,
+          "x": 0,
+          "y": 5
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "max"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value_and_name",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by(topic) (kafka_consumer_fetch_manager_records_lead_avg{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\"}) \u003e 0",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{topic}} ",
+            "refId": "A"
+          }
+        ],
+        "title": "Consumer Record lead (max)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 7,
+          "y": 5
+        },
+        "id": 16,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "max"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value_and_name",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "max by(topic) (kafka_consumer_fetch_manager_records_lag_max{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\"}) \u003e 0",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{topic}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Consumer Record Lag (max)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 5,
+          "x": 15,
+          "y": 5
+        },
+        "id": 80,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "editorMode": "code",
+            "expr": "avg by (container)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", workload=\"$workload\", workload !=\"\"}) * 100 \n or\navg by (job,service) (asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", job=~\"$job\", workload=\"\",service=\"$service\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"})) * 100 ",
+            "interval": "",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "CPU",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 20,
+          "y": 5
+        },
+        "id": 81,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "editorMode": "code",
+            "expr": "avg by (container)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"memory:usage\", workload=\"$workload\", workload !=\"\"}) * 100 \n or\navg by (job, service) (asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"memory:usage\", job=\"$job\", workload=\"\",service=\"$service\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"})) * 100 ",
+            "interval": "",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Memory",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 11
+        },
+        "id": 57,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "reqpm"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 10,
+              "x": 0,
+              "y": 12
+            },
+            "id": 61,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "area",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "value_and_name"
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "sum by (job,service, asserts_request_type)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",asserts_request_type !~\"producer_.*|consumer_.*\"}[$__rate_interval])) * 60 \u003e 0",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "avg_over_time((sum by (job,service, asserts_request_type)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type !~\"producer_.*|consumer_.*\"}))[$__rate_interval:]) * 60 \u003e 0",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Requests",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 10,
+              "x": 10,
+              "y": 12
+            },
+            "id": 76,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "area",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "value_and_name"
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "1000 * sum by (job,service, asserts_request_type) (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", accountID=\"\", asserts_request_type !~\"producer_.*|consumer_.*\"}[$__rate_interval]))\n/\n(sum by (job,service, asserts_request_type) (rate({asserts_metric_latency=\"count\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type !~\"producer_.*|consumer_.*\"}[$__rate_interval])) \u003e 0)",
+                "hide": true,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "1000 * avg by (job,service, asserts_request_type) (asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type !~\"producer_.*|consumer_.*\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Avg Latency (ms)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 4,
+              "x": 20,
+              "y": 12
+            },
+            "id": 65,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "area",
+              "justifyMode": "center",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "value_and_name"
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "sum by(job,service, asserts_error_type)(rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}[$__rate_interval])) * 60 \u003e0",
+                "interval": "",
+                "legendFormat": "{{asserts_error_type}} ",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "avg_over_time((sum by(job,service, asserts_error_type)({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\"}))[$__rate_interval:]) * 60 \u003e0",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_error_type}} ",
+                "refId": "B"
+              }
+            ],
+            "title": "Errors per Minute",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "reqpm"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 10,
+              "x": 0,
+              "y": 18
+            },
+            "id": 74,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "area",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "value_and_name"
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "sum by (job,service, asserts_request_type)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"producer_.*.*\"}[$__rate_interval])) * 60 \u003e 0",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "avg_over_time((sum by (job,service, asserts_request_type)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"producer_\"}))[$__rate_interval:]) * 60 \u003e 0",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Producer Requests",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 10,
+              "x": 10,
+              "y": 18
+            },
+            "id": 77,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "area",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "value_and_name"
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "1000 * sum by (job,service, asserts_request_type) (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", accountID=\"\", asserts_request_type =~\"producer_.*\"}[$__rate_interval]))\n/\n(sum by (job,service, asserts_request_type) (rate({asserts_metric_latency=\"count\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type =~\"producer_.*\"}[$__rate_interval])) \u003e 0)",
+                "hide": true,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "1000 * avg by (job,service, asserts_request_type) (asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type =~\"producer_.*\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Producer Avg Latency (ms)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 4,
+              "x": 20,
+              "y": 18
+            },
+            "id": 79,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "area",
+              "justifyMode": "center",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "value_and_name"
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "sum by(job,service, asserts_error_type)(rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_error_type=~\"producer.*\"}[$__rate_interval])) * 60 \u003e0",
+                "interval": "",
+                "legendFormat": "{{asserts_error_type}} ",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "avg_over_time((sum by(job,service, asserts_error_type)({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",  asserts_error_type=~\"producer.*\"}))[$__rate_interval:]) * 60 \u003e0",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_error_type}} ",
+                "refId": "B"
+              }
+            ],
+            "title": "Producer Errors per Minute",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "reqpm"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 12,
+              "x": 0,
+              "y": 24
+            },
+            "id": 75,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "area",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "value_and_name"
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "sum by (job,service, asserts_request_type)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"consumer_.*.*\"}[$__rate_interval])) * 60 \u003e 0",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "avg_over_time((sum by (job,service, asserts_request_type)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"consumer_\"}))[$__rate_interval:]) * 60 \u003e 0",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Consumer Requests",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 12,
+              "x": 12,
+              "y": 24
+            },
+            "id": 78,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "area",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "value_and_name"
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "1000 * sum by (job,service, asserts_request_type) (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", accountID=\"\", asserts_request_type =~\"consumer_.*\"}[$__rate_interval]))\n/\n(sum by (job,service, asserts_request_type) (rate({asserts_metric_latency=\"count\",namespace=~\"$namespace\", asserts_env=~\"$env\", asserts_site=~\"$site\", job=~\"$job\", service=~\"$service\", asserts_request_type =~\"consumer_.*\"}[$__rate_interval])) \u003e 0)",
+                "hide": true,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "1000 * avg by (job,service, asserts_request_type) (asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type =~\"consumer_.*\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Consumer Avg Latency (ms)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "You must select the request_type and request_context (when available) to view the predictions",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 10,
+              "w": 12,
+              "x": 0,
+              "y": 30
+            },
+            "id": 67,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "sum by (job,service, asserts_request_type, asserts_request_context)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_type!~\"(producer|consumer).*\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))\u003e0 * 60 ",
+                "hide": false,
+                "instant": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} :: {{asserts_request_context}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "group by (asserts_request_type, asserts_request_context) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", alertname=\"RequestRateAnomaly\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}) * 0.001",
+                "hide": false,
+                "instant": false,
+                "interval": "",
+                "legendFormat": "RequestRateAnomaly::{{asserts_request_context}}",
+                "refId": "F"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "avg_over_time((sum by (job,service, asserts_request_type, asserts_request_context)({asserts_metric_request=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_request_type!~\"(producer|consumer).*\"}))[$__rate_interval:])\u003e0 * 60",
+                "hide": false,
+                "instant": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} :: {{asserts_request_context}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Request Rate (cpm) ",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "You must select the request_type and request_context (when available) to view the predictions",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 10,
+              "w": 12,
+              "x": 12,
+              "y": 30
+            },
+            "id": 69,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "1000 * sum by (asserts_request_type, asserts_request_context) \n  (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_request_context!~\"(producer|consumer).*\"}[$__rate_interval]))\n/\n(sum by (asserts_request_type, asserts_request_context) \n  (rate({asserts_metric_latency=\"count\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_request_context!~\"(producer_|consumer_).*\"}[$__rate_interval])) \u003e 0)",
+                "hide": true,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} :: {{asserts_request_context}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "group by (asserts_request_type, asserts_request_context) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", alertname=\"LatencyAverageAnomaly\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}) * 0.001",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "LatencyAverageAnomaly",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "group by (asserts_request_type, asserts_request_context) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", alertname=\"LatencyAverageBreach\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}) * 0.001",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "LatencyAverageBreach",
+                "refId": "E"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "1000* avg by (job,service, asserts_request_type, asserts_request_context) (asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", asserts_request_context=~\"$request_context\", asserts_request_type!~\"(producer|consumer).*\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} :: {{asserts_request_context}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Avg Request Latency (ms)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 0,
+              "y": 40
+            },
+            "id": 71,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "exemplar": true,
+                "expr": "sum by(job,service, asserts_error_type)(rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\"}[$__rate_interval])) * 60 \n   ",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} - {{asserts_error_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "avg_over_time((sum by(job,service, asserts_error_type)({asserts_metric_error=\"gauge\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\"}))[$__rate_interval:]) * 60 \n  ",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}} - {{asserts_error_type}}",
+                "refId": "C"
+              }
+            ],
+            "title": "Errors Per Minute",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 12,
+              "y": 40
+            },
+            "id": 73,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "asserts:error:ratio{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",  asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\"}*100",
+                "interval": "",
+                "legendFormat": "{{job}} - {{asserts_request_type}} -{{asserts_request_context}} - {{asserts_error_type}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Error Ratio 5m (%)",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Requests And Error",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 12
+        },
+        "id": 23,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 0,
+              "y": 13
+            },
+            "id": 10,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_producer_request_latency_avg{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_context}} ",
+                "refId": "A"
+              }
+            ],
+            "title": "Producer Request Latency",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 12,
+              "y": 13
+            },
+            "id": 11,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "max by (asserts_request_context)(kafka_consumer_fetch_manager_fetch_latency_max{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_context}} ",
+                "refId": "A"
+              }
+            ],
+            "title": "Consumer Fetch Latency (max)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 0,
+              "y": 22
+            },
+            "id": 12,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum by (asserts_request_context)(rate(kafka_producer_request_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"}[$__rate_interval]))",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_context}} ",
+                "refId": "A"
+              }
+            ],
+            "title": "Producer Request Rate",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 12,
+              "y": 22
+            },
+            "id": 13,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum by (asserts_request_context)(rate(kafka_consumer_fetch_manager_fetch_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\"}[$__rate_interval]))",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_context}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Consumer Fetch Rate",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Producer \u0026 Consumer",
+        "type": "row"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 13
+        },
+        "id": 9,
+        "panels": [],
+        "title": "Resource",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Saturation ::critical"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#E02F44",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 6
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Saturation ::warning"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#F2CC0C",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 6
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 14
+        },
+        "id": 2,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "avg by (container)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", workload=\"$workload\", workload !=\"\"}) * 100 \n or\navg by (job,service) (asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", job=\"$job\",service=\"$service\", workload=\"\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"})) * 100 ",
+            "interval": "",
+            "legendFormat": "{{container}} :: usage",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "group by(alertname,asserts_severity)(asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$workload\", alertname=\"Saturation\", asserts_resource_type=\"cpu:usage\"}) or group by(alertname,asserts_severity)(asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", alertname=\"Saturation\", asserts_resource_type=\"cpu:usage\", workload=\"\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Saturation ::{{asserts_severity}}",
+            "refId": "B"
+          }
+        ],
+        "title": "CPU %",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/Saturation.*critical/"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#E02F44",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 6
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "/Saturation.*warning/"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#F2CC0C",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 6
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 14
+        },
+        "id": 3,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "avg by (container)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"memory:usage\", workload=\"$workload\", workload!=\"\"}) * 100\n or\navg by (job, service) (asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"memory:usage\", job=\"$job\",service=\"$service\", workload=\"\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\", workload!=\"\"})) * 100  ",
+            "interval": "",
+            "legendFormat": "{{container}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "group by(alertname,asserts_severity)(asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$workload\", alertname=\"Saturation\", asserts_resource_type=\"memory:usage\"}) or group by(alertname,asserts_severity)(asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$job\", alertname=\"Saturation\", asserts_resource_type=\"memory:usage\", workload=\"\"})",
+            "interval": "",
+            "legendFormat": "Saturation ::{{asserts_severity}}",
+            "refId": "B"
+          }
+        ],
+        "title": "Memory",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 23
+        },
+        "id": 5,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "editorMode": "code",
+            "expr": "avg by (container)(asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", workload=\"$workload\", workload!=\"\"})\nor\navg by (job,service) (asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:usage\", job=\"$job\",service=\"$service\", workload=\"\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"})) * 100 ",
+            "interval": "",
+            "legendFormat": "{{container}} : usage",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "avg by (container) (kube_pod_container_resource_requests{namespace=~\"$namespace\",resource=\"cpu\", } * on (pod) group_left (workload)(asserts:mixin_pod_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\", workload!=\"\"} or asserts:mixin_pod_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\", workload=\"\"}))",
+            "interval": "",
+            "legendFormat": "{{container}} :: requests",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "avg by (container) (kube_pod_container_resource_limits{namespace=~\"$namespace\",resource=\"cpu\", } * on (pod) group_left (workload)(asserts:mixin_pod_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\", workload!=\"\"} or asserts:mixin_pod_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\", workload=\"\"}))",
+            "interval": "",
+            "legendFormat": "{{container}} :: limits",
+            "refId": "C"
+          }
+        ],
+        "title": "CPU Cores Used",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 23
+        },
+        "id": 4,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "avg by (container)(asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"memory:usage\", workload=\"$workload\", workload !=\"\"})\n or\navg by (job,service) (asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"memory:usage\", job=\"$job\",service=\"$service\", workload=\"\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\",workload!=\"\"}))",
+            "interval": "",
+            "legendFormat": "{{container}} :: usage",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "avg by (container) (kube_pod_container_resource_requests{namespace=~\"$namespace\",resource=\"memory\"} * on (pod) group_left (workload)(asserts:mixin_pod_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\"} or asserts:mixin_pod_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\", workload=\"\"}))",
+            "interval": "",
+            "legendFormat": "{{container}} :: requests",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "avg by (container) (kube_pod_container_resource_limits{namespace=~\"$namespace\",resource=\"memory\"} * on (pod) group_left (workload)(asserts:mixin_pod_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\"} or asserts:mixin_pod_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\", workload=\"\"}))",
+            "interval": "",
+            "legendFormat": "{{container}} :: limits",
+            "refId": "C"
+          }
+        ],
+        "title": "Memory Bytes ",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 32
+        },
+        "id": 24,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "avg by(job,service)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:throttle\", job=\"$job\",service=\"$service\", workload=\"\"}) or avg by (container)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"cpu:throttle\", workload=\"$workload\", workload!=\"\"}) ",
+            "interval": "",
+            "legendFormat": "{{container}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "group by (asserts_severity) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Service=\"$workload\", alertname=\"Saturation\", asserts_resource_type=\"cpu:throttle\"}) * .001",
+            "interval": "",
+            "legendFormat": "Saturation :: {{asserts_severity}}",
+            "refId": "B"
+          }
+        ],
+        "title": "CPU Throttle",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 32
+        },
+        "id": 19,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum by (workload) (asserts:resource:rate5m{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"network:rx_bytes\", workload=\"$workload\", workload !=\"\"})\nor\nsum by (job,service) (asserts:resource:rate5m{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"network:rx_bytes\", job=\"$job\",service=\"$service\", workload=\"\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\", workload!=\"\"}))",
+            "interval": "",
+            "legendFormat": "{{workload}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Received Bytes",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 40
+        },
+        "id": 17,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum by(persistentvolumeclaim) (asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"disk:usage\", workload=\"$workload\", workload!=\"\"})\n or\navg by(device)(avg by(ip,device)(label_replace(asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"\",asserts_resource_type=\"disk:usage\"},\"ip\",\"$1\",\"instance\",\"(.+?):.+\")) and on(ip) group by (ip)(label_replace(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\", workload=\"\"},\"ip\",\"$1\",\"instance\",\"(.+?):.+\")))",
+            "interval": "",
+            "legendFormat": "{{persistentvolumeclaim}} {{device}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Disk Utilization (GB)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 40
+        },
+        "id": 20,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum by (workload) (asserts:resource:rate5m{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"network:tx_bytes\", workload=\"$workload\", workload !=\"\"})\nor\nsum by (job,service) (asserts:resource:rate5m{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_resource_type=\"network:tx_bytes\", job=\"$job\",service=\"$service\", workload=\"\"} unless on(job) group by(job)(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",workload=\"$workload\", workload!=\"\"}))",
+            "interval": "",
+            "legendFormat": "{{workload}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Transmitted Bytes",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 48
+        },
+        "id": 25,
+        "panels": [],
+        "title": "Throughput",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 49
+        },
+        "id": 82,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum(rate(kafka_producer_topic_byte_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\", topic !=\"\"}[$__rate_interval])) by (asserts_request_context)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{asserts_request_context}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Producer Bytes Rate",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 49
+        },
+        "id": 83,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum(rate(kafka_consumer_fetch_manager_bytes_consumed_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", client_id=~\"$consumer_client_id\",topic!=\"\"}[$__rate_interval])) by (asserts_request_context)",
+            "interval": "",
+            "legendFormat": "{{asserts_request_context}}",
+            "refId": "B"
+          }
+        ],
+        "title": "Consumer Bytes Rate",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 58
+        },
+        "id": 84,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum(rate(kafka_producer_topic_record_send_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", client_id=~\"$producer_client_id\"}[$__rate_interval])) by (asserts_request_context)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{asserts_request_context}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Messages Produced Rate",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 58
+        },
+        "id": 85,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "9.1.5",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (asserts_request_context) (rate(kafka_consumer_fetch_manager_records_consumed_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", topic!=\"\"}[$__rate_interval]))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{asserts_request_context}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Messages Consumed Rate",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 67
+        },
+        "id": 27,
+        "panels": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 0,
+              "y": 15
+            },
+            "id": 15,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_producer_record_size_avg{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_context}} ",
+                "refId": "A"
+              }
+            ],
+            "title": "Producer Avg Record Size",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 12,
+              "y": 15
+            },
+            "id": 86,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_consumer_fetch_manager_fetch_size_avg{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\", client_id=~\"$consumer_client_id\",topic!=\"\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_context}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Consumer Avg Fetch Size",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 0,
+              "y": 24
+            },
+            "id": 14,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_producer_record_queue_time_avg{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"})",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{asserts_request_context}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Producer Queue Time",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Performance",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 68
+        },
+        "id": 35,
+        "panels": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 16
+            },
+            "id": 40,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_producer_io_ratio{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"})",
+                "interval": "",
+                "legendFormat": "producer :: {{asserts_request_context}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_consumer_io_ratio{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\"})",
+                "interval": "",
+                "legendFormat": "consumer :: {{asserts_request_context}}",
+                "refId": "B"
+              }
+            ],
+            "title": "IO Ratio",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 16
+            },
+            "id": 43,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_producer_io_wait_time_ns_avg{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"})",
+                "interval": "",
+                "legendFormat": "producer :: {{asserts_request_context}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_consumer_io_wait_time_ns_avg{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\"})",
+                "interval": "",
+                "legendFormat": "consumer :: {{asserts_request_context}}",
+                "refId": "B"
+              }
+            ],
+            "title": "IO Wait time average",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 24
+            },
+            "id": 42,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_producer_io_wait_ratio{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"})",
+                "interval": "",
+                "legendFormat": "producer :: {{asserts_request_context}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_consumer_io_wait_ratio{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\"})",
+                "interval": "",
+                "legendFormat": "consumer :: {{asserts_request_context}}",
+                "refId": "B"
+              }
+            ],
+            "title": "IO Wait Ratio",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 24
+            },
+            "id": 41,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "9.1.5",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_producer_io_time_ns_avg{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"})",
+                "interval": "",
+                "legendFormat": "producer :: {{asserts_request_context}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "avg by (asserts_request_context)(kafka_consumer_io_time_ns_avg{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$consumer_client_id\"})",
+                "interval": "",
+                "legendFormat": "consumer :: {{asserts_request_context}}",
+                "refId": "B"
+              }
+            ],
+            "title": "IO Time average",
+            "type": "timeseries"
+          }
+        ],
+        "title": "IO Performance",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 69
+        },
+        "id": 29,
+        "panels": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 0,
+              "y": 124
+            },
+            "id": 8,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "rate(kafka_producer_record_error_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=~\"$producer_client_id\"}[$__rate_interval])",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{spring_id}} :: {{instance}}",
+                "refId": "B"
+              }
+            ],
+            "title": "Producer Error rate",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 12,
+              "y": 124
+            },
+            "id": 87,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "rate(kafka_producer_record_retry_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",service=~\"$service\",client_id=\"$producer_client_id\"}[$__rate_interval])",
+                "hide": false,
+                "interval": "",
+                "legendFormat": "{{spring_id}} :: {{instance}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Producer Retry rate",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Producer Errors \u0026 Retries",
+        "type": "row"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "uid": "$ds"
+          },
+          "definition": "label_values(asserts:mixin_workload_job, asserts_env)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"kafka_producer_topic_record_send_total|kafka_consumer_request_total\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, job)",
+          "includeAll": true,
+          "multi": true,
+          "name": "job",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"kafka_producer_topic_record_send_total|kafka_consumer_request_total\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, job)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"kafka_producer_topic_record_send_total|kafka_consumer_request_total\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\"}, service)",
+          "includeAll": false,
+          "name": "service",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"kafka_producer_topic_record_send_total|kafka_consumer_request_total\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\"}, service)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(kafka_producer_topic_record_send_total {namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",client_id!~\".*StreamThread.*\", job=~\"$job\",service=~\"$service\"},client_id)",
+          "includeAll": true,
+          "multi": true,
+          "name": "producer_client_id",
+          "options": [],
+          "query": {
+            "query": "label_values(kafka_producer_topic_record_send_total {namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",client_id!~\".*StreamThread.*\", job=~\"$job\",service=~\"$service\"},client_id)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "uid": "$ds"
+          },
+          "definition": "label_values(kafka_consumer_request_total {namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",client_id!~\".*StreamThread.*\", job=~\"$job\",service=~\"$service\"},client_id)",
+          "includeAll": true,
+          "multi": true,
+          "name": "consumer_client_id",
+          "options": [],
+          "query": {
+            "query": "label_values(kafka_consumer_request_total {namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",client_id!~\".*StreamThread.*\", job=~\"$job\",service=~\"$service\"},client_id)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\"}, asserts_request_type)",
+          "includeAll": true,
+          "multi": true,
+          "name": "request_type",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\"}, asserts_request_type)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "uid": "$ds"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\", asserts_request_type=~\"$request_type\"}, asserts_request_context)",
+          "includeAll": true,
+          "name": "request_context",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_context\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\", asserts_request_type=~\"$request_type\"}, asserts_request_context)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_error\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\",asserts_request_type=~\"$request_type\"}, asserts_error_type)",
+          "includeAll": true,
+          "name": "error_type",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",__name__=~\"asserts:request:type_error\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=~\"$job\", asserts_request_type=~\"$request_type\"}, asserts_error_type)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "2022-08-14T04:00:00.000Z",
+      "to": "2022-08-15T03:59:59.000Z"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Kafka Client KPI",
+    "weekStart": ""
+  }
+}

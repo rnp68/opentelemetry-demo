@@ -1,0 +1,13 @@
+{
+  "apiVersion": "folder.grafana.app/v1beta1",
+  "kind": "Folder",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "ef00mxxjt8gsgc",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "title": "Examples"
+  }
+}

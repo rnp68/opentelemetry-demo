@@ -1,0 +1,23 @@
+{
+  "apiVersion": "grafana-labels-app.ext.grafana.com/v1alpha1",
+  "kind": "Label",
+  "metadata": {
+    "annotations": {
+      "grafana.com/updateTimestamp": "2025-01-30T13:05:57Z"
+    },
+    "labels": {
+      "grafana-app-sdk-resource-version": "v1alpha1",
+      "keyName": "AlertTitle"
+    },
+    "name": "400e39da-799a-4cad-806e-ebf0ea2d32f4",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "key": {
+      "id": "400e39da-799a-4cad-806e-ebf0ea2d32f4",
+      "name": "AlertTitle",
+      "prescribed": false
+    },
+    "values": []
+  }
+}

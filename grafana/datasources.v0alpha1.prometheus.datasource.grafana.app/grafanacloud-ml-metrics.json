@@ -1,0 +1,23 @@
+{
+  "apiVersion": "prometheus.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-ml-metrics",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "1036148",
+    "jsonData": {
+      "httpMethod": "POST",
+      "manageAlerts": false,
+      "prometheusType": "Mimir",
+      "prometheusVersion": "2.3.0"
+    },
+    "title": "grafanacloud-ml-metrics",
+    "url": "https://machine-learning-prod-us-east-0.grafana.net/machine-learning/predict"
+  }
+}

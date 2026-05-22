@@ -1,0 +1,22 @@
+{
+  "apiVersion": "grafana-labels-app.ext.grafana.com/v1alpha1",
+  "kind": "LabelMetadata",
+  "metadata": {
+    "annotations": null,
+    "labels": {
+      "grafana-app-sdk-resource-version": "v1alpha1"
+    },
+    "name": "400a26fd-1376-413c-ae8a-2cce0b91afa5",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "archived": false,
+    "color": "",
+    "currentStringPair": {
+      "id": "s88bf3026d81f43744ab8fa98b38666744036803bfd54843064ed1ef3d4f3cc5a",
+      "key": "asserts_env",
+      "value": ""
+    },
+    "description": ""
+  }
+}

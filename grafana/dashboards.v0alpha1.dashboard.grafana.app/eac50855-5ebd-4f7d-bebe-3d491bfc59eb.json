@@ -1,0 +1,254 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "eac50855-5ebd-4f7d-bebe-3d491bfc59eb",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "fejqpycotqvpce"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 18,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": true
+          },
+          "frameIndex": 0,
+          "showHeader": true
+        },
+        "pluginVersion": "12.0.0-86782",
+        "targets": [
+          {
+            "datasource": {
+              "type": "mssql",
+              "uid": "fejqpycotqvpce"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT \n    p.name AS procedure_name,\n    s.name AS schema_name,\n    m.definition AS procedure_definition,\n    p.create_date,\n    p.modify_date,\n    pa.parameter_id,\n    pa.name AS parameter_name,\n    pa.system_type_id,\n    t.name AS data_type,\n    pa.max_length,\n    pa.is_output AS is_output_parameter\nFROM sys.procedures p\nJOIN sys.schemas s ON p.schema_id = s.schema_id\nJOIN sys.sql_modules m ON p.object_id = m.object_id\nLEFT JOIN sys.parameters pa ON p.object_id = pa.object_id\nLEFT JOIN sys.types t ON pa.system_type_id = t.user_type_id\nORDER BY p.name, pa.parameter_id;\n",
+            "refId": "Real_time_usage",
+            "sql": {
+              "columns": [
+                {
+                  "name": "COUNT",
+                  "parameters": [
+                    {
+                      "name": "",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            },
+            "table": "dbo.spt_values"
+          },
+          {
+            "datasource": {
+              "type": "mssql",
+              "uid": "fejqpycotqvpce"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "key": "Q-651b1918-f22b-40ab-ae24-d3b29c90bf83-1",
+            "rawQuery": true,
+            "rawSql": "SELECT \n    qs.sql_handle,\n    st.text AS query_text,\n    qs.total_worker_time AS cpu_time,\n    qs.total_elapsed_time,\n    qs.total_logical_reads,\n    qs.total_physical_reads,\n    qs.execution_count\nFROM sys.dm_exec_query_stats qs\nCROSS APPLY sys.dm_exec_sql_text(qs.sql_handle) st\nORDER BY qs.total_worker_time DESC;\n",
+            "refId": "historic_usage",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          },
+          {
+            "datasource": {
+              "type": "mssql",
+              "uid": "fejqpycotqvpce"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "key": "Q-8d34c165-99d7-4cfb-9b4a-7ffee00839ac-2",
+            "rawQuery": true,
+            "rawSql": "SELECT \n    r.session_id,\n    r.status,\n    r.cpu_time,\n    r.total_elapsed_time,\n    r.logical_reads,\n    r.writes,\n    r.blocking_session_id,\n    t.text AS query_text\nFROM sys.dm_exec_requests r\nCROSS APPLY sys.dm_exec_sql_text(r.sql_handle) t\nORDER BY r.cpu_time DESC;\n",
+            "refId": "Stored_procedures",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          },
+          {
+            "datasource": {
+              "type": "mssql",
+              "uid": "fejqpycotqvpce"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "hide": false,
+            "rawQuery": true,
+            "rawSql": "SELECT \n    (SELECT COUNT(*) FROM sys.dm_exec_requests) AS active_queries,\n    (SELECT COUNT(*) FROM sys.dm_exec_sessions WHERE is_user_process = 1) AS active_sessions,\n    (SELECT SUM(total_physical_reads) FROM sys.dm_exec_query_stats) AS total_physical_reads,\n    (SELECT SUM(total_logical_reads) FROM sys.dm_exec_query_stats) AS total_logical_reads,\n    (SELECT SUM(total_worker_time) FROM sys.dm_exec_query_stats) / 1000 AS total_cpu_time_ms,\n    (SELECT SUM(wait_time_ms) FROM sys.dm_os_wait_stats) AS total_wait_time_ms,\n    (SELECT SUM(io_stall_read_ms) FROM sys.dm_io_virtual_file_stats(DB_ID(), NULL)) AS io_stall_read_ms,\n    (SELECT SUM(io_stall_write_ms) FROM sys.dm_io_virtual_file_stats(DB_ID(), NULL)) AS io_stall_write_ms\n",
+            "refId": "General_performance",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          },
+          {
+            "datasource": {
+              "type": "mssql",
+              "uid": "fejqpycotqvpce"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "hide": false,
+            "rawQuery": true,
+            "rawSql": "SELECT \n    DB_NAME(vfs.database_id) AS database_name,\n    vfs.file_id,\n    mf.name AS file_name,\n    mf.type_desc AS file_type,\n    vfs.num_of_reads,\n    vfs.num_of_writes,\n    vfs.io_stall_read_ms,\n    vfs.io_stall_write_ms,\n    vfs.size_on_disk_bytes / 1024 / 1024 AS size_on_disk_MB\nFROM sys.dm_io_virtual_file_stats(NULL, NULL) vfs\nJOIN sys.master_files mf ON vfs.database_id = mf.database_id AND vfs.file_id = mf.file_id\nORDER BY io_stall_read_ms DESC, io_stall_write_ms DESC;\n",
+            "refId": "IO_Activity",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "SQL data",
+        "type": "table"
+      }
+    ],
+    "preload": false,
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "SQL Test"
+  }
+}

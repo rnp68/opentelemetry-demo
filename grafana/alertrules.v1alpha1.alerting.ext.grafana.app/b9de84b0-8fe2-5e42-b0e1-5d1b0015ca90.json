@@ -1,0 +1,59 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "b9de84b0-8fe2-5e42-b0e1-5d1b0015ca90",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerts": [
+      {
+        "activeAt": "2026-04-15T07:39:50Z",
+        "annotations": {
+          "datasource_uid": "grafanacloud-prom",
+          "description": "Windows disk [no value] is not in healthy state, currently in '[no value]' status.",
+          "ref_id": "query",
+          "summary": "Windows physical disk is not healthy."
+        },
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "alertname": "WindowsDiskDriveNotHealthy",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "critical",
+          "datasource_uid": "grafanacloud-prom",
+          "grafana_folder": "Integration - Windows Exporter",
+          "ref_id": "query",
+          "severity": "critical"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      }
+    ],
+    "annotations": {
+      "description": "Windows disk {{ $labels.name }} is not in healthy state, currently in '{{ $labels.status }}' status.",
+      "summary": "Windows physical disk is not healthy."
+    },
+    "evaluationTime": 0.015406465,
+    "folderUid": "integration---windows-exporter",
+    "health": "ok",
+    "isPaused": false,
+    "labels": {
+      "__converted_prometheus_rule__": "true",
+      "asserts_alert_category": "failure",
+      "asserts_entity_type": "Node",
+      "asserts_severity": "critical",
+      "severity": "critical"
+    },
+    "lastEvaluation": "2026-05-22T00:31:50Z",
+    "name": "WindowsDiskDriveNotHealthy",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-prom"
+    ],
+    "query": "(windows_disk_drive_status{job=~\"integrations/windows_exporter\",status=\"OK\"}) != 1\n",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

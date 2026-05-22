@@ -1,0 +1,136 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "integration---windows-exporter",
+      "grafana.com/provenance": "converted_prometheus",
+      "grafana.com/updateTimestamp": "2026-04-15T07:38:57Z",
+      "grafana.com/updatedBy": "bfbazndswqry8e"
+    },
+    "labels": {
+      "grafana.app/folder": "integration---windows-exporter",
+      "grafana.com/group": "windows-alerts-windows",
+      "grafana.com/group-index": "0"
+    },
+    "name": "f32e3dc0-e692-5c01-b4c5-c88f5f652d04",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "description": "CPU usage on host {{ $labels.instance }} is above 90%. The current value is {{ $value | printf \"%.2f\" }}%.\n",
+      "summary": "High CPU usage on Windows host."
+    },
+    "execErrState": "OK",
+    "expressions": {
+      "prometheus_math": {
+        "model": {
+          "datasource": {
+            "IsPrunable": false,
+            "access": "",
+            "apiVersion": "",
+            "basicAuth": false,
+            "basicAuthUser": "",
+            "created": "0001-01-01T00:00:00Z",
+            "database": "",
+            "id": -100,
+            "isDefault": false,
+            "jsonData": {},
+            "name": "__expr__",
+            "readOnly": false,
+            "secureJsonData": {},
+            "type": "__expr__",
+            "uid": "__expr__",
+            "updated": "0001-01-01T00:00:00Z",
+            "url": "",
+            "user": "",
+            "withCredentials": false
+          },
+          "expression": "is_number($query) || is_nan($query) || is_inf($query)",
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "refId": "prometheus_math",
+          "type": "math"
+        },
+        "queryType": "math"
+      },
+      "query": {
+        "datasourceUID": "grafanacloud-prom",
+        "model": {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "expr": "(100 - (avg without (mode,core) (rate(windows_cpu_time_total{mode=\"idle\", job=~\"integrations/windows_exporter\"}[2m])*100))) \u003e 90\n",
+          "instant": true,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "range": false,
+          "refId": "query"
+        },
+        "queryType": "prometheus",
+        "relativeTimeRange": {
+          "from": "11m0s",
+          "to": "1m0s"
+        }
+      },
+      "threshold": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0
+                ],
+                "type": "gt"
+              }
+            }
+          ],
+          "datasource": {
+            "IsPrunable": false,
+            "access": "",
+            "apiVersion": "",
+            "basicAuth": false,
+            "basicAuthUser": "",
+            "created": "0001-01-01T00:00:00Z",
+            "database": "",
+            "id": -100,
+            "isDefault": false,
+            "jsonData": {},
+            "name": "__expr__",
+            "readOnly": false,
+            "secureJsonData": {},
+            "type": "__expr__",
+            "uid": "__expr__",
+            "updated": "0001-01-01T00:00:00Z",
+            "url": "",
+            "user": "",
+            "withCredentials": false
+          },
+          "expression": "prometheus_math",
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "refId": "threshold",
+          "type": "threshold"
+        },
+        "queryType": "threshold",
+        "source": true
+      }
+    },
+    "for": "15m0s",
+    "keepFiringFor": "5m0s",
+    "labels": {
+      "__converted_prometheus_rule__": "true",
+      "asserts_alert_category": "failure",
+      "asserts_entity_type": "Node",
+      "asserts_severity": "warning",
+      "severity": "warning"
+    },
+    "missingSeriesEvalsToResolve": 1,
+    "noDataState": "OK",
+    "title": "WindowsCPUHighUsage",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

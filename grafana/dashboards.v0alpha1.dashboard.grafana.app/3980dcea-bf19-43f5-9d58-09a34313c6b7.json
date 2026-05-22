@@ -1,0 +1,143 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ef00mxxjt8gsgc"
+    },
+    "labels": {},
+    "name": "3980dcea-bf19-43f5-9d58-09a34313c6b7",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "dashboard": {
+      "panels": [
+        {
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 1
+                  },
+                  {
+                    "color": "red",
+                    "value": 2
+                  }
+                ]
+              },
+              "unit": "h"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 1,
+          "targets": [
+            {
+              "expr": "avg_over_time(jira_incident_mtta_hours{priority=\"High\"}[1h])",
+              "legendFormat": "High Priority",
+              "refId": "A"
+            },
+            {
+              "expr": "avg_over_time(jira_incident_mtta_hours{priority=\"Medium\"}[1h])",
+              "legendFormat": "Medium Priority",
+              "refId": "B"
+            },
+            {
+              "expr": "avg_over_time(jira_incident_mtta_hours{priority=\"Low\"}[1h])",
+              "legendFormat": "Low Priority",
+              "refId": "C"
+            }
+          ],
+          "title": "MTTA by Priority",
+          "type": "bargauge"
+        },
+        {
+          "fieldConfig": {
+            "defaults": {
+              "unit": "h"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "id": 2,
+          "targets": [
+            {
+              "expr": "avg_over_time(jira_incident_mttr_hours{priority=\"High\"}[1h])",
+              "legendFormat": "High Priority",
+              "refId": "A"
+            },
+            {
+              "expr": "avg_over_time(jira_incident_mttr_hours{priority=\"Medium\"}[1h])",
+              "legendFormat": "Medium Priority",
+              "refId": "B"
+            },
+            {
+              "expr": "avg_over_time(jira_incident_mttr_hours{priority=\"Low\"}[1h])",
+              "legendFormat": "Low Priority",
+              "refId": "C"
+            }
+          ],
+          "title": "MTTR by Priority",
+          "type": "bargauge"
+        },
+        {
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "bars"
+              },
+              "unit": "short"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 8
+          },
+          "id": 3,
+          "targets": [
+            {
+              "expr": "count_over_time(jira_incident_mtta_hours[1h])",
+              "legendFormat": "Incidents",
+              "refId": "A"
+            }
+          ],
+          "title": "Incident Count Over Time",
+          "type": "timeseries"
+        }
+      ],
+      "refresh": "5m",
+      "schemaVersion": 38,
+      "tags": [
+        "jira",
+        "mttx",
+        "breakdown"
+      ],
+      "time": {
+        "from": "now-30d",
+        "to": "now"
+      },
+      "timezone": "browser",
+      "title": "MTTx Breakdown Dashboard",
+      "version": 1
+    },
+    "id": null,
+    "title": "mttx-breakdown-json"
+  }
+}

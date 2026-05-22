@@ -1,0 +1,82 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRuleGroup",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "Test-Evaluation-group-2",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "evaluationTime": 0,
+    "file": "Test",
+    "folderUid": "ee6qllfxlq41sb",
+    "interval": 60,
+    "lastEvaluation": "0001-01-01T00:00:00Z",
+    "rules": [
+      {
+        "annotations": {
+          "__dashboardUid__": "be6r7iu38z08wa",
+          "__panelId__": "1"
+        },
+        "evaluationTime": 0,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "ok",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "0001-01-01T00:00:00Z",
+        "name": "SItWiFi-Alert-Test (grp2)",
+        "notificationSettings": {
+          "receiver": "grafana-default-email"
+        },
+        "queriedDatasourceUIDs": [
+          "ae6qkf61vtb0gd"
+        ],
+        "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"ae6qkf61vtb0gd\",\"model\":{\"alias\":\"Random Walk\",\"columns\":[{\"selector\":\"casesReported\",\"text\":\"\",\"type\":\"number\"}],\"dataOverrides\":[],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"ae6qkf61vtb0gd\"},\"filters\":[],\"format\":\"timeseries\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"casesByState\",\"source\":\"url\",\"summarizeExpression\":\"sum(casesReported)\",\"type\":\"json\",\"url\":\"https://api.apify.com/v2/key-value-stores/moxA3Q0aZh5LosewB/records/LATEST?disableRedirect=true\",\"url_options\":{\"data\":\"\",\"method\":\"GET\"}}},{\"refId\":\"C\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[0],\"type\":\"lt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[\"C\"]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"C\",\"type\":\"threshold\"}}]",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "aebhhv764hbeoc"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 0,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "ok",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "0001-01-01T00:00:00Z",
+        "name": "SitWiFi-IRM-Rule (grp2)",
+        "notificationSettings": {
+          "receiver": "Webhook"
+        },
+        "queriedDatasourceUIDs": [
+          "grafanacloud-usage-insights"
+        ],
+        "query": "rate({org_id=\"1213604\"} [$__auto])",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "cebhhxht8jlkwd"
+      },
+      {
+        "annotations": null,
+        "evaluationTime": 0,
+        "folderUid": "ee6qllfxlq41sb",
+        "health": "ok",
+        "isPaused": true,
+        "labels": null,
+        "lastEvaluation": "0001-01-01T00:00:00Z",
+        "name": "SitWiFi-Alert-Routing (grp2)",
+        "queriedDatasourceUIDs": [
+          "fdxos61g0vyf4b"
+        ],
+        "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"fdxos61g0vyf4b\",\"model\":{\"csvContent\":\"device,city,views\\ndesktop,paris,120\\nmobile,paris,120\\ndesktop,london,700\\nmobile,london,900\\n\",\"datasource\":{\"type\":\"grafana-testdata-datasource\",\"uid\":\"fdxos61g0vyf4b\"},\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"A\",\"scenarioId\":\"csv_content\",\"seriesCount\":1}},{\"refId\":\"C\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[1000],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[\"C\"]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"C\",\"type\":\"threshold\"}}]",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "cebhi2elsbuo0f"
+      }
+    ],
+    "totals": {
+      "inactive": 3
+    }
+  }
+}

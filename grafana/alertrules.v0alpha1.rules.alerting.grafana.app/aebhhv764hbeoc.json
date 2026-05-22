@@ -1,0 +1,118 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/provenance": "",
+      "grafana.com/updateTimestamp": "2025-02-25T15:38:25Z",
+      "grafana.com/updatedBy": "fdxoo6cwb8d8gb"
+    },
+    "labels": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/group": "Test-Evaluation-group-2",
+      "grafana.com/group-index": "1"
+    },
+    "name": "aebhhv764hbeoc",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "__dashboardUid__": "be6r7iu38z08wa",
+      "__panelId__": "1"
+    },
+    "execErrState": "KeepLast",
+    "expressions": {
+      "A": {
+        "datasourceUID": "ae6qkf61vtb0gd",
+        "model": {
+          "alias": "Random Walk",
+          "columns": [
+            {
+              "selector": "casesReported",
+              "text": "",
+              "type": "number"
+            }
+          ],
+          "dataOverrides": [],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "ae6qkf61vtb0gd"
+          },
+          "filters": [],
+          "format": "timeseries",
+          "global_query_id": "",
+          "instant": true,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "casesByState",
+          "source": "url",
+          "summarizeExpression": "sum(casesReported)",
+          "type": "json",
+          "url": "https://api.apify.com/v2/key-value-stores/moxA3Q0aZh5LosewB/records/LATEST?disableRedirect=true",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        }
+      },
+      "C": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "C"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "last"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "A",
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "refId": "C",
+          "type": "threshold"
+        },
+        "source": true
+      }
+    },
+    "noDataState": "NoData",
+    "notificationSettings": {
+      "receiver": "grafana-default-email",
+      "type": "SimplifiedRouting"
+    },
+    "panelRef": {
+      "dashboardUID": "be6r7iu38z08wa",
+      "panelID": 1
+    },
+    "paused": true,
+    "title": "SItWiFi-Alert-Test (grp2)",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

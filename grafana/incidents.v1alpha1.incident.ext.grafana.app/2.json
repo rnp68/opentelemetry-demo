@@ -1,0 +1,344 @@
+{
+  "apiVersion": "incident.ext.grafana.app/v1alpha1",
+  "kind": "Incident",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "2",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "createdByUser": {
+      "chatbotUserID": "U07KD2VGNR4",
+      "email": "ramiro.nagles@grafana.com",
+      "grafanaLogin": "",
+      "msTeamsUserID": "",
+      "name": "ramiro.nagles",
+      "photoURL": "https://www.gravatar.com/avatar/29498f1d13d76cfd53b4b33d2facf0c6?s=512\u0026d=https%3A%2F%2Favatars.slack-edge.com%2F2024-09-03%2F7692872731024_852293a0a04eb27872d7_192.jpg",
+      "slackUserID": "U07KD2VGNR4",
+      "userID": "grafana-incident:user-679929273d1136867f094697"
+    },
+    "createdTime": "2025-01-30T16:08:01.2065Z",
+    "description": "deleteme",
+    "descriptionModifiedTime": "2025-01-30T16:08:01.2065Z",
+    "descriptionUser": {
+      "chatbotUserID": "U07KD2VGNR4",
+      "email": "ramiro.nagles@grafana.com",
+      "grafanaLogin": "",
+      "msTeamsUserID": "",
+      "name": "ramiro.nagles",
+      "photoURL": "https://www.gravatar.com/avatar/29498f1d13d76cfd53b4b33d2facf0c6?s=512\u0026d=https%3A%2F%2Favatars.slack-edge.com%2F2024-09-03%2F7692872731024_852293a0a04eb27872d7_192.jpg",
+      "slackUserID": "U07KD2VGNR4",
+      "userID": "grafana-incident:user-679929273d1136867f094697"
+    },
+    "durationSeconds": 41156714,
+    "fieldGroupUUID": "0cd451fe-ddaa-11ef-a2da-06d54ce9198c",
+    "fieldValues": [
+      {
+        "fieldUUID": "0cd4aae2-ddaa-11ef-a2da-06d54ce9198c",
+        "value": "0cd57e55-ddaa-11ef-a2da-06d54ce9198c"
+      },
+      {
+        "fieldUUID": "0cd4b37d-ddaa-11ef-a2da-06d54ce9198c",
+        "value": ""
+      }
+    ],
+    "incidentHookRuns": {
+      "hookRuns": []
+    },
+    "incidentMembership": {
+      "assignments": [
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "2025-01-28T18:59:50Z",
+            "description": "Owns the incident (has their full-time attention)",
+            "hidden": false,
+            "important": true,
+            "mandatory": true,
+            "name": "commander",
+            "orgID": "1036148",
+            "roleID": 35688,
+            "updatedAt": ""
+          },
+          "roleID": 35688,
+          "user": {
+            "chatbotUserID": "U07KD2VGNR4",
+            "email": "ramiro.nagles@grafana.com",
+            "grafanaLogin": "ramironagles",
+            "msTeamsUserID": "",
+            "name": "ramiro.nagles",
+            "photoURL": "https://www.gravatar.com/avatar/29498f1d13d76cfd53b4b33d2facf0c6?s=512\u0026d=https%3A%2F%2Favatars.slack-edge.com%2F2024-09-03%2F7692872731024_852293a0a04eb27872d7_192.jpg",
+            "slackUserID": "U07KD2VGNR4",
+            "userID": "grafana-incident:user-679929273d1136867f094697"
+          }
+        },
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "2025-01-28T18:59:50Z",
+            "description": "Leads the investigation (has their full-time attention)",
+            "hidden": false,
+            "important": true,
+            "mandatory": true,
+            "name": "investigator",
+            "orgID": "1036148",
+            "roleID": 35689,
+            "updatedAt": ""
+          },
+          "roleID": 35689,
+          "user": {
+            "chatbotUserID": "U02KMFUUGBD",
+            "email": "ricky.anzar@grafana.com",
+            "grafanaLogin": "",
+            "msTeamsUserID": "",
+            "name": "Ricky Anzar",
+            "photoURL": "https://www.gravatar.com/avatar/b3bed6c3e1382853b6174f6d5fc63e20?s=512\u0026d=https%3A%2F%2Favatars.slack-edge.com%2F2024-12-04%2F8111529220759_817cef869b466d497b0d_192.png",
+            "slackUserID": "U02KMFUUGBD",
+            "userID": "grafana-incident:user-679ba418d95328f65be934d9"
+          }
+        },
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "",
+            "description": "",
+            "hidden": false,
+            "important": false,
+            "mandatory": false,
+            "name": "",
+            "orgID": "",
+            "roleID": 0,
+            "updatedAt": ""
+          },
+          "roleID": 0,
+          "user": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "",
+            "msTeamsUserID": "",
+            "name": "",
+            "photoURL": "",
+            "slackUserID": "",
+            "userID": ""
+          }
+        },
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "",
+            "description": "",
+            "hidden": false,
+            "important": false,
+            "mandatory": false,
+            "name": "",
+            "orgID": "",
+            "roleID": 0,
+            "updatedAt": ""
+          },
+          "roleID": 0,
+          "user": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "",
+            "msTeamsUserID": "",
+            "name": "",
+            "photoURL": "",
+            "slackUserID": "",
+            "userID": ""
+          }
+        },
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "",
+            "description": "",
+            "hidden": false,
+            "important": false,
+            "mandatory": false,
+            "name": "",
+            "orgID": "",
+            "roleID": 0,
+            "updatedAt": ""
+          },
+          "roleID": 0,
+          "user": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "",
+            "msTeamsUserID": "",
+            "name": "",
+            "photoURL": "",
+            "slackUserID": "",
+            "userID": ""
+          }
+        },
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "",
+            "description": "",
+            "hidden": false,
+            "important": false,
+            "mandatory": false,
+            "name": "",
+            "orgID": "",
+            "roleID": 0,
+            "updatedAt": ""
+          },
+          "roleID": 0,
+          "user": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "",
+            "msTeamsUserID": "",
+            "name": "",
+            "photoURL": "",
+            "slackUserID": "",
+            "userID": ""
+          }
+        },
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "",
+            "description": "",
+            "hidden": false,
+            "important": false,
+            "mandatory": false,
+            "name": "",
+            "orgID": "",
+            "roleID": 0,
+            "updatedAt": ""
+          },
+          "roleID": 0,
+          "user": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "",
+            "msTeamsUserID": "",
+            "name": "",
+            "photoURL": "",
+            "slackUserID": "",
+            "userID": ""
+          }
+        },
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "",
+            "description": "",
+            "hidden": false,
+            "important": false,
+            "mandatory": false,
+            "name": "",
+            "orgID": "",
+            "roleID": 0,
+            "updatedAt": ""
+          },
+          "roleID": 0,
+          "user": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "",
+            "msTeamsUserID": "",
+            "name": "",
+            "photoURL": "",
+            "slackUserID": "",
+            "userID": ""
+          }
+        },
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "",
+            "description": "",
+            "hidden": false,
+            "important": false,
+            "mandatory": false,
+            "name": "",
+            "orgID": "",
+            "roleID": 0,
+            "updatedAt": ""
+          },
+          "roleID": 0,
+          "user": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "",
+            "msTeamsUserID": "",
+            "name": "",
+            "photoURL": "",
+            "slackUserID": "",
+            "userID": ""
+          }
+        },
+        {
+          "role": {
+            "archived": false,
+            "createdAt": "",
+            "description": "",
+            "hidden": false,
+            "important": false,
+            "mandatory": false,
+            "name": "",
+            "orgID": "",
+            "roleID": 0,
+            "updatedAt": ""
+          },
+          "roleID": 0,
+          "user": {
+            "chatbotUserID": "",
+            "email": "",
+            "grafanaLogin": "",
+            "msTeamsUserID": "",
+            "name": "",
+            "photoURL": "",
+            "slackUserID": "",
+            "userID": ""
+          }
+        }
+      ],
+      "totalAssignments": 2,
+      "totalParticipants": 0
+    },
+    "incidentStart": "2025-01-30T16:07:04.487Z",
+    "incidentType": "internal",
+    "isDrill": false,
+    "modifiedTime": "2025-04-03T15:12:36.144991Z",
+    "overviewURL": "/a/grafana-irm-app/incidents/2/sitwifi-incident-irm-test",
+    "prefix": "incident",
+    "refs": [
+      {
+        "key": "com.grafana.incident.source",
+        "ref": "ITMHUVUTBVV8H",
+        "url": "https://ramironagles.grafana.net/a/grafana-oncall-app/alert-groups/ITMHUVUTBVV8H"
+      }
+    ],
+    "severity": "Major",
+    "severityID": "0cd776e0-ddaa-11ef-a2da-06d54ce9198c",
+    "slug": "sitwifi-incident-irm-test",
+    "state": "active",
+    "status": "active",
+    "statusID": "12a9b797-109e-11f0-a2da-06d54ce9198c",
+    "statusModifiedByUser": {
+      "chatbotUserID": "U07KD2VGNR4",
+      "email": "ramiro.nagles@grafana.com",
+      "grafanaLogin": "",
+      "msTeamsUserID": "",
+      "name": "ramiro.nagles",
+      "photoURL": "https://www.gravatar.com/avatar/29498f1d13d76cfd53b4b33d2facf0c6?s=512\u0026d=https%3A%2F%2Favatars.slack-edge.com%2F2024-09-03%2F7692872731024_852293a0a04eb27872d7_192.jpg",
+      "slackUserID": "U07KD2VGNR4",
+      "userID": "grafana-incident:user-679929273d1136867f094697"
+    },
+    "statusModifiedTime": "2025-01-30T16:08:01.2065Z",
+    "taskList": {
+      "doneCount": 0,
+      "tasks": [],
+      "todoCount": 0,
+      "totalCount": 0
+    },
+    "title": "SitWifi-Incident-IRM-test",
+    "version": 7
+  }
+}

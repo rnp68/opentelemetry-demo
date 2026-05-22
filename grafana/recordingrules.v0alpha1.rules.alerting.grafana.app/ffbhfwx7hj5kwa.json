@@ -1,0 +1,154 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "RecordingRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/provenance": "",
+      "grafana.com/updateTimestamp": "2026-02-06T13:44:39Z",
+      "grafana.com/updatedBy": "bfbazndswqry8e"
+    },
+    "labels": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/group": "Test-Evaluation-group",
+      "grafana.com/group-index": "7"
+    },
+    "name": "ffbhfwx7hj5kwa",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "expressions": {
+      "A": {
+        "datasourceUID": "efc1ef8hk8gzkc",
+        "model": {
+          "columns": [],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efc1ef8hk8gzkc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "instant": true,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "$average(issues[fields.customfield_10109 != null and fields.customfield_10114 != null].(($toMillis(fields.customfield_10114) - $toMillis(fields.customfield_10109)) / 3600000))",
+          "source": "url",
+          "type": "json",
+          "url": "https://jiramttx2.atlassian.net/rest/api/3/search/jql",
+          "url_options": {
+            "body_content_type": "application/json",
+            "body_type": "raw",
+            "data": "{\n  \"jql\": \"project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC\",\n  \"maxResults\": 1000,\n  \"fields\": [\n    \"key\",\n    \"customfield_10109\",\n    \"customfield_10110\",\n    \"customfield_10111\",\n    \"customfield_10112\",\n    \"customfield_10113\",\n    \"customfield_10114\"\n  ]\n}",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "params": [
+              {
+                "key": "jql",
+                "value": "project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC"
+              },
+              {
+                "key": "expand",
+                "value": "names"
+              },
+              {
+                "key": "maxResults",
+                "value": "1000"
+              }
+            ]
+          }
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        }
+      },
+      "C": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": []
+              },
+              "reducer": {
+                "params": [],
+                "type": "last"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "reducer",
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "refId": "C",
+          "type": "threshold"
+        },
+        "source": true
+      },
+      "reducer": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0,
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": []
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "A",
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "reducer": "last",
+          "refId": "reducer",
+          "type": "reduce"
+        },
+        "queryType": "expression"
+      }
+    },
+    "metric": "jira_incident_mttc_hours",
+    "targetDatasourceUID": "grafanacloud-prom",
+    "title": "jira_incident_mttc_hours",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

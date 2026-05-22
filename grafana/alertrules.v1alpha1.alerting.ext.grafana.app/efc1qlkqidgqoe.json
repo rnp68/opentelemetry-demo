@@ -1,0 +1,26 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "efc1qlkqidgqoe",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": null,
+    "evaluationTime": 0.000031337,
+    "folderUid": "ee6qllfxlq41sb",
+    "health": "unknown",
+    "isPaused": true,
+    "labels": null,
+    "lastEvaluation": "2026-05-22T00:32:17.072609497Z",
+    "name": "InfinityJira-basic-fields-extraction",
+    "queriedDatasourceUIDs": [
+      "efc1ef8hk8gzkc"
+    ],
+    "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"efc1ef8hk8gzkc\",\"model\":{\"columns\":[{\"selector\":\"key\",\"text\":\"key\",\"type\":\"string\"},{\"selector\":\"summary\",\"text\":\"summary\",\"type\":\"string\"},{\"selector\":\"id\",\"text\":\"id\",\"type\":\"string\"},{\"selector\":\"customfield_10111\",\"text\":\"timestamp\",\"type\":\"timestamp_epoch\"},{\"selector\":\"id\",\"text\":\"id\",\"type\":\"number\"}],\"computed_columns\":[{\"selector\":\"\",\"text\":\"\",\"type\":\"string\"}],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"efc1ef8hk8gzkc\"},\"filters\":[],\"format\":\"table\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"issues[id!=null].{\\n\\\"key\\\":key,\\n\\\"id\\\":id,\\n\\\"self\\\":self,\\n\\\"customfield_10111\\\":fields.customfield_10111,\\n\\\"summary\\\":fields.summary,\\n\\\"expand\\\":expand,\\n\\\"fields\\\":fields\\n}\\n\",\"source\":\"url\",\"summarizeBy\":\"Accepted_month\",\"summarizeExpression\":\"\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"{\\n  \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\\\",\\n  \\\"maxResults\\\": 1000,\\n  \\\"expand\\\":\\\"names,fields\\\",\\n  \\\"fields\\\": [\\n    \\\"key\\\",\\n    \\\"id\\\",\\n    \\\"self\\\",\\n    \\\"customfield_10111\\\",\\n    \\\"summary\\\"\\n  ]\\n}\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[]}}}]",
+    "state": "inactive",
+    "type": "recording"
+  }
+}

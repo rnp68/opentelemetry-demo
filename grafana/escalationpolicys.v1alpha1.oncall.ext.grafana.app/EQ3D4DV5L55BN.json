@@ -1,0 +1,18 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "EscalationPolicy",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "EQ3D4DV5L55BN",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "custom_webhook": "WHRXQI48UC6GF1",
+    "escalation_chain": "FTJSRU5SLHXAB",
+    "notify_schedule": "",
+    "notify_to_group": null,
+    "notify_to_users_queue": null,
+    "step": "trigger_webhook"
+  }
+}

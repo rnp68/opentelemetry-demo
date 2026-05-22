@@ -1,0 +1,20 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Webhook",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "WHZX5RKYZRY2WJ",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "forward_all": true,
+    "http_method": "POST",
+    "is_webhook_enabled": true,
+    "name": "AI_Assistant-Automatic",
+    "preset": "grafana_assistant",
+    "team": "",
+    "trigger_type": "alert group created",
+    "url": "https://ramironagles.grafana.net/api/plugins/grafana-assistant-app/resources/api/v1/investigations/from-irm"
+  }
+}

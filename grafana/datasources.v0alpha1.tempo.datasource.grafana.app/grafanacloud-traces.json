@@ -1,0 +1,38 @@
+{
+  "apiVersion": "tempo.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-traces",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "988243",
+    "jsonData": {
+      "serviceMap": {
+        "datasourceUid": "grafanacloud-prom"
+      },
+      "streamingEnabled": {
+        "search": true
+      },
+      "tracesToLogs": {
+        "datasourceUid": "grafanacloud-logs",
+        "spanEndTimeShift": "2s",
+        "spanStartTimeShift": "-2s"
+      },
+      "tracesToMetrics": {
+        "datasourceUid": "grafanacloud-prom"
+      },
+      "tracesToProfiles": {
+        "datasourceUid": "grafanacloud-profiles",
+        "profileTypeId": "process_cpu:cpu:nanoseconds:cpu:nanoseconds"
+      }
+    },
+    "readOnly": true,
+    "title": "grafanacloud-ramironagles-traces",
+    "url": "https://tempo-prod-04-prod-us-east-0.grafana.net/tempo"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "0fff9b8e-d48b-5af0-8a68-97e521d870c9",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerts": [
+      {
+        "activeAt": "2026-04-15T07:39:50Z",
+        "annotations": {
+          "datasource_uid": "grafanacloud-prom",
+          "description": "Round-trip time of NTP client on instance [no value] is greater than 1 second. Delay is %!f(string=) sec.",
+          "ref_id": "query",
+          "summary": "NTP client delay."
+        },
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "alertname": "WindowsNTPClientDelay",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "warning",
+          "datasource_uid": "grafanacloud-prom",
+          "grafana_folder": "Integration - Windows Exporter",
+          "ref_id": "query",
+          "severity": "warning"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      }
+    ],
+    "annotations": {
+      "description": "Round-trip time of NTP client on instance {{ $labels.instance }} is greater than 1 second. Delay is {{ printf \"%.2f\" $value }} sec.",
+      "summary": "NTP client delay."
+    },
+    "evaluationTime": 0.016614716,
+    "folderUid": "integration---windows-exporter",
+    "health": "ok",
+    "isPaused": false,
+    "labels": {
+      "__converted_prometheus_rule__": "true",
+      "asserts_alert_category": "failure",
+      "asserts_entity_type": "Node",
+      "asserts_severity": "warning",
+      "severity": "warning"
+    },
+    "lastEvaluation": "2026-05-22T00:31:50Z",
+    "name": "WindowsNTPClientDelay",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-prom"
+    ],
+    "query": "(windows_time_ntp_round_trip_delay_seconds{job=~\"integrations/windows_exporter\"}) \u003e 1\n",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

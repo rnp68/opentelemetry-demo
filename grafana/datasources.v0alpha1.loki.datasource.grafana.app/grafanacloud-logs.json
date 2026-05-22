@@ -1,0 +1,40 @@
+{
+  "apiVersion": "loki.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-logs",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "993928",
+    "jsonData": {
+      "derivedFields": [
+        {
+          "datasourceUid": "grafanacloud-traces",
+          "matcherRegex": "[tT]race_?[iI][dD]\"?[:=]\"?(\\w+)",
+          "matcherType": "regex",
+          "name": "traceID",
+          "url": "${__value.raw}"
+        },
+        {
+          "datasourceUid": "grafanacloud-traces",
+          "matcherRegex": "[tT]race_?[iI][dD]",
+          "matcherType": "label",
+          "name": "traceID (field)",
+          "url": "${__value.raw}"
+        }
+      ],
+      "streamingEnabled": {
+        "search": true
+      },
+      "timeout": "300"
+    },
+    "readOnly": true,
+    "title": "grafanacloud-ramironagles-logs",
+    "url": "https://logs-prod-006.grafana.net"
+  }
+}

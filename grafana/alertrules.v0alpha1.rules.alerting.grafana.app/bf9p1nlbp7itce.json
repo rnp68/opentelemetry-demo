@@ -1,0 +1,132 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ff9p1nkq236yob",
+      "grafana.com/provenance": "",
+      "grafana.com/updateTimestamp": "2026-01-09T23:49:51Z",
+      "grafana.com/updatedBy": "fdxoo6cwb8d8gb"
+    },
+    "labels": {
+      "grafana.app/folder": "ff9p1nkq236yob",
+      "grafana.com/group": "frontend-observability-alerts",
+      "grafana.com/group-index": "0"
+    },
+    "name": "bf9p1nlbp7itce",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "appName": "opentelemetry-demo-faro",
+      "description": "This alert fires when the Time to First Byte (TTFB) is greater than 1800ms for the last 6h.",
+      "ruleId": "ttfb_p75",
+      "summary": "Web Vitals - TTFB - opentelemetry-demo-faro",
+      "threshold": "1800"
+    },
+    "execErrState": "Error",
+    "expressions": {
+      "Is Web Vitals - TTFB currently greater than threshold": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0,
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": []
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "Is Web Vitals - TTFB greater than threshold",
+          "hide": false,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "reducer": "last",
+          "refId": "Is Web Vitals - TTFB currently greater than threshold",
+          "type": "reduce"
+        },
+        "source": true
+      },
+      "Is Web Vitals - TTFB greater than threshold": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  1800,
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "Is Web Vitals - TTFB greater than threshold"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "Web Vitals - TTFB",
+          "hide": false,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "refId": "Is Web Vitals - TTFB greater than threshold",
+          "type": "threshold"
+        }
+      },
+      "Web Vitals - TTFB": {
+        "datasourceUID": "grafanacloud-prom",
+        "model": {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "expr": "feo11y:ttfb_p75{service_name=\"opentelemetry-demo-faro\"}",
+          "intervalMs": 1800000,
+          "maxDataPoints": 50000,
+          "queryType": "instant",
+          "refId": "Web Vitals - TTFB"
+        },
+        "queryType": "instant",
+        "relativeTimeRange": {
+          "from": "48h0m0s",
+          "to": "0s"
+        }
+      }
+    },
+    "for": "6h0m0s",
+    "noDataState": "OK",
+    "title": "Web Vitals - TTFB - opentelemetry-demo-faro",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

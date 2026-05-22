@@ -1,0 +1,49 @@
+{
+  "apiVersion": "queries.grafana.app/v1beta1",
+  "kind": "Query",
+  "metadata": {
+    "annotations": {},
+    "labels": null,
+    "name": "b1137034-17ab-4c7e-b406-13c2eeefaddakqxg9",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "description": "Extracting Jira plain fields (no computations) using Infinity plugin - should be able to re-use it",
+    "isLocked": true,
+    "isVisible": true,
+    "targets": [
+      {
+        "properties": {
+          "columns": [],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efc1ef8hk8gzkc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "issues.{  \n  \"Issue Key\": key,  \n  \"Issue ID\": id,  \n  \"URL\": self,  \n  \"Open Date\": fields.customfield_10109,  \n  \"Accepted Date\": fields.customfield_10111,  \n  \"Summary\": fields.summary \n}  ",
+          "source": "url",
+          "type": "json",
+          "url": "https://jiramttx2.atlassian.net/rest/api/3/search/jql",
+          "url_options": {
+            "body_content_type": "application/json",
+            "body_type": "raw",
+            "data": "{\n  \"jql\": \"project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC\",\n  \"maxResults\": 1000,\n  \"expand\":\"names,fields\",\n  \"fields\": [\n    \"key\",\n    \"id\",\n    \"customfield_10111\",\n    \"customfield_10109\",\n    \"summary\"\n  ]\n}",
+            "headers": [
+              {
+                "key": "Content-type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          }
+        },
+        "variables": {}
+      }
+    ],
+    "title": "Jira_plain_fields_extraction"
+  }
+}

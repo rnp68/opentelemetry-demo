@@ -1,0 +1,17 @@
+{
+  "apiVersion": "advisor.grafana.app/v0alpha1",
+  "kind": "Check",
+  "metadata": {
+    "annotations": {
+      "advisor.grafana.app/ignore-steps-list": "",
+      "advisor.grafana.app/status": "processed"
+    },
+    "labels": {
+      "advisor.grafana.app/type": "datasource",
+      "grafana-app-sdk-resource-version": "v0alpha1"
+    },
+    "name": "check-lhvdr",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {}
+}

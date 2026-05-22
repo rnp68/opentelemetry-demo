@@ -1,0 +1,422 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRuleGroup",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "windows-alerts-windows",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "evaluationTime": 0.021428208,
+    "file": "Integration - Windows Exporter",
+    "folderUid": "integration---windows-exporter",
+    "interval": 60,
+    "lastEvaluation": "2026-05-22T00:31:50Z",
+    "rules": [
+      {
+        "alerts": [
+          {
+            "activeAt": "2026-04-15T07:39:50Z",
+            "annotations": {
+              "datasource_uid": "grafanacloud-prom",
+              "description": "CPU usage on host [no value] is above 90%. The current value is %!f(string=)%.\n",
+              "ref_id": "query",
+              "summary": "High CPU usage on Windows host."
+            },
+            "labels": {
+              "__converted_prometheus_rule__": "true",
+              "alertname": "WindowsCPUHighUsage",
+              "asserts_alert_category": "failure",
+              "asserts_entity_type": "Node",
+              "asserts_severity": "warning",
+              "datasource_uid": "grafanacloud-prom",
+              "grafana_folder": "Integration - Windows Exporter",
+              "ref_id": "query",
+              "severity": "warning"
+            },
+            "state": "Normal (NoData)",
+            "value": ""
+          }
+        ],
+        "annotations": {
+          "description": "CPU usage on host {{ $labels.instance }} is above 90%. The current value is {{ $value | printf \"%.2f\" }}%.\n",
+          "summary": "High CPU usage on Windows host."
+        },
+        "evaluationTime": 0.01558762,
+        "folderUid": "integration---windows-exporter",
+        "health": "ok",
+        "isPaused": false,
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "warning",
+          "severity": "warning"
+        },
+        "lastEvaluation": "2026-05-22T00:31:50Z",
+        "name": "WindowsCPUHighUsage",
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ],
+        "query": "(100 - (avg without (mode,core) (rate(windows_cpu_time_total{mode=\"idle\", job=~\"integrations/windows_exporter\"}[2m])*100))) \u003e 90\n",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "f32e3dc0-e692-5c01-b4c5-c88f5f652d04"
+      },
+      {
+        "alerts": [
+          {
+            "activeAt": "2026-04-15T07:39:50Z",
+            "annotations": {
+              "datasource_uid": "grafanacloud-prom",
+              "description": "Memory usage on host {{ $labels.instance }} is critically high, with {{ printf \"%.2f\" $value }}% of total memory used.\nThis exceeds the threshold of 90%.\nCurrent memory free: {{ with printf `windows_memory_physical_free_bytes{job=~\"integrations/windows_exporter\"}\nor\nwindows_os_physical_memory_free_bytes{job=~\"integrations/windows_exporter\"}` | query | first | value | humanize }}{{ . }}{{ end }}.\nTotal memory: {{ with printf `windows_cs_physical_memory_bytes{job=~\"integrations/windows_exporter\"}\nor\nwindows_memory_physical_total_bytes{job=~\"integrations/windows_exporter\"}` | query | first | value | humanize }}{{ . }}{{ end }}.\nConsider investigating processes consuming high memory or increasing available memory.\n",
+              "ref_id": "query",
+              "summary": "High memory usage on Windows host."
+            },
+            "labels": {
+              "__converted_prometheus_rule__": "true",
+              "alertname": "WindowsMemoryHighUtilization",
+              "asserts_alert_category": "failure",
+              "asserts_entity_type": "Node",
+              "asserts_severity": "critical",
+              "datasource_uid": "grafanacloud-prom",
+              "grafana_folder": "Integration - Windows Exporter",
+              "ref_id": "query",
+              "severity": "critical"
+            },
+            "state": "Normal (NoData)",
+            "value": ""
+          }
+        ],
+        "annotations": {
+          "description": "Memory usage on host {{ $labels.instance }} is critically high, with {{ printf \"%.2f\" $value }}% of total memory used.\nThis exceeds the threshold of 90%.\nCurrent memory free: {{ with printf `windows_memory_physical_free_bytes{job=~\"integrations/windows_exporter\"}\nor\nwindows_os_physical_memory_free_bytes{job=~\"integrations/windows_exporter\"}` | query | first | value | humanize }}{{ . }}{{ end }}.\nTotal memory: {{ with printf `windows_cs_physical_memory_bytes{job=~\"integrations/windows_exporter\"}\nor\nwindows_memory_physical_total_bytes{job=~\"integrations/windows_exporter\"}` | query | first | value | humanize }}{{ . }}{{ end }}.\nConsider investigating processes consuming high memory or increasing available memory.\n",
+          "summary": "High memory usage on Windows host."
+        },
+        "evaluationTime": 0.025760219,
+        "folderUid": "integration---windows-exporter",
+        "health": "ok",
+        "isPaused": false,
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "critical",
+          "severity": "critical"
+        },
+        "lastEvaluation": "2026-05-22T00:31:50Z",
+        "name": "WindowsMemoryHighUtilization",
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ],
+        "query": "(100 - windows_memory_physical_free_bytes{job=~\"integrations/windows_exporter\"} / windows_memory_physical_total_bytes{job=~\"integrations/windows_exporter\"} * 100\nor\n100 - windows_os_physical_memory_free_bytes{job=~\"integrations/windows_exporter\"} / windows_cs_physical_memory_bytes{job=~\"integrations/windows_exporter\"} * 100) \u003e 90\n",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "85aaa056-f3b7-5de6-b296-1a39b5f2d1bf"
+      },
+      {
+        "alerts": [
+          {
+            "activeAt": "2026-04-15T07:39:50Z",
+            "annotations": {
+              "datasource_uid": "grafanacloud-prom",
+              "description": "Disk space on volume {{ $labels.volume }} of host {{ $labels.instance }} is critically low, with {{ printf \"%.2f\" $value }}% of total space used.\nThis exceeds the threshold of 90%.\nCurrent disk free: {{ with printf `windows_logical_disk_free_bytes{volume=\"%s\", job=~\"integrations/windows_exporter\"}` $labels.volume | query | first | value | humanize }}{{ . }}{{ end }}.\nTotal disk size: {{ with printf `windows_logical_disk_size_bytes{volume=\"%s\", job=~\"integrations/windows_exporter\"}` $labels.volume | query | first | value | humanize }}{{ . }}{{ end }}.\nConsider cleaning up unnecessary files or increasing disk capacity.\n",
+              "ref_id": "query",
+              "summary": "Disk is almost full on Windows host."
+            },
+            "labels": {
+              "__converted_prometheus_rule__": "true",
+              "alertname": "WindowsDiskAlmostOutOfSpace",
+              "asserts_alert_category": "failure",
+              "asserts_entity_type": "Node",
+              "asserts_severity": "critical",
+              "datasource_uid": "grafanacloud-prom",
+              "grafana_folder": "Integration - Windows Exporter",
+              "ref_id": "query",
+              "severity": "critical"
+            },
+            "state": "Normal (NoData)",
+            "value": ""
+          }
+        ],
+        "annotations": {
+          "description": "Disk space on volume {{ $labels.volume }} of host {{ $labels.instance }} is critically low, with {{ printf \"%.2f\" $value }}% of total space used.\nThis exceeds the threshold of 90%.\nCurrent disk free: {{ with printf `windows_logical_disk_free_bytes{volume=\"%s\", job=~\"integrations/windows_exporter\"}` $labels.volume | query | first | value | humanize }}{{ . }}{{ end }}.\nTotal disk size: {{ with printf `windows_logical_disk_size_bytes{volume=\"%s\", job=~\"integrations/windows_exporter\"}` $labels.volume | query | first | value | humanize }}{{ . }}{{ end }}.\nConsider cleaning up unnecessary files or increasing disk capacity.\n",
+          "summary": "Disk is almost full on Windows host."
+        },
+        "evaluationTime": 0.017371034,
+        "folderUid": "integration---windows-exporter",
+        "health": "ok",
+        "isPaused": false,
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "critical",
+          "severity": "critical"
+        },
+        "lastEvaluation": "2026-05-22T00:31:50Z",
+        "name": "WindowsDiskAlmostOutOfSpace",
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ],
+        "query": "(100 - windows_logical_disk_free_bytes{volume!~\"HarddiskVolume.*\", job=~\"integrations/windows_exporter\"}/windows_logical_disk_size_bytes{volume!~\"HarddiskVolume.*\", job=~\"integrations/windows_exporter\"}*100) \u003e 90\n",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "c1500828-ccfc-54c9-94fd-6d9ea9ed74fa"
+      },
+      {
+        "alerts": [
+          {
+            "activeAt": "2026-04-15T07:39:50Z",
+            "annotations": {
+              "datasource_uid": "grafanacloud-prom",
+              "description": "Windows disk [no value] is not in healthy state, currently in '[no value]' status.",
+              "ref_id": "query",
+              "summary": "Windows physical disk is not healthy."
+            },
+            "labels": {
+              "__converted_prometheus_rule__": "true",
+              "alertname": "WindowsDiskDriveNotHealthy",
+              "asserts_alert_category": "failure",
+              "asserts_entity_type": "Node",
+              "asserts_severity": "critical",
+              "datasource_uid": "grafanacloud-prom",
+              "grafana_folder": "Integration - Windows Exporter",
+              "ref_id": "query",
+              "severity": "critical"
+            },
+            "state": "Normal (NoData)",
+            "value": ""
+          }
+        ],
+        "annotations": {
+          "description": "Windows disk {{ $labels.name }} is not in healthy state, currently in '{{ $labels.status }}' status.",
+          "summary": "Windows physical disk is not healthy."
+        },
+        "evaluationTime": 0.015406465,
+        "folderUid": "integration---windows-exporter",
+        "health": "ok",
+        "isPaused": false,
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "critical",
+          "severity": "critical"
+        },
+        "lastEvaluation": "2026-05-22T00:31:50Z",
+        "name": "WindowsDiskDriveNotHealthy",
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ],
+        "query": "(windows_disk_drive_status{job=~\"integrations/windows_exporter\",status=\"OK\"}) != 1\n",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "b9de84b0-8fe2-5e42-b0e1-5d1b0015ca90"
+      },
+      {
+        "alerts": [
+          {
+            "activeAt": "2026-04-15T07:39:50Z",
+            "annotations": {
+              "datasource_uid": "grafanacloud-prom",
+              "description": "Round-trip time of NTP client on instance [no value] is greater than 1 second. Delay is %!f(string=) sec.",
+              "ref_id": "query",
+              "summary": "NTP client delay."
+            },
+            "labels": {
+              "__converted_prometheus_rule__": "true",
+              "alertname": "WindowsNTPClientDelay",
+              "asserts_alert_category": "failure",
+              "asserts_entity_type": "Node",
+              "asserts_severity": "warning",
+              "datasource_uid": "grafanacloud-prom",
+              "grafana_folder": "Integration - Windows Exporter",
+              "ref_id": "query",
+              "severity": "warning"
+            },
+            "state": "Normal (NoData)",
+            "value": ""
+          }
+        ],
+        "annotations": {
+          "description": "Round-trip time of NTP client on instance {{ $labels.instance }} is greater than 1 second. Delay is {{ printf \"%.2f\" $value }} sec.",
+          "summary": "NTP client delay."
+        },
+        "evaluationTime": 0.016614716,
+        "folderUid": "integration---windows-exporter",
+        "health": "ok",
+        "isPaused": false,
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "warning",
+          "severity": "warning"
+        },
+        "lastEvaluation": "2026-05-22T00:31:50Z",
+        "name": "WindowsNTPClientDelay",
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ],
+        "query": "(windows_time_ntp_round_trip_delay_seconds{job=~\"integrations/windows_exporter\"}) \u003e 1\n",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "0fff9b8e-d48b-5af0-8a68-97e521d870c9"
+      },
+      {
+        "alerts": [
+          {
+            "activeAt": "2026-04-15T07:39:50Z",
+            "annotations": {
+              "datasource_uid": "grafanacloud-prom",
+              "description": "NTP time offset for instance [no value] is greater than 1 second. Offset is  sec.",
+              "ref_id": "query",
+              "summary": "NTP time offset is too large."
+            },
+            "labels": {
+              "__converted_prometheus_rule__": "true",
+              "alertname": "WindowsNTPTimeOffset",
+              "asserts_alert_category": "failure",
+              "asserts_entity_type": "Node",
+              "asserts_severity": "warning",
+              "datasource_uid": "grafanacloud-prom",
+              "grafana_folder": "Integration - Windows Exporter",
+              "ref_id": "query",
+              "severity": "warning"
+            },
+            "state": "Normal (NoData)",
+            "value": ""
+          }
+        ],
+        "annotations": {
+          "description": "NTP time offset for instance {{ $labels.instance }} is greater than 1 second. Offset is {{ $value }} sec.",
+          "summary": "NTP time offset is too large."
+        },
+        "evaluationTime": 0.015275979,
+        "folderUid": "integration---windows-exporter",
+        "health": "ok",
+        "isPaused": false,
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "warning",
+          "severity": "warning"
+        },
+        "lastEvaluation": "2026-05-22T00:31:50Z",
+        "name": "WindowsNTPTimeOffset",
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ],
+        "query": "(windows_time_computed_time_offset_seconds{job=~\"integrations/windows_exporter\"}) \u003e 1\n",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "650a0af8-eb75-5469-9198-2db709c70542"
+      },
+      {
+        "alerts": [
+          {
+            "activeAt": "2026-04-15T07:39:50Z",
+            "annotations": {
+              "datasource_uid": "grafanacloud-prom",
+              "description": "Node {{ $labels.instance }} has rebooted {{ $value | humanize }} seconds ago.",
+              "ref_id": "query",
+              "summary": "Node has rebooted."
+            },
+            "labels": {
+              "__converted_prometheus_rule__": "true",
+              "alertname": "WindowsNodeHasRebooted",
+              "asserts_alert_category": "amend",
+              "asserts_entity_type": "Node",
+              "asserts_severity": "info",
+              "datasource_uid": "grafanacloud-prom",
+              "grafana_folder": "Integration - Windows Exporter",
+              "ref_id": "query",
+              "severity": "info"
+            },
+            "state": "Normal (NoData)",
+            "value": ""
+          }
+        ],
+        "annotations": {
+          "description": "Node {{ $labels.instance }} has rebooted {{ $value | humanize }} seconds ago.",
+          "summary": "Node has rebooted."
+        },
+        "evaluationTime": 0.028913261,
+        "folderUid": "integration---windows-exporter",
+        "health": "ok",
+        "isPaused": false,
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "asserts_alert_category": "amend",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "info",
+          "severity": "info"
+        },
+        "lastEvaluation": "2026-05-22T00:31:50Z",
+        "name": "WindowsNodeHasRebooted",
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ],
+        "query": "(time() - windows_system_boot_time_timestamp_seconds{job=~\"integrations/windows_exporter\"}\nor\ntime() - windows_system_boot_time_timestamp{job=~\"integrations/windows_exporter\"}\nor\ntime() - windows_system_system_up_time{job=~\"integrations/windows_exporter\"}) \u003c 600\nand\n((time() - windows_system_boot_time_timestamp_seconds{job=~\"integrations/windows_exporter\"} offset 10m)\nor\n(time() - windows_system_boot_time_timestamp{job=~\"integrations/windows_exporter\"} offset 10m)\nor\n(time() - windows_system_system_up_time{job=~\"integrations/windows_exporter\"} offset 10m)) \u003e 600\n",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "cdd09dcc-d8b2-55f3-81f3-e9d2de411b7b"
+      },
+      {
+        "alerts": [
+          {
+            "activeAt": "2026-04-15T07:39:50Z",
+            "annotations": {
+              "datasource_uid": "grafanacloud-prom",
+              "description": "Windows service [no value] is not in healthy state, currently in '[no value]'.",
+              "ref_id": "query",
+              "summary": "Windows service is not healthy."
+            },
+            "labels": {
+              "__converted_prometheus_rule__": "true",
+              "alertname": "WindowsServiceNotHealthy",
+              "asserts_alert_category": "failure",
+              "asserts_entity_type": "Node",
+              "asserts_severity": "critical",
+              "datasource_uid": "grafanacloud-prom",
+              "grafana_folder": "Integration - Windows Exporter",
+              "ref_id": "query",
+              "severity": "critical"
+            },
+            "state": "Normal (NoData)",
+            "value": ""
+          }
+        ],
+        "annotations": {
+          "description": "Windows service {{ $labels.name }} is not in healthy state, currently in '{{ $labels.status }}'.",
+          "summary": "Windows service is not healthy."
+        },
+        "evaluationTime": 0.021428208,
+        "folderUid": "integration---windows-exporter",
+        "health": "ok",
+        "isPaused": false,
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "critical",
+          "severity": "critical"
+        },
+        "lastEvaluation": "2026-05-22T00:31:50Z",
+        "name": "WindowsServiceNotHealthy",
+        "queriedDatasourceUIDs": [
+          "grafanacloud-prom"
+        ],
+        "query": "(windows_service_status{status!~\"starting|stopping|ok\", job=~\"integrations/windows_exporter\"}) \u003e 0\n",
+        "state": "inactive",
+        "type": "alerting",
+        "uid": "c6998680-2717-53a8-8968-1cbb5a06c316"
+      }
+    ],
+    "totals": {
+      "inactive": 8
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "85aaa056-f3b7-5de6-b296-1a39b5f2d1bf",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerts": [
+      {
+        "activeAt": "2026-04-15T07:39:50Z",
+        "annotations": {
+          "datasource_uid": "grafanacloud-prom",
+          "description": "Memory usage on host {{ $labels.instance }} is critically high, with {{ printf \"%.2f\" $value }}% of total memory used.\nThis exceeds the threshold of 90%.\nCurrent memory free: {{ with printf `windows_memory_physical_free_bytes{job=~\"integrations/windows_exporter\"}\nor\nwindows_os_physical_memory_free_bytes{job=~\"integrations/windows_exporter\"}` | query | first | value | humanize }}{{ . }}{{ end }}.\nTotal memory: {{ with printf `windows_cs_physical_memory_bytes{job=~\"integrations/windows_exporter\"}\nor\nwindows_memory_physical_total_bytes{job=~\"integrations/windows_exporter\"}` | query | first | value | humanize }}{{ . }}{{ end }}.\nConsider investigating processes consuming high memory or increasing available memory.\n",
+          "ref_id": "query",
+          "summary": "High memory usage on Windows host."
+        },
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "alertname": "WindowsMemoryHighUtilization",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "critical",
+          "datasource_uid": "grafanacloud-prom",
+          "grafana_folder": "Integration - Windows Exporter",
+          "ref_id": "query",
+          "severity": "critical"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      }
+    ],
+    "annotations": {
+      "description": "Memory usage on host {{ $labels.instance }} is critically high, with {{ printf \"%.2f\" $value }}% of total memory used.\nThis exceeds the threshold of 90%.\nCurrent memory free: {{ with printf `windows_memory_physical_free_bytes{job=~\"integrations/windows_exporter\"}\nor\nwindows_os_physical_memory_free_bytes{job=~\"integrations/windows_exporter\"}` | query | first | value | humanize }}{{ . }}{{ end }}.\nTotal memory: {{ with printf `windows_cs_physical_memory_bytes{job=~\"integrations/windows_exporter\"}\nor\nwindows_memory_physical_total_bytes{job=~\"integrations/windows_exporter\"}` | query | first | value | humanize }}{{ . }}{{ end }}.\nConsider investigating processes consuming high memory or increasing available memory.\n",
+      "summary": "High memory usage on Windows host."
+    },
+    "evaluationTime": 0.025760219,
+    "folderUid": "integration---windows-exporter",
+    "health": "ok",
+    "isPaused": false,
+    "labels": {
+      "__converted_prometheus_rule__": "true",
+      "asserts_alert_category": "failure",
+      "asserts_entity_type": "Node",
+      "asserts_severity": "critical",
+      "severity": "critical"
+    },
+    "lastEvaluation": "2026-05-22T00:31:50Z",
+    "name": "WindowsMemoryHighUtilization",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-prom"
+    ],
+    "query": "(100 - windows_memory_physical_free_bytes{job=~\"integrations/windows_exporter\"} / windows_memory_physical_total_bytes{job=~\"integrations/windows_exporter\"} * 100\nor\n100 - windows_os_physical_memory_free_bytes{job=~\"integrations/windows_exporter\"} / windows_cs_physical_memory_bytes{job=~\"integrations/windows_exporter\"} * 100) \u003e 90\n",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

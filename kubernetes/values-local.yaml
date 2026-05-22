@@ -35,3 +35,22 @@ components:
 #   enabled: true
 # opensearch:
 #   enabled: true
+
+# Forward all signals to Grafana Cloud via Alloy receiver in grafana-k8s-monitoring namespace.
+opentelemetry-collector:
+  config:
+    exporters:
+      otlp/alloy:
+        endpoint: grafana-k8s-monitoring-alloy-receiver.grafana-k8s-monitoring.svc.cluster.local:4317
+        sending_queue:
+          batch: null
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          exporters: [otlp/jaeger, otlp/alloy, debug, spanmetrics]
+        metrics:
+          exporters: [otlphttp/prometheus, otlp/alloy, debug]
+        logs:
+          exporters: [opensearch, otlp/alloy, debug]

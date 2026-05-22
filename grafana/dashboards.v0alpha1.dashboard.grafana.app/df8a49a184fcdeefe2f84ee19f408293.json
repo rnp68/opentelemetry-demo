@@ -1,0 +1,354 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "cloud-provider---aws",
+      "grafana.app/message": "creating dashboard from the Cloud Connections plugin"
+    },
+    "labels": {},
+    "name": "df8a49a184fcdeefe2f84ee19f408293",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "description": "Visualize Amazon Lambda metrics",
+    "editable": false,
+    "graphTooltip": 1,
+    "id": null,
+    "panels": [
+      {
+        "content": "Showing metrics only for AWS resources that have tags assigned to them. For more information, see [Amazon CloudWatch Metrics for Amazon Lambda](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html).\n",
+        "datasource": "default",
+        "gridPos": {
+          "h": 3,
+          "w": 24
+        },
+        "id": 2,
+        "mode": "markdown",
+        "title": "Info",
+        "transparent": false,
+        "type": "text"
+      },
+      {
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "description": "The number of times your function code is executed.",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12
+        },
+        "hiddenSeries": false,
+        "id": 3,
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "points": false,
+        "renderer": "flot",
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "expr": "sum by (dimension_FunctionName) (aws_lambda_invocations_sum{job=~\"$job\", region=~\"$region\", dimension_FunctionName=~\"$function_name\", dimension_Resource=~\"$resource\", dimension_ExecutedVersion=~\"$executed_version\"})",
+            "format": "time_series",
+            "legendFormat": "{{dimension_FunctionName}}"
+          }
+        ],
+        "title": "Invocations",
+        "tooltip": {
+          "value_type": "individual"
+        },
+        "transparent": false,
+        "type": "graph",
+        "yaxes": [
+          {
+            "format": "short",
+            "logBase": 1,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "description": "The number of invocations that result in a function error.",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12
+        },
+        "hiddenSeries": false,
+        "id": 4,
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "points": false,
+        "renderer": "flot",
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "expr": "sum by (dimension_FunctionName) (aws_lambda_errors_sum{job=~\"$job\", region=~\"$region\", dimension_FunctionName=~\"$function_name\", dimension_Resource=~\"$resource\", dimension_ExecutedVersion=~\"$executed_version\"})",
+            "format": "time_series",
+            "legendFormat": "{{dimension_FunctionName}}"
+          }
+        ],
+        "title": "Errors",
+        "tooltip": {
+          "value_type": "individual"
+        },
+        "transparent": false,
+        "type": "graph",
+        "yaxes": [
+          {
+            "format": "short",
+            "logBase": 1,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "description": "The number of invocation requests that are throttled.",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12
+        },
+        "hiddenSeries": false,
+        "id": 5,
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "points": false,
+        "renderer": "flot",
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "expr": "sum by (dimension_FunctionName) (aws_lambda_throttles_sum{job=~\"$job\", region=~\"$region\", dimension_FunctionName=~\"$function_name\", dimension_Resource=~\"$resource\", dimension_ExecutedVersion=~\"$executed_version\"})",
+            "format": "time_series",
+            "legendFormat": "{{dimension_FunctionName}}"
+          }
+        ],
+        "title": "Throttles",
+        "tooltip": {
+          "value_type": "individual"
+        },
+        "transparent": false,
+        "type": "graph",
+        "yaxes": [
+          {
+            "decimals": 0,
+            "format": "short",
+            "logBase": 1,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ]
+      },
+      {
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "description": "The time that your function code spends processing an event.",
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12
+        },
+        "hiddenSeries": false,
+        "id": 6,
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "percentage": false,
+        "points": false,
+        "renderer": "flot",
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "expr": "sum by (dimension_FunctionName) (aws_lambda_duration_p90{job=~\"$job\", region=~\"$region\", dimension_FunctionName=~\"$function_name\", dimension_Resource=~\"$resource\", dimension_ExecutedVersion=~\"$executed_version\"})",
+            "format": "time_series",
+            "legendFormat": "{{dimension_FunctionName}} (p90)"
+          },
+          {
+            "datasource": "$datasource",
+            "expr": "sum by (dimension_FunctionName) (aws_lambda_duration_minimum{job=~\"$job\", region=~\"$region\", dimension_FunctionName=~\"$function_name\", dimension_Resource=~\"$resource\", dimension_ExecutedVersion=~\"$executed_version\"})",
+            "format": "time_series",
+            "legendFormat": "{{dimension_FunctionName}} (min)"
+          },
+          {
+            "datasource": "$datasource",
+            "expr": "sum by (dimension_FunctionName) (aws_lambda_duration_maximum{job=~\"$job\", region=~\"$region\", dimension_FunctionName=~\"$function_name\", dimension_Resource=~\"$resource\", dimension_ExecutedVersion=~\"$executed_version\"})",
+            "format": "time_series",
+            "legendFormat": "{{dimension_FunctionName}} (max)"
+          }
+        ],
+        "title": "Duration",
+        "tooltip": {
+          "value_type": "individual"
+        },
+        "transparent": false,
+        "type": "graph",
+        "yaxes": [
+          {
+            "decimals": 0,
+            "format": "ms",
+            "logBase": 1,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ]
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 25,
+    "style": "dark",
+    "tags": [
+      "aws-cloud-provider"
+    ],
+    "templating": {
+      "list": [
+        {
+          "hide": 0,
+          "includeAll": false,
+          "label": "Data Source",
+          "multi": false,
+          "name": "datasource",
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "(?!grafanacloud-usage|grafanacloud-ml-metrics).+",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
+          "allValue": ".+",
+          "datasource": "$datasource",
+          "hide": 0,
+          "includeAll": true,
+          "label": "job",
+          "multi": true,
+          "name": "job",
+          "query": "label_values(aws_lambda_invocations_sum, job)",
+          "refresh": 2,
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "datasource": "$datasource",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Region",
+          "multi": true,
+          "name": "region",
+          "query": "label_values(aws_lambda_invocations_sum, region)",
+          "refresh": 2,
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": ".+",
+          "datasource": "$datasource",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Function name",
+          "multi": true,
+          "name": "function_name",
+          "query": "label_values(aws_lambda_invocations_sum{job=~\"$job\", region=~\"$region\"}, dimension_FunctionName)",
+          "refresh": 2,
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "datasource": "$datasource",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Resource",
+          "multi": true,
+          "name": "resource",
+          "query": "label_values(aws_lambda_invocations_sum{job=~\"$job\", region=~\"$region\", dimension_FunctionName=~\"$function_name\"}, dimension_Resource)",
+          "refresh": 2,
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": ".*",
+          "datasource": "$datasource",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Executed Version",
+          "multi": true,
+          "name": "executed_version",
+          "query": "label_values(aws_lambda_invocations_sum{job=~\"$job\", region=~\"$region\", dimension_FunctionName=~\"$function_name\", dimension_Resource=~\"$resource\"}, dimension_ExecutedVersion)",
+          "refresh": 2,
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "title": "AWS Lambda"
+  }
+}

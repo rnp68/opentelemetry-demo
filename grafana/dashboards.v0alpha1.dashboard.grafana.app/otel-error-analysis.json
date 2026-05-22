@@ -1,0 +1,143 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "otel-demo",
+      "grafana.app/message": "Created by gcx observability setup"
+    },
+    "labels": {},
+    "name": "otel-error-analysis",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "unit": "reqps"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "expr": "sum by(http_route) (rate(http_server_duration_count{namespace=\"otel-demo\",http_status_code=~\"5..\"}[5m]))",
+            "legendFormat": "{{http_route}}",
+            "refId": "A"
+          }
+        ],
+        "title": "HTTP 5xx Errors by Route",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "unit": "reqps"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "expr": "sum by(http_route) (rate(http_server_duration_count{namespace=\"otel-demo\",http_status_code=~\"4..\"}[5m]))",
+            "legendFormat": "{{http_route}}",
+            "refId": "A"
+          }
+        ],
+        "title": "HTTP 4xx Errors by Route",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "grafanacloud-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps"
+          }
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        },
+        "id": 3,
+        "options": {
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": true,
+              "displayName": "Value"
+            }
+          ]
+        },
+        "targets": [
+          {
+            "expr": "topk(10, sum by(http_route,http_status_code) (rate(http_server_duration_count{namespace=\"otel-demo\",http_status_code=~\"[45]..\"}[5m])))",
+            "format": "table",
+            "instant": true,
+            "legendFormat": "{{http_route}} {{http_status_code}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Top Error Routes",
+        "type": "table"
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 39,
+    "tags": [
+      "otel-demo"
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "title": "OTel Demo — Error Analysis"
+  }
+}

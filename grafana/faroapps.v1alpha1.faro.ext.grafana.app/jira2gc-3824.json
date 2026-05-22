@@ -1,0 +1,21 @@
+{
+  "apiVersion": "faro.ext.grafana.app/v1alpha1",
+  "kind": "FaroApp",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "jira2gc-3824",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "appKey": "2d9d8a931896e0d649d55a492024d724",
+    "collectEndpointURL": "https://faro-collector-prod-us-east-0.grafana.net/collect",
+    "corsOrigins": [
+      {
+        "url": "*"
+      }
+    ],
+    "name": "jira2gc",
+    "settings": {}
+  }
+}
