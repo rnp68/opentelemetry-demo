@@ -1,0 +1,16 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Route",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "RC9I2T282QB6G",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alert_receive_channel": "CKNWPD2JLE7F5",
+    "escalation_chain": "",
+    "filtering_term": "{{ payload.oncall.important }}",
+    "filtering_term_type": "jinja2"
+  }
+}

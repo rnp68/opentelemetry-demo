@@ -1,0 +1,18 @@
+{
+  "apiVersion": "prometheus.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "aejwx2s93i1oge",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "jsonData": {
+      "httpMethod": "POST"
+    },
+    "title": "demo.promlabs",
+    "url": "http://demo.promlabs.com:9090"
+  }
+}

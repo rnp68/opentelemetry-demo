@@ -1,0 +1,272 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "F9eIn6Q7z",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Quick Dashboard Makeover - KitchenOps challenge",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": 20605,
+    "graphTooltip": 0,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 13,
+        "libraryPanel": {
+          "name": "Extreme Dashboard Makeover - Grill",
+          "uid": "y1C0A5unz"
+        }
+      },
+      {
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 14,
+        "libraryPanel": {
+          "name": "Extreme Dashboard Makeover - Room Temperature (F)",
+          "uid": "3dSe05X7z"
+        }
+      },
+      {
+        "gridPos": {
+          "h": 30,
+          "w": 5,
+          "x": 0,
+          "y": 8
+        },
+        "id": 2,
+        "libraryPanel": {
+          "name": "Dashboard Makeover - Time since we purchased these spices",
+          "uid": "1D_h3UQ7k"
+        }
+      },
+      {
+        "gridPos": {
+          "h": 4,
+          "w": 19,
+          "x": 5,
+          "y": 8
+        },
+        "id": 10,
+        "libraryPanel": {
+          "name": "Dashboard Makeover - Lighting Status",
+          "uid": "u97RX_Q7z"
+        }
+      },
+      {
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 5,
+          "y": 12
+        },
+        "id": 16,
+        "libraryPanel": {
+          "name": "Extreme Dashboard Makeover - Mac Oven",
+          "uid": "VvzpJ5X7z"
+        }
+      },
+      {
+        "gridPos": {
+          "h": 11,
+          "w": 11,
+          "x": 13,
+          "y": 12
+        },
+        "id": 19,
+        "libraryPanel": {
+          "name": "Extreme Dashboard Makeover - Salmon Cooking Times, past 7 days",
+          "uid": "fwwLJ5X7k"
+        }
+      },
+      {
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 5,
+          "y": 19
+        },
+        "id": 18,
+        "libraryPanel": {
+          "name": "Extreme Dashboard Makeover - Refrigerator Temperature (F)",
+          "uid": "kGPSJcu7z"
+        }
+      },
+      {
+        "gridPos": {
+          "h": 8,
+          "w": 11,
+          "x": 13,
+          "y": 23
+        },
+        "id": 9,
+        "libraryPanel": {
+          "name": "Dashboard Makeover - Extra Cleaning Duty Assignment Today",
+          "uid": "T47RSwQnz"
+        }
+      },
+      {
+        "gridPos": {
+          "h": 11,
+          "w": 8,
+          "x": 5,
+          "y": 27
+        },
+        "id": 4,
+        "libraryPanel": {
+          "name": "Dashboard Makeover - Side Dish Prep Times, past 7 days",
+          "uid": "WDs3jUQ7k"
+        }
+      },
+      {
+        "datasource": {
+          "type": "grafana-testdata-datasource",
+          "uid": "fdxos61g0vyf4b"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "Time until we need new soup in the number of overall minutes",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "bars",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 1,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 11,
+          "x": 13,
+          "y": 31
+        },
+        "id": 8,
+        "interval": "",
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "grafana-testdata-datasource",
+              "uid": "fdxos61g0vyf4b"
+            },
+            "refId": "A",
+            "scenarioId": "csv_metric_values",
+            "stringInput": "1470,1410,1350,1290,1170,1110,1050,990,930,870,810,750,690,630,570,510,450,390,330,270,210,150,90"
+          }
+        ],
+        "timeFrom": "24h",
+        "timeShift": "1d",
+        "title": "Soup: Minutes until we need to throw this soup out and make some new soup for our guests/customers",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-7d",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "KitchenOps Makeover",
+    "weekStart": ""
+  }
+}

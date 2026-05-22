@@ -1,0 +1,92 @@
+{
+  "apiVersion": "slo.ext.grafana.app/v1alpha1",
+  "kind": "SLO",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "pycanbaecxb9i4qc2559d",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerting": {
+      "advancedOptions": {},
+      "annotations": [
+        {
+          "key": "runbook_url",
+          "value": ""
+        }
+      ],
+      "fastBurn": {
+        "annotations": [
+          {
+            "key": "name",
+            "value": "SLO Burn Rate Very High"
+          },
+          {
+            "key": "description",
+            "value": "Error budget is burning too fast."
+          }
+        ],
+        "labels": [
+          {
+            "key": "service_name",
+            "value": "web_app_3"
+          }
+        ]
+      },
+      "slowBurn": {
+        "annotations": [
+          {
+            "key": "name",
+            "value": "SLO Burn Rate High"
+          },
+          {
+            "key": "description",
+            "value": "Error budget is burning more than expected"
+          }
+        ],
+        "labels": [
+          {
+            "key": "service_name",
+            "value": "web_app_3"
+          }
+        ]
+      }
+    },
+    "description": "",
+    "destinationDatasource": {
+      "uid": "grafanacloud-prom"
+    },
+    "labels": [
+      {
+        "key": "team_name",
+        "value": "NOC"
+      },
+      {
+        "key": "service_name",
+        "value": "web_app_3"
+      }
+    ],
+    "name": "SLO-web_app_3",
+    "objectives": [
+      {
+        "value": 0.999999999999,
+        "window": "28d"
+      }
+    ],
+    "query": {
+      "ratio": {
+        "groupByLabels": [
+          ""
+        ],
+        "successMetric": {
+          "prometheusMetric": "http_requests_total{service=\"web_app_3\",status!~\"5..\"}"
+        },
+        "totalMetric": {
+          "prometheusMetric": "http_requests_total{service=\"web_app_3\"}"
+        }
+      },
+      "type": "ratio"
+    }
+  }
+}

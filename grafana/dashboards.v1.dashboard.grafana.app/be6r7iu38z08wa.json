@@ -1,0 +1,351 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ee6qllfxlq41sb"
+    },
+    "labels": {},
+    "name": "be6r7iu38z08wa",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "ae6qkf61vtb0gd"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-89438",
+        "targets": [
+          {
+            "columns": [
+              {
+                "selector": "casesReported",
+                "text": "",
+                "type": "number"
+              }
+            ],
+            "computed_columns": [],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "ae6qkf61vtb0gd"
+            },
+            "filters": [],
+            "format": "timeseries",
+            "global_query_id": "",
+            "groq": "*",
+            "hide": false,
+            "parser": "backend",
+            "refId": "A",
+            "root_selector": "casesByState",
+            "source": "url",
+            "summarizeExpression": "",
+            "type": "json",
+            "uql": "parse-json",
+            "url": "https://api.apify.com/v2/key-value-stores/moxA3Q0aZh5LosewB/records/LATEST?disableRedirect=true",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          {
+            "columns": [],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "ae6qkf61vtb0gd"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "hide": false,
+            "parser": "backend",
+            "refId": "B",
+            "root_selector": "",
+            "source": "url",
+            "type": "json",
+            "url": "https://25olw4vpg2.execute-api.us-east-1.amazonaws.com/dev/monitoreosondas?clientes=Metrobus\u0026from=2025-06-01T00%3A00%3A00\u0026limit=10000\u0026page=1\u0026sitios=ALL\u0026to=2025-06-12T11%3A21%3A17",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          }
+        ],
+        "title": "SitWiFi Counters",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "ae6qkf61vtb0gd"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-89438",
+        "targets": [
+          {
+            "columns": [
+              {
+                "selector": "",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "ae6qkf61vtb0gd"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "hide": false,
+            "parser": "backend",
+            "refId": "B",
+            "root_selector": "",
+            "source": "url",
+            "type": "json",
+            "url": "https://25olw4vpg2.execute-api.us-east-1.amazonaws.com/dev/monitoreosondas",
+            "url_options": {
+              "data": "",
+              "headers": [],
+              "method": "GET",
+              "params": [
+                {
+                  "key": "clientes",
+                  "value": "Metrobus"
+                },
+                {
+                  "key": "from",
+                  "value": "2025-06-01T00:00:00"
+                },
+                {
+                  "key": "limit",
+                  "value": "10000"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "sitios",
+                  "value": "ALL"
+                },
+                {
+                  "key": "to",
+                  "value": "2025-06-12T11:21:17"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "SitWiFi Counters",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "ae6qkf61vtb0gd"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "sum"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0-89438",
+        "targets": [
+          {
+            "columns": [
+              {
+                "selector": "",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "datasource": {
+              "type": "yesoreyeram-infinity-datasource",
+              "uid": "ae6qkf61vtb0gd"
+            },
+            "filters": [],
+            "format": "table",
+            "global_query_id": "",
+            "hide": false,
+            "parser": "backend",
+            "refId": "B",
+            "root_selector": "",
+            "source": "url",
+            "type": "json",
+            "url": "https://25olw4vpg2.execute-api.us-east-1.amazonaws.com/dev/monitoreosondas?clientes=Metrobus\u0026from=2025-06-01T00%3A00%3A00\u0026limit=10000\u0026page=1\u0026sitios=ALL\u0026to=2025-06-12T11%3A21%3A17",
+            "url_options": {
+              "data": "",
+              "headers": [],
+              "method": "GET",
+              "params": []
+            }
+          }
+        ],
+        "title": "SitWiFi Counters",
+        "type": "stat"
+      }
+    ],
+    "preload": false,
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "SitWiFi Infinity Alert Test"
+  }
+}

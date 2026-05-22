@@ -1,0 +1,21 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "User",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "UFN9BV5WUCR62",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "current_team": [],
+    "email": "ramiro.nagles@grafana.com",
+    "role": "admin",
+    "slack_user_identity": {
+      "team_id": "T02S4RCS0",
+      "user_id": "U07KD2VGNR4"
+    },
+    "timezone": "America/Chicago",
+    "username": "ramironagles"
+  }
+}

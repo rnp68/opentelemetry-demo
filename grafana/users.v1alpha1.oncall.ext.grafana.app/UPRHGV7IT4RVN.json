@@ -1,0 +1,16 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "User",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "UPRHGV7IT4RVN",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "current_team": [],
+    "email": "dafydd.thomas@grafana.com",
+    "role": "admin",
+    "username": "dafyddthomas"
+  }
+}

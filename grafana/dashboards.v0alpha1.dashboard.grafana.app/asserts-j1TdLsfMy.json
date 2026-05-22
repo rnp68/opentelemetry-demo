@@ -1,0 +1,1080 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts-j1TdLsfMy",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.0.0-85820.patch2-86140"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "uid": "$ds"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "enable": false,
+          "expr": "asserts:alerts{alertgroup=\"kubernetes_release.alerts\"}*1000",
+          "hide": false,
+          "iconColor": "rgba(255, 96, 96, 1)",
+          "name": "Config Changes",
+          "showIn": 0,
+          "tagKeys": "",
+          "textFormat": "workload:{{workload}}",
+          "titleFormat": "{{alertname}}",
+          "useValueForTime": true
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "reqpm"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 13,
+          "x": 0,
+          "y": 0
+        },
+        "id": 40,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (db_name, asserts_request_type) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\"}[$__rate_interval]))* 60",
+            "interval": "",
+            "legendFormat": "{{asserts_request_type}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Requests",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 11,
+          "x": 13,
+          "y": 0
+        },
+        "id": 44,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (db_name, asserts_error_type)(rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\"}[$__rate_interval])) * 60 ",
+            "interval": "",
+            "legendFormat": "{{asserts_error_type}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Error Rate (per minute)",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 4
+        },
+        "id": 53,
+        "panels": [],
+        "title": "Requests",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 35,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "short-term prediction upper band"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillBelowTo",
+                  "value": "short-term prediction lower band"
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "solid"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "long-term prediction upper band"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillBelowTo",
+                  "value": "long-term prediction lower band"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "short-term prediction upper band"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillBelowTo",
+                  "value": "short-term prediction lower band"
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "solid"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "long-term prediction upper band"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillBelowTo",
+                  "value": "long-term prediction lower band"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 12,
+          "x": 0,
+          "y": 5
+        },
+        "id": 6,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "(sum by (db_name, asserts_request_type) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", asserts_request_type=~\"$request_type\"}[$__rate_interval]))) * 60",
+            "interval": "",
+            "legendFormat": "{{db_name}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "clamp_min(asserts:request:rate5m:prediction_st{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            -\n            asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            * on() group_left\n            asserts:request:rate:threshold_by_stddev,\n            0) * 60 and {asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\"}",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "short-term prediction lower band",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "(asserts:request:rate5m:prediction_st{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            +\n            asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            * on() group_left\n            asserts:request:rate:threshold_by_stddev) * 60 and {asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\"}",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "short-term prediction upper band",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "clamp_min(asserts:request:rate5m:prediction_lt{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            -\n            asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            * on() group_left\n            asserts:request:rate:threshold_by_stddev,\n            0) * 60 and {asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\"}",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "long-term prediction lower band",
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "(asserts:request:rate5m:prediction_lt{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            +\n            asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            * on() group_left\n            asserts:request:rate:threshold_by_stddev) * 60 and {asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\", instance=~\"$instance.*\", asserts_request_type=\"${request_type:raw}\"}",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "long-term prediction upper band",
+            "refId": "E"
+          }
+        ],
+        "title": "Rate by Type (rpm)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 35,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "short-term prediction upper bound"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillBelowTo",
+                  "value": "short-term prediction lower bound"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "long-term prediction upper band"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillBelowTo",
+                  "value": "long-term prediction lower band"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "short-term prediction upper bound"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillBelowTo",
+                  "value": "short-term prediction lower bound"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "long-term prediction upper band"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillBelowTo",
+                  "value": "long-term prediction lower band"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 12,
+          "x": 12,
+          "y": 5
+        },
+        "id": 2,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (db_name, asserts_request_type, asserts_request_context) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", db_name=\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) * 60",
+            "interval": "",
+            "legendFormat": "{{asserts_request_type}}::{{asserts_request_context}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "clamp_min(asserts:request:rate5m:prediction_st{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} - asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left asserts:request:rate:threshold_by_stddev, 0) * 60",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "short-term prediction lower bound",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "(asserts:request:rate5m:prediction_st{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} + asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", db_name=\"$db_name\",asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left asserts:request:rate:threshold_by_stddev) * 60",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "short-term prediction upper bound",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "clamp_min(asserts:request:rate5m:prediction_lt{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\",   asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} - asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left asserts:request:rate:threshold_by_stddev, 0) * 60",
+            "interval": "",
+            "legendFormat": "long-term prediction lower band",
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "(asserts:request:rate5m:prediction_lt{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} + asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left  asserts:request:rate:threshold_by_stddev) * 60",
+            "interval": "",
+            "legendFormat": "long-term prediction upper band",
+            "refId": "E"
+          }
+        ],
+        "title": "Rate by Type/Context (rpm)",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 15
+        },
+        "id": 51,
+        "panels": [],
+        "title": "Errors",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 24,
+          "x": 0,
+          "y": 16
+        },
+        "id": 16,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "100 * sum by (db_name, asserts_request_type, asserts_request_context, asserts_error_type) (increase({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\"}[5m]))\n   / ignoring(asserts_request_type, asserts_request_context, asserts_error_type) group_left() \n (sum by (db_name)(increase({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[5m])))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{asserts_request_type}} - {{asserts_error_type}}",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "group by (alertname, asserts_request_type, asserts_request_context, asserts_error_type) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", alertname=~\"(ErrorRatioAnomaly|ErrorRatioBreach)\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\"}) * 0.001",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{alertname}} :: {{asserts_request_type}} :: {{asserts_request_context}} :: {{asserts_error_type}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Error Ratio 5m (%)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 24,
+          "x": 0,
+          "y": 26
+        },
+        "id": 36,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "topk(10, sum by (db_name, asserts_request_type, asserts_request_context, asserts_error_type) (rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\"}[5m])) / ignoring(asserts_error_type) group_left sum by (db_name, asserts_request_type, asserts_request_context) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\"}[5m]) \u003e 0) ) * 100",
+            "interval": "",
+            "legendFormat": "{{asserts_request_type}} - {{asserts_request_context}} - {{asserts_error_type}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "group by (alertname, asserts_request_type, asserts_request_context, asserts_error_type) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=\"$db_name\", alertname=~\"(ErrorRatioAnomaly|ErrorRatioBreach)\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\"}) * 0.001",
+            "interval": "",
+            "legendFormat": "{{alertname}} :: {{asserts_request_type}} :: {{asserts_request_context}} :: {{asserts_error_type}}",
+            "refId": "B"
+          }
+        ],
+        "title": "Error Ratio 5m - Top 10 requests (%)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {}
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 36
+        },
+        "id": 38,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "60 * sum by (asserts_request_context, asserts_error_type, error_code)(label_replace(label_join(increase({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",db_name=~\"$db_name\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\"}[$__rate_interval]),\"error_detail\",\"-\",\"status\",\"exception\",\"code\",\"response_code\"),\"error_code\",\"$2\",\"error_detail\",\"(\\\\-+)?(.*?)(.None)?(\\\\-+)?\"))",
+            "interval": "",
+            "legendFormat": "{{asserts_request_context}} - {{asserts_error_type}}  {{error_code}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Error Rate 5m",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 41,
+    "tags": [
+      "asserts"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job, asserts_env)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_metric_request=~\".+\"}, db_name)",
+          "includeAll": false,
+          "name": "db_name",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", asserts_metric_request=~\".+\"}, db_name)",
+            "refId": "$ds-data_source-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_metric_request=~\".+\",db_name=\"$db_name\"}, asserts_request_type)",
+          "includeAll": true,
+          "name": "request_type",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_metric_request=~\".+\",db_name=\"$db_name\"}, asserts_request_type)",
+            "refId": "$ds-request_type-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_metric_request=~\".+\",db_name=\"$db_name\", asserts_request_type=\"$request_type\"}, asserts_request_context)",
+          "includeAll": true,
+          "name": "request_context",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_metric_request=~\".+\",db_name=\"$db_name\", asserts_request_type=\"$request_type\"}, asserts_request_context)",
+            "refId": "$ds-request_context-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_metric_error=~\"total|gauge\",db_name=\"$db_name\",asserts_request_type=\"$request_type\"}, asserts_error_type)",
+          "includeAll": true,
+          "name": "error_type",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_metric_error=~\"total|gauge\",db_name=\"$db_name\",asserts_request_type=\"$request_type\"}, asserts_error_type)",
+            "refId": "$ds-error_type-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-2d",
+      "to": "now"
+    },
+    "timepicker": {
+      "hidden": true,
+      "refresh_intervals": [
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ]
+    },
+    "timezone": "",
+    "title": "Database KPI",
+    "weekStart": ""
+  }
+}

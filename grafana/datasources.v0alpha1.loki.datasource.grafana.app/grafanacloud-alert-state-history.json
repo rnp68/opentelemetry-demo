@@ -1,0 +1,25 @@
+{
+  "apiVersion": "loki.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-alert-state-history",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "1036148",
+    "jsonData": {
+      "manageAlerts": false,
+      "streamingEnabled": {
+        "search": true
+      },
+      "timeout": "300"
+    },
+    "readOnly": true,
+    "title": "grafanacloud-ramironagles-alert-state-history",
+    "url": "https://insight-logs-prod-us-east-0.grafana.net"
+  }
+}

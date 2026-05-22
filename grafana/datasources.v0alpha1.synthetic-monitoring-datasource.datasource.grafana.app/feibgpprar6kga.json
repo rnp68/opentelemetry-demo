@@ -1,0 +1,30 @@
+{
+  "apiVersion": "synthetic-monitoring-datasource.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": null,
+    "labels": {},
+    "name": "feibgpprar6kga",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "jsonData": {
+      "apiHost": "https://synthetic-monitoring-api-us-east-0.grafana.net",
+      "initialized": true,
+      "logs": {
+        "grafanaName": "grafanacloud-ramironagles-logs",
+        "hostedId": 993928,
+        "type": "loki",
+        "uid": "grafanacloud-logs"
+      },
+      "metrics": {
+        "grafanaName": "grafanacloud-ramironagles-prom",
+        "hostedId": 1789283,
+        "type": "prometheus",
+        "uid": "grafanacloud-prom"
+      }
+    },
+    "title": "Synthetic Monitoring"
+  }
+}

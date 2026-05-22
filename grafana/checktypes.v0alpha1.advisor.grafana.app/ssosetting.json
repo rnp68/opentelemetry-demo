@@ -1,0 +1,27 @@
+{
+  "apiVersion": "advisor.grafana.app/v0alpha1",
+  "kind": "CheckType",
+  "metadata": {
+    "annotations": {
+      "advisor.grafana.app/checktype-name": "SSO setting",
+      "advisor.grafana.app/ignore-steps": "1",
+      "advisor.grafana.app/retry": "1"
+    },
+    "labels": {
+      "grafana-app-sdk-resource-version": "v0alpha1"
+    },
+    "name": "ssosetting",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "name": "ssosetting",
+    "steps": [
+      {
+        "description": "Checks if list configs in SSO settings are in a valid list format (space-separated, comma-separated or JSON array).",
+        "resolution": "Configure the relevant SSO setting using a valid format, like space-separated (\"opt1 opt2\"), comma-separated values (\"opt1, opt2\") or JSON array format ([\"opt1\", \"opt2\"]).",
+        "stepID": "sso-list-format-validation",
+        "title": "SSO List Setting Format Validation"
+      }
+    ]
+  }
+}

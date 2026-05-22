@@ -1,0 +1,59 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "c1500828-ccfc-54c9-94fd-6d9ea9ed74fa",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerts": [
+      {
+        "activeAt": "2026-04-15T07:39:50Z",
+        "annotations": {
+          "datasource_uid": "grafanacloud-prom",
+          "description": "Disk space on volume {{ $labels.volume }} of host {{ $labels.instance }} is critically low, with {{ printf \"%.2f\" $value }}% of total space used.\nThis exceeds the threshold of 90%.\nCurrent disk free: {{ with printf `windows_logical_disk_free_bytes{volume=\"%s\", job=~\"integrations/windows_exporter\"}` $labels.volume | query | first | value | humanize }}{{ . }}{{ end }}.\nTotal disk size: {{ with printf `windows_logical_disk_size_bytes{volume=\"%s\", job=~\"integrations/windows_exporter\"}` $labels.volume | query | first | value | humanize }}{{ . }}{{ end }}.\nConsider cleaning up unnecessary files or increasing disk capacity.\n",
+          "ref_id": "query",
+          "summary": "Disk is almost full on Windows host."
+        },
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "alertname": "WindowsDiskAlmostOutOfSpace",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "critical",
+          "datasource_uid": "grafanacloud-prom",
+          "grafana_folder": "Integration - Windows Exporter",
+          "ref_id": "query",
+          "severity": "critical"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      }
+    ],
+    "annotations": {
+      "description": "Disk space on volume {{ $labels.volume }} of host {{ $labels.instance }} is critically low, with {{ printf \"%.2f\" $value }}% of total space used.\nThis exceeds the threshold of 90%.\nCurrent disk free: {{ with printf `windows_logical_disk_free_bytes{volume=\"%s\", job=~\"integrations/windows_exporter\"}` $labels.volume | query | first | value | humanize }}{{ . }}{{ end }}.\nTotal disk size: {{ with printf `windows_logical_disk_size_bytes{volume=\"%s\", job=~\"integrations/windows_exporter\"}` $labels.volume | query | first | value | humanize }}{{ . }}{{ end }}.\nConsider cleaning up unnecessary files or increasing disk capacity.\n",
+      "summary": "Disk is almost full on Windows host."
+    },
+    "evaluationTime": 0.017371034,
+    "folderUid": "integration---windows-exporter",
+    "health": "ok",
+    "isPaused": false,
+    "labels": {
+      "__converted_prometheus_rule__": "true",
+      "asserts_alert_category": "failure",
+      "asserts_entity_type": "Node",
+      "asserts_severity": "critical",
+      "severity": "critical"
+    },
+    "lastEvaluation": "2026-05-22T00:31:50Z",
+    "name": "WindowsDiskAlmostOutOfSpace",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-prom"
+    ],
+    "query": "(100 - windows_logical_disk_free_bytes{volume!~\"HarddiskVolume.*\", job=~\"integrations/windows_exporter\"}/windows_logical_disk_size_bytes{volume!~\"HarddiskVolume.*\", job=~\"integrations/windows_exporter\"}*100) \u003e 90\n",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

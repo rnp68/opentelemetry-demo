@@ -1,0 +1,17 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Shift",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "O11BIM7DFLUUT",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "frequency": "",
+    "name": "Override",
+    "shift_end": 86400,
+    "shift_start": "2025-01-31T06:00:00",
+    "type": "override"
+  }
+}

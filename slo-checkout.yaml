@@ -1,0 +1,21 @@
+apiVersion: slo.ext.grafana.app/v1alpha1
+kind: SLO
+metadata:
+  name: jam1zt9bmawgs3hore2gu
+spec:
+  name: Checkout Availability
+  description: HTTP success rate for checkout flow
+  labels:
+    - key: team
+      value: platform
+    - key: app
+      value: otel-demo
+  objectives:
+    - value: 0.999
+      window: 28d
+  destinationDatasource:
+    uid: grafanacloud-prom
+  query:
+    type: freeform
+    freeform:
+      query: sum(rate(http_server_duration_count{http_route=~"/api/checkout.*",http_status_code!~"5.."}[$__rate_interval])) / sum(rate(http_server_duration_count{http_route=~"/api/checkout.*"}[$__rate_interval]))

@@ -1,0 +1,40 @@
+{
+  "apiVersion": "loki.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "beks37skim0w0e",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "993928",
+    "jsonData": {
+      "derivedFields": [
+        {
+          "matcherRegex": "",
+          "matcherType": "regex",
+          "name": "",
+          "url": "",
+          "urlDisplayLabel": ""
+        }
+      ],
+      "oauthPassThru": false,
+      "teamHttpHeaders": {
+        "headers": {
+          "bekrv30hmmi9sb": [
+            {
+              "header": "X-Prom-Label-Policy",
+              "value": "993928:{ log_type=\"redacted\" }"
+            }
+          ]
+        },
+        "restrictAccess": false
+      }
+    },
+    "title": "BCP_redacted",
+    "url": "https://logs-prod-006.grafana.net"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "apiVersion": "loki.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": null,
+    "labels": {},
+    "name": "cdzj0g5nbqneof",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "title": "loki-1"
+  }
+}

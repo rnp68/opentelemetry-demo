@@ -1,0 +1,26 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "bfbhdzd261rlsf",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": null,
+    "evaluationTime": 3.250540397,
+    "folderUid": "ee6qllfxlq41sb",
+    "health": "error",
+    "isPaused": false,
+    "labels": null,
+    "lastEvaluation": "2026-05-22T00:32:14.322992536Z",
+    "name": "jira_incident_mttr_hours",
+    "queriedDatasourceUIDs": [
+      "efc1ef8hk8gzkc"
+    ],
+    "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"efc1ef8hk8gzkc\",\"model\":{\"columns\":[{\"selector\":\"timestamp\",\"text\":\"time\",\"type\":\"timestamp\"},{\"selector\":\"duration_ms_avg\",\"text\":\"mttr\",\"type\":\"number\"}],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"efc1ef8hk8gzkc\"},\"filters\":[],\"format\":\"table\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"jq-backend\",\"refId\":\"A\",\"root_selector\":\"[.issues[] | select(.fields.customfield_10111 != null and .fields.customfield_10109 != null) |   \\n  (((.fields.customfield_10111 | .[0:19] + \\\"Z\\\" | fromdateiso8601) - (.fields.customfield_10109 | .[0:19] + \\\"Z\\\" | fromdateiso8601)) * 1000)  \\n] | {  \\n  timestamp: (now * 1000),  \\n  duration_ms_avg: (add / length)  \\n}  \",\"source\":\"url\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"    {\\n      \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -7d ORDER BY created DESC\\\",\\n      \\\"maxResults\\\": 10,\\n      \\\"fields\\\": [\\n        \\\"key\\\",\\n        \\\"customfield_10109\\\",\\n        \\\"customfield_10110\\\",\\n        \\\"customfield_10111\\\",\\n        \\\"customfield_10112\\\",\\n        \\\"customfield_10113\\\",\\n        \\\"customfield_10114\\\"\\n      ]\\n    }\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[{\"key\":\"jql\",\"value\":\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\"},{\"key\":\"expand\",\"value\":\"names\"},{\"key\":\"maxResults\",\"value\":\"1000\"}]}}},{\"refId\":\"B\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"reducer\":\"last\",\"refId\":\"B\",\"type\":\"reduce\"}}]",
+    "state": "inactive",
+    "type": "recording"
+  }
+}

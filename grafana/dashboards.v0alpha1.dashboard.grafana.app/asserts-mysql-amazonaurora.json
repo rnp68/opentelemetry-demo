@@ -1,0 +1,1755 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts-mysql-amazonaurora",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.1.0-90058"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 1,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "uid": "${ds}"
+        },
+        "description": "This graph shows the number of Commits which Amazon Aurora engine performed as well as average commit latency. Graph Latency does not always correlate with the number of performed commits and can be quite high in certain situations.\n\n* **Number of Amazon Aurora Commits**: The average number of commit operations per second.\n\n* **Amazon Aurora Commit avg Latency**: The average amount of latency for commit operations",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ops"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Amazon Aurora Commit avg Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#962d82",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Number of Amazon Aurora Commits "
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#0a50a1",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Write Transactions"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#e24d42",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Reads"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Writes"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Write Requests"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Avg Write Transactions Latency"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "µs"
+                },
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Amazon Aurora Commit avg Latency"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "µs"
+                },
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 3,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": " avg by (job,service) (rate(mysql_global_status_auroradb_commits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval]) or irate(mysql_global_status_auroradb_commits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m]))",
+            "interval": "",
+            "legendFormat": "Number of Amazon Aurora Commits ",
+            "queryType": "randomWalk",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "avg by (job,service) (rate(mysql_global_status_auroradb_commit_latency{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/(rate(mysql_global_status_auroradb_commits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval]) \u003e 0)) or avg by (job,service) (irate(mysql_global_status_auroradb_commit_latency{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m])/(irate(mysql_global_status_auroradb_commits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m]) \u003e 0))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Amazon Aurora Commit avg Latency",
+            "refId": "B"
+          }
+        ],
+        "title": "Amazon Aurora Transaction Commits",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "This graph shows us what statements contribute most load on the system as well as what load corresponds to Amazon Aurora transaction commit.\n\n* **Write Transaction Commit Load**: Load in Average Active Sessions per second for COMMIT operations\n\n* **UPDATE load**: Load in Average Active Sessions per second for UPDATE queries\n\n* **SELECT load**: Load in Average Active Sessions per second for SELECT queries\n\n* **DELETE load**: Load in Average Active Sessions per second for DELETE queries\n\n* **INSERT load**: Load in Average Active Sessions per second for INSERT queries\n\nAn *active session* is a connection that has submitted work to the database engine and is waiting for a response from it. For example, if you submit an SQL query to the database engine, the database session is active while the database engine is processing that query.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DDL Load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#962d82",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DELETE load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#eab839",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "INSERT load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#0a437c",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SELECT load "
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#629e51",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UPDATE load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#ea6460",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Write Transaction Commit Load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#bf1b00",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Blocks Not Flushed"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 21,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (rate(mysql_global_status_auroradb_commit_latency{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/1000000 or irate(mysql_global_status_auroradb_commit_latency{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m])/1000000)",
+            "interval": "",
+            "legendFormat": "Write Transaction Commit Load",
+            "queryType": "randomWalk",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (rate(mysql_global_status_auroradb_ddl_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/1000000 or irate(mysql_global_status_auroradb_ddl_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m])/1000000)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "DDL Load",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (rate(mysql_global_status_auroradb_select_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/1000000 or irate(mysql_global_status_auroradb_select_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m])/1000000)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "SELECT load ",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (rate(mysql_global_status_auroradb_insert_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/1000000 or irate(mysql_global_status_auroradb_insert_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m])/1000000)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "INSERT load",
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (rate(mysql_global_status_auroradb_update_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/1000000 or irate(mysql_global_status_auroradb_update_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m])/1000000)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "UPDATE load",
+            "refId": "E"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (rate(mysql_global_status_auroradb_delete_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/1000000 or irate(mysql_global_status_auroradb_delete_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m])/1000000)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "DELETE load",
+            "refId": "F"
+          }
+        ],
+        "title": "Amazon Aurora Load",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "${ds}"
+        },
+        "description": "This graph shows how much memory is used by Amazon Aurora lock manager as well as amount of memory used by Amazon Aurora to store Data Dictionary.\n\n* **Aurora Lock Manager Memory**: the amount of memory used by the Lock Manager, the module responsible for handling row lock requests for concurrent transactions.\n\n* **Aurora Dictionary Memory**: the amount of memory used by the Dictionary, the space that contains metadata used to keep track of database objects, such as tables and indexes.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Reads"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Writes"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Write Requests"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "id": 22,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (max_over_time(mysql_global_status_aurora_lockmgr_memory_used{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval]) or max_over_time(mysql_global_status_aurora_lockmgr_memory_used{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m]))",
+            "interval": "",
+            "legendFormat": "Aurora Lock Manager Memory",
+            "queryType": "randomWalk",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (max_over_time(mysql_global_status_aurora_dict_sys_mem_size{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval]) or max_over_time(mysql_global_status_aurora_dict_sys_mem_size{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[5m]))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Aurora Dictionary Memory ",
+            "refId": "B"
+          }
+        ],
+        "title": "Aurora Memory Used",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "This graph shows average latency for the most important types of statements. Latency spikes are often indicative of the instance overload.\n\n* **DDL Latency:** Average time to execute DDL queries\n\n* **DELETE Latency**: Average time to execute DELETE queries\n\n* **UPDATE Latency**: Average time to execute UPDATE queries\n\n* **SELECT Latency**: Average time to execute SELECT queries\n\n* **INSERT Latency**: Average time to execute INSERT queries",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "µs"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DDL Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#962d82",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DDL Load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#962d82",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DELETE Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#e5ac0e",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DELETE load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#eab839",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "INSERT Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#0a437c",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "INSERT load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#0a437c",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SELECT Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#508642",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SELECT load "
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#629e51",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UPDATE load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#ea6460",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Write Transaction Commit Load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#bf1b00",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Blocks Not Flushed"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "id": 24,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) ((rate(mysql_global_status_auroradb_ddl_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/ (sum(rate(mysql_global_status_commands_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\",command=~'alter_table|create_index|drop_index|drop_table'}[$__rate_interval])) without(command))))",
+            "interval": "",
+            "legendFormat": "DDL Latency",
+            "queryType": "randomWalk",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) ((rate(mysql_global_status_auroradb_select_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/ (sum(rate(mysql_global_status_commands_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\",command='select'}[$__rate_interval])) without(command))+rate(mysql_global_status_qcache_hits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "SELECT Latency",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) ((rate(mysql_global_status_auroradb_insert_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/ (sum(rate(mysql_global_status_commands_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\",command=~'insert|insert_select'}[$__rate_interval])) without(command))))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "INSERT Latency",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) ((rate(mysql_global_status_auroradb_update_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/ (sum(rate(mysql_global_status_commands_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\",command=~'update|update_multi'}[$__rate_interval])) without(command))))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "UPDATE Latency",
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) ((rate(mysql_global_status_auroradb_delete_stmt_duration{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval])/ (sum(rate(mysql_global_status_commands_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\",command=~'delete|delete_multi'}[$__rate_interval])) without(command))))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "DELETE Latency",
+            "refId": "E"
+          }
+        ],
+        "title": "Amazon Aurora Statement Latency",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Amazon Aurora MySQL allows a number of commands which are not available in standard MySQL. This graph shows usage of such commands.  Regular “unit_test” calls can be seen in default Amazon Aurora install,  the rest will depend on your workload.\n\n* `show_volume_status`: The number of executions per second of the command SHOW VOLUME STATUS. The SHOW VOLUME STATUS query returns two server status variables, Disks and Nodes. These variables represent the total number of logical blocks of data and storage nodes, respectively, for the DB cluster volume.\n\n* `awslambda`: The number of AWS Lambda calls per second. AWS Lambda is an event-drive, server-less computing platform provided by AWS. It is a compute service that run codes in response to an event. You can run any kind of code from Aurora invoking Lambda from a stored procedure or a trigger.\n\n* `alter_system`: The number of executions per second of the special query ALTER SYSTEM, that is a special query to simulate an instance crash, a disk failure, a disk congestion or a replica failure. It’s a useful query for testing the system.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 4,
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ops"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DDL Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#962d82",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DDL Load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#962d82",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DELETE Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#e5ac0e",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DELETE load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#eab839",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "INSERT Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#0a437c",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "INSERT load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#0a437c",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SELECT Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#508642",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SELECT load "
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#629e51",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UPDATE load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#ea6460",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Write Transaction Commit Load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#bf1b00",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Blocks Not Flushed"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 17
+        },
+        "id": 25,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service,command) (rate(mysql_global_status_commands_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\",command=~'awslambda|alter_system|unit_test|show_volume_status'}[$__rate_interval]))",
+            "interval": "",
+            "legendFormat": "{{command}}",
+            "queryType": "randomWalk",
+            "refId": "A"
+          }
+        ],
+        "title": "Amazon Aurora Special Command Counters",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "This graph shows different kinds of Internal Amazon Aurora MySQL Problems which general should be zero in normal operation.\n\nAnything non-zero is worth examining in greater depth.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ops/"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DDL Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#962d82",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DDL Load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#962d82",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DELETE Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#e5ac0e",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "DELETE load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#eab839",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "INSERT Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#0a437c",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "INSERT load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#0a437c",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Missing History on Replica Incidents"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#e0752d",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Reserved Mem Exceeded Incidents"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#bf1b00",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SELECT Latency"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#508642",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "SELECT load "
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#629e51",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Thread Deadlocks"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#ea6460",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "UPDATE load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#ea6460",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Write Transaction Commit Load"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#bf1b00",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Key Blocks Not Flushed"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 17
+        },
+        "id": 26,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (rate(mysql_global_status_auroradb_thread_deadlocks{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval]))",
+            "interval": "",
+            "legendFormat": "Thread Deadlocks",
+            "queryType": "randomWalk",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by(job,service) (rate(mysql_global_status_aurora_missing_history_on_replica_incidents{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval]))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Missing History on Replica Incidents",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "uid": "${ds}"
+            },
+            "expr": "avg by (job,service) (rate(mysql_global_status_aurora_reserved_mem_exceeded_incidents{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\",service=\"$service\",service=\"$service\"}[$__rate_interval]))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Reserved Mem Exceeded Incidents",
+            "refId": "C"
+          }
+        ],
+        "title": "Amazon Aurora Problems",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 41,
+    "tags": [
+      "Percona",
+      "MySQL"
+    ],
+    "templating": {
+      "list": [
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job, asserts_env)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mysql_global_status_auroradb_thread_deadlocks{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, job)",
+          "includeAll": false,
+          "name": "job",
+          "options": [],
+          "query": {
+            "query": "label_values(mysql_global_status_auroradb_thread_deadlocks{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, job)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mysql_global_status_auroradb_thread_deadlocks{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\"}, service)",
+          "includeAll": false,
+          "name": "service",
+          "options": [],
+          "query": {
+            "query": "label_values(mysql_global_status_auroradb_thread_deadlocks{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",job=\"$job\"}, service)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Aurora MySQL",
+    "weekStart": ""
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "apiVersion": "advisor.grafana.app/v0alpha1",
+  "kind": "CheckType",
+  "metadata": {
+    "annotations": {
+      "advisor.grafana.app/checktype-name": "instance attribute",
+      "advisor.grafana.app/ignore-steps": "1",
+      "advisor.grafana.app/retry": "1"
+    },
+    "labels": {
+      "grafana-app-sdk-resource-version": "v0alpha1"
+    },
+    "name": "instance",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "name": "instance",
+    "steps": [
+      {
+        "description": "Checks if the Grafana version is pinned.",
+        "resolution": "You may miss out on security updates and bug fixes if you use a pinned version. Contact your Grafana administrator and open a \u003ca href='https://grafana.com/profile/org#support' target=_blank\u003esupport ticket\u003c/a\u003e to help you get unpinned.",
+        "stepID": "pinned_version",
+        "title": "Grafana Cloud version check"
+      }
+    ]
+  }
+}

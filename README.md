@@ -44,6 +44,28 @@ your preferred deployment method:
 - [Docker](https://opentelemetry.io/docs/demo/docker_deployment/)
 - [Kubernetes](https://opentelemetry.io/docs/demo/kubernetes_deployment/)
 
+## Grafana Extensions
+
+This Grafana fork adds three capabilities on top of the upstream project:
+
+| Extension | Description | Documentation |
+|-----------|-------------|:-------------:|
+| **OTel Noop Mode** | Run the full demo with a lightweight stub collector that accepts and silently drops all telemetry. Jaeger and Grafana stay accessible but show no data — useful for app-only demos and resource-constrained environments. | [docs/otel-noop-mode.md](docs/otel-noop-mode.md) |
+| **AWS 1-Click Deployment** | Deploy the complete demo on Amazon EKS with a single script. Automatically installs all missing prerequisites, validates AWS credentials with clear remediation steps, provisions an EKS cluster, and deploys via Helm. | [docs/aws-deployment.md](docs/aws-deployment.md) |
+| **AWS Teardown** | Remove every AWS resource created by the deployment — in the correct order to prevent orphaned NLBs, EBS volumes, and VPC deletion failures. Ends with a tag-based sweep to verify zero remaining resources. | [docs/aws-deployment.md#removing-all-aws-resources](docs/aws-deployment.md#removing-all-aws-resources) |
+
+**Quick command reference:**
+
+```bash
+make start-no-otel      # Start demo without OTel collection (noop mode)
+make start              # Start demo with full OTel pipeline (default)
+make stop               # Stop all services
+
+./scripts/deploy-aws.sh           # Deploy to AWS EKS (1-click)
+./scripts/deploy-aws.sh --spot    # Deploy with Spot instances (~60% cheaper)
+./scripts/teardown-aws.sh         # Remove ALL AWS resources (verified cleanup)
+```
+
 ## Documentation
 
 For detailed documentation, see [Demo Documentation][docs]. If you're curious

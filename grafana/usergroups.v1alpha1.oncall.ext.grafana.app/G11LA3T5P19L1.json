@@ -1,0 +1,11 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "UserGroup",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "G11LA3T5P19L1",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {}
+}

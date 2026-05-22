@@ -1,0 +1,602 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts-xSc6TpPMk",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.1.0-90058"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            },
+            "unit": "decbytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by(node) (asserts:resource:usage{asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_entity_type=\"Volume\", asserts_resource_type=\"disk:usage\", persistentvolumeclaim=~\"$persistentvolumeclaim\"})",
+            "interval": "",
+            "legendFormat": "{{node}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Current Usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            },
+            "unit": "decbytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 8,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "predict_linear(kubelet_volume_stats_available_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",persistentvolumeclaim=~\"$persistentvolumeclaim\"}[6h], 4 * 24 * 3600)",
+            "interval": "",
+            "legendFormat": "{{node}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Predicted Available Bytes in 4 Days ",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 9
+        },
+        "id": 5,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "(sum by(node) (asserts:resource{asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_entity_type=\"Volume\",asserts_resource_type=\"disk:usage\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}))",
+            "interval": "",
+            "legendFormat": "{{node}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "count by (node) (asserts:alerts{asserts_env=~\"$env\",asserts_site=~\"$site\",alertname=\"Saturation\", asserts_resource_type=\"disk:usage\", persistentvolumeclaim=~\"$persistentvolumeclaim\"})",
+            "interval": "",
+            "legendFormat": "",
+            "refId": "B"
+          }
+        ],
+        "title": "Usage Ratio",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            },
+            "unit": "decbytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 9
+        },
+        "id": 7,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by(node) (increase(asserts:resource:usage{asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_entity_type=\"Volume\", asserts_resource_type=\"disk:usage\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}[1d]))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{node}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Usage Growth/Day",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 18
+        },
+        "id": 6,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0-90058",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "(sum by(node) (asserts:resource{asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_entity_type=\"Volume\",asserts_resource_type=\"disk:inode_usage\", persistentvolumeclaim=~\"$persistentvolumeclaim\"}))",
+            "interval": "",
+            "legendFormat": "{{node}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "count by (node) (asserts:alerts{asserts_env=~\"$env\",asserts_site=~\"$site\",alertname=\"Saturation\", asserts_resource_type=\"disk:inode_usage\", persistentvolumeclaim=~\"$persistentvolumeclaim\"})",
+            "interval": "",
+            "legendFormat": "",
+            "refId": "B"
+          }
+        ],
+        "title": "iNode Ratio",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job, asserts_env)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:resource{asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_entity_type=\"Volume\"}, persistentvolumeclaim)",
+          "includeAll": false,
+          "name": "persistentvolumeclaim",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:resource{asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_entity_type=\"Volume\"}, persistentvolumeclaim)",
+            "refId": "Chief-VictoriaMetrics-persistentvolumeclaim-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Volume KPI",
+    "weekStart": ""
+  }
+}

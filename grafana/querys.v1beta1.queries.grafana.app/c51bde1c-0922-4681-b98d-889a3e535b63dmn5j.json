@@ -1,0 +1,76 @@
+{
+  "apiVersion": "queries.grafana.app/v1beta1",
+  "kind": "Query",
+  "metadata": {
+    "annotations": {},
+    "labels": null,
+    "name": "c51bde1c-0922-4681-b98d-889a3e535b63dmn5j",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "description": "Extracting Jira fields, performing math operations with them and displaying results with columns in desired order (not the default alphabetical order)",
+    "isLocked": true,
+    "isVisible": true,
+    "targets": [
+      {
+        "properties": {
+          "columns": [
+            {
+              "selector": "key",
+              "text": "     key",
+              "type": "string"
+            },
+            {
+              "selector": "id",
+              "text": "    id",
+              "type": "number"
+            },
+            {
+              "selector": "openD",
+              "text": "   openD",
+              "type": "string"
+            },
+            {
+              "selector": "acceptedD",
+              "text": "  acceptedD",
+              "type": "string"
+            },
+            {
+              "selector": "duration",
+              "text": " duration",
+              "type": "number"
+            }
+          ],
+          "computed_columns": [],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efc1ef8hk8gzkc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "issues.{  \n  \"key\": key,  \n  \"id\": id, \n  \"openDate\": $toMillis(fields.customfield_10109),  \n  \"acceptedDate\": $toMillis(fields.customfield_10111),  \n  \"openD\":fields.customfield_10109,\n  \"acceptedD\":fields.customfield_10111,\n\"duration\":($toMillis(fields.customfield_10111)-$toMillis(fields.customfield_10109))/360000,\n  \"Summary\": fields.summary \n}  ",
+          "source": "url",
+          "type": "json",
+          "url": "https://jiramttx2.atlassian.net/rest/api/3/search/jql",
+          "url_options": {
+            "body_content_type": "application/json",
+            "body_type": "raw",
+            "data": "{\n  \"jql\": \"project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC\",\n  \"maxResults\": 1000,\n  \"expand\":\"names,fields\",\n  \"fields\": [\n    \"key\",\n    \"id\",\n    \"customfield_10111\",\n    \"customfield_10109\",\n    \"summary\"\n  ]\n}",
+            "headers": [
+              {
+                "key": "Content-type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          }
+        },
+        "variables": {}
+      }
+    ],
+    "title": "jira_complex_fields_extraction"
+  }
+}

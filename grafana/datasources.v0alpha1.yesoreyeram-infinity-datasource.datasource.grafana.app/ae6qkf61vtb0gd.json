@@ -1,0 +1,17 @@
+{
+  "apiVersion": "yesoreyeram-infinity-datasource.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "ae6qkf61vtb0gd",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "jsonData": {
+      "global_queries": []
+    },
+    "title": "SitWiFi_test"
+  }
+}

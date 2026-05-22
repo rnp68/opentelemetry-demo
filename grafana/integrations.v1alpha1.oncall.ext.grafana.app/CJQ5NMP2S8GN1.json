@@ -1,0 +1,30 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Integration",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "CJQ5NMP2S8GN1",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "integration": "webhook",
+    "integration_url": "https://oncall-prod-us-central-0.grafana.net/oncall/integrations/v1/webhook/X1wPO3ciXZj9559lw1uu6PBJK/",
+    "labels": [
+      {
+        "key": {
+          "id": "785cb36e-1053-4799-882c-9542b05bdecd",
+          "name": "service_name",
+          "prescribed": true
+        },
+        "value": {
+          "id": "5c8ff56b-e201-4e8e-b81e-3aae005fc8d2",
+          "name": "web_app_3",
+          "prescribed": false
+        }
+      }
+    ],
+    "team": "T4B9LRMF8U9I9",
+    "verbal_name": "web hook-test"
+  }
+}

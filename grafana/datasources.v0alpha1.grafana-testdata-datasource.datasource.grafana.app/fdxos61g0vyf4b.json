@@ -1,0 +1,14 @@
+{
+  "apiVersion": "grafana-testdata-datasource.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "fdxos61g0vyf4b",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "title": "grafana-testdata-datasource"
+  }
+}

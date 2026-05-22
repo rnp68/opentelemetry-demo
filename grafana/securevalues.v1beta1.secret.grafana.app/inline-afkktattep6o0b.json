@@ -1,0 +1,16 @@
+{
+  "apiVersion": "secret.grafana.app/v1beta1",
+  "kind": "SecureValue",
+  "metadata": {
+    "annotations": {},
+    "labels": null,
+    "name": "inline-afkktattep6o0b",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "decrypters": [
+      "setting.grafana.app"
+    ],
+    "description": "Inline secure value for Setting/remote.alertmanager--password in setting.grafana.app/v1beta1"
+  }
+}

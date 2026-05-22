@@ -1,0 +1,29 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "debdvmmzvrf28f",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": null,
+    "evaluationTime": 0,
+    "folderUid": "ee6qllfxlq41sb",
+    "health": "ok",
+    "isPaused": true,
+    "labels": null,
+    "lastEvaluation": "0001-01-01T00:00:00Z",
+    "name": "IRM-Rule",
+    "notificationSettings": {
+      "receiver": "onCall-contactPoint-deleteme"
+    },
+    "queriedDatasourceUIDs": [
+      "grafanacloud-usage-insights"
+    ],
+    "query": "rate({org_id=\"1213604\"} [$__auto])",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

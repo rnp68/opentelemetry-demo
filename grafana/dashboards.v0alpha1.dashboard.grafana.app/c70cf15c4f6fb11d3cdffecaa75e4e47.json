@@ -1,0 +1,596 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "cloud-provider---aws",
+      "grafana.app/message": "creating dashboard from the Cloud Connections plugin"
+    },
+    "labels": {},
+    "name": "c70cf15c4f6fb11d3cdffecaa75e4e47",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Visualize estimated AWS charges per AWS resource (EC2, S3, ...)",
+    "editable": false,
+    "fiscalYearStartMonth": 0,
+    "gnetId": 139,
+    "graphTooltip": 1,
+    "id": null,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "uid": ""
+        },
+        "editable": true,
+        "error": false,
+        "gridPos": {
+          "h": 3,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "links": [],
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "Showing estimated charges for AWS resources. For more information, see [Monitor estimated charges with Cloudwatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) for more info.",
+          "mode": "markdown"
+        },
+        "pluginVersion": "10.2.0-59128pre",
+        "targets": [
+          {
+            "datasource": {
+              "uid": ""
+            },
+            "refId": "A"
+          }
+        ],
+        "title": "Info",
+        "type": "text"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "currencyUSD"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 5,
+          "x": 0,
+          "y": 3
+        },
+        "hideTimeOverride": true,
+        "id": 4,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.2.0-59128pre",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "aws_billing_estimated_charges_average{job=~\"$job\", dimension_Currency=\"USD\", dimension_ServiceName=\"\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Total",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Estimated Monthly Charge (to date)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 5,
+          "x": 5,
+          "y": 3
+        },
+        "hideTimeOverride": true,
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "10.2.0-59128pre",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "$datasource"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "count(count_over_time(aws_billing_estimated_charges_average{job=~\"$job\", dimension_Currency=\"USD\", dimension_ServiceName!=\"\"}[30d]) \u003e 0)",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{dimension_ServiceName}}",
+            "range": true,
+            "refId": "B",
+            "useBackend": false
+          }
+        ],
+        "title": "Total number of active services",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "currencyUSD"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 14,
+          "x": 10,
+          "y": 3
+        },
+        "id": 3,
+        "links": [],
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "lastNotNull",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "10.1.0-58312pre",
+        "targets": [
+          {
+            "alias": "",
+            "application": {
+              "filter": ""
+            },
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "dimensions": {
+              "Currency": "USD"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "rate(aws_billing_estimated_charges_average{job=~\"$job\", dimension_Currency=\"USD\", dimension_ServiceName=\"\"}[24h]) * 86400 \u003e 0",
+            "expression": "",
+            "fullMetaSearch": false,
+            "functions": [],
+            "group": {
+              "filter": ""
+            },
+            "hide": false,
+            "highResolution": false,
+            "host": {
+              "filter": ""
+            },
+            "id": "m1",
+            "includeNullMetadata": true,
+            "instant": false,
+            "item": {
+              "filter": ""
+            },
+            "legendFormat": "Total estimated daily charge",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "EstimatedCharges",
+            "metricQueryType": 0,
+            "mode": 0,
+            "namespace": "AWS/Billing",
+            "options": {
+              "showDisabledItems": false
+            },
+            "period": "86400",
+            "range": true,
+            "refId": "A",
+            "region": "us-east-1",
+            "returnData": false,
+            "statistic": "Average",
+            "useBackend": false
+          }
+        ],
+        "title": "Estimated daily charges",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "currencyUSD"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 15,
+          "w": 24,
+          "x": 0,
+          "y": 13
+        },
+        "id": 1,
+        "links": [],
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "lastNotNull",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Mean",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "10.1.0-58312pre",
+        "targets": [
+          {
+            "alias": "Total",
+            "application": {
+              "filter": ""
+            },
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "dimensions": {
+              "Currency": "USD"
+            },
+            "editorMode": "code",
+            "expr": "aws_billing_estimated_charges_average{job=~\"$job\", dimension_Currency=\"USD\", dimension_ServiceName!=\"\"}",
+            "expression": "",
+            "functions": [],
+            "group": {
+              "filter": ""
+            },
+            "hide": false,
+            "highResolution": false,
+            "host": {
+              "filter": ""
+            },
+            "id": "",
+            "item": {
+              "filter": ""
+            },
+            "label": "Total",
+            "legendFormat": "{{dimension_ServiceName}}",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "EstimatedCharges",
+            "metricQueryType": 0,
+            "mode": 0,
+            "namespace": "AWS/Billing",
+            "options": {
+              "showDisabledItems": false
+            },
+            "period": "",
+            "range": true,
+            "refId": "A",
+            "region": "us-east-1",
+            "returnData": false,
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "$datasource"
+            },
+            "editorMode": "code",
+            "expr": "aws_billing_estimated_charges_average{job=~\"$job\", dimension_Currency=\"USD\", dimension_ServiceName=\"\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Total",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Estimated charges",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [
+      "aws-cloud-provider"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "default",
+            "value": "default"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Data source",
+          "multi": false,
+          "name": "datasource",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "(?!grafanacloud-usage|grafanacloud-ml-metrics).+",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
+          "allValue": ".+",
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "definition": "label_values(aws_billing_estimated_charges_average,job)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "job",
+          "multi": true,
+          "name": "job",
+          "options": [],
+          "query": {
+            "query": "label_values(aws_billing_estimated_charges_average,job)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "",
+    "title": "AWS Billing",
+    "weekStart": ""
+  }
+}

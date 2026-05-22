@@ -1,0 +1,59 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "c6998680-2717-53a8-8968-1cbb5a06c316",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerts": [
+      {
+        "activeAt": "2026-04-15T07:39:50Z",
+        "annotations": {
+          "datasource_uid": "grafanacloud-prom",
+          "description": "Windows service [no value] is not in healthy state, currently in '[no value]'.",
+          "ref_id": "query",
+          "summary": "Windows service is not healthy."
+        },
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "alertname": "WindowsServiceNotHealthy",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "critical",
+          "datasource_uid": "grafanacloud-prom",
+          "grafana_folder": "Integration - Windows Exporter",
+          "ref_id": "query",
+          "severity": "critical"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      }
+    ],
+    "annotations": {
+      "description": "Windows service {{ $labels.name }} is not in healthy state, currently in '{{ $labels.status }}'.",
+      "summary": "Windows service is not healthy."
+    },
+    "evaluationTime": 0.021428208,
+    "folderUid": "integration---windows-exporter",
+    "health": "ok",
+    "isPaused": false,
+    "labels": {
+      "__converted_prometheus_rule__": "true",
+      "asserts_alert_category": "failure",
+      "asserts_entity_type": "Node",
+      "asserts_severity": "critical",
+      "severity": "critical"
+    },
+    "lastEvaluation": "2026-05-22T00:31:50Z",
+    "name": "WindowsServiceNotHealthy",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-prom"
+    ],
+    "query": "(windows_service_status{status!~\"starting|stopping|ok\", job=~\"integrations/windows_exporter\"}) \u003e 0\n",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

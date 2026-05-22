@@ -1,0 +1,2542 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts-i2R0zTAMk9",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.0.0-85820.patch2-86140"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [
+              {
+                "title": "By Request Type",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=28\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              },
+              {
+                "title": "By Request Type and Context",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=30\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "reqpm"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "id": 44,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (pod, asserts_request_type)(rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\"}[$__rate_interval])) * 60 ",
+            "interval": "",
+            "legendFormat": "{{asserts_request_type}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Requests",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [
+              {
+                "title": "By Request Type",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=32\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              },
+              {
+                "title": "By Request Type and Context",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=34\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 8,
+          "y": 0
+        },
+        "id": 48,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "1000 * ((sum by (asserts_request_type) (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", pod=\"$pod\"}[$__rate_interval])) or sum by (asserts_request_type) (rate({asserts_metric_latency=\"milliseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", pod=\"$pod\"}[$__rate_interval]))/1e3 or sum by (asserts_request_type) (rate({asserts_metric_latency=\"microseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", pod=\"$pod\"}[$__rate_interval]))/1e6)\n/\n(sum by (asserts_request_type) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\"}[$__rate_interval])) \u003e 0) or histogram_avg(sum by (asserts_request_type) (rate({asserts_metric_latency=\"native_histogram_seconds\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",accountID=\"\", pod=\"$pod\"}[$__rate_interval]))))",
+            "interval": "",
+            "legendFormat": "{{asserts_request_type}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Avg Latency (ms)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [
+              {
+                "title": "By Request Type",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=36\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              },
+              {
+                "title": "By Request Type and Context",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=38\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              },
+              {
+                "title": "By Request Type and Error Type",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=40\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              },
+              {
+                "title": "By Request Type, Error Type and Context",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=42\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 16,
+          "y": 0
+        },
+        "id": 54,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (pod, asserts_error_type)(rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\"}[$__rate_interval])) * 60 ",
+            "interval": "",
+            "legendFormat": "{{asserts_error_type}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Errors per Minute",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [
+              {
+                "title": "By Container",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=3\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              },
+              {
+                "title": "By Total Memory",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=4\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 0,
+          "y": 5
+        },
+        "id": 52,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (container) (container_memory_working_set_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"}) / on(container) group_left() (sum by (container)(kube_pod_container_resource_limits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"memory\"}) or sum by (container)(kube_pod_container_resource_requests{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"memory\"})) * 100",
+            "interval": "",
+            "legendFormat": "{{ccontainer}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Memory %",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [
+              {
+                "title": "By Container",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=2\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              },
+              {
+                "title": "By CPU Cores",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=5\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              },
+              {
+                "title": "By CPU Throttle",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=24\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 8,
+          "y": 5
+        },
+        "id": 50,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (container) (rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"}[5m])) / on(container) group_left() (sum by (container)(kube_pod_container_resource_limits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"cpu\"}) or sum by (container)(kube_pod_container_resource_requests{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"cpu\"})) * 100",
+            "interval": "",
+            "legendFormat": "{{container}}",
+            "refId": "A"
+          }
+        ],
+        "title": "CPU %",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [
+              {
+                "title": "By Container",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=17\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 16,
+          "y": 5
+        },
+        "id": 56,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "(asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_entity_type=\"Pod\", container != \"\", asserts_resource_type=\"disk:usage\", pod=~\"$pod\"}) / (1024 * 1024)",
+            "interval": "",
+            "legendFormat": "{{container}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Disk Usage (MB)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [
+              {
+                "title": "By Container",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=19\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 0,
+          "y": 10
+        },
+        "id": 58,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (pod)(rate(container_network_receive_bytes_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=~\"$pod\"}[5m]))",
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Received ",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [
+              {
+                "title": "By Container",
+                "url": "/d/asserts-i2R0zTAMk/pod-kpi?viewPanel=20\u0026orgId=1\u0026var-ds=${ds}\u0026var-pod=${pod}\u0026var-request_type=${request_type}\u0026var-request_context=${request_context}\u0026var-error_type=${error_type}\u0026var-env=${env}\u0026var-site=${site}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 12,
+          "y": 10
+        },
+        "id": 60,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (pod)(rate(container_network_transmit_bytes_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\"}[5m]))",
+            "interval": "",
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Transmitted",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 15
+        },
+        "id": 9,
+        "panels": [],
+        "title": "Resource",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 2,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (container) (rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"}[5m])) / on(container) group_left() (sum by (container)(kube_pod_container_resource_limits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"cpu\"}) or sum by (container)(kube_pod_container_resource_requests{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"cpu\"})) * 100",
+            "interval": "",
+            "legendFormat": "{{container}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "count by (alertname) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Pod=\"$pod\", alertname=\"Saturation\", asserts_resource_type=\"cpu:usage\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{alertname}}",
+            "refId": "B"
+          }
+        ],
+        "title": "CPU ",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 25
+        },
+        "id": 26,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 17
+            },
+            "id": 28,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum by (job, asserts_request_type) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\", asserts_request_type=~\"$request_type\"}[$__rate_interval]))) * 60",
+                "interval": "",
+                "legendFormat": "{{job}} :: {{asserts_request_type}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Rate By Type (rpm)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 17
+            },
+            "id": 30,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum by (pod, asserts_request_type, asserts_request_context) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\", asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) * 60",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "clamp_min(asserts:request:rate5m:prediction_st{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} - asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left asserts:request:rate:threshold_by_stddev, 0) * 60",
+                "interval": "",
+                "legendFormat": "short-term prediction lower bound",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(asserts:request:rate5m:prediction_st{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} + asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left asserts:request:rate:threshold_by_stddev) * 60",
+                "interval": "",
+                "legendFormat": "short-term prediction upper bound",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "clamp_min(asserts:request:rate5m:prediction_lt{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",   asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} - asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left asserts:request:rate:threshold_by_stddev, 0) * 60",
+                "interval": "",
+                "legendFormat": "long-term prediction lower band",
+                "refId": "D"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(asserts:request:rate5m:prediction_lt{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} + asserts:request:rate5m:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"} * on() group_left  asserts:request:rate:threshold_by_stddev) * 60",
+                "interval": "",
+                "legendFormat": "long-term prediction upper band",
+                "refId": "E"
+              }
+            ],
+            "title": "Rate By Type/Context (rpm)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 25
+            },
+            "id": 32,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "1000 * ((sum by (pod, asserts_request_type) (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\", asserts_request_type=~\"$request_type\"}[$__rate_interval])) or sum by (pod, asserts_request_type) (rate({asserts_metric_latency=\"milliseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\", asserts_request_type=~\"$request_type\"}[$__rate_interval]))/1e3 or sum by (pod, asserts_request_type) (rate({asserts_metric_latency=\"microseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\", asserts_request_type=~\"$request_type\"}[$__rate_interval]))/1e6) / (sum by (pod, asserts_request_type) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=~\"$request_type\"}[$__rate_interval])) \u003e 0) or histogram_avg(sum by (pod, asserts_request_type) (rate({asserts_metric_latency=\"native_histogram_seconds\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\", asserts_request_type=~\"$request_type\"}[$__rate_interval]))))",
+                "interval": "",
+                "legendFormat": "{{job}}::{{asserts_request_type}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "clamp_min(asserts:latency:average:prediction{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            -\n            asserts:latency:average:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            * on() group_left\n            asserts:latency:average:threshold_by_stddev, 0) * 1000 and asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=\"${request_type:raw}\"}",
+                "interval": "",
+                "legendFormat": "prediction lower bound",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(asserts:latency:average:prediction{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            +\n            asserts:latency:average:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=\"${request_type:raw}\", asserts_request_context=\"\"}\n            * on() group_left\n            asserts:latency:average:threshold_by_stddev) * 1000 and asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=\"${request_type:raw}\"}",
+                "interval": "",
+                "legendFormat": "prediction upper bound",
+                "refId": "C"
+              }
+            ],
+            "title": "Avg Latency By Type (ms)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 25
+            },
+            "id": 34,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "1000 * ((sum by (pod,asserts_request_type, asserts_request_context) (rate({asserts_metric_latency=\"seconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) or sum by (pod,asserts_request_type, asserts_request_context) (rate({asserts_metric_latency=\"milliseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))/1e3 or sum by (pod,asserts_request_type, asserts_request_context) (rate({asserts_metric_latency=\"microseconds_sum\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))/1e6) / (sum by (pod,asserts_request_type, asserts_request_context) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval])) \u003e 0) or histogram_avg(sum by (pod,asserts_request_type, asserts_request_context) (rate({asserts_metric_latency=\"native_histogram_seconds\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[$__rate_interval]))))",
+                "interval": "",
+                "legendFormat": "avg::{{asserts_request_type}}::{{asserts_request_context}}",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "clamp_min(asserts:latency:average:prediction{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"}\n            -\n            asserts:latency:average:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"}\n            * on() group_left\n            asserts:latency:average:threshold_by_stddev, 0) * 1000 and asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"}",
+                "interval": "",
+                "legendFormat": "prediction lower bound",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(asserts:latency:average:prediction{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"}\n            +\n            asserts:latency:average:stddev{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"}\n            * on() group_left\n            asserts:latency:average:threshold_by_stddev) * 1000 and asserts:latency:average{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"}",
+                "interval": "",
+                "legendFormat": "prediction upper bound",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "asserts:latency:q99{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"} * 1000",
+                "interval": "",
+                "legendFormat": "q99::{{asserts_request_type}}::{{asserts_request_context}}",
+                "refId": "D"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "exemplar": true,
+                "expr": "(asserts:latency:p99:threshold * 1000) and on (asserts_request_type, asserts_source) asserts:latency:p99{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=\"${request_context:raw}\"}",
+                "interval": "",
+                "legendFormat": "p99_threshold::{{asserts_request_type}}::{{asserts_request_context}}",
+                "refId": "E"
+              }
+            ],
+            "title": "Latency by Type/Context (ms)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 33
+            },
+            "id": 36,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "100 * (sum by (pod,asserts_request_type) (rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=~\"$request_type\"}[5m])) / ignoring(asserts_error_type) group_left sum by (pod, asserts_request_type) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=~\"$request_type\"}[5m])))",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Error Ratio by Type (%)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 33
+            },
+            "id": 38,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "100 * (sum by (pod,asserts_request_type, asserts_request_context) (rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[5m])) / ignoring(asserts_error_type) group_left sum by ( pod, asserts_request_type, asserts_request_context) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[5m])))",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}::{{asserts_request_context}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Error Ratio by Type/Context (%)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 41
+            },
+            "id": 40,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "100 * (sum by ( pod,asserts_request_type, asserts_error_type) (rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_error_type=~\"$error_type\"}[5m])) / ignoring(asserts_error_type) group_left sum by ( pod,asserts_request_type) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\"}[5m])))",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}::{{asserts_error_type}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Error Ratio by Type/Error (%)",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 41
+            },
+            "id": 42,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "100 * (sum by (pod,asserts_request_type, asserts_request_context, asserts_error_type) (rate({asserts_metric_error=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\", asserts_error_type=~\"$error_type\"}[5m])) / ignoring(asserts_error_type) group_left sum by (pod, asserts_request_type, asserts_request_context) (rate({asserts_metric_request=\"total\",namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", pod=\"$pod\",asserts_request_type=~\"$request_type\", asserts_request_context=~\"$request_context\"}[5m])))",
+                "interval": "",
+                "legendFormat": "{{asserts_request_type}}::{{asserts_request_context}}::{{asserts_error_type}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Error Ratio by Type/Context/Error (%)",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Requests",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 26
+        },
+        "id": 5,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by (container) (rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"}[5m]))",
+            "interval": "",
+            "legendFormat": "{{container}} :: usage",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (pod, container)(kube_pod_container_resource_limits{namespace=~\"$namespace\",resource=\"cpu\", asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\"})",
+            "interval": "",
+            "legendFormat": "{{container}} :: limits",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by (pod, container)(kube_pod_container_resource_requests{namespace=~\"$namespace\",resource=\"cpu\", asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\"})",
+            "interval": "",
+            "legendFormat": "{{container}} :: requests",
+            "refId": "C"
+          }
+        ],
+        "title": "CPU Cores Used",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 26
+        },
+        "id": 3,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by (container) (container_memory_working_set_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"}) / on(container) group_left() (sum by (container)(kube_pod_container_resource_limits{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"memory\"}) or sum by (container)(kube_pod_container_resource_requests{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",resource=\"memory\"})) * 100",
+            "interval": "",
+            "legendFormat": "{{container}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "count by (alertname, asserts_severity) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",Pod=\"$pod\", alertname=\"Saturation\", asserts_resource_type=\"memory:usage\"})* 0.001",
+            "interval": "",
+            "legendFormat": "{{alertname}} :: {{asserts_severity}}",
+            "refId": "B"
+          }
+        ],
+        "title": "Memory",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 35
+        },
+        "id": 61,
+        "panels": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 18
+            },
+            "id": 62,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_memstats_mspan_inuse_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "mspan_inuse",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "go_memstats_mspan_sys_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "mspan_sys",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_memstats_mcache_inuse_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "mcache_inuse",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "go_memstats_mcache_sys_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "mcache_sys",
+                "refId": "D"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_memstats_buck_hash_sys_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "mcache_sys",
+                "refId": "E"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "go_memstats_gc_sys_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "buck_hash_sys",
+                "refId": "F"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_memstats_next_gc_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "next_gc",
+                "refId": "G"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "go_memstats_other_sys_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "bytes of memory are used for other runtime allocations {pod={{pod}}}",
+                "refId": "H"
+              }
+            ],
+            "title": "Memory in Off-Heap",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 18
+            },
+            "id": 63,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "go_memstats_heap_alloc_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "heap_alloc_bytes",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_memstats_heap_sys_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "heap_sys_bytes",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "go_memstats_heap_idle_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "heap_idle_bytes",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_memstats_heap_inuse_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "heap_inuse_bytes",
+                "refId": "D"
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "go_memstats_heap_released_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "heap_released_bytes",
+                "refId": "E"
+              }
+            ],
+            "title": "Memory in Heap",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 26
+            },
+            "id": 64,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "go_memstats_stack_inuse_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "stack_inuse",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_memstats_stack_sys_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "stack_sys",
+                "refId": "B"
+              }
+            ],
+            "title": "Memory in Stack",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 26
+            },
+            "id": 65,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_memstats_sys_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "sys",
+                "refId": "A"
+              }
+            ],
+            "title": "Total Used Memory",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 34
+            },
+            "id": 66,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_gc_duration_seconds{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "gc_quantile : {{quantile}}",
+                "refId": "A"
+              }
+            ],
+            "title": "GC duration quantile",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 34
+            },
+            "id": 67,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_memstats_mallocs_total{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"} - go_memstats_frees_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "(mallocs) - (free)",
+                "refId": "A"
+              }
+            ],
+            "title": "Number of Live Objects",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "description": "shows how many heap objects are allocated. This is a counter value so you can use rate() to objects allocated/s.",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 42
+            },
+            "id": 68,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "rate(go_memstats_mallocs_total{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}[1m])",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "rate (mallocs)",
+                "refId": "A"
+              }
+            ],
+            "title": "Rate of Objects Allocated",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 42
+            },
+            "id": 69,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "rate(go_memstats_alloc_bytes_total{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}[1m])",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "alloc_bytes",
+                "refId": "A"
+              }
+            ],
+            "title": "Rates of Allocation",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 50
+            },
+            "id": 70,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "go_goroutines{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "go_routines",
+                "refId": "A"
+              }
+            ],
+            "title": "Goroutines",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "description": "go_memstats_lookups_total – counts how many pointer dereferences happened. This is a counter value so you can use rate() to lookups/s.",
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 50
+            },
+            "id": 71,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "8.0.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "rate(go_memstats_lookups_total{asserts_env=~\"$env\",asserts_site=~\"$site\",namespace=\"$namespace\", pod=~\"$pod\"}[1m])",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "pointer dereferences",
+                "refId": "A"
+              }
+            ],
+            "title": "Rate of a Pointer Dereferences",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Go Metrics",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 36
+        },
+        "id": 24,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (container)(asserts:resource{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_entity_type=\"Pod\", asserts_resource_type=\"cpu:throttle\", pod=~\"$pod\"}) ",
+            "interval": "",
+            "legendFormat": "{{container}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "group by (asserts_severity) (asserts:alerts{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\", alertname=\"Saturation\", asserts_resource_type=\"cpu:throttle\"}) * .001",
+            "interval": "",
+            "legendFormat": "Saturation :: {{asserts_severity}}",
+            "refId": "B"
+          }
+        ],
+        "title": "CPU Throttle",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 36
+        },
+        "id": 4,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by (container) (container_memory_working_set_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\",container!=\"POD\",container!=\"\",image!=\"\"})",
+            "interval": "",
+            "legendFormat": "{{container}} :: usage",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum by (container) (kube_pod_container_resource_limits{namespace=~\"$namespace\",resource=\"memory\", asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\"})",
+            "interval": "",
+            "legendFormat": "{{container}} :: limits",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by (container) (kube_pod_container_resource_requests{namespace=~\"$namespace\",resource=\"memory\", asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\"})",
+            "interval": "",
+            "legendFormat": "{{container}} :: requests",
+            "refId": "C"
+          }
+        ],
+        "title": "Memory Total ",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 44
+        },
+        "id": 17,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "(asserts:resource:usage{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",asserts_entity_type=\"Pod\", asserts_resource_type=\"disk:usage\", pod=~\"$pod\"})",
+            "interval": "",
+            "legendFormat": "{{pod}} :: {{persistentvolumeclaim}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Disk Utilization (GB)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 45
+        },
+        "id": 19,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by (pod)(rate(container_network_receive_bytes_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\"}[5m]))",
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Received Bytes",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 53
+        },
+        "id": 20,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.4.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum by (pod)(rate(container_network_transmit_bytes_total{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=~\"$pod\"}[5m]))",
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Transmitted Bytes",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job, asserts_env)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, workload)",
+          "includeAll": false,
+          "name": "workload",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\"}, workload)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", workload=~\"$workload\"}, pod)",
+          "includeAll": false,
+          "multi": true,
+          "name": "pod",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_pod_job_workload{namespace=~\"$namespace\",asserts_env=~\"$env\",asserts_site=~\"$site\", workload=~\"$workload\"}, pod)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",asserts_metric_request=~\".+\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\"}, asserts_request_type)",
+          "includeAll": true,
+          "name": "request_type",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",asserts_metric_request=~\".+\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\"}, asserts_request_type)",
+            "refId": "$ds-request_type-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",asserts_metric_request=~\".+\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=\"${request_type:raw}\"}, asserts_request_context)",
+          "includeAll": true,
+          "name": "request_context",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",asserts_metric_request=~\".+\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\", asserts_request_type=\"${request_type:raw}\"}, asserts_request_context)",
+            "refId": "$ds-request_context-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values({namespace=~\"$namespace\",asserts_metric_error=~\"total|gauge\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=\"${request_type:raw}\"}, asserts_error_type)",
+          "includeAll": true,
+          "name": "error_type",
+          "options": [],
+          "query": {
+            "query": "label_values({namespace=~\"$namespace\",asserts_metric_error=~\"total|gauge\",asserts_env=~\"$env\",asserts_site=~\"$site\",pod=\"$pod\",asserts_request_type=\"${request_type:raw}\"}, asserts_error_type)",
+            "refId": "$ds-error_type-Variable-Query"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ]
+    },
+    "timezone": "",
+    "title": "GO Pod KPI",
+    "weekStart": ""
+  }
+}

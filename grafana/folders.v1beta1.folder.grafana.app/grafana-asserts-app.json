@@ -1,0 +1,14 @@
+{
+  "apiVersion": "folder.grafana.app/v1beta1",
+  "kind": "Folder",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafana-asserts-app",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "description": "",
+    "title": "Asserts Dashboards"
+  }
+}

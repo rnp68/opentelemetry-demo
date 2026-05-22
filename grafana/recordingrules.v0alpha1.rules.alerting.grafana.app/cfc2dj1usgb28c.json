@@ -1,0 +1,178 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "RecordingRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/provenance": "",
+      "grafana.com/updateTimestamp": "2026-02-06T13:44:39Z",
+      "grafana.com/updatedBy": "bfbazndswqry8e"
+    },
+    "labels": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/group": "Test-Evaluation-group",
+      "grafana.com/group-index": "10"
+    },
+    "name": "cfc2dj1usgb28c",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "expressions": {
+      "A": {
+        "model": {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0,
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": []
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "accepted",
+          "hide": false,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "reducer": "max",
+          "refId": "A",
+          "type": "reduce"
+        }
+      },
+      "B": {
+        "datasourceUID": "efc1ef8hk8gzkc",
+        "model": {
+          "columns": [],
+          "computed_columns": [
+            {
+              "selector": "accepted_ms",
+              "text": "am_test",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efc1ef8hk8gzkc"
+          },
+          "filters": [],
+          "format": "timeseries",
+          "global_query_id": "",
+          "hide": false,
+          "instant": true,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "parser": "jq-backend",
+          "refId": "B",
+          "root_selector": ".issues[] | select(.fields.customfield_10111 != null and .fields.customfield_10109 != null) | {    \n  timestamp: (.fields.customfield_10111 | .[0:19] + \"Z\" | fromdateiso8601 * 1000),  \n  accepted: .fields.customfield_10111,  \n  open: .fields.customfield_10109  \n}  ",
+          "source": "url",
+          "summarizeBy": "",
+          "summarizeExpression": "",
+          "type": "json",
+          "url": "https://jiramttx2.atlassian.net/rest/api/3/search/jql",
+          "url_options": {
+            "body_content_type": "application/json",
+            "body_type": "raw",
+            "data": "{\n  \"jql\": \"project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC\",\n  \"maxResults\": 2,\n  \"expand\":\"names,fields\",\n  \"fields\": [\n    \"customfield_10111\",\n    \"customfield_10109\"\n  ]\n}",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "params": []
+          }
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        }
+      },
+      "accepted": {
+        "datasourceUID": "efc1ef8hk8gzkc",
+        "model": {
+          "columns": [
+            {
+              "selector": "timestamp",
+              "text": "time",
+              "timestampFormat": "2006-01-02T15:04:05Z07:00",
+              "type": "timestamp"
+            },
+            {
+              "selector": "duration_ms_avg",
+              "text": "duration",
+              "type": "number"
+            }
+          ],
+          "computed_columns": [
+            {
+              "selector": "accepted_ms",
+              "text": "am_test",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efc1ef8hk8gzkc"
+          },
+          "filters": [],
+          "format": "timeseries",
+          "global_query_id": "",
+          "instant": true,
+          "intervalMs": 1000,
+          "maxDataPoints": 43200,
+          "parser": "jq-backend",
+          "refId": "accepted",
+          "root_selector": "[.issues[] | select(.fields.customfield_10111 != null and .fields.customfield_10109 != null) |   \n  (((.fields.customfield_10111 | .[0:19] + \"Z\" | fromdateiso8601) - (.fields.customfield_10109 | .[0:19] + \"Z\" | fromdateiso8601)) * 1000)  \n] | {  \n  timestamp: (now * 1000),  \n  duration_ms_avg: (add / length)  \n}  ",
+          "source": "url",
+          "summarizeBy": "",
+          "summarizeExpression": "",
+          "type": "json",
+          "url": "https://jiramttx2.atlassian.net/rest/api/3/search/jql",
+          "url_options": {
+            "body_content_type": "application/json",
+            "body_type": "raw",
+            "data": "{\n  \"jql\": \"project=KAN AND issuetype=Incident AND created \u003e= -365d ORDER BY created DESC\",\n  \"maxResults\": 2,\n  \"expand\":\"names,fields\",\n  \"fields\": [\n    \"customfield_10111\",\n    \"customfield_10109\"\n  ]\n}",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "params": []
+          }
+        },
+        "relativeTimeRange": {
+          "from": "10m0s",
+          "to": "0s"
+        },
+        "source": true
+      }
+    },
+    "metric": "mttx2",
+    "paused": true,
+    "targetDatasourceUID": "grafanacloud-prom",
+    "title": "InfinityJira-complex-fields-extraction",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "apiVersion": "grafana-labels-app.ext.grafana.com/v1alpha1",
+  "kind": "StringPair",
+  "metadata": {
+    "annotations": {
+      "grafana.com/updateTimestamp": "2026-01-21T17:46:31Z"
+    },
+    "labels": {
+      "grafana-app-sdk-resource-version": "v1alpha1"
+    },
+    "name": "se56725ac6889c8f20878c9642b19b02d4297ec0ebb6665ba81cc31d1072f4096",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "key": "cluster",
+    "prescribed": false,
+    "target": {
+      "apiVersion": "v1alpha1",
+      "kind": "LabelMetadata",
+      "name": "f652c36f-8a18-402e-9dba-6db3d22f85bd"
+    },
+    "value": ""
+  }
+}

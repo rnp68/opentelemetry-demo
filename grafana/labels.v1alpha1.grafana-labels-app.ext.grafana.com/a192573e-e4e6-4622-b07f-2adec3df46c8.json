@@ -1,0 +1,27 @@
+{
+  "apiVersion": "grafana-labels-app.ext.grafana.com/v1alpha1",
+  "kind": "Label",
+  "metadata": {
+    "annotations": null,
+    "labels": {
+      "grafana-app-sdk-resource-version": "v1alpha1",
+      "keyName": "app"
+    },
+    "name": "a192573e-e4e6-4622-b07f-2adec3df46c8",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "key": {
+      "id": "a192573e-e4e6-4622-b07f-2adec3df46c8",
+      "name": "app",
+      "prescribed": false
+    },
+    "values": [
+      {
+        "id": "af149617-1538-41e6-8da7-4160d7f2e5ff",
+        "name": "otel-demo",
+        "prescribed": false
+      }
+    ]
+  }
+}

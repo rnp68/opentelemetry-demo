@@ -1,0 +1,2462 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts-d9I_9crnz",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.0.0-85820.patch2-86140"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "limit": 100,
+          "name": "Annotations \u0026 Alerts",
+          "showIn": 0,
+          "type": "dashboard"
+        },
+        {
+          "datasource": {
+            "uid": "$ds"
+          },
+          "enable": true,
+          "expr": "resets(process_uptime_seconds{asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}[1m]) \u003e 0",
+          "hide": false,
+          "iconColor": "rgba(255, 96, 96, 1)",
+          "name": "Restart Detection",
+          "showIn": 0,
+          "step": "1m",
+          "tagKeys": "restart-tag",
+          "textFormat": "uptime reset",
+          "titleFormat": "Restart"
+        }
+      ]
+    },
+    "description": "Dashboard for Micrometer instrumented applications (Java, Spring Boot, Micronaut)",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 2,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 1,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "id": 63,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "max(time() - on() process_start_time_seconds{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "",
+            "metric": "",
+            "refId": "A",
+            "step": 14400
+          }
+        ],
+        "title": "Uptime",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(50, 172, 45, 0.97)"
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 70
+                },
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 8,
+          "x": 8,
+          "y": 0
+        },
+        "id": 65,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", area=\"heap\"})*100/sum(jvm_memory_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\",instance=~\"$instance.*\", area=\"heap\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 14400
+          }
+        ],
+        "title": "Heap used",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(50, 172, 45, 0.97)"
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 70
+                },
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 8,
+          "x": 16,
+          "y": 0
+        },
+        "id": 75,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", area=\"nonheap\"})*100/sum(jvm_memory_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\",instance=~\"$instance.*\", area=\"heap\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 14400
+          }
+        ],
+        "title": "Non-Heap used",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 3
+        },
+        "id": 127,
+        "panels": [],
+        "title": "Overall Memory",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 4
+        },
+        "id": 24,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", area=\"heap\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", area=\"heap\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "committed",
+            "refId": "B",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", area=\"heap\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "refId": "C",
+            "step": 2400
+          }
+        ],
+        "title": "JVM Heap",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 6,
+          "y": 4
+        },
+        "id": 25,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", area=\"nonheap\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", area=\"nonheap\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "committed",
+            "refId": "B",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", area=\"nonheap\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "refId": "C",
+            "step": 2400
+          }
+        ],
+        "title": "JVM Non-Heap",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 12,
+          "y": 4
+        },
+        "id": 26,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "committed",
+            "refId": "B",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "sum(jvm_memory_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "refId": "C",
+            "step": 2400
+          }
+        ],
+        "title": "JVM Total",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 18,
+          "y": 4
+        },
+        "id": 86,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "process_memory_vss_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}",
+            "format": "time_series",
+            "hide": true,
+            "intervalFactor": 2,
+            "legendFormat": "vss",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "process_memory_rss_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "rss",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "process_memory_swap_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "swap",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "process_memory_rss_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"} + process_memory_swap_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "total",
+            "refId": "D"
+          }
+        ],
+        "title": "JVM Process Memory",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 11
+        },
+        "id": 129,
+        "panels": [],
+        "repeat": "persistence_counts",
+        "title": "Heap Memory and GC",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 12
+        },
+        "id": 3,
+        "maxPerRow": 3,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "jvm_memory_pool_heap",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "commited",
+            "metric": "",
+            "refId": "B",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "C",
+            "step": 1800
+          }
+        ],
+        "title": "$jvm_memory_pool_heap",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 19
+        },
+        "id": 139,
+        "maxPerRow": 3,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "commited",
+            "metric": "",
+            "refId": "B",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "C",
+            "step": 1800
+          }
+        ],
+        "title": "$jvm_memory_pool_heap",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 19
+        },
+        "id": 140,
+        "maxPerRow": 3,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "commited",
+            "metric": "",
+            "refId": "B",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "C",
+            "step": 1800
+          }
+        ],
+        "title": "$jvm_memory_pool_heap",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 26
+        },
+        "id": 138,
+        "maxPerRow": 3,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "jvm_memory_pool_heap",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_collection_used_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_collection_committed_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "commited",
+            "metric": "",
+            "refId": "B",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_collection_max_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "C",
+            "step": 1800
+          }
+        ],
+        "title": "$jvm_memory_pool_heap (Since last collection)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 33
+        },
+        "id": 98,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "rate(jvm_gc_collection_seconds_count{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}[$__rate_interval])",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "{{gc}}",
+            "refId": "A"
+          }
+        ],
+        "title": "GC Count",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 33
+        },
+        "id": 141,
+        "maxPerRow": 3,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_collection_used_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_collection_committed_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "commited",
+            "metric": "",
+            "refId": "B",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_collection_max_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "C",
+            "step": 1800
+          }
+        ],
+        "title": "$jvm_memory_pool_heap (Since last collection)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 33
+        },
+        "id": 142,
+        "maxPerRow": 3,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_collection_used_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_collection_committed_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "commited",
+            "metric": "",
+            "refId": "B",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_collection_max_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"$jvm_memory_pool_heap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "C",
+            "step": 1800
+          }
+        ],
+        "title": "$jvm_memory_pool_heap (Since last collection)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 40
+        },
+        "id": 101,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "rate(jvm_gc_collection_seconds_sum{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}[$__rate_interval]) / rate(jvm_gc_collection_seconds_count{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}[$__rate_interval])",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "{{gc}}",
+            "refId": "A"
+          }
+        ],
+        "title": "GC Time",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 40
+        },
+        "id": 99,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "rate(jvm_memory_pool_allocated_bytes_total{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"(Eden|Old|Survivor).*\"}[$__rate_interval])",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "{{pool}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Allocated",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 47
+        },
+        "id": 130,
+        "panels": [],
+        "title": "JVM Memory Pools (Non-Heap)",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 48
+        },
+        "id": 78,
+        "maxPerRow": 3,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "jvm_memory_pool_nonheap",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"$jvm_memory_pool_nonheap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "{{pool}}",
+            "metric": "",
+            "refId": "A",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"$jvm_memory_pool_nonheap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "commited",
+            "metric": "",
+            "refId": "B",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"$jvm_memory_pool_nonheap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "C",
+            "step": 1800
+          }
+        ],
+        "title": "$jvm_memory_pool_nonheap",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 55
+        },
+        "id": 143,
+        "maxPerRow": 3,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"$jvm_memory_pool_nonheap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "{{pool}}",
+            "metric": "",
+            "refId": "A",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"$jvm_memory_pool_nonheap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "commited",
+            "metric": "",
+            "refId": "B",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"$jvm_memory_pool_nonheap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "C",
+            "step": 1800
+          }
+        ],
+        "title": "$jvm_memory_pool_nonheap",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 55
+        },
+        "id": 144,
+        "maxPerRow": 3,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"$jvm_memory_pool_nonheap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "{{pool}}",
+            "metric": "",
+            "refId": "A",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"$jvm_memory_pool_nonheap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "commited",
+            "metric": "",
+            "refId": "B",
+            "step": 1800
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_memory_pool_bytes_max{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"$jvm_memory_pool_nonheap\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "C",
+            "step": 1800
+          }
+        ],
+        "title": "$jvm_memory_pool_nonheap",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 62
+        },
+        "id": 133,
+        "panels": [],
+        "title": "Buffer Pools",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 63
+        },
+        "id": 33,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_buffer_pool_used_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"direct\"}",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_buffer_pool_capacity_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"direct\"}",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "capacity",
+            "metric": "",
+            "refId": "B",
+            "step": 2400
+          }
+        ],
+        "title": "Direct Buffers",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 6,
+          "y": 63
+        },
+        "id": 83,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_buffer_pool_used_buffers{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"direct\"}",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "count",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          }
+        ],
+        "title": "Direct Buffer Count",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 12,
+          "y": 63
+        },
+        "id": 85,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_buffer_pool_used_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"mapped\"}",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "used",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_buffer_pool_capacity_bytes{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"mapped\"}",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "capacity",
+            "metric": "",
+            "refId": "B",
+            "step": 2400
+          }
+        ],
+        "title": "Mapped Buffers",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 18,
+          "y": 63
+        },
+        "id": 84,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_buffer_pool_used_buffers{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=\"mapped\"}",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "count",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          }
+        ],
+        "title": "Mapped Buffer Count",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 70
+        },
+        "id": 128,
+        "panels": [],
+        "title": "JVM Misc",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 71
+        },
+        "id": 106,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "rate(process_cpu_seconds_total{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}[$__rate_interval])",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "system",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          }
+        ],
+        "title": "CPU Usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 6,
+          "y": 71
+        },
+        "id": 32,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "label_replace({namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", __name__=~\"jvm_threads_.+\", __name__!=\"jvm_threads_started_total\", __name__!=\"jvm_threads_state\", instance=~\"$instance.*\"},\"type\",\"$1\",\"__name__\",\"jvm_threads_(.+)\")",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "{{type}}",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "rate(jvm_threads_started_total{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}[$__rate_interval])*60",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Count Change Rate (pm)",
+            "refId": "B"
+          }
+        ],
+        "title": "Thread Counts",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 12,
+          "y": 71
+        },
+        "id": 124,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "jvm_threads_state{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "{{state}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Thread States",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 18,
+          "y": 71
+        },
+        "id": 61,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "process_open_fds{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "open",
+            "metric": "",
+            "refId": "A",
+            "step": 2400
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "process_max_fds{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "max",
+            "metric": "",
+            "refId": "B",
+            "step": 2400
+          }
+        ],
+        "title": "File Descriptors",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 78
+        },
+        "id": 37,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "jvm_classes_loaded{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\"}",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "loaded",
+            "metric": "",
+            "refId": "A",
+            "step": 1200
+          }
+        ],
+        "title": "Classes loaded",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 78
+        },
+        "id": 38,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "delta(jvm_classes_loaded_total {namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\",instance=~\"$instance.*\"}[$__rate_interval])",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "loaded",
+            "metric": "",
+            "refId": "A",
+            "step": 1200
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "delta(jvm_classes_unloaded_total {namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\",instance=~\"$instance.*\"}[$__rate_interval])",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "unloaded",
+            "refId": "B"
+          }
+        ],
+        "title": "Class delta",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(jmx_exporter_build_info, asserts_env)",
+          "hide": 2,
+          "includeAll": true,
+          "label": "Environment",
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(jmx_exporter_build_info, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(jmx_exporter_build_info{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": true,
+          "label": "Site",
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(jmx_exporter_build_info{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(jmx_exporter_build_info{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(jmx_exporter_build_info{asserts_env=~\"$env\",asserts_site=~\"$site\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(jvm_memory_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\"},job)",
+          "includeAll": false,
+          "label": "Job",
+          "name": "job",
+          "options": [],
+          "query": {
+            "query": "label_values(jvm_memory_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\"},job)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(jvm_memory_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\"}, instance)",
+          "includeAll": false,
+          "label": "Instance",
+          "name": "instance",
+          "options": [],
+          "query": {
+            "query": "label_values(jvm_memory_bytes_used{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\"}, instance)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "(.+):.*",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"(Eden|Old|Survivor).*\"},pool)",
+          "hide": 2,
+          "includeAll": true,
+          "label": "JVM Memory Pools Heap",
+          "name": "jvm_memory_pool_heap",
+          "options": [],
+          "query": {
+            "query": "label_values(jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool=~\"(Eden|Old|Survivor).*\"},pool)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool!~\"(Eden|Old|Survivor).*\"},pool)",
+          "hide": 2,
+          "includeAll": true,
+          "label": "JVM Memory Pools Non-Heap",
+          "name": "jvm_memory_pool_nonheap",
+          "options": [],
+          "query": {
+            "query": "label_values(jvm_memory_pool_bytes_committed{namespace=~\"$namespace\",asserts_env=~\"$env\", asserts_site=~\"$site\", job=\"$job\", instance=~\"$instance.*\", pool!~\"(Eden|Old|Survivor).*\"},pool)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 2,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "JVM Instance KPI (JMX Exporter)",
+    "weekStart": ""
+  }
+}

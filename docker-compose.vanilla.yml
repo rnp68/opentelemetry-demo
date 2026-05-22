@@ -1,0 +1,63 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Docker Compose override: run the demo without any local observability backends.
+# OTel SDKs remain ENABLED — all services emit telemetry normally.
+# Telemetry is accepted by a noop collector and silently dropped.
+#
+# Usage:
+#   make local-vanilla
+#   # or manually:
+#   docker compose -f docker-compose.yml -f docker-compose.vanilla.yml up --force-recreate --remove-orphans --detach
+#
+# What this does:
+#   - Assigns Jaeger, Prometheus, Grafana OSS, and OpenSearch to an inactive
+#     Docker Compose profile so they are never started. No RAM wasted.
+#   - Replaces the OTel Collector with the noop stub (accepts OTLP, drops it).
+#   - Fixes frontendproxy's depends_on to remove the hard deps on Jaeger and Grafana.
+#
+# To wire telemetry to Alloy once you have it configured:
+#   1. Install Alloy on your host and configure an OTLP receiver on port 4317.
+#   2. In .env, set:
+#        OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4317
+#   3. Re-run the docker compose up command above (only changed services restart).
+
+services:
+  # ── Local observability backends ─────────────────────────────────────────────
+  # Assigning these to the "local-backends" profile prevents them from starting
+  # in vanilla mode. Run with --profile local-backends to include them.
+
+  jaeger:
+    profiles: ["local-backends"]
+
+  grafana:
+    profiles: ["local-backends"]
+
+  prometheus:
+    profiles: ["local-backends"]
+
+  opensearch:
+    profiles: ["local-backends"]
+
+  # ── OTel Collector (noop stub) ────────────────────────────────────────────────
+  # Same image and ports as the full collector — all services connect to it
+  # normally via their OTEL_EXPORTER_OTLP_ENDPOINT. Telemetry is silently dropped.
+  # No Grafana Cloud credentials required.
+
+  otelcol:
+    command: ["--config=/etc/otelcol-config-noop.yml"]
+    volumes:
+      - ./src/otelcollector/otelcol-config-noop.yml:/etc/otelcol-config-noop.yml
+    depends_on: {}
+    environment:
+      - ENVOY_PORT
+
+  # ── Frontend Proxy ────────────────────────────────────────────────────────────
+  # Remove hard depends_on for Jaeger and Grafana (both assigned to inactive profile).
+
+  frontendproxy:
+    depends_on:
+      frontend:
+        condition: service_started
+      loadgenerator:
+        condition: service_started

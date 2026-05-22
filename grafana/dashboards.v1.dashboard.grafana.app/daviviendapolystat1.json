@@ -1,0 +1,1354 @@
+{
+  "apiVersion": "dashboard.grafana.app/v1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ef00mxxjt8gsgc"
+    },
+    "labels": {},
+    "name": "daviviendapolystat1",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": false,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "queryType": "timeRegions",
+            "tags": [],
+            "timeRegion": {
+              "from": "08:54",
+              "timezone": "browser",
+              "to": "09:09"
+            },
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        },
+        {
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "fdxos61g0vyf4b"
+          },
+          "enable": true,
+          "filter": {
+            "exclude": false,
+            "ids": [
+              2
+            ]
+          },
+          "hide": false,
+          "iconColor": "red",
+          "mappings": {
+            "tags": {
+              "source": "field",
+              "value": "tags"
+            },
+            "text": {
+              "source": "field",
+              "value": "text"
+            },
+            "time": {
+              "source": "field",
+              "value": "time"
+            },
+            "title": {
+              "source": "field",
+              "value": "text"
+            }
+          },
+          "name": "New annotation",
+          "target": {
+            "alias": "test",
+            "refId": "Anno",
+            "scenarioId": "random_walk_with_error"
+          }
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": false,
+          "iconColor": "red",
+          "name": "Test Annotation",
+          "target": {
+            "expr": "",
+            "interval": "",
+            "refId": "Anno"
+          }
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "autoSizeColumns": true,
+          "autoSizePolygons": true,
+          "autoSizeRows": true,
+          "compositeConfig": {
+            "animationSpeed": "1500",
+            "composites": [],
+            "enabled": true
+          },
+          "compositeGlobalAliasingEnabled": false,
+          "ellipseCharacters": 18,
+          "ellipseEnabled": false,
+          "globalAutoScaleFonts": true,
+          "globalClickthrough": "/d/daviviendapolystat1/davivienda-polystat?orgId=1\u0026timezone=browser\u0026var-PNS_Target_Name=${__cell_name}-series\u0026var-PNS_Target=${__cell_name}",
+          "globalClickthroughCustomTarget": "",
+          "globalClickthroughCustomTargetEnabled": true,
+          "globalClickthroughNewTabEnabled": false,
+          "globalClickthroughSanitizedEnabled": false,
+          "globalDecimals": 0,
+          "globalDisplayMode": "all",
+          "globalDisplayTextTriggeredEmpty": "OK",
+          "globalFillColor": "rgba(10, 85, 161, 1)",
+          "globalFontSize": 12,
+          "globalGradientsEnabled": true,
+          "globalOperator": "mean",
+          "globalPolygonBorderColor": "text",
+          "globalPolygonBorderSize": 2,
+          "globalPolygonSize": 25,
+          "globalRegexPattern": "",
+          "globalShape": "hexagon_pointed_top",
+          "globalShowTimestampEnabled": false,
+          "globalShowTimestampFontSize": 12,
+          "globalShowTimestampFormat": "YYYY-MM-DD HH:mm:ss",
+          "globalShowTimestampPosition": "below_value",
+          "globalShowTimestampYOffset": 0,
+          "globalShowTooltipColumnHeadersEnabled": true,
+          "globalShowValueEnabled": true,
+          "globalTextFontAutoColorEnabled": true,
+          "globalTextFontColor": "#000000",
+          "globalTextFontFamily": "Roboto Mono",
+          "globalThresholdsConfig": [
+            {
+              "color": "#FF9830",
+              "state": 2,
+              "value": 0
+            },
+            {
+              "color": "rgba(0,0,0,0)",
+              "state": 3,
+              "value": 50
+            },
+            {
+              "color": "#5794F2",
+              "state": 0,
+              "value": 54
+            }
+          ],
+          "globalTooltipsEnabled": false,
+          "globalTooltipsFontFamily": "Roboto",
+          "globalTooltipsShowTimestampEnabled": true,
+          "globalTooltipsShowValueEnabled": true,
+          "globalUnitFormat": "short",
+          "layoutDisplayLimit": 100,
+          "layoutNumColumns": 8,
+          "layoutNumRows": 8,
+          "overrideConfig": {
+            "overrides": []
+          },
+          "sortByDirection": 1,
+          "sortByField": "name",
+          "tooltipDisplayMode": "all",
+          "tooltipDisplayTextTriggeredEmpty": "OK",
+          "tooltipPrimarySortByField": "value",
+          "tooltipPrimarySortDirection": 3,
+          "tooltipSecondarySortByField": "value",
+          "tooltipSecondarySortDirection": 1
+        },
+        "pluginVersion": "2.1.13",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "queryType": "randomWalk",
+            "refId": "SuperAPP"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "PortalPN"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "PortalPYME"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Empresas"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Corporativo"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "NuevaAppEmp"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Oficina"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "ATM"
+          }
+        ],
+        "title": "PNS",
+        "transformations": [
+          {
+            "id": "renameByRegex",
+            "options": {
+              "regex": "(.*)\\-.*",
+              "renamePattern": "$1"
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "grafana-polystat-panel"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "displayName": "${PNS_Target}",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "timezone": [
+            "browser"
+          ],
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.0-18356121373.patch3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 1,
+            "refId": "A"
+          }
+        ],
+        "title": "Tendencia - ${PNS_Target}",
+        "transformations": [
+          {
+            "id": "filterFieldsByName",
+            "options": {
+              "byVariable": false,
+              "include": {
+                "pattern": "time|${PNS_Target_Name}"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.3.0-18356121373.patch3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "queryType": "randomWalk",
+            "refId": "SuperAPP"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "PortalPN"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "PortalPYME"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Empresas"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Corporativo"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "NuevaAppEmp"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Oficina"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "ATM"
+          }
+        ],
+        "title": "PNS",
+        "transformations": [
+          {
+            "id": "renameByRegex",
+            "options": {
+              "regex": "(.*)\\-.*",
+              "renamePattern": "$1"
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
+        },
+        "description": "${Target_Name}",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "displayName": "${Target}",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "timezone": [
+            "browser"
+          ],
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.0-18356121373.patch3",
+        "targets": [
+          {
+            "adHocFiltersEnabled": false,
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 3,
+            "refId": "A",
+            "withTransforms": false
+          }
+        ],
+        "title": "Tendencia - ${Target}",
+        "transformations": [
+          {
+            "id": "filterFieldsByName",
+            "options": {
+              "byVariable": false,
+              "include": {
+                "names": [],
+                "pattern": ".*${Target}.*|.*time.*"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "links": [
+              {
+                "title": "t",
+                "url": "/d/daviviendapolystat1/davivienda-polystat?orgId=1\u0026timezone=browser\u0026var-Target=${__field.displayName}\u0026var-Target_Name=${__field.name}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 3,
+        "options": {
+          "displayMode": "lcd",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "maxVizHeight": 300,
+          "minVizHeight": 16,
+          "minVizWidth": 8,
+          "namePlacement": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "sizing": "auto",
+          "valueMode": "color"
+        },
+        "pluginVersion": "12.3.0-18356121373.patch3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Application"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Portal"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "PYME"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Empresas"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Corporativo"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "NuevasAreas"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Oficina"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Cajeros"
+          }
+        ],
+        "title": "Indicadores de Desempeño",
+        "transformations": [
+          {
+            "id": "renameByRegex",
+            "options": {
+              "regex": "(.*)\\-.*",
+              "renamePattern": "$1"
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "showValues": false,
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "displayName": "${PNS_Target}",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "id": 6,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
+          },
+          "timezone": [
+            "browser"
+          ],
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.3.0-18356121373.patch3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 1,
+            "refId": "A"
+          }
+        ],
+        "title": "Tendencia - ${PNS_Target}",
+        "transformations": [
+          {
+            "id": "filterFieldsByName",
+            "options": {
+              "byVariable": false,
+              "include": {
+                "pattern": "time|${PNS_Target_Name}"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        },
+        "id": 5,
+        "options": {
+          "autoSizeColumns": true,
+          "autoSizePolygons": true,
+          "autoSizeRows": true,
+          "compositeConfig": {
+            "animationSpeed": "1500",
+            "composites": [],
+            "enabled": true
+          },
+          "compositeGlobalAliasingEnabled": false,
+          "ellipseCharacters": 18,
+          "ellipseEnabled": false,
+          "globalAutoScaleFonts": true,
+          "globalClickthrough": "/d/daviviendapolystat1/davivienda-polystat?orgId=1\u0026timezone=browser\u0026var-PNS_Target_Name=${__cell_name}-series\u0026var-PNS_Target=${__cell_name}\u0026var-Target=${__cell_name}",
+          "globalClickthroughCustomTarget": "",
+          "globalClickthroughCustomTargetEnabled": true,
+          "globalClickthroughNewTabEnabled": false,
+          "globalClickthroughSanitizedEnabled": false,
+          "globalDecimals": 0,
+          "globalDisplayMode": "all",
+          "globalDisplayTextTriggeredEmpty": "OK",
+          "globalFillColor": "rgba(10, 85, 161, 1)",
+          "globalFontSize": 12,
+          "globalGradientsEnabled": true,
+          "globalOperator": "mean",
+          "globalPolygonBorderColor": "text",
+          "globalPolygonBorderSize": 2,
+          "globalPolygonSize": 25,
+          "globalRegexPattern": "",
+          "globalShape": "hexagon_pointed_top",
+          "globalShowTimestampEnabled": false,
+          "globalShowTimestampFontSize": 12,
+          "globalShowTimestampFormat": "YYYY-MM-DD HH:mm:ss",
+          "globalShowTimestampPosition": "below_value",
+          "globalShowTimestampYOffset": 0,
+          "globalShowTooltipColumnHeadersEnabled": true,
+          "globalShowValueEnabled": true,
+          "globalTextFontAutoColorEnabled": true,
+          "globalTextFontColor": "#000000",
+          "globalTextFontFamily": "Roboto Mono",
+          "globalThresholdsConfig": [
+            {
+              "color": "#FF9830",
+              "state": 2,
+              "value": 0
+            },
+            {
+              "color": "rgba(0,0,0,0)",
+              "state": 3,
+              "value": 50
+            },
+            {
+              "color": "#5794F2",
+              "state": 0,
+              "value": 54
+            }
+          ],
+          "globalTooltipsEnabled": false,
+          "globalTooltipsFontFamily": "Roboto",
+          "globalTooltipsShowTimestampEnabled": true,
+          "globalTooltipsShowValueEnabled": true,
+          "globalUnitFormat": "short",
+          "layoutDisplayLimit": 100,
+          "layoutNumColumns": 8,
+          "layoutNumRows": 8,
+          "overrideConfig": {
+            "overrides": []
+          },
+          "sortByDirection": 1,
+          "sortByField": "name",
+          "tooltipDisplayMode": "all",
+          "tooltipDisplayTextTriggeredEmpty": "OK",
+          "tooltipPrimarySortByField": "value",
+          "tooltipPrimarySortDirection": 3,
+          "tooltipSecondarySortByField": "value",
+          "tooltipSecondarySortDirection": 1
+        },
+        "pluginVersion": "2.1.13",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "queryType": "randomWalk",
+            "refId": "SuperAPP"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "PortalPN"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "PortalPYME"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Empresas"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Corporativo"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "NuevaAppEmp"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Oficina"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "ATM"
+          }
+        ],
+        "title": "PNS",
+        "transformations": [
+          {
+            "id": "renameByRegex",
+            "options": {
+              "regex": "(.*)\\-.*",
+              "renamePattern": "$1"
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "grafana-polystat-panel"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 32
+        },
+        "id": 8,
+        "options": {
+          "autoSizeColumns": true,
+          "autoSizePolygons": true,
+          "autoSizeRows": true,
+          "compositeConfig": {
+            "animationSpeed": "1500",
+            "composites": [],
+            "enabled": true
+          },
+          "compositeGlobalAliasingEnabled": false,
+          "ellipseCharacters": 18,
+          "ellipseEnabled": false,
+          "globalAutoScaleFonts": true,
+          "globalClickthrough": "/d/daviviendapolystat1/davivienda-polystat?orgId=1\u0026timezone=browser\u0026var-PNS_Target_Name=${__cell_name}-series\u0026var-PNS_Target=${__cell_name}\u0026var-Target=${__cell_name}",
+          "globalClickthroughCustomTarget": "",
+          "globalClickthroughCustomTargetEnabled": true,
+          "globalClickthroughNewTabEnabled": false,
+          "globalClickthroughSanitizedEnabled": false,
+          "globalDecimals": 0,
+          "globalDisplayMode": "all",
+          "globalDisplayTextTriggeredEmpty": "OK",
+          "globalFillColor": "rgba(10, 85, 161, 1)",
+          "globalFontSize": 12,
+          "globalGradientsEnabled": true,
+          "globalOperator": "mean",
+          "globalPolygonBorderColor": "text",
+          "globalPolygonBorderSize": 2,
+          "globalPolygonSize": 25,
+          "globalRegexPattern": "",
+          "globalShape": "hexagon_pointed_top",
+          "globalShowTimestampEnabled": false,
+          "globalShowTimestampFontSize": 12,
+          "globalShowTimestampFormat": "YYYY-MM-DD HH:mm:ss",
+          "globalShowTimestampPosition": "below_value",
+          "globalShowTimestampYOffset": 0,
+          "globalShowTooltipColumnHeadersEnabled": true,
+          "globalShowValueEnabled": true,
+          "globalTextFontAutoColorEnabled": true,
+          "globalTextFontColor": "#000000",
+          "globalTextFontFamily": "Roboto Mono",
+          "globalThresholdsConfig": [
+            {
+              "color": "#FF9830",
+              "state": 2,
+              "value": 0
+            },
+            {
+              "color": "rgba(0,0,0,0)",
+              "state": 3,
+              "value": 50
+            },
+            {
+              "color": "#5794F2",
+              "state": 0,
+              "value": 54
+            }
+          ],
+          "globalTooltipsEnabled": false,
+          "globalTooltipsFontFamily": "Roboto",
+          "globalTooltipsShowTimestampEnabled": true,
+          "globalTooltipsShowValueEnabled": true,
+          "globalUnitFormat": "short",
+          "layoutDisplayLimit": 100,
+          "layoutNumColumns": 8,
+          "layoutNumRows": 8,
+          "overrideConfig": {
+            "overrides": []
+          },
+          "sortByDirection": 1,
+          "sortByField": "name",
+          "tooltipDisplayMode": "all",
+          "tooltipDisplayTextTriggeredEmpty": "OK",
+          "tooltipPrimarySortByField": "value",
+          "tooltipPrimarySortDirection": 3,
+          "tooltipSecondarySortByField": "value",
+          "tooltipSecondarySortDirection": 1
+        },
+        "pluginVersion": "2.1.13",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "queryType": "randomWalk",
+            "refId": "SuperAPP"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "PortalPN"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "PortalPYME"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Empresas"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Corporativo"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "NuevaAppEmp"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "Oficina"
+          },
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "hide": false,
+            "queryType": "randomWalk",
+            "refId": "ATM"
+          }
+        ],
+        "title": "PNS",
+        "transformations": [
+          {
+            "id": "renameByRegex",
+            "options": {
+              "regex": "(.*)\\-.*",
+              "renamePattern": "$1"
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "grafana-polystat-panel"
+      }
+    ],
+    "schemaVersion": 42,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": "SuperAPP-series",
+            "value": "SuperAPP-series"
+          },
+          "hide": 2,
+          "name": "PNS_Target_Name",
+          "options": [],
+          "query": "",
+          "type": "custom"
+        },
+        {
+          "current": {
+            "text": "SuperAPP",
+            "value": "SuperAPP"
+          },
+          "hide": 2,
+          "name": "PNS_Target",
+          "options": [],
+          "query": "",
+          "type": "custom"
+        },
+        {
+          "current": {
+            "text": "",
+            "value": ""
+          },
+          "hide": 2,
+          "name": "Target",
+          "options": [],
+          "query": "",
+          "type": "custom"
+        },
+        {
+          "current": {
+            "text": "",
+            "value": ""
+          },
+          "hide": 2,
+          "label": "Target_Name",
+          "name": "Target_Name",
+          "options": [],
+          "query": "",
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "__grafana_origin",
+            "value": "__grafana_origin"
+          },
+          "definition": "label_names()",
+          "hide": 2,
+          "name": "query0",
+          "options": [],
+          "query": {
+            "qryType": 0,
+            "query": "label_names()",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {
+      "hidden": true
+    },
+    "timezone": "",
+    "title": "polystat",
+    "weekStart": ""
+  }
+}

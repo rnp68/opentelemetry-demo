@@ -1,0 +1,73 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "df9p1nlbiyv41b",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerts": [
+      {
+        "activeAt": "2026-01-09T23:50:50Z",
+        "annotations": {
+          "appName": "opentelemetry-demo-faro",
+          "datasource_uid": "grafanacloud-prom",
+          "description": "This alert fires when the First Contentful Paint (FCP) is greater than 3000ms for the last 6h.",
+          "ref_id": "Web Vitals - FCP",
+          "ruleId": "fcp_p75",
+          "summary": "Web Vitals - FCP - opentelemetry-demo-faro",
+          "threshold": "3000"
+        },
+        "labels": {
+          "alertname": "Web Vitals - FCP - opentelemetry-demo-faro",
+          "datasource_uid": "grafanacloud-prom",
+          "grafana_folder": "frontend-observability-alerts",
+          "ref_id": "Web Vitals - FCP"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      },
+      {
+        "activeAt": "2026-03-24T04:51:50Z",
+        "annotations": {
+          "Error": "Post \"https://query-grafana-app-main.grafana-datasources.svc.cluster.local.:6443/apis/query.grafana.app/v0alpha1/namespaces/stacks-1036148/query\": invalid exchange response: terminated after 3 retries\nPost \"http://api-lb.auth.svc.cluster.local./v1/sign-access-token\": dial tcp 10.50.6.176:80: connect: connection refused",
+          "appName": "opentelemetry-demo-faro",
+          "datasource_uid": "grafanacloud-prom",
+          "description": "This alert fires when the First Contentful Paint (FCP) is greater than 3000ms for the last 6h.",
+          "ref_id": "Web Vitals - FCP",
+          "ruleId": "fcp_p75",
+          "summary": "Web Vitals - FCP - opentelemetry-demo-faro",
+          "threshold": "3000"
+        },
+        "labels": {
+          "alertname": "Web Vitals - FCP - opentelemetry-demo-faro",
+          "grafana_folder": "frontend-observability-alerts"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      }
+    ],
+    "annotations": {
+      "appName": "opentelemetry-demo-faro",
+      "description": "This alert fires when the First Contentful Paint (FCP) is greater than 3000ms for the last 6h.",
+      "ruleId": "fcp_p75",
+      "summary": "Web Vitals - FCP - opentelemetry-demo-faro",
+      "threshold": "3000"
+    },
+    "evaluationTime": 0.041797681,
+    "folderUid": "ff9p1nkq236yob",
+    "health": "ok",
+    "isPaused": false,
+    "labels": null,
+    "lastEvaluation": "2026-05-22T00:31:50Z",
+    "name": "Web Vitals - FCP - opentelemetry-demo-faro",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-prom"
+    ],
+    "query": "feo11y:fcp_p75{service_name=\"opentelemetry-demo-faro\"}",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

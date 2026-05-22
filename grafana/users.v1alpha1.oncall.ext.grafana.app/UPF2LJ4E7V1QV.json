@@ -1,0 +1,16 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "User",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "UPF2LJ4E7V1QV",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "current_team": [],
+    "email": "sa-1-claude_service_account",
+    "role": "none",
+    "username": "sa-1-claude_service_account"
+  }
+}

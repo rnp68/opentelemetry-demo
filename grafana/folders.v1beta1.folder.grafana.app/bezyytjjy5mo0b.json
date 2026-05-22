@@ -1,0 +1,15 @@
+{
+  "apiVersion": "folder.grafana.app/v1beta1",
+  "kind": "Folder",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "k6-app"
+    },
+    "labels": {},
+    "name": "bezyytjjy5mo0b",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "title": "BCP test"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "apiVersion": "rules.alerting.grafana.app/v0alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/provenance": "",
+      "grafana.com/updateTimestamp": "2026-02-06T13:44:39Z",
+      "grafana.com/updatedBy": "bfbazndswqry8e"
+    },
+    "labels": {
+      "grafana.app/folder": "ee6qllfxlq41sb",
+      "grafana.com/group": "Test-Evaluation-group",
+      "grafana.com/group-index": "4"
+    },
+    "name": "eebhoz0j0p7uoe",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "grafana-ml-forecast-id": "cea6e9f4-065b-4333-ad81-ad27ade343be",
+      "grafana-ml-forecast-metric": "sitwifi_forecast_test",
+      "grafana-ml-forecast-name": "SitWiFi-Forecast-test",
+      "grafana-ml-forecast-url": "https://ramironagles.grafana.net/a/grafana-ml-app/metric-forecast/cea6e9f4-065b-4333-ad81-ad27ade343be",
+      "summary": "Forecast-test (Grafana ML) - Alert Rule"
+    },
+    "execErrState": "Error",
+    "expressions": {
+      "A": {
+        "datasourceUID": "grafanacloud-ml-metrics",
+        "model": {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "grafanacloud-ml-metrics"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sitwifi_forecast_test:anomalous",
+          "instant": true,
+          "intervalMs": 1000,
+          "legendFormat": "",
+          "maxDataPoints": 43200,
+          "range": false,
+          "refId": "A"
+        },
+        "relativeTimeRange": {
+          "from": "20m0s",
+          "to": "0s"
+        },
+        "source": true
+      }
+    },
+    "labels": {
+      "service_name": "web_app_3",
+      "team_name": "NOC"
+    },
+    "noDataState": "NoData",
+    "paused": true,
+    "title": "Forecast-test (Grafana ML)",
+    "trigger": {
+      "interval": "1m"
+    }
+  }
+}

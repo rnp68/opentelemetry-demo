@@ -1,0 +1,59 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "650a0af8-eb75-5469-9198-2db709c70542",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alerts": [
+      {
+        "activeAt": "2026-04-15T07:39:50Z",
+        "annotations": {
+          "datasource_uid": "grafanacloud-prom",
+          "description": "NTP time offset for instance [no value] is greater than 1 second. Offset is  sec.",
+          "ref_id": "query",
+          "summary": "NTP time offset is too large."
+        },
+        "labels": {
+          "__converted_prometheus_rule__": "true",
+          "alertname": "WindowsNTPTimeOffset",
+          "asserts_alert_category": "failure",
+          "asserts_entity_type": "Node",
+          "asserts_severity": "warning",
+          "datasource_uid": "grafanacloud-prom",
+          "grafana_folder": "Integration - Windows Exporter",
+          "ref_id": "query",
+          "severity": "warning"
+        },
+        "state": "Normal (NoData)",
+        "value": ""
+      }
+    ],
+    "annotations": {
+      "description": "NTP time offset for instance {{ $labels.instance }} is greater than 1 second. Offset is {{ $value }} sec.",
+      "summary": "NTP time offset is too large."
+    },
+    "evaluationTime": 0.015275979,
+    "folderUid": "integration---windows-exporter",
+    "health": "ok",
+    "isPaused": false,
+    "labels": {
+      "__converted_prometheus_rule__": "true",
+      "asserts_alert_category": "failure",
+      "asserts_entity_type": "Node",
+      "asserts_severity": "warning",
+      "severity": "warning"
+    },
+    "lastEvaluation": "2026-05-22T00:31:50Z",
+    "name": "WindowsNTPTimeOffset",
+    "queriedDatasourceUIDs": [
+      "grafanacloud-prom"
+    ],
+    "query": "(windows_time_computed_time_offset_seconds{job=~\"integrations/windows_exporter\"}) \u003e 1\n",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "apiVersion": "prometheus.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "fe6l0chiwsu80e",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "jsonData": {
+      "enableSecureSocksProxy": true,
+      "httpMethod": "POST",
+      "prometheusType": "Mimir",
+      "prometheusVersion": "2.3.0",
+      "secureSocksProxyUsername": "0d1c8230-864b-4de7-9242-a796ddb064fc"
+    },
+    "title": "prometheus-1",
+    "url": "http://172.20.0.3:9090"
+  }
+}

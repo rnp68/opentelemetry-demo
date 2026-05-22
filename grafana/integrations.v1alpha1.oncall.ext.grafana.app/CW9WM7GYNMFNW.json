@@ -1,0 +1,17 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Integration",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "CW9WM7GYNMFNW",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "integration": "direct_paging",
+    "integration_url": "https://oncall-prod-us-central-0.grafana.net/oncall/integrations/v1/direct_paging/DHFB38yLLYnCzi3ZjNvdvOpry/",
+    "labels": [],
+    "team": "T4B9LRMF8U9I9",
+    "verbal_name": "Direct paging (NOC team)"
+  }
+}

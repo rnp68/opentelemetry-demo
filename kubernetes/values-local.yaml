@@ -1,0 +1,56 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Helm values for running the OpenTelemetry Demo on Docker Desktop Kubernetes.
+# Full mode — all services enabled (app + Jaeger, Prometheus, Grafana, OpenSearch).
+#
+# Usage:
+#   make local-k8s
+#   # or manually:
+#   helm upgrade --install opentelemetry-demo open-telemetry/opentelemetry-demo \
+#     --namespace otel-demo --create-namespace \
+#     -f kubernetes/values-local.yaml
+#
+# After deploy, access the demo:
+#   kubectl port-forward -n otel-demo svc/opentelemetry-demo-frontend-proxy 8080:8080
+#   open http://localhost:8080
+#
+# To view available values:
+#   helm show values open-telemetry/opentelemetry-demo
+
+# Use ClusterIP for frontend-proxy — access via kubectl port-forward
+# NOTE: chart renamed `frontendProxy` → `frontend-proxy` (kebab-case) in recent versions.
+components:
+  frontend-proxy:
+    service:
+      type: ClusterIP
+
+# Keep all backends enabled (default). This section is here as a reference —
+# set any of these to false to disable a backend.
+# jaeger:
+#   enabled: true
+# prometheus:
+#   enabled: true
+# grafana:
+#   enabled: true
+# opensearch:
+#   enabled: true
+
+# Forward all signals to Grafana Cloud via Alloy receiver in grafana-k8s-monitoring namespace.
+opentelemetry-collector:
+  config:
+    exporters:
+      otlp/alloy:
+        endpoint: grafana-k8s-monitoring-alloy-receiver.grafana-k8s-monitoring.svc.cluster.local:4317
+        sending_queue:
+          batch: null
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          exporters: [otlp/jaeger, otlp/alloy, debug, spanmetrics]
+        metrics:
+          exporters: [otlphttp/prometheus, otlp/alloy, debug]
+        logs:
+          exporters: [opensearch, otlp/alloy, debug]

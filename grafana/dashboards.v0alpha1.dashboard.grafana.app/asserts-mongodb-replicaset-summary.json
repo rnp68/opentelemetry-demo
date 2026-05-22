@@ -1,0 +1,2293 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts-mongodb-replicaset-summary",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.0.0-85820.patch2-86140"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "table",
+        "name": "Table",
+        "type": "panel",
+        "version": ""
+      },
+      {
+        "id": "text",
+        "name": "Text",
+        "type": "panel",
+        "version": ""
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": false,
+          "iconColor": "#e0752d",
+          "limit": 100,
+          "matchAny": true,
+          "name": "PMM Annotations",
+          "showIn": 0,
+          "tags": [
+            "pmm_annotation",
+            "$service_name"
+          ],
+          "target": {
+            "limit": 100,
+            "matchAny": true,
+            "tags": [
+              "pmm_annotation",
+              "$service_name"
+            ],
+            "type": "tags"
+          },
+          "type": "tags"
+        },
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "#6ed0e0",
+          "limit": 100,
+          "name": "Annotations \u0026 Alerts",
+          "showIn": 0,
+          "tags": [],
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 1,
+    "links": [
+      {
+        "asDropdown": true,
+        "includeVars": true,
+        "keepTime": true,
+        "tags": [
+          "MongoDB"
+        ],
+        "targetBlank": false,
+        "title": "MongoDB",
+        "type": "dashboards"
+      },
+      {
+        "asDropdown": true,
+        "includeVars": true,
+        "keepTime": true,
+        "tags": [
+          "MongoDB_HA"
+        ],
+        "targetBlank": false,
+        "title": "HA",
+        "type": "dashboards"
+      }
+    ],
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1022,
+        "panels": [],
+        "title": "Overview",
+        "type": "row"
+      },
+      {
+        "description": "",
+        "gridPos": {
+          "h": 3,
+          "w": 5,
+          "x": 0,
+          "y": 1
+        },
+        "id": 1228,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "\u003ch5 style='color:#e68a00;font-weight:bold;text-align:center'\u003e\u003ca href=\"/d/asserts-mongodb-cluster-summary/mongodb-cluster-summary?var-cluster=$current_cluster\" target=\"_blank\"\u003e$current_cluster\u003c/a\u003e\u003c/h5\u003e",
+          "mode": "html"
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "title": "Cluster Name",
+        "type": "text"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "This shows how many members are configured in the replica set.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "rgb(31, 120, 193)",
+              "mode": "fixed"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 4,
+          "x": 5,
+          "y": 1
+        },
+        "id": 59,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "count by (set) (mongodb_mongod_replset_number_of_members{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=~\"$replset\"} or mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=~\"$replset\"})",
+            "interval": "5m",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "metric": "",
+            "refId": "A",
+            "step": 300
+          }
+        ],
+        "title": "ReplSet Members",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "This shows the time since the last election.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "rgb(31, 120, 193)",
+              "mode": "fixed"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 4,
+          "x": 9,
+          "y": 1
+        },
+        "id": 1227,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "time() - max(mongodb_mongod_replset_member_election_date{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "interval": "5m",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "metric": "",
+            "refId": "A",
+            "step": 300
+          }
+        ],
+        "title": "ReplSet Last Election",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "This panel shows how far behind in replication this member is if it is a secondary. This number may be high it the instance is running as a delayed secondary member.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "rgb(31, 120, 193)",
+              "mode": "fixed"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 4,
+          "x": 13,
+          "y": 1
+        },
+        "hideTimeOverride": true,
+        "id": 77,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": false,
+            "expr": "avg by (set) (max_over_time(mongodb_mongod_replset_member_replication_lag{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=\"$replset\",service_name=~\"$service_name\"}[$__rate_interval])) ",
+            "format": "time_series",
+            "hide": false,
+            "instant": true,
+            "interval": "$interval",
+            "legendFormat": "",
+            "refId": "B"
+          }
+        ],
+        "timeFrom": "1m",
+        "title": "Avg ReplSet Lag",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "custom.hidden",
+                  "value": true
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "service_name"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Service Name"
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "links",
+                  "value": [
+                    {
+                      "targetBlank": true,
+                      "title": "MongoDB Instance Summary - ${__cell}",
+                      "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__cell}"
+                    }
+                  ]
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "mongodb"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Version"
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.hidden",
+                  "value": true
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 7,
+          "x": 17,
+          "y": 1
+        },
+        "hideTimeOverride": true,
+        "id": 78,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": false,
+            "expr": "avg by (service_name,engine) (mongodb_mongod_storage_engine{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "format": "table",
+            "hide": true,
+            "instant": true,
+            "interval": "5m",
+            "intervalFactor": 1,
+            "legendFormat": "{{ engine }}",
+            "metric": "",
+            "refId": "A",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": false,
+            "expr": "avg by (service_name,mongodb) (mongodb_version_info{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "format": "table",
+            "instant": true,
+            "interval": "5m",
+            "legendFormat": "{{mongodb}}",
+            "refId": "B"
+          }
+        ],
+        "timeFrom": "1m",
+        "title": "MongoDB Versions",
+        "type": "table"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 4
+        },
+        "id": 1024,
+        "panels": [],
+        "title": "Replication Lag",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "MongoDB replication lag occurs when the secondary node cannot replicate data fast enough to keep up with the rate that data is being written to the primary node. It could be caused by something as simple as network latency, packet loss within your network, or a routing issue.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__series.name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__series.name}$\u0026$__url_time_range"
+              }
+            ],
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Avg"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#C4162A",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.stacking",
+                  "value": {
+                    "group": "A",
+                    "mode": "none"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 5
+        },
+        "id": 14,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "mean",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name) (max(max_over_time(mongodb_mongod_replset_member_replication_lag{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=\"$replset\",service_name=~\"$secondary\"}[$interval]) \u003e 0) by (service_name,set) or max(max_over_time(mongodb_mongod_replset_member_replication_lag{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=\"$replset\",service_name=~\"$secondary\"}[5m]) \u003e 0) by (service_name,set))",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{service_name}}",
+            "refId": "A",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (set) (max(max_over_time(mongodb_mongod_replset_member_replication_lag{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=\"$replset\",service_name=~\"$secondary\"}[$interval]) \u003e 0) by (service_name,set) or max(max_over_time(mongodb_mongod_replset_member_replication_lag{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=\"$replset\",service_name=~\"$secondary\"}[5m]) \u003e 0) by (service_name,set))",
+            "hide": true,
+            "interval": "$interval",
+            "legendFormat": "Avg",
+            "refId": "B"
+          }
+        ],
+        "title": "Replication Lag",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 13
+        },
+        "id": 1019,
+        "panels": [],
+        "title": "Operations",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "Operations are classified by legacy wire protocol type (insert, update, and delete only).",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__field.labels.service_name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__field.labels.service_name}\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 14
+        },
+        "id": 1020,
+        "links": [
+          {
+            "targetBlank": true,
+            "title": "MongoDB Instance Summary - $service_name",
+            "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=$service_name$__url_time_range"
+          }
+        ],
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "service_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name,type) (rate(mongodb_op_counters_repl_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_op_counters_repl_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "repl - {{type}}",
+            "refId": "A",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name,type) (rate(mongodb_mongod_op_counters_repl_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "legendFormat": "repl - {{type}}",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name,type) (rate(mongodb_op_counters_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_op_counters_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "legendFormat": "{{type}}",
+            "refId": "C"
+          }
+        ],
+        "title": "Operations - $service_name",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 22
+        },
+        "id": 1170,
+        "panels": [],
+        "title": "Max Member Ping Time",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "This metric can show a correlation with the replication lag value.",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__field.labels.service_name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__field.labels.service_name}\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 23
+        },
+        "id": 13,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "service_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name,name,state) (mongodb_mongod_replset_member_ping_ms{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})\n* on (name) group_right(state) avg by (service_name,state,name) ((max_over_time(mongodb_mongod_replset_my_name[$interval]) or max_over_time(mongodb_mongod_replset_my_name[5m])))",
+            "format": "time_series",
+            "hide": true,
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{service_name}} - {{name}} - {{state}}",
+            "refId": "A",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "max by (service_name,name,state) (mongodb_mongod_replset_member_ping_ms{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=~\"$replset\",service_name=~\"$service_name\"}) or mongodb_rs_members_pingMs{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\", member_state!=\"\"}",
+            "hide": true,
+            "interval": "$interval",
+            "legendFormat": "{{service_name}} - {{name}} - {{state}}",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "max by (service_name,name,state) (mongodb_mongod_replset_member_ping_ms{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=~\"$replset\",service_name=~\"$service_name\"} or label_replace(label_replace(mongodb_rs_members_pingMs{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\", member_state!=\"\"},\"state\", \"$1\", \"member_state\", \"(.*)\"),\"name\", \"$1\", \"member_idx\", \"(.*)\"))",
+            "interval": "$interval",
+            "legendFormat": "{{service_name}} - {{name}}{{member_idx}} - {{state}}{{member_state}}",
+            "refId": "D"
+          }
+        ],
+        "title": "Max Member Ping Time - $service_name",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 31
+        },
+        "id": 1017,
+        "panels": [],
+        "title": "Max Heartbeat Time / Elections",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "Time span between now and last heartbeat from replicaset members.",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__series.name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__series.name}$\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 32
+        },
+        "id": 75,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "time() - avg by (service_name) (max(mongodb_mongod_replset_member_last_heartbeat{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}) by (name)) * on (name) group_right avg by (service_name) (mongodb_mongod_replset_my_name{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "hide": false,
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{service_name}}",
+            "metric": "",
+            "refId": "J",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name) (max(mongodb_rs_heartbeatIntervalMillis{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}) by (name) / 1000) * on (name) group_right avg by (service_name) (mongodb_mongod_replset_my_name{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "hide": true,
+            "interval": "$interval",
+            "legendFormat": "Interval - {service_name}}",
+            "refId": "B"
+          }
+        ],
+        "title": "Max Heartbeat Time",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Count of elections. Usually zero; 1 count by each healthy node will appear in each election. Happens when the primary role changes due to either normal maintenance or trouble events.",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__series.name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__series.name}$\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 32
+        },
+        "id": 12,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "max by (service_name) (changes(mongodb_mongod_replset_member_election_date{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]))",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{service_name}}",
+            "refId": "A",
+            "step": 300
+          }
+        ],
+        "title": "Elections",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 40
+        },
+        "id": 1547,
+        "panels": [],
+        "title": "Oplog Recovery Window",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Timespan 'window' between newest and the oldest op in the Oplog collection.",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__field.labels.service_name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__field.labels.service_name}\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 41
+        },
+        "id": 27,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "service_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "time()-avg by (service_name) (mongodb_mongod_replset_oplog_tail_timestamp{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "hide": false,
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Now to End",
+            "metric": "",
+            "refId": "J",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name) (mongodb_mongod_replset_oplog_head_timestamp{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}-mongodb_mongod_replset_oplog_tail_timestamp{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "hide": false,
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Oplog Range",
+            "metric": "",
+            "refId": "A",
+            "step": 300
+          }
+        ],
+        "title": "Oplog Recovery Window - $service_name",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 49
+        },
+        "id": 1070,
+        "panels": [],
+        "title": "Oplog Details",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "Repl buffer ops applied per sec.",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__series.name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__series.name}$\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 50
+        },
+        "id": 85,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name) (mongodb_mongod_metrics_repl_buffer_count{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{service_name}}",
+            "refId": "A",
+            "step": 300
+          }
+        ],
+        "title": "Oplog Buffered Operations",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "Time spent per second waiting for or fetching oplog docs in replication.",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__series.name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__series.name}$\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 50
+        },
+        "id": 79,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name) (rate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_mongod_metrics_repl_network_getmores_total_milliseconds{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{service_name}}",
+            "refId": "A",
+            "step": 300
+          }
+        ],
+        "title": "Oplog Getmore Time",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "Times spent per second A) pre-loading oplog ops into parallel-executable batches B) Times spent pre-loading index values and C) repl batch apply phase.",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__field.labels.service_name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__field.labels.service_name}\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 58
+        },
+        "id": 84,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "service_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name) (rate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_total_milliseconds{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Document Preload",
+            "refId": "A",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name) (rate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Index Preload",
+            "metric": "mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds",
+            "refId": "B",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name) (rate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_batches_total_milliseconds{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Batch Apply",
+            "metric": "mongodb_mongod_metrics_repl_preload_indexes_total_milliseconds",
+            "refId": "C",
+            "step": 300
+          }
+        ],
+        "title": "Oplog Processing Time - $service_name",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "Current hard-coded max and actual size of repl batch buffer.",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__field.labels.service_name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__field.labels.service_name}\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 66
+        },
+        "id": 80,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "service_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name) (mongodb_mongod_metrics_repl_buffer_size_bytes{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Used",
+            "refId": "A",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name) (mongodb_mongod_metrics_repl_buffer_max_size_bytes{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Max",
+            "refId": "B",
+            "step": 300
+          }
+        ],
+        "title": "Oplog Buffer Capacity - $service_name",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Count of A) getmores executed B) index values pre-loaded C) oplog docs applied per second against oplog collection in replication.",
+        "fieldConfig": {
+          "defaults": {
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "MongoDB Instance Summary - ${__field.labels.service_name}",
+                "url": "/d/asserts-mongodb-instance-summary/mongodb-instance-summary?var-service_name=${__field.labels.service_name}\u0026$__url_time_range"
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 74
+        },
+        "id": 81,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "service_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name) (rate(mongodb_mongod_metrics_repl_preload_docs_num_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_docs_num_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Document Preload",
+            "metric": "mongodb_mongod_metrics_repl_preload_indexes_num_total",
+            "refId": "A",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name) (rate(mongodb_mongod_metrics_repl_preload_indexes_num_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_mongod_metrics_repl_preload_indexes_num_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Index Preload",
+            "metric": "mongodb_mongod_metrics_repl_preload_indexes_num_total",
+            "refId": "B",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name) (rate(mongodb_mongod_metrics_repl_apply_ops_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_mongod_metrics_repl_apply_ops_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "interval": "$interval",
+            "intervalFactor": 2,
+            "legendFormat": "Batch Apply",
+            "refId": "C",
+            "step": 120
+          }
+        ],
+        "title": "Oplog Operations - $service_name",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 82
+        },
+        "id": 1306,
+        "panels": [],
+        "title": "MongoDB Services Summary",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Average latency of operations (classified by read, write, or (other) command).",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 83
+        },
+        "id": 1558,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "service_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name,type) (rate(mongodb_mongod_op_latencies_latency_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) / (rate(mongodb_mongod_op_latencies_ops_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) \u003e 0) or irate(mongodb_mongod_op_latencies_latency_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]) / (irate(mongodb_mongod_op_latencies_ops_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]) \u003e 0))",
+            "format": "time_series",
+            "hide": false,
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{type}}",
+            "refId": "J",
+            "step": 300
+          }
+        ],
+        "title": "Latency Detail - $service_name",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "Docs per second inserted, updated, deleted or returned. (N.b. not 1-to-1 with operation counts.)",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 91
+        },
+        "id": 1397,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "service_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name,state) (rate(mongodb_mongod_metrics_document_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or \nirate(mongodb_mongod_metrics_document_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m]))",
+            "format": "time_series",
+            "hide": false,
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{state}}",
+            "refId": "J",
+            "step": 300
+          }
+        ],
+        "title": "Document Operations - $service_name",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "MongoDB keeps most recently used data in RAM. If you have created indexes for your queries and your working data set fits in RAM, MongoDB serves all queries from memory.",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 99
+        },
+        "id": 1012,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "service_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "rate(mongodb_tcmalloc_cache_bytes{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[$interval]) or irate(mongodb_tcmalloc_cache_bytes{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}[5m])",
+            "format": "time_series",
+            "hide": false,
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{cache}} - {{type}}",
+            "refId": "J",
+            "step": 300
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name) (mongodb_ss_tcmalloc_tcmalloc_thread_cache_free_bytes{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "interval": "$interval",
+            "legendFormat": "Free Thread Cache",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (service_name) (mongodb_ss_tcmalloc_tcmalloc_central_cache_free_bytes{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "interval": "$interval",
+            "legendFormat": "Free Central Cache",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by (service_name) (mongodb_ss_tcmalloc_tcmalloc_transfer_cache_free_bytes{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"})",
+            "interval": "$interval",
+            "legendFormat": "Free Transfer Cache",
+            "refId": "C"
+          }
+        ],
+        "title": "Cache - $service_name",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 107
+        },
+        "id": 1403,
+        "panels": [],
+        "title": "Nodes Summary",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "The CPU time is measured in clock ticks or seconds. It is useful to measure CPU time as a percentage of the CPU's capacity, which is called the CPU usage.",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 108
+        },
+        "id": 337,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "node_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "clamp_max(((avg by (mode) ( (clamp_max(rate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode!=\"idle\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode!=\"idle\"}[5m]),1)) ))*100 or (avg_over_time(node_cpu_average{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\", mode!=\"total\", mode!=\"idle\"}[$interval]) or avg_over_time(node_cpu_average{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\", mode!=\"total\", mode!=\"idle\"}[5m]))),100)",
+            "format": "time_series",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "{{ mode }}",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "clamp_max(max by () (sum  by (cpu) ( (clamp_max(rate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode!=\"idle\",mode!=\"iowait\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode!=\"idle\",mode!=\"iowait\"}[5m]),1)) )),1)",
+            "format": "time_series",
+            "hide": true,
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Max Core Utilization",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "exemplar": true,
+            "expr": "clamp_max(avg(rate(container_cpu_system_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=~\"$node_name\",id=~\"/kubepods.*\",container!~\"POD|pmm-client|\"}[$interval])) or \n((avg by () ((clamp_max(rate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode=\"system\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode=\"system\"}[5m]),1)) ))*100 or \n(avg_over_time(node_cpu_average{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\", mode=\"system\"}[$interval]) or \navg_over_time(node_cpu_average{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\", mode=\"system\"}[5m]))),100)",
+            "hide": false,
+            "interval": "$interval",
+            "legendFormat": "system",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "exemplar": true,
+            "expr": "clamp_max(avg(rate(container_cpu_user_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=~\"$node_name\",id=~\"/kubepods.*\",container!~\"POD|pmm-client|\"}[$interval])) or \n((avg by () ((clamp_max(rate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode=\"user\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode=\"user\"}[5m]),1)) ))*100 or \n(avg_over_time(node_cpu_average{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\", mode=\"user\"}[$interval]) or \navg_over_time(node_cpu_average{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\", mode=\"user\"}[5m]))),100)",
+            "hide": false,
+            "interval": "$interval",
+            "legendFormat": "user",
+            "refId": "D"
+          }
+        ],
+        "title": "CPU Usage - $node_name",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "description": "When a system is running with maximum CPU utilization, the transmitting and receiving threads must all share the available CPU. This will cause data to be queued more frequently to cope with the lack of CPU. CPU Saturation may be measured as the length of a wait queue, or the time spent waiting on the queue.",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 116
+        },
+        "id": 339,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "node_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "calculatedInterval": "2s",
+            "datasource": {
+              "uid": "$ds"
+            },
+            "datasourceErrors": {},
+            "errors": {},
+            "expr": "((sum(avg_over_time(container_processes{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=~\"$node_name\",id=~\"/kubepods.*\",container!~\"POD|pmm-client|\"}[$interval]))-1) / avg by () (machine_cpu_cores)) or\navg by () ((avg_over_time(node_procs_running{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\"}[$interval])-1) / scalar(count(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", mode=\"user\", node_name=~\"$node_name\"})) or (avg_over_time(node_procs_running{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\"}[5m])-1) / scalar(count(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", mode=\"user\", node_name=~\"$node_name\"})))",
+            "format": "time_series",
+            "hide": false,
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Normalized CPU Load",
+            "metric": "",
+            "refId": "B",
+            "step": 300,
+            "target": ""
+          },
+          {
+            "calculatedInterval": "2s",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "datasourceErrors": {},
+            "errors": {},
+            "expr": "clamp_max(sum(rate(container_cpu_usage_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=~\"$node_name\",id=~\"/kubepods.*\",container!~\"POD|pmm-client|\"}[$interval]) or rate(container_cpu_usage_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\",container!~\"POD|pmm-client|\"}[5m])) or\nmax by () (sum  by (cpu) ( (clamp_max(rate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode!=\"idle\",mode!=\"iowait\"}[$interval]),1)) or (clamp_max(irate(node_cpu_seconds_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=~\"$node_name\",mode!=\"idle\",mode!=\"iowait\"}[5m]),1)) )),1)",
+            "format": "time_series",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Max CPU Core Utilization",
+            "metric": "",
+            "refId": "A",
+            "step": 300,
+            "target": ""
+          }
+        ],
+        "title": "CPU Saturation and Max Core Usage - $node_name",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "Disk I/O includes read or write or input/output operations involving a physical disk. It is the speed with which the data transfer takes place between the hard disk drive and RAM.\n\nSwap Activity is memory management that involves swapping sections of memory to and from physical storage.",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 124
+        },
+        "id": 341,
+        "links": [
+          {
+            "targetBlank": true,
+            "title": "Disk Performance",
+            "url": "/d/asserts-node-disk/disk-details?$__url_time_range\u0026$__all_variables"
+          }
+        ],
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "node_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "calculatedInterval": "2s",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "datasourceErrors": {},
+            "errors": {},
+            "expr": "avg by () (sum(rate(container_fs_reads_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\"}[5s]) or irate(container_fs_reads_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\"}[5s]))) or\navg by () (rate(node_vmstat_pgpgin{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[$interval]) * 1024 or irate(node_vmstat_pgpgin{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[5m]) * 1024)",
+            "format": "time_series",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Disk Reads (Page In)",
+            "metric": "",
+            "refId": "A",
+            "step": 300,
+            "target": ""
+          },
+          {
+            "calculatedInterval": "2s",
+            "datasource": {
+              "uid": "$ds"
+            },
+            "datasourceErrors": {},
+            "errors": {},
+            "expr": "avg by () (sum(rate(container_fs_writes_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\"}[5s]) or irate(container_fs_writes_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\"}[5s]))) or\navg by () ((rate(node_vmstat_pgpgout{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[$interval]) * 1024 or irate(node_vmstat_pgpgout{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[5m]) * 1024))",
+            "format": "time_series",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Disk Writes (Page Out)",
+            "metric": "",
+            "refId": "B",
+            "step": 300,
+            "target": ""
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by () (sum(rate(container_fs_reads_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\"}[5s]) or irate(container_fs_reads_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\"}[5s]))) + \navg by () (sum(rate(container_fs_writes_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\"}[5s]) or irate(container_fs_writes_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\"}[5s]))) or \navg  by () ((rate(node_vmstat_pgpgin{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[$interval]) * 1024 or irate(node_vmstat_pgpgin{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[5m]) * 1024 ) + (rate(node_vmstat_pgpgout{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[$interval]) * 1024 or irate(node_vmstat_pgpgout{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[5m]) * 1024))",
+            "format": "time_series",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Total",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "avg by (node_name) (rate(node_vmstat_pswpin{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[$interval]) * 4096 or irate(node_vmstat_pswpin{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[5m]) * 4096)",
+            "format": "time_series",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Swap In (Reads)",
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "avg by () (rate(container_memory_swap{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\",container!~\"POD|pmm-client|\"}[$interval]) or \nirate(container_memory_swap{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods.*\",container!~\"POD|pmm-client|\"}[5s])) or \navg by () (rate(node_vmstat_pswpout{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[$interval]) * 4096 or \nirate(node_vmstat_pswpout{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\"}[5m]) * 4096)",
+            "format": "time_series",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Swap Out (Writes)",
+            "refId": "E"
+          }
+        ],
+        "title": "Disk I/O and Swap Activity - $node_name",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "description": "Network traffic refers to the amount of data moving across a network at a given point in time.",
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 132
+        },
+        "id": 343,
+        "options": {
+          "alertThreshold": true
+        },
+        "pluginVersion": "7.5.11",
+        "repeat": "node_name",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "calculatedInterval": "2s",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "datasourceErrors": {},
+            "errors": {},
+            "expr": "sum(rate(container_network_receive_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods/.*\"}[$interval]) or \nirate(container_network_receive_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods/.*\"}[5m])) or\nsum(rate(node_network_receive_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\", device!=\"lo\"}[$interval])) or \nsum(irate(node_network_receive_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\", device!=\"lo\"}[5m]))",
+            "format": "time_series",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Inbound",
+            "metric": "",
+            "refId": "B",
+            "step": 300,
+            "target": ""
+          },
+          {
+            "calculatedInterval": "2s",
+            "datasource": {
+              "uid": "$ds"
+            },
+            "datasourceErrors": {},
+            "errors": {},
+            "expr": "sum(rate(container_network_transmit_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods/.*\"}[$interval]) or \nirate(container_network_transmit_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", node_name=\"$node_name\",id=~\"/kubepods/.*\"}[5m])) or \nsum(rate(node_network_transmit_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\", device!=\"lo\"}[$interval])) or \nsum(irate(node_network_transmit_bytes_total{asserts_env=~\"$env\", asserts_site=~\"$site\", node_name=\"$node_name\", device!=\"lo\"}[5m]))",
+            "format": "time_series",
+            "interval": "$interval",
+            "intervalFactor": 1,
+            "legendFormat": "Outbound",
+            "metric": "",
+            "refId": "A",
+            "step": 300,
+            "target": ""
+          }
+        ],
+        "title": "Network Traffic - $node_name",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "1m",
+    "schemaVersion": 41,
+    "tags": [
+      "MongoDB_HA",
+      "Percona"
+    ],
+    "templating": {
+      "list": [
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mongodb_up, asserts_env)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(mongodb_up, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mongodb_up{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(mongodb_up{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mongodb_up{asserts_env=~\"$env\", asserts_site=~\"$site\"}, namespace)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(mongodb_up{asserts_env=~\"$env\", asserts_site=~\"$site\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "auto": true,
+          "auto_count": 200,
+          "auto_min": "1s",
+          "current": {
+            "text": "$__auto",
+            "value": "$__auto"
+          },
+          "label": "Interval",
+          "name": "interval",
+          "options": [
+            {
+              "selected": false,
+              "text": "1s",
+              "value": "1s"
+            },
+            {
+              "selected": false,
+              "text": "5s",
+              "value": "5s"
+            },
+            {
+              "selected": false,
+              "text": "1m",
+              "value": "1m"
+            },
+            {
+              "selected": false,
+              "text": "5m",
+              "value": "5m"
+            },
+            {
+              "selected": false,
+              "text": "1h",
+              "value": "1h"
+            },
+            {
+              "selected": false,
+              "text": "6h",
+              "value": "6h"
+            },
+            {
+              "selected": false,
+              "text": "1d",
+              "value": "1d"
+            }
+          ],
+          "query": "1s,5s,1m,5m,1h,6h,1d",
+          "refresh": 2,
+          "type": "interval"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mongodb_up{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\"}, cluster)",
+          "includeAll": true,
+          "label": "Cluster",
+          "name": "cluster",
+          "options": [],
+          "query": {
+            "query": "label_values(mongodb_up{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\"}, cluster)",
+            "refId": "Metrics-cluster-Variable-Query"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", cluster=~\"$cluster\"}, set)",
+          "includeAll": false,
+          "label": "Replica Set",
+          "name": "replset",
+          "options": [],
+          "query": {
+            "query": "label_values(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", cluster=~\"$cluster\"}, set)",
+            "refId": "Metrics-replset-Variable-Query"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}, node_name)",
+          "hide": 2,
+          "includeAll": true,
+          "label": "Node Name",
+          "name": "node_name",
+          "options": [],
+          "query": {
+            "query": "label_values(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", service_name=~\"$service_name\"}, node_name)",
+            "refId": "Metrics-node_name-Variable-Query"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", cluster=~\"$cluster\",set=\"$replset\"}, service_name)",
+          "includeAll": true,
+          "label": "Service Name",
+          "multi": true,
+          "name": "service_name",
+          "options": [],
+          "query": {
+            "query": "label_values(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", cluster=~\"$cluster\",set=\"$replset\"}, service_name)",
+            "refId": "Metrics-service_name-Variable-Query"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=~\"$replset\"},cluster)",
+          "hide": 2,
+          "includeAll": false,
+          "label": "Cluster",
+          "name": "current_cluster",
+          "options": [],
+          "query": {
+            "query": "label_values(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", set=~\"$replset\"},cluster)",
+            "refId": "Metrics-current_cluster-Variable-Query"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "query_result(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", cluster=~\"$cluster\",set=\"$replset\"}==2)",
+          "hide": 2,
+          "includeAll": true,
+          "label": "Secondary",
+          "multi": true,
+          "name": "secondary",
+          "options": [],
+          "query": {
+            "query": "query_result(mongodb_mongod_replset_my_state{asserts_env=~\"$env\", asserts_site=~\"$site\", namespace=\"$namespace\", cluster=~\"$cluster\",set=\"$replset\"}==2)",
+            "refId": "Metrics-secondary-Variable-Query"
+          },
+          "refresh": 2,
+          "regex": "/.*service_name=\"(.*)\",service_type.*/",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-12h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "MongoDB ReplSet Summary",
+    "weekStart": ""
+  }
+}

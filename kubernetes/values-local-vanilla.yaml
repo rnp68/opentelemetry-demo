@@ -1,0 +1,81 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Helm values for running the OpenTelemetry Demo on Docker Desktop Kubernetes
+# in "vanilla" mode — app services only, no local observability backends.
+# OTel SDKs remain ENABLED. Telemetry is accepted by a noop collector and dropped.
+#
+# Use this as a clean test bed for following Grafana Cloud + Alloy K8s
+# instrumentation procedures from scratch.
+#
+# Usage:
+#   make local-k8s-vanilla
+#   # or manually:
+#   helm upgrade --install opentelemetry-demo open-telemetry/opentelemetry-demo \
+#     --namespace otel-demo --create-namespace \
+#     -f kubernetes/values-local.yaml \
+#     -f kubernetes/values-local-vanilla.yaml
+#
+# After deploy, access the demo:
+#   kubectl port-forward -n otel-demo svc/opentelemetry-demo-frontend-proxy 8080:8080
+#   open http://localhost:8080
+#
+# To wire telemetry to Alloy once you have it configured:
+#   1. Deploy Alloy in the cluster using the Grafana Cloud Kubernetes Helm chart.
+#   2. In this file, replace the opentelemetry-collector config below to forward
+#      to your Alloy service, e.g.:
+#        exporters:
+#          otlp/alloy:
+#            endpoint: "alloy.otel-demo.svc.cluster.local:4317"
+#            tls:
+#              insecure: true
+#   3. Run: helm upgrade opentelemetry-demo open-telemetry/opentelemetry-demo \
+#              --namespace otel-demo \
+#              -f kubernetes/values-local.yaml \
+#              -f kubernetes/values-local-vanilla.yaml
+
+# ── Disable local observability backends ─────────────────────────────────────
+
+jaeger:
+  enabled: false
+
+prometheus:
+  enabled: false
+
+grafana:
+  enabled: false
+
+opensearch:
+  enabled: false
+
+# ── OTel Collector: noop config ───────────────────────────────────────────────
+# Accepts all OTLP traffic from app services and drops it via the debug exporter.
+# Replace exporters and pipelines below when wiring to Alloy.
+
+opentelemetry-collector:
+  config:
+    exporters:
+      debug:
+        verbosity: basic
+      # NEW: forward to in-cluster Alloy receiver. No auth needed —
+      # cluster-internal HTTP, Alloy holds the Grafana Cloud creds.
+      otlphttp/alloy:
+        endpoint: http://grafana-k8s-monitoring-alloy-receiver.grafana-k8s-monitoring.svc.cluster.local:4318
+        tls:
+          insecure: true
+    connectors:
+      spanmetrics: null
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp, jaeger]
+          processors: [memory_limiter, batch]
+          exporters: [debug, otlphttp/alloy]      # ← keep debug for visibility, add alloy
+        metrics:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [debug, otlphttp/alloy]
+        logs:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [debug, otlphttp/alloy]

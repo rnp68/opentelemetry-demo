@@ -1,0 +1,27 @@
+{
+  "apiVersion": "grafanacloud-cardinality-datasource.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-cardinality-management",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "1789283",
+    "jsonData": {
+      "streamingEnabled": {
+        "search": true
+      },
+      "unusedMetrics": {
+        "metricsDataSourceUid": "grafanacloud-prom",
+        "proxyType": "insights"
+      }
+    },
+    "readOnly": true,
+    "title": "grafanacloud-ramironagles-cardinality-management",
+    "url": "https://insights-prod-us-east-0.grafana.net/usage/v1/metrics/1789283"
+  }
+}

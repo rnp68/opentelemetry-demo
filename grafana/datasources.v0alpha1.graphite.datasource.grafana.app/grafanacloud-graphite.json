@@ -1,0 +1,23 @@
+{
+  "apiVersion": "graphite.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-graphite",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "1789284",
+    "jsonData": {
+      "streamingEnabled": {
+        "search": true
+      }
+    },
+    "readOnly": true,
+    "title": "grafanacloud-ramironagles-graphite",
+    "url": "https://graphite-prod-13-prod-us-east-0.grafana.net/graphite"
+  }
+}

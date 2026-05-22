@@ -1,0 +1,26 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "eebe5xahjmscgc",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": null,
+    "evaluationTime": 0,
+    "folderUid": "ee6qllfxlq41sb",
+    "health": "ok",
+    "isPaused": true,
+    "labels": null,
+    "lastEvaluation": "0001-01-01T00:00:00Z",
+    "name": "Alert-Routing",
+    "queriedDatasourceUIDs": [
+      "fdxos61g0vyf4b"
+    ],
+    "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"fdxos61g0vyf4b\",\"model\":{\"csvContent\":\"device,views\\ndesktop,120\\nmobile,900\",\"datasource\":{\"type\":\"grafana-testdata-datasource\",\"uid\":\"fdxos61g0vyf4b\"},\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"A\",\"scenarioId\":\"csv_content\",\"seriesCount\":1}},{\"refId\":\"C\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[1000],\"type\":\"gt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[\"C\"]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"C\",\"type\":\"threshold\"}}]",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

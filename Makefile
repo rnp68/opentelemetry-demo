@@ -122,16 +122,39 @@ generate-kubernetes-manifests:
 	echo "  name: otel-demo" >> kubernetes/opentelemetry-demo.yaml
 	helm template opentelemetry-demo open-telemetry/opentelemetry-demo --namespace otel-demo | sed '/helm.sh\/chart\:/d' | sed '/helm.sh\/hook/d' | sed '/managed-by\: Helm/d' >> kubernetes/opentelemetry-demo.yaml
 
+# Set OTEL_ENABLED=false to run the demo with a noop OTel Collector (no telemetry collected).
+OTEL_ENABLED ?= true
+ifeq ($(OTEL_ENABLED),false)
+COMPOSE_OVERRIDE = -f docker-compose.no-otel.yml
+else
+COMPOSE_OVERRIDE =
+endif
+
 .PHONY: start
 start:
-	docker compose up --force-recreate --remove-orphans --detach
+	docker compose $(COMPOSE_OVERRIDE) up --force-recreate --remove-orphans --detach
 	@echo ""
 	@echo "OpenTelemetry Demo is running."
 	@echo "Go to http://localhost:8080 for the demo UI."
-	@echo "Go to http://localhost:8080/jaeger/ui for the Jaeger UI."
-	@echo "Go to http://localhost:8080/grafana/ for the Grafana UI."
+	@if [ "$(OTEL_ENABLED)" = "false" ]; then \
+		echo "OTel Collector is in NOOP mode — telemetry is accepted but dropped."; \
+		echo "Jaeger/Grafana are available but will show no data."; \
+	else \
+		echo "Go to http://localhost:8080/jaeger/ui for the Jaeger UI."; \
+		echo "Go to http://localhost:8080/grafana/ for the Grafana UI."; \
+	fi
 	@echo "Go to http://localhost:8080/loadgen/ for the Load Generator UI."
 	@echo "Go to https://opentelemetry.io/docs/demo/feature-flags/ to learn how to change feature flags."
+
+.PHONY: start-no-otel
+start-no-otel:
+	docker compose -f docker-compose.yml -f docker-compose.no-otel.yml up --force-recreate --remove-orphans --detach
+	@echo ""
+	@echo "OpenTelemetry Demo is running (OTel Collector DISABLED — noop mode)."
+	@echo "Go to http://localhost:8080 for the demo UI."
+	@echo "Go to http://localhost:8080/jaeger/ui for the Jaeger UI (no data)."
+	@echo "Go to http://localhost:8080/grafana/ for the Grafana UI (no data)."
+	@echo "Go to http://localhost:8080/loadgen/ for the Load Generator UI."
 
 .PHONY: start-minimal
 start-minimal:
@@ -159,7 +182,7 @@ start-odd:
 
 .PHONY: stop
 stop:
-	docker compose --profile tests --profile odd down --remove-orphans --volumes
+	docker compose -f docker-compose.yml -f docker-compose.no-otel.yml --profile tests --profile odd down --remove-orphans --volumes
 	@echo ""
 	@echo "OpenTelemetry Demo is stopped."
 
@@ -199,4 +222,41 @@ ifdef service
 else
 	@echo "Please provide a service name using `service=[service name]` or `SERVICE=[service name]`"
 endif
+
+.PHONY: local
+local: ## 1-click startup — Docker Compose full mode (all services)
+	@bash start-local.sh
+
+.PHONY: local-vanilla
+local-vanilla: ## Docker Compose vanilla — app only, no backends, clean slate for Alloy
+	@bash start-local.sh --vanilla
+
+.PHONY: local-stop
+local-stop: ## Stop and remove all Docker Compose services
+	@bash start-local.sh --stop
+
+.PHONY: local-k8s
+local-k8s: ## Docker Desktop K8s full mode (all services via Helm)
+	@bash start-local.sh --k8s
+
+.PHONY: local-k8s-vanilla
+local-k8s-vanilla: ## Docker Desktop K8s vanilla — app only, no backends, clean slate for Alloy
+	@bash start-local.sh --k8s-vanilla
+
+.PHONY: local-k8s-stop
+local-k8s-stop: ## Uninstall K8s Helm release and delete otel-demo namespace
+	@bash start-local.sh --k8s-stop
+
+.PHONY: deploy-aws
+deploy-aws:
+	@chmod +x ./scripts/deploy-aws.sh
+	@./scripts/deploy-aws.sh
+
+.PHONY: teardown-aws
+teardown-aws:
+	@chmod +x ./scripts/teardown-aws.sh
+	@./scripts/teardown-aws.sh
+
+.PHONY: destroy-aws
+destroy-aws: teardown-aws
 

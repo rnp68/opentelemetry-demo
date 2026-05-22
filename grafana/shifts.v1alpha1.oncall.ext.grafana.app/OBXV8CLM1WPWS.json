@@ -1,0 +1,19 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Shift",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "OBXV8CLM1WPWS",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "frequency": "daily",
+    "interval": 1,
+    "name": "[L1] Rotation",
+    "priority_level": 1,
+    "shift_end": 86400,
+    "shift_start": "2025-01-27T06:00:00",
+    "type": "rolling_users"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "aebhhv764hbeoc",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": {
+      "__dashboardUid__": "be6r7iu38z08wa",
+      "__panelId__": "1"
+    },
+    "evaluationTime": 0,
+    "folderUid": "ee6qllfxlq41sb",
+    "health": "ok",
+    "isPaused": true,
+    "labels": null,
+    "lastEvaluation": "0001-01-01T00:00:00Z",
+    "name": "SItWiFi-Alert-Test (grp2)",
+    "notificationSettings": {
+      "receiver": "grafana-default-email"
+    },
+    "queriedDatasourceUIDs": [
+      "ae6qkf61vtb0gd"
+    ],
+    "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"ae6qkf61vtb0gd\",\"model\":{\"alias\":\"Random Walk\",\"columns\":[{\"selector\":\"casesReported\",\"text\":\"\",\"type\":\"number\"}],\"dataOverrides\":[],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"ae6qkf61vtb0gd\"},\"filters\":[],\"format\":\"timeseries\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"casesByState\",\"source\":\"url\",\"summarizeExpression\":\"sum(casesReported)\",\"type\":\"json\",\"url\":\"https://api.apify.com/v2/key-value-stores/moxA3Q0aZh5LosewB/records/LATEST?disableRedirect=true\",\"url_options\":{\"data\":\"\",\"method\":\"GET\"}}},{\"refId\":\"C\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":0,\"to\":0},\"datasourceUid\":\"__expr__\",\"model\":{\"conditions\":[{\"evaluator\":{\"params\":[0],\"type\":\"lt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[\"C\"]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"C\",\"type\":\"threshold\"}}]",
+    "state": "inactive",
+    "type": "alerting"
+  }
+}

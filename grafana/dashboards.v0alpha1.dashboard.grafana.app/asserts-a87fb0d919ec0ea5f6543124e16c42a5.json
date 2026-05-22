@@ -1,0 +1,1589 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "grafana-asserts-app",
+      "grafana.app/message": "Installed by the Grafana Asserts Plugin"
+    },
+    "labels": {},
+    "name": "asserts-a87fb0d919ec0ea5f6543124e16c42a5",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "__elements": {},
+    "__requires": [
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "type": "grafana",
+        "version": "12.0.0-85820.patch2-86140"
+      },
+      {
+        "id": "prometheus",
+        "name": "Prometheus",
+        "type": "datasource",
+        "version": "1.0.0"
+      },
+      {
+        "id": "table",
+        "name": "Table",
+        "type": "panel",
+        "version": ""
+      },
+      {
+        "id": "timeseries",
+        "name": "Time series",
+        "type": "panel",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "uid": "$ds"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 14,
+        "panels": [],
+        "title": "CPU Usage",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 100,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 0,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "quota - requests"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#F2495C",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.stacking",
+                  "value": {
+                    "group": "A",
+                    "mode": "none"
+                  }
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "quota - limits"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#FF9830",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.stacking",
+                  "value": {
+                    "group": "A",
+                    "mode": "none"
+                  }
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 1
+        },
+        "id": 1,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum(\n  sum(rate(container_cpu_usage_seconds_total{image!=\"\", container!=\"POD\", container!=\"\",asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\"}[5m])) by (namespace, pod)\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "{{workload}} - {{workload_type}}",
+            "refId": "A",
+            "step": 10
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "scalar(kube_resourcequota{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=\"requests.cpu\"})",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "quota - requests",
+            "refId": "B",
+            "step": 10
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "scalar(kube_resourcequota{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=\"limits.cpu\"})",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "quota - limits",
+            "refId": "C",
+            "step": 10
+          }
+        ],
+        "title": "CPU Usage",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        },
+        "id": 15,
+        "panels": [],
+        "title": "CPU Quota",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "uid": "$ds"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "custom.hidden",
+                  "value": true
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #A"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Running Pods"
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #B"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "CPU Usage"
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #C"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "CPU Requests"
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #D"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "CPU Requests %"
+                },
+                {
+                  "id": "unit",
+                  "value": "percentunit"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #E"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "CPU Limits"
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #F"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "CPU Limits %"
+                },
+                {
+                  "id": "unit",
+                  "value": "percentunit"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "workload"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Workload"
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "links",
+                  "value": [
+                    {
+                      "targetBlank": false,
+                      "title": "Drill down",
+                      "url": "/d/asserts-a164a7f0339f99e89cea5cb47e9be617/k8s-resources-workload?var-datasource=$datasource\u0026var-cluster=$cluster\u0026var-namespace=$namespace\u0026var-workload=${__value.raw}\u0026var-type=${__value.raw}\u0026theme=light\u0026kiosk=tv"
+                    }
+                  ]
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "workload_type"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Workload Type"
+                },
+                {
+                  "id": "unit",
+                  "value": "short"
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 9
+        },
+        "id": 2,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "count(asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}) by (workload, workload_type)",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 10
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum(\n  sum(rate(container_cpu_usage_seconds_total{image!=\"\", container!=\"POD\", container!=\"\",asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\"}[5m])) by (namespace, pod)\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "",
+            "refId": "B",
+            "step": 10
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum(\n  kube_pod_container_resource_requests{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"}\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "",
+            "refId": "C",
+            "step": 10
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum(\n  sum(rate(container_cpu_usage_seconds_total{image!=\"\", container!=\"POD\", container!=\"\",asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\"}[5m])) by (namespace, pod)\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n/sum(\n  kube_pod_container_resource_requests{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"}\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "",
+            "refId": "D",
+            "step": 10
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "sum(\n  kube_pod_container_resource_limits{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"}\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "",
+            "refId": "E",
+            "step": 10
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum(\n  sum(rate(container_cpu_usage_seconds_total{image!=\"\", container!=\"POD\", container!=\"\",asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\"}[5m])) by (namespace, pod)\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n/sum(\n  kube_pod_container_resource_limits{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\"}\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "",
+            "refId": "F",
+            "step": 10
+          }
+        ],
+        "title": "CPU Quota",
+        "type": "table"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 16
+        },
+        "id": 16,
+        "panels": [],
+        "title": "Memory Usage",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${ds}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 100,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 0,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "quota - requests"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#F2495C",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.stacking",
+                  "value": {
+                    "group": "A",
+                    "mode": "none"
+                  }
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "quota - limits"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#FF9830",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.stacking",
+                  "value": {
+                    "group": "A",
+                    "mode": "none"
+                  }
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 17
+        },
+        "id": 3,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.0-85820.patch2-86140",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "sum(\n    container_memory_working_set_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 2,
+            "legendFormat": "{{workload}} - {{workload_type}}",
+            "refId": "A",
+            "step": 10
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "expr": "scalar(kube_resourcequota{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=\"requests.memory\"})",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "quota - requests",
+            "refId": "B",
+            "step": 10
+          },
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "expr": "scalar(kube_resourcequota{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", type=\"hard\",resource=\"limits.memory\"})",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "quota - limits",
+            "refId": "C",
+            "step": 10
+          }
+        ],
+        "title": "Memory Usage",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 24
+        },
+        "id": 17,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 25
+            },
+            "id": 4,
+            "options": {},
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "count(asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}) by (workload, workload_type)",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "A",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "sum(\n    container_memory_working_set_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "B",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum(\n  kube_pod_container_resource_requests{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"}\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "C",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "sum(\n    container_memory_working_set_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n/sum(\n  kube_pod_container_resource_requests{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"}\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "D",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "sum(\n  kube_pod_container_resource_limits{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"}\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "E",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "sum(\n    container_memory_working_set_bytes{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n/sum(\n  kube_pod_container_resource_limits{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\"}\n* on(namespace,pod)\n  group_left(workload, workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=\"$namespace\", workload_type=\"$type\"}\n) by (workload, workload_type)\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "F",
+                "step": 10
+              }
+            ],
+            "title": "Memory Quota",
+            "type": "table"
+          }
+        ],
+        "title": "Memory Quota",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 25
+        },
+        "id": 18,
+        "panels": [
+          {
+            "datasource": {
+              "uid": "$ds"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 33
+            },
+            "id": 5,
+            "interval": "1m",
+            "options": {},
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "(sum(irate(container_network_receive_bytes_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "A",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum(irate(container_network_transmit_bytes_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "B",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "(sum(irate(container_network_receive_packets_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "C",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum(irate(container_network_transmit_packets_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "D",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${ds}"
+                },
+                "expr": "(sum(irate(container_network_receive_packets_dropped_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "E",
+                "step": 10
+              },
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum(irate(container_network_transmit_packets_dropped_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "",
+                "refId": "F",
+                "step": 10
+              }
+            ],
+            "title": "Current Network Usage",
+            "type": "table"
+          }
+        ],
+        "title": "Current Network Usage",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 26
+        },
+        "id": 19,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 0,
+              "y": 41
+            },
+            "id": 6,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum(irate(container_network_receive_bytes_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "{{workload}}",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "title": "Receive Bandwidth",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 12,
+              "y": 41
+            },
+            "id": 7,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum(irate(container_network_transmit_bytes_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "{{workload}}",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "title": "Transmit Bandwidth",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Bandwidth",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 27
+        },
+        "id": 20,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 0,
+              "y": 49
+            },
+            "id": 8,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(avg(irate(container_network_receive_bytes_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "{{workload}}",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "title": "Average Container Bandwidth by Workload: Received",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 12,
+              "y": 49
+            },
+            "id": 9,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(avg(irate(container_network_transmit_bytes_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "{{workload}}",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "title": "Average Container Bandwidth by Workload: Transmitted",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Average Container Bandwidth by Workload",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 28
+        },
+        "id": 21,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 0,
+              "y": 57
+            },
+            "id": 10,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum(irate(container_network_receive_packets_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "{{workload}}",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "title": "Rate of Received Packets",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 12,
+              "y": 57
+            },
+            "id": 11,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum(irate(container_network_transmit_packets_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "{{workload}}",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "title": "Rate of Transmitted Packets",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Rate of Packets",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 29
+        },
+        "id": 22,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 0,
+              "y": 65
+            },
+            "id": 12,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum(irate(container_network_receive_packets_dropped_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "{{workload}}",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "title": "Rate of Received Packets Dropped",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${ds}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 12,
+              "y": 65
+            },
+            "id": 13,
+            "options": {
+              "alertThreshold": true
+            },
+            "pluginVersion": "7.4.2",
+            "targets": [
+              {
+                "datasource": {
+                  "uid": "$ds"
+                },
+                "expr": "(sum(irate(container_network_transmit_packets_dropped_total{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\"}[$__rate_interval])\n* on (namespace,pod)\ngroup_left(workload,workload_type) asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\", workload_type=\"$type\"}) by (workload))\n",
+                "format": "time_series",
+                "interval": "",
+                "intervalFactor": 2,
+                "legendFormat": "{{workload}}",
+                "refId": "A",
+                "step": 10
+              }
+            ],
+            "title": "Rate of Transmitted Packets Dropped",
+            "type": "timeseries"
+          }
+        ],
+        "title": "Rate of Packets Dropped",
+        "type": "row"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 41,
+    "tags": [
+      "kubernetes-mixin"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "hide": 2,
+          "includeAll": false,
+          "name": "ds",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(asserts:mixin_workload_job, asserts_env)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "env",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job, asserts_env)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "allValue": ".*",
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$ds"
+          },
+          "definition": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+          "hide": 2,
+          "includeAll": true,
+          "name": "site",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_workload_job{asserts_env=~\"$env\"}, asserts_site)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(kube_pod_info{asserts_env=~\"$env\",asserts_site=~\"$site\"}, cluster)",
+          "hide": 2,
+          "includeAll": false,
+          "name": "cluster",
+          "options": [],
+          "query": {
+            "query": "label_values(kube_pod_info{asserts_env=~\"$env\",asserts_site=~\"$site\"}, cluster)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$ds"
+          },
+          "definition": "label_values(asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\"}, workload_type)",
+          "includeAll": false,
+          "name": "type",
+          "options": [],
+          "query": {
+            "query": "label_values(asserts:mixin_pod_workload{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\", namespace=~\"$namespace\", workload=~\".+\"}, workload_type)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds}"
+          },
+          "definition": "label_values(kube_pod_info{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\"}, namespace)",
+          "includeAll": false,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(kube_pod_info{asserts_env=~\"$env\",asserts_site=~\"$site\",cluster=\"$cluster\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "sort": 1,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Kubernetes / Compute Resources / Namespace (Workloads)",
+    "weekStart": ""
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "apiVersion": "folder.grafana.app/v1",
+  "kind": "Folder",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "fl7p6c",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "title": "SecOps"
+  }
+}

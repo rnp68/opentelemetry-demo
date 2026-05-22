@@ -1,0 +1,20 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Webhook",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "WHG4IEBQNBSCNZ",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "data": "\n{\n    \"name\": \"{{ alert_payload.commonLabels.alertname }}\",\n    \"requestData\": {\n        \"end\": \"{{ alert_group.created_at }}\",\n        \"labels\": {{ alert_payload.commonLabels | tojson }},\n        \"queryUrl\": \"{{ (alert_payload.alerts and alert_payload.alerts[0] and alert_payload.alerts[0].generatorURL) }}\",\n        \"alertGroupId\": \"{{ alert_group_id }}\",\n        \"resolutionNotesUrl\": \"https://oncall-prod-us-central-0.grafana.net/oncall/api/v1/resolution_notes/\",\n        \"investigationSource\": {\n            \"type\": \"oncall-integration\",\n            \"id\": \"{{ alert_group_id }}\",\n            \"url\": \"https://oncall-prod-us-central-0.grafana.net/oncall/api/v1/resolution_notes/\"\n        }\n    },\n    \"grafanaUrl\": \"https://ramironagles.grafana.net\"\n}",
+    "http_method": "POST",
+    "is_webhook_enabled": true,
+    "name": "Sift-Automatic",
+    "preset": "grafana_sift",
+    "team": "",
+    "trigger_type": "alert group created",
+    "url": "https://ramironagles.grafana.net/api/plugins/grafana-ml-app/resources/sift/api/v1/investigations"
+  }
+}

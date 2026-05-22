@@ -1,0 +1,20 @@
+{
+  "apiVersion": "grafana-knowledgegraph-datasource.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "grafanacloud-knowledgegraph",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "jsonData": {
+      "backendUrl": "https://asserts-prod-us-east-0.grafana.net",
+      "basicAuthUser": "1036148",
+      "linkedPromDSUID": "grafanacloud-prom"
+    },
+    "readOnly": true,
+    "title": "grafanacloud-ramironagles-knowledgegraph"
+  }
+}

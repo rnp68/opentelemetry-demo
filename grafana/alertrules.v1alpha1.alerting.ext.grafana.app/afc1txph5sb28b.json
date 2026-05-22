@@ -1,0 +1,26 @@
+{
+  "apiVersion": "alerting.ext.grafana.app/v1alpha1",
+  "kind": "AlertRule",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "afc1txph5sb28b",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "annotations": null,
+    "evaluationTime": 0.000023777,
+    "folderUid": "ee6qllfxlq41sb",
+    "health": "unknown",
+    "isPaused": true,
+    "labels": null,
+    "lastEvaluation": "2026-05-22T00:32:10.072508099Z",
+    "name": "InfinityJira-perMonth-aggregation-test",
+    "queriedDatasourceUIDs": [
+      "ffbeitosw2ghse"
+    ],
+    "query": "[{\"refId\":\"A\",\"queryType\":\"\",\"relativeTimeRange\":{\"from\":600,\"to\":0},\"datasourceUid\":\"ffbeitosw2ghse\",\"model\":{\"columns\":[],\"computed_columns\":[{\"selector\":\"\",\"text\":\"\",\"type\":\"string\"}],\"datasource\":{\"type\":\"yesoreyeram-infinity-datasource\",\"uid\":\"ffbeitosw2ghse\"},\"filters\":[],\"format\":\"timeseries\",\"global_query_id\":\"\",\"instant\":true,\"intervalMs\":1000,\"maxDataPoints\":43200,\"parser\":\"backend\",\"refId\":\"A\",\"root_selector\":\"(  \\n  $monthGroups := issues.(  \\n    $month := $substring(fields.customfield_10111, 0, 7);  \\n    {\\\"month\\\": $month}  \\n  );  \\n  $distinct($monthGroups.month).(  \\n    $currentMonth := $;  \\n    {  \\n      \\\"month\\\": $currentMonth,  \\n      \\\"value\\\": $count($monthGroups[month = $currentMonth])  \\n    }  \\n  )  \\n)  \",\"source\":\"url\",\"summarizeBy\":\"Accepted_month\",\"summarizeExpression\":\"\",\"type\":\"json\",\"url\":\"https://jiramttx2.atlassian.net/rest/api/3/search/jql\",\"url_options\":{\"body_content_type\":\"application/json\",\"body_type\":\"raw\",\"data\":\"{\\n  \\\"jql\\\": \\\"project=KAN AND issuetype=Incident AND created \\u003e= -365d ORDER BY created DESC\\\",\\n  \\\"maxResults\\\": 1000,\\n  \\\"expand\\\":\\\"names,fields\\\",\\n  \\\"fields\\\": [\\n    \\\"key\\\",\\n    \\\"id\\\",\\n    \\\"self\\\",\\n    \\\"customfield_10111\\\",\\n    \\\"summary\\\"\\n  ]\\n}\",\"headers\":[{\"key\":\"Content-Type\",\"value\":\"application/json\"}],\"method\":\"POST\",\"params\":[]}}}]",
+    "state": "inactive",
+    "type": "recording"
+  }
+}

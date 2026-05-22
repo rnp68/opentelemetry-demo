@@ -1,0 +1,16 @@
+{
+  "apiVersion": "oncall.ext.grafana.app/v1alpha1",
+  "kind": "Route",
+  "metadata": {
+    "annotations": null,
+    "labels": null,
+    "name": "RTPUNZX6EI9PR",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "alert_receive_channel": "CJQ5NMP2S8GN1",
+    "escalation_chain": "",
+    "filtering_term_type": "regex",
+    "is_default": true
+  }
+}

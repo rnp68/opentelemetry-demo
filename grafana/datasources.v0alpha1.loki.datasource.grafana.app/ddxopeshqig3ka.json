@@ -1,0 +1,45 @@
+{
+  "apiVersion": "loki.datasource.grafana.app/v0alpha1",
+  "kind": "DataSource",
+  "metadata": {
+    "annotations": {},
+    "labels": {},
+    "name": "ddxopeshqig3ka",
+    "namespace": "stacks-1036148"
+  },
+  "spec": {
+    "access": "proxy",
+    "basicAuth": true,
+    "basicAuthUser": "3965",
+    "jsonData": {
+      "derivedFields": [
+        {
+          "datasourceUid": "edxop0csij4lcb",
+          "matcherRegex": "\"tempo_trace_id\":\\s*\"([a-f0-9]+)\"",
+          "matcherType": "regex",
+          "name": "tempo_trace_id",
+          "url": "${__value.raw}",
+          "urlDisplayLabel": ""
+        },
+        {
+          "matcherRegex": "\"service\":\\s*\"?([^\"]+)\"?",
+          "matcherType": "regex",
+          "name": "service_derived",
+          "url": "",
+          "urlDisplayLabel": ""
+        },
+        {
+          "matcherRegex": "service",
+          "matcherType": "label",
+          "name": "service_derived_label",
+          "targetBlank": false,
+          "url": "",
+          "urlDisplayLabel": "LokiNGINX_to_MetricsCorrelation"
+        }
+      ],
+      "oauthPassThru": false
+    },
+    "title": "LokiNGINX",
+    "url": "https://logs-prod-us-central1.grafana.net/"
+  }
+}

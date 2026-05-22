@@ -1,0 +1,90 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Docker Compose override: run the demo without active OTel telemetry collection.
+#
+# Usage:
+#   make start-no-otel
+#   # or manually:
+#   docker compose -f docker-compose.yml -f docker-compose.no-otel.yml up --force-recreate --remove-orphans --detach
+#
+# What this does:
+#   - Replaces the OTel Collector with a lightweight noop stub that accepts and
+#     drops all telemetry. All services with `depends_on: otelcol` still start
+#     cleanly — the stub satisfies the dependency without collecting anything.
+#   - Disables flagd's OTel metrics export.
+#   - Sets OTEL_SDK_DISABLED=true for SDKs that support it (Java, .NET, Ruby,
+#     Node.js, Python, PHP), preventing them from initializing the OTel SDK.
+#   - Go/C++/Rust services are not affected by OTEL_SDK_DISABLED, but they
+#     connect to the noop stub and export data that is silently discarded.
+#   - The observability UI stack (Jaeger, Grafana, Prometheus, OpenSearch) still
+#     runs — dashboards are accessible but show no data.
+
+version: '3.9'
+
+services:
+  # Replace the full OTel Collector with a noop stub.
+  # Same image, same ports — but uses a config that only has a debug exporter.
+  # No depends_on: jaeger since there is no Jaeger pipeline in the noop config.
+  otelcol:
+    command: ["--config=/etc/otelcol-config-noop.yml"]
+    volumes:
+      - ./src/otelcollector/otelcol-config-noop.yml:/etc/otelcol-config-noop.yml
+    depends_on: {}
+
+  # Disable flagd's OTel metrics export. Without FLAGD_METRICS_EXPORTER=otel,
+  # the FLAGD_OTEL_COLLECTOR_URI is never used.
+  flagd:
+    environment:
+      - FLAGD_METRICS_EXPORTER=
+      - FLAGD_OTEL_COLLECTOR_URI=
+
+  # Java SDK honors OTEL_SDK_DISABLED
+  adservice:
+    environment:
+      - OTEL_SDK_DISABLED=true
+
+  # .NET SDK honors OTEL_SDK_DISABLED
+  cartservice:
+    environment:
+      - OTEL_SDK_DISABLED=true
+
+  # Ruby SDK honors OTEL_SDK_DISABLED
+  emailservice:
+    environment:
+      - OTEL_SDK_DISABLED=true
+
+  # Java SDK honors OTEL_SDK_DISABLED
+  frauddetectionservice:
+    environment:
+      - OTEL_SDK_DISABLED=true
+
+  # Node.js SDK honors OTEL_SDK_DISABLED
+  frontend:
+    environment:
+      - OTEL_SDK_DISABLED=true
+
+  # Java SDK honors OTEL_SDK_DISABLED
+  kafka:
+    environment:
+      - OTEL_SDK_DISABLED=true
+
+  # Python SDK honors OTEL_SDK_DISABLED
+  loadgenerator:
+    environment:
+      - OTEL_SDK_DISABLED=true
+
+  # Node.js SDK honors OTEL_SDK_DISABLED
+  paymentservice:
+    environment:
+      - OTEL_SDK_DISABLED=true
+
+  # PHP SDK honors OTEL_SDK_DISABLED
+  quoteservice:
+    environment:
+      - OTEL_SDK_DISABLED=true
+
+  # Python SDK honors OTEL_SDK_DISABLED
+  recommendationservice:
+    environment:
+      - OTEL_SDK_DISABLED=true
