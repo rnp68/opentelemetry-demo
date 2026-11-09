@@ -164,6 +164,21 @@ Kubernetes > **Configuration** > **Manage app** > **Deactivate**. The script pri
 | every endpoint answers `invalid token` | the token was pasted with an extra character (one case: a stray leading `g`, 213 characters instead of 212) | paste again; a real token starts with `glc_` and the installer warns when it does not |
 | `alloy-profiles` logs `failed to load eBPF tracer ... failed to determine system configs` | Docker Desktop's Linux kernel does not expose what the eBPF profiler needs (my reading; not confirmed with the vendor) | harmless for the rest; the other collectors and Java profiling are separate. Use another cluster for eBPF profiles |
 | the "data arrives" check passed within seconds | it matched series left by an earlier run | fixed: the check now needs samples newer than the install start |
+| the app's home page still shows "Activate Kubernetes Monitoring" / "Start sending data" although the installer's data check passed | the home page shows its onboarding card unless **both** the activation resource is enabled **and** the data-flowing query returns a value, and it evaluates them once when the page loads (the one-minute refresh does not re-run them), so an already open tab keeps old state. Read from the app's own code (plugin 3.3.0) | reload the tab (Cmd+Shift+R) or open `/a/grafana-k8s-app/navigation/cluster`. To check both conditions yourself, see below |
+
+### Checking by hand what the home page checks
+
+```bash
+# 1. activation resource (stack namespace is stacks-<stack id>): expect  spec: {enabled: true}
+gcx --context <ctx> api /apis/productactivation.ext.grafana.com/v1alpha1/namespaces/stacks-<stack-id>/k8so11yconfigs
+
+# 2. the data-flowing query, on the Prometheus source the app selects (the Grafana Cloud one, not "usage")
+gcx --context <ctx> metrics query -d grafanacloud-prom 'count(kube_node_info{}) or count(k8s_node_condition{})' --from now-1h --to now --step 1m -o json
+```
+
+The app picks its Prometheus and Loki sources itself: only types `prometheus` / `loki` whose URL matches
+`grafana(-dev|-ops)?.net`, excluding names containing "usage" or "ml-metrics", preferring a name saved in the
+browser (local storage key `grafana.k8s-app.navigation.storage`), then the stack's default source, then the first.
 
 ## Design decisions
 
