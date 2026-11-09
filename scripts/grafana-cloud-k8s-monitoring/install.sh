@@ -15,6 +15,10 @@
 #   optional  K8S_CLUSTER_NAME  K8S_MONITORING_CHART_VERSION (default 4.6.0)
 #             K8S_MONITORING_NAMESPACE  K8S_MONITORING_RELEASE  K8S_CONTEXT
 #
+# Before the first install, activate Kubernetes Monitoring once in the Grafana Cloud UI
+# (it enables host/container-hour billing; the app stays empty until then). See
+# docs/grafana-cloud-k8s-monitoring.md.
+#
 # The token needs the scopes metrics:write, logs:write, traces:write and
 # profiles:write. It is written to a temporary 0600 values file (never passed on
 # the command line, so it does not appear in `ps`) that is deleted on exit.
@@ -186,6 +190,8 @@ Next steps
   2. Check Alloy is shipping data:
        kubectl --context ${CTX} logs -n ${K8S_MONITORING_NAMESPACE} -l app.kubernetes.io/name=alloy --tail=30
   3. In Grafana Cloud open Kubernetes > Cluster navigation and look for cluster "${CLUSTER}".
+     If the app only shows "Activate Kubernetes Monitoring", click Activate once (it starts
+     host/container-hour billing); the installed collectors will then show up.
   4. To make the demo send its telemetry through this Alloy:
        ./start-local.sh --k8s-alloy-forward
   Undeploy:  scripts/grafana-cloud-k8s-monitoring/install.sh --uninstall

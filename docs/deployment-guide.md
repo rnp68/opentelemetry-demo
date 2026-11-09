@@ -350,7 +350,10 @@ the Kubernetes behavior, and limitations: [faro-and-pyroscope.md](faro-and-pyros
 scripts/grafana-cloud-k8s-monitoring/install.sh
 ```
 
-Installs `grafana/k8s-monitoring` (nodes, pods, events, logs, costs, profiles). It
+Installs `grafana/k8s-monitoring` (nodes, pods, events, logs, costs, profiles). **First
+activate Kubernetes Monitoring once in your stack's UI** (it enables host/container-hour
+billing; until then the app's home page only shows an Activate panel): see
+[the activation steps](grafana-cloud-k8s-monitoring.md#before-you-install-activate-kubernetes-monitoring-one-time-in-the-grafana-ui). It
 needs the extra values listed under "Kubernetes monitoring" in
 [configuration.md](configuration.md). Procedure and manual steps:
 [grafana-cloud-k8s-monitoring.md](grafana-cloud-k8s-monitoring.md). Afterwards,

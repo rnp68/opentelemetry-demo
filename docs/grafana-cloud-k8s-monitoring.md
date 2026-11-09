@@ -25,6 +25,23 @@ flowchart LR
   AP --> GC
 ```
 
+## Before you install: activate Kubernetes Monitoring (one-time, in the Grafana UI)
+
+Grafana Cloud's Kubernetes Monitoring app stays empty until it is **activated**, and a stack that
+has not been activated shows only an "Activate Kubernetes Monitoring" panel on the app's home
+page (`/a/grafana-k8s-app/home`). Activation is a billing decision: Kubernetes Monitoring is
+billed on active host hours and active container hours, metered from `kube-state-metrics`, so
+charges start when the cluster sends that data (see the
+[pricing page](https://grafana.com/docs/grafana-cloud/platform/pricing-and-usage/kubernetes-monitoring/)).
+The installer cannot and must not do this for you.
+
+1. Sign in to Grafana Cloud, click **My Account**, select the stack and click **Details**.
+2. Next to the stack, click **Launch** for Kubernetes Monitoring (or open `/a/grafana-k8s-app/home` in the stack).
+3. Click **Activate**, tick the box in the dialog and click **Activate**.
+4. Then run the installer below, which is the "Start sending data" step.
+
+To stop billing later: **Configuration** > **Manage app** > **Deactivate** (this does not delete metrics).
+
 ## Prerequisites
 
 | Need | How |
