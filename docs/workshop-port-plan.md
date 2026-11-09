@@ -171,14 +171,15 @@ fault. The first two tokens had been created at the organization level; a token 
 inside the stack (stack menu > Administration > Cloud access policies) was accepted
 (traces 200, metrics 200, logs 204; a wrong password still gives 401).
 
-A note on a wrong diagnosis: I first attributed the 401 to the token's embedded region
-(`prod-us-east-0`) not matching the endpoint (`prod-us-east-2`), and added a preflight
-that stopped on that mismatch. The working token carries the same field, so the field is not
-the stack's region and that rule would have blocked a valid token. It was removed: the
-preflight now only sends one request and stops on 401/403
-(`scripts/tests/credential-check-test.sh`, which includes a regression test for this). What
-exactly made the first tokens fail is not established; the stack-level creation path is what
-is documented to work.
+A note on a wrong diagnosis, now explained: I first attributed the 401 to the token's embedded
+region (`prod-us-east-0`) not matching the endpoint (`prod-us-east-2`), and added a preflight that
+stopped on that mismatch. The working token carries the same field, so the rule would have blocked
+a valid token and it was removed: the preflight now only sends one request and stops on 401/403
+(`scripts/tests/credential-check-test.sh`, which includes a regression test for this). After a
+`gcx cloud login`, `gcx cloud stacks get demosrnp68` shows why: the stack's `regionSlug` is
+`prod-us-east-0` (that is what the token field holds) while its `clusterSlug`, which names the OTLP
+gateway, is `prod-us-east-2`. What exactly made the first tokens fail is still not established;
+the stack-level creation path is what is documented to work.
 
 **Grafana Cloud run, second attempt (2026-11-09): passed.** With the working token,
 `./start-local.sh --grafana-cloud` started 21 containers, the collector logged 0 export
@@ -220,6 +221,14 @@ named context, and decommission guidance. Tested with `scripts/tests/k8s-monitor
 (a control that lets `--yes` pass fails the test) and on the real cluster: without an
 acknowledgement the real install stops before applying anything. The chart itself has still not
 been installed.
+
+**Discovery of the stack's connection values (2026-11-09):** with `GCX_CONTEXT` set and a
+`gcx cloud login`, `install.sh` fills the unset metrics, logs and profiles URL and user values
+from `gcx cloud stacks get`; run against the real stack, it produced the values the Kubernetes
+page asks for, and a dry run rendered the chart with them. Found on the way: gcx reads a
+`GRAFANA_CLOUD_TOKEN` environment variable as its own cloud token (HTTP 401), which collides
+with this repo's variable of the same name, so every gcx call in the installer now runs without it
+(regression test in `scripts/tests/k8s-monitoring-test.sh`, which fails if the leak returns).
 
 **Still not run:**
 

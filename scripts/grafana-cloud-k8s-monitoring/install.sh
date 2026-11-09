@@ -15,7 +15,8 @@
 #   optional  K8S_CLUSTER_NAME  K8S_MONITORING_CHART_VERSION (default 4.6.0)
 #             K8S_MONITORING_NAMESPACE  K8S_MONITORING_RELEASE  K8S_CONTEXT
 #             GRAFANA_STACK_URL (link to the activation page), GCX_CONTEXT (gcx context of this
-#             stack: enables the automatic data check), K8S_MONITORING_ACTIVATED
+#             stack: enables the automatic data check AND fills in the unset GRAFANA_CLOUD_*_URL/_USER
+#             values from the stack, after `gcx cloud login`), K8S_MONITORING_ACTIVATED
 #
 # Before the first install, activate Kubernetes Monitoring once in the Grafana Cloud UI
 # (it enables host/container-hour billing; the app stays empty until then). See
@@ -77,6 +78,85 @@ VALUES_FILE="${BUILD_DIR}/k8s-monitoring-values.yaml"
 cleanup() { rm -f "${SECRETS_FILE}"; }
 trap cleanup EXIT
 
+# gcx_clean: runs gcx without GRAFANA_CLOUD_TOKEN in its environment. gcx reads that
+# variable as its own Grafana Cloud API token and then rejects its login (HTTP 401), but
+# here it holds the access-policy token for the Helm chart.
+gcx_clean() { ( unset GRAFANA_CLOUD_TOKEN; gcx "$@" ); }
+
+# discover_stack_settings: fills the connection values that are still unset (never
+# overwrites one you set) from the stack itself, with `gcx cloud stacks get`. Needs
+# gcx, an explicit GCX_CONTEXT and a `gcx cloud login` for that context. The token is
+# NOT discoverable: create it in the UI (see docs/grafana-cloud-k8s-monitoring.md).
+discover_stack_settings() {
+  is_unset "${GCX_CONTEXT:-}" && return 0
+  command -v gcx >/dev/null 2>&1 || return 0
+  command -v python3 >/dev/null 2>&1 || return 0
+  local need=0 k v
+  for k in GRAFANA_CLOUD_METRICS_URL GRAFANA_CLOUD_METRICS_USER GRAFANA_CLOUD_LOGS_URL GRAFANA_CLOUD_LOGS_USER \
+           GRAFANA_CLOUD_PROFILES_URL GRAFANA_CLOUD_PROFILES_USER GRAFANA_STACK_URL; do
+    eval "v=\"\${${k}:-}\""; is_unset "${v}" && need=1
+  done
+  [ "${need}" -eq 0 ] && return 0
+
+  local slug cfg stack
+  cfg="$(gcx_clean config view 2>/dev/null || true)"
+  slug="$(printf '%s' "${cfg}" | GCX_CONTEXT="${GCX_CONTEXT}" python3 -c '
+import sys,json,os,re
+ctx=os.environ["GCX_CONTEXT"]
+for l in sys.stdin:
+    l=l.strip()
+    if l.startswith("{\"version\""):
+        d=json.loads(l); st=(d.get("contexts",{}).get(ctx) or {}).get("stack")
+        srv=((d.get("stacks",{}).get(st) or {}).get("grafana") or {}).get("server","")
+        m=re.match(r"https?://([^./]+)\.grafana\.net",srv)
+        print(m.group(1) if m else "")
+' 2>/dev/null || true)"
+  if [ -z "${slug}" ]; then
+    log_warn "gcx context '${GCX_CONTEXT}' has no <slug>.grafana.net server; cannot look up the stack settings."
+    return 0
+  fi
+  stack="$(gcx_clean --context "${GCX_CONTEXT}" cloud stacks get "${slug}" 2>/dev/null || true)"
+  local lines
+  lines="$(printf '%s' "${stack}" | python3 -c '
+import sys,json
+d=None
+for l in sys.stdin:
+    l=l.strip()
+    if l.startswith("{"):
+        try: d=json.loads(l); break
+        except Exception: pass
+if not d or "error" in d: sys.exit(1)
+d=d.get("stack",d)
+g=lambda k: str(d.get(k,"") or "")
+out={
+ "GRAFANA_CLOUD_METRICS_URL": g("hmInstancePromUrl")+"/api/prom/push" if g("hmInstancePromUrl") else "",
+ "GRAFANA_CLOUD_METRICS_USER": g("hmInstancePromId"),
+ "GRAFANA_CLOUD_LOGS_URL": g("hlInstanceUrl")+"/loki/api/v1/push" if g("hlInstanceUrl") else "",
+ "GRAFANA_CLOUD_LOGS_USER": g("hlInstanceId"),
+ "GRAFANA_CLOUD_PROFILES_URL": g("hpInstanceUrl")+":443" if g("hpInstanceUrl") else "",
+ "GRAFANA_CLOUD_PROFILES_USER": g("hpInstanceId"),
+ "GRAFANA_STACK_URL": g("url"),
+}
+for k,v in out.items():
+    if v: print(k+"="+v)
+' 2>/dev/null)" || {
+    log_warn "Could not read stack '${slug}' with gcx (not logged in? run: gcx cloud login). Continuing with .env.local."
+    return 0
+  }
+  local line key val filled=""
+  while IFS= read -r line; do
+    [ -n "${line}" ] || continue
+    key="${line%%=*}"; val="${line#*=}"
+    eval "v=\"\${${key}:-}\""
+    if is_unset "${v}"; then export "${key}=${val}"; filled="${filled} ${key}"; fi
+  done <<EOL
+${lines}
+EOL
+  if [ -n "${filled}" ]; then
+    log_ok "Filled from stack '${slug}' (gcx context '${GCX_CONTEXT}'):${filled}"
+  fi
+}
+
 # ── Activation, verification, deactivation guidance ─────────────────────────
 
 stack_app_url() {
@@ -124,7 +204,7 @@ EOM
 wait_for_metric() {
   local expr="$1" total="$2" every="$3" waited=0 out
   while :; do
-    out="$(gcx --context "${GCX_CONTEXT}" metrics query -d "${GRAFANA_CLOUD_PROM_DATASOURCE_UID}" "${expr}" --since 10m -o json 2>/dev/null || true)"
+    out="$(gcx_clean --context "${GCX_CONTEXT}" metrics query -d "${GRAFANA_CLOUD_PROM_DATASOURCE_UID}" "${expr}" --since 10m -o json 2>/dev/null || true)"
     if printf '%s' "${out}" | grep -q '"values"'; then return 0; fi
     [ "${waited}" -ge "${total}" ] && return 1
     sleep "${every}"
@@ -147,7 +227,7 @@ verify_cluster_data() {
   fi
   local minutes="${VERIFY_MINUTES_ARG:-${K8S_MONITORING_VERIFY_MINUTES}}"
   local server
-  server="$(gcx config view 2>/dev/null | python3 -c '
+  server="$(gcx_clean config view 2>/dev/null | python3 -c '
 import sys,json,os
 ctx=os.environ.get("GCX_CONTEXT","")
 for l in sys.stdin:
@@ -220,6 +300,7 @@ do_uninstall() {
 }
 
 do_install() {
+  discover_stack_settings
   require_vars GRAFANA_CLOUD_TOKEN GRAFANA_OTLP_ENDPOINT GRAFANA_INSTANCE_ID \
     GRAFANA_CLOUD_METRICS_URL GRAFANA_CLOUD_METRICS_USER \
     GRAFANA_CLOUD_LOGS_URL GRAFANA_CLOUD_LOGS_USER \

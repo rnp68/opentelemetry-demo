@@ -67,6 +67,15 @@ flowchart TD
 | `helm` and `kubectl` | `brew install helm kubectl` |
 | The values below in `.env.local` | table below |
 
+**Shortcut for the six URL and user values.** If you have `gcx`, run `gcx cloud login` (with the
+context of this stack) and set `GCX_CONTEXT=<that context>` in `.env.local`. The installer then
+reads the stack with `gcx cloud stacks get` and fills every value below that you left unset, except
+the token, which only you can create. It prints which values it filled; values you set are never
+overwritten. Two details learned the hard way: `gcx cloud login` saves the login under the context
+you are in, so use the same `--context` afterwards; and the installer runs `gcx` without the
+`GRAFANA_CLOUD_TOKEN` variable, because `gcx` treats that variable as its own cloud API token and
+then rejects its login (HTTP 401).
+
 | Variable | Where to find it, click by click |
 |---|---|
 | `GRAFANA_CLOUD_TOKEN` (**secret**) | grafana.com > your org > **Access Policies** > **Create access policy**, realm: your stack, scopes `metrics:write`, `logs:write`, `traces:write`, `profiles:write` > **Create** > **Add token** > copy it (`glc_...`) |

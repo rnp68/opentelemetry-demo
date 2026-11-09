@@ -62,6 +62,47 @@ GCX_CONTEXT=fake-stack; NO_VERIFY=true
 out="$(verify_cluster_data 2>&1)"; check "--no-verify: silent skip" "" "${out}"
 NO_VERIFY=false
 
+# ---- discovery of the stack's connection settings (fake gcx; synthetic IDs) ----
+FAKE_CFG='{"version":1,"stacks":{"st":{"grafana":{"server":"https://myslug.grafana.net"}}},"contexts":{"ctxA":{"stack":"st"}}}'
+FAKE_STACK='{"stack":{"url":"https://myslug.grafana.net","hmInstancePromUrl":"https://prometheus-prod-01-prod-xx-0.grafana.net","hmInstancePromId":111,"hlInstanceUrl":"https://logs-prod-001.grafana.net","hlInstanceId":222,"hpInstanceUrl":"https://profiles-prod-001.grafana.net","hpInstanceId":333}}'
+FAKE_STACK_RC=0
+gcx() {
+  # Like the real gcx: a GRAFANA_CLOUD_TOKEN in the environment is taken as a (wrong) cloud token.
+  if [ -n "${GRAFANA_CLOUD_TOKEN:-}" ]; then printf '%s\n' '{"type":"gcx.error","error":{"summary":"Authentication failed (token from environment)"}}'; return 3; fi
+  case "$*" in
+    "config view")  printf '%s\n' "${FAKE_CFG}" ;;
+    *"cloud stacks get myslug") if [ "${FAKE_STACK_RC}" -eq 0 ]; then printf '%s\n' "${FAKE_STACK}"; else printf '%s\n' '{"type":"gcx.error","error":{"summary":"Authentication failed"}}'; fi ;;
+  esac
+}
+unset_all() { for k in GRAFANA_CLOUD_METRICS_URL GRAFANA_CLOUD_METRICS_USER GRAFANA_CLOUD_LOGS_URL GRAFANA_CLOUD_LOGS_USER GRAFANA_CLOUD_PROFILES_URL GRAFANA_CLOUD_PROFILES_USER GRAFANA_STACK_URL; do unset "$k"; done; }
+
+unset_all; GCX_CONTEXT=ctxA; export GRAFANA_CLOUD_TOKEN=glc_installer_token   # as load_env does in the real run
+discover_stack_settings >/dev/null 2>&1
+check "discovery works although GRAFANA_CLOUD_TOKEN is exported (regression)" "https://prometheus-prod-01-prod-xx-0.grafana.net/api/prom/push" "${GRAFANA_CLOUD_METRICS_URL:-}"
+unset GRAFANA_CLOUD_TOKEN
+unset_all; GCX_CONTEXT=ctxA; discover_stack_settings >/dev/null 2>&1
+check "metrics URL = host + /api/prom/push"  "https://prometheus-prod-01-prod-xx-0.grafana.net/api/prom/push" "${GRAFANA_CLOUD_METRICS_URL:-}"
+check "metrics user"                          "111" "${GRAFANA_CLOUD_METRICS_USER:-}"
+check "logs URL = host + /loki/api/v1/push"   "https://logs-prod-001.grafana.net/loki/api/v1/push" "${GRAFANA_CLOUD_LOGS_URL:-}"
+check "logs user"                             "222" "${GRAFANA_CLOUD_LOGS_USER:-}"
+check "profiles URL = host + :443"            "https://profiles-prod-001.grafana.net:443" "${GRAFANA_CLOUD_PROFILES_URL:-}"
+check "profiles user"                         "333" "${GRAFANA_CLOUD_PROFILES_USER:-}"
+check "stack URL"                             "https://myslug.grafana.net" "${GRAFANA_STACK_URL:-}"
+
+unset_all; GRAFANA_CLOUD_LOGS_USER=999; discover_stack_settings >/dev/null 2>&1
+check "a value you set is never overwritten"  "999" "${GRAFANA_CLOUD_LOGS_USER}"
+check "...while the unset ones are filled"    "111" "${GRAFANA_CLOUD_METRICS_USER:-}"
+
+unset_all; GCX_CONTEXT=unknown; discover_stack_settings >/dev/null 2>&1
+check "no GCX_CONTEXT: nothing is looked up"  "" "${GRAFANA_CLOUD_METRICS_URL:-}"
+
+unset_all; GCX_CONTEXT=ctxA; FAKE_STACK_RC=1
+out="$(discover_stack_settings 2>&1)"; rc=$?
+check "not logged in: continues (rc 0)"       "0" "${rc}"
+check "...and fills nothing"                  "" "${GRAFANA_CLOUD_METRICS_URL:-}"
+contains "...and tells the user to log in"    "gcx cloud login" "${out}"
+FAKE_STACK_RC=0; unset_all
+
 # ---- decommission note ----
 GRAFANA_STACK_URL="https://demo.grafana.net"
 out="$(print_deactivation_guidance)"
