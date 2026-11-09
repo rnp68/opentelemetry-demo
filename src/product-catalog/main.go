@@ -53,8 +53,9 @@ var (
 	catalog           []*pb.Product
 	resource          *sdkresource.Resource
 	initResourcesOnce sync.Once
-	// Extracts the deployment name from a pod name, e.g. "product-catalog2".
-	podNamePattern = regexp.MustCompile(`-(product-catalog[0-9]*)-`)
+	// Extracts the deployment name from a pod name, e.g. "product-catalog2" from
+	// "product-catalog2-6d5f7c9b8-x2x4z" or "demo-product-catalog2-6d5f7c9b8-x2x4z".
+	podNamePattern = regexp.MustCompile(`(?:^|-)(product-catalog[0-9]*)-`)
 )
 
 const DEFAULT_RELOAD_INTERVAL = 10
