@@ -250,3 +250,42 @@ endif
 .PHONY: build-react-native-android
 build-react-native-android:
 	docker build -f src/react-native-app/android.Dockerfile --platform=linux/amd64 --output=. src/react-native-app
+
+# ── Workshop: 1-click local deployment (see docs/deployment-guide.md) ─────────
+.PHONY: local local-grafana-cloud local-vanilla local-stop local-status local-reset
+local: ## Docker Compose, full demo with all local backends
+	@./start-local.sh
+
+local-grafana-cloud: ## Docker Compose, lean: telemetry to Grafana Cloud, no local backends
+	@./start-local.sh --grafana-cloud
+
+local-vanilla: ## Docker Compose, no backends, noop collector
+	@./start-local.sh --vanilla
+
+local-stop: ## Undeploy the Docker Compose deployment
+	@./start-local.sh --stop
+
+local-status: ## Show what is currently deployed
+	@./start-local.sh --status
+
+local-reset: ## Undeploy everything and delete build/ (keeps .env.local)
+	@./start-local.sh --reset
+
+.PHONY: local-k8s local-k8s-grafana-cloud local-k8s-vanilla local-k8s-clean local-k8s-alloy-collector local-k8s-stop
+local-k8s: ## Local Kubernetes, full demo
+	@./start-local.sh --k8s
+
+local-k8s-grafana-cloud: ## Local Kubernetes, collector exports to Grafana Cloud
+	@./start-local.sh --k8s-grafana-cloud
+
+local-k8s-vanilla: ## Local Kubernetes, no backends, noop collector
+	@./start-local.sh --k8s-vanilla
+
+local-k8s-clean: ## Local Kubernetes, no backends, no collector
+	@./start-local.sh --k8s-clean
+
+local-k8s-alloy-collector: ## Local Kubernetes, Alloy replaces the collector
+	@./start-local.sh --k8s-alloy-collector
+
+local-k8s-stop: ## Undeploy the local Kubernetes deployment
+	@./start-local.sh --k8s-stop
