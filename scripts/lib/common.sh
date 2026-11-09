@@ -63,7 +63,7 @@ default_for() {
     EKS_NODE_MAX)                   echo "4" ;;
     AWS_RESOURCE_TAG_KEY)           echo "project" ;;
     AWS_RESOURCE_TAG_VALUE)         echo "opentelemetry-demo" ;;
-    K8S_MONITORING_CHART_VERSION)   echo "^4" ;;
+    K8S_MONITORING_CHART_VERSION)   echo "4.6.0" ;;
     K8S_MONITORING_NAMESPACE)       echo "grafana-k8s-monitoring" ;;
     K8S_MONITORING_RELEASE)         echo "grafana-k8s-monitoring" ;;
     ALLOY_CHART_VERSION)            echo "1.8.1" ;;
