@@ -1,0 +1,88 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Collector configuration for the "Grafana Cloud only" mode
+# (docker-compose.grafana-cloud.yml).
+#
+# Differences from otelcol-config.yml:
+#   - the only backend is Grafana Cloud over OTLP/HTTP; no Jaeger, Prometheus
+#     or OpenSearch exporters, so those services need not run;
+#   - host and Docker metrics receivers (hostmetrics, docker_stats, redis) are
+#     left out: they need privileged mounts and are not needed for the demo;
+#   - the receiver, span-name normalization, spanmetrics connector and the
+#     collector self-telemetry are kept.
+#
+# Credentials are read from the container environment (set from .env.local):
+#   GRAFANA_OTLP_ENDPOINT, GRAFANA_INSTANCE_ID, GRAFANA_CLOUD_APIKEY
+
+extensions:
+  basicauth/grafanacloud:
+    client_auth:
+      username: ${env:GRAFANA_INSTANCE_ID}
+      password: ${env:GRAFANA_CLOUD_APIKEY}
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: ${env:OTEL_COLLECTOR_HOST}:${env:OTEL_COLLECTOR_PORT_GRPC}
+      http:
+        endpoint: ${env:OTEL_COLLECTOR_HOST}:${env:OTEL_COLLECTOR_PORT_HTTP}
+        cors:
+          allowed_origins:
+            - "http://*"
+            - "https://*"
+  httpcheck/frontend-proxy:
+    targets:
+      - endpoint: http://frontend-proxy:${env:ENVOY_PORT}
+
+exporters:
+  otlphttp/grafanacloud:
+    endpoint: ${env:GRAFANA_OTLP_ENDPOINT}
+    auth:
+      authenticator: basicauth/grafanacloud
+
+processors:
+  batch:
+  memory_limiter:
+    check_interval: 5s
+    limit_percentage: 80
+    spike_limit_percentage: 25
+  transform:
+    error_mode: ignore
+    trace_statements:
+      - context: span
+        statements:
+          # could be removed when https://github.com/vercel/next.js/pull/64852 is fixed upstream
+          - replace_pattern(name, "\\?.*", "")
+          - replace_match(name, "GET /api/products/*", "GET /api/products/{productId}")
+
+connectors:
+  spanmetrics:
+
+service:
+  extensions: [basicauth/grafanacloud]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, transform, batch]
+      exporters: [otlphttp/grafanacloud, spanmetrics]
+    metrics:
+      receivers: [httpcheck/frontend-proxy, otlp, spanmetrics]
+      processors: [memory_limiter, batch]
+      exporters: [otlphttp/grafanacloud]
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlphttp/grafanacloud]
+  telemetry:
+    metrics:
+      level: detailed
+      readers:
+        - periodic:
+            interval: 10000
+            timeout: 5000
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: ${env:OTEL_COLLECTOR_HOST}:${env:OTEL_COLLECTOR_PORT_HTTP}

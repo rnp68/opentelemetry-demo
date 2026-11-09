@@ -1,0 +1,62 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Docker Compose override: run the demo with telemetry collection switched off
+# but the backend UIs still running (they show no data).
+#
+# Usage (prefer ./start-local.sh --no-otel):
+#   docker compose -f docker-compose.yml -f docker-compose.no-otel.yml up --detach
+#
+# What this does:
+#   - replaces the collector with a noop stub that accepts and drops telemetry,
+#     so every depends_on: otel-collector is still satisfied;
+#   - disables flagd's OTel metrics export;
+#   - sets OTEL_SDK_DISABLED=true for SDKs that honor it (Java, .NET, Ruby,
+#     Node.js, Python, PHP). Go, C++ and Rust services ignore it and export to
+#     the noop stub, which discards the data.
+
+services:
+  otel-collector:
+    volumes: !override
+      - ./src/otel-collector/otelcol-config-noop.yml:/etc/otelcol-config.yml
+      - ${OTEL_COLLECTOR_CONFIG_EXTRAS}:/etc/otelcol-config-extras.yml
+    depends_on: !reset {}
+
+  flagd:
+    environment:
+      - FLAGD_METRICS_EXPORTER=
+      - FLAGD_OTEL_COLLECTOR_URI=
+
+  accounting:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  ad:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  cart:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  email:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  fraud-detection:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  frontend:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  kafka:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  load-generator:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  payment:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  quote:
+    environment:
+      - OTEL_SDK_DISABLED=true
+  recommendation:
+    environment:
+      - OTEL_SDK_DISABLED=true

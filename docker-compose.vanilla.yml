@@ -1,0 +1,41 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Docker Compose override: run the demo without any local observability
+# backends and without sending telemetry anywhere. OTel SDKs stay enabled; a
+# noop collector accepts the telemetry and drops it. Use it as a clean test bed
+# for following a Grafana Cloud / Alloy instrumentation procedure from scratch.
+#
+# Usage (prefer ./start-local.sh --vanilla):
+#   docker compose -f docker-compose.yml -f docker-compose.vanilla.yml up --detach
+#
+# To route telemetry to an Alloy instance on the host instead, set in
+# .env.local:  OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4317
+
+services:
+  jaeger:
+    profiles: ["local-backends"]
+
+  grafana:
+    profiles: ["local-backends"]
+
+  prometheus:
+    profiles: ["local-backends"]
+
+  opensearch:
+    profiles: ["local-backends"]
+
+  otel-collector:
+    volumes: !override
+      - ./src/otel-collector/otelcol-config-noop.yml:/etc/otelcol-config.yml
+      - ${OTEL_COLLECTOR_CONFIG_EXTRAS}:/etc/otelcol-config-extras.yml
+    depends_on: !reset {}
+
+  frontend-proxy:
+    depends_on: !override
+      frontend:
+        condition: service_started
+      load-generator:
+        condition: service_started
+      flagd-ui:
+        condition: service_started

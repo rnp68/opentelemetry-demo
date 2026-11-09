@@ -1,0 +1,53 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Docker Compose override: send all telemetry to Grafana Cloud and run no local
+# observability backends. Lean mode for a laptop or a workshop.
+#
+# Usage (prefer ./start-local.sh --grafana-cloud, which resolves .env.local):
+#   docker compose --env-file .env --env-file build/env.resolved \
+#     -f docker-compose.yml -f docker-compose.grafana-cloud.yml up --detach
+#
+# What this does:
+#   - moves Jaeger, Grafana, Prometheus and OpenSearch to the "local-backends"
+#     profile, so they do not start (about 1.8 GB of memory limits freed);
+#   - runs the collector with otelcol-config-grafana-cloud.yml, which exports to
+#     Grafana Cloud only, and removes the collector's dependency on Jaeger and
+#     OpenSearch;
+#   - removes frontend-proxy's dependency on Jaeger and Grafana;
+#   - passes the Grafana Cloud credentials to the collector. They come from the
+#     environment (.env.local); nothing is hardcoded here.
+#
+# Add --profile local-backends to also start the local backends.
+
+services:
+  jaeger:
+    profiles: ["local-backends"]
+
+  grafana:
+    profiles: ["local-backends"]
+
+  prometheus:
+    profiles: ["local-backends"]
+
+  opensearch:
+    profiles: ["local-backends"]
+
+  otel-collector:
+    volumes: !override
+      - ./src/otel-collector/otelcol-config-grafana-cloud.yml:/etc/otelcol-config.yml
+      - ${OTEL_COLLECTOR_CONFIG_EXTRAS}:/etc/otelcol-config-extras.yml
+    depends_on: !reset {}
+    environment:
+      - GRAFANA_OTLP_ENDPOINT
+      - GRAFANA_INSTANCE_ID
+      - GRAFANA_CLOUD_APIKEY
+
+  frontend-proxy:
+    depends_on: !override
+      frontend:
+        condition: service_started
+      load-generator:
+        condition: service_started
+      flagd-ui:
+        condition: service_started
