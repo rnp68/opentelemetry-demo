@@ -180,14 +180,28 @@ preflight now only sends one request and stops on 401/403
 exactly made the first tokens fail is not established; the stack-level creation path is what
 is documented to work.
 
+**Grafana Cloud run, second attempt (2026-11-09): passed.** With the working token,
+`./start-local.sh --grafana-cloud` started 21 containers, the collector logged 0 export
+failures and 0 auth errors, and the data was read back from the stack with `gcx` (context
+`demosrnp68`): traces from `frontend-proxy`, `frontend`, `product-catalog`, `cart` and
+`image-provider` with timestamps after the collector's start; metrics for 17 services
+(`accounting`, `ad`, `cart`, `checkout`, `currency`, `email`, `flagd`, `fraud-detection`,
+`frontend`, `frontend-proxy`, `kafka`, `load-generator`, `payment`, `product-catalog`,
+`quote`, `recommendation`, `shipping`); and logs (a `currency` stream seen).
+
+The same check showed that the SLO queries were wrong for this stack: `http_server_duration_count`
+and `rpc_server_duration_count` have 0 series (the `..._milliseconds_count` variants exist,
+but the frontend's HTTP metric has no `http_route` label). The four SLOs now use the
+collector's span metrics (`traces_span_metrics_calls_total`); each query returns a value on
+the live stack.
+
 **Still not run:**
 
-- the full demo deployed in Grafana Cloud mode with the working credentials, and the data seen in Grafana (in progress at the time of writing; see below if updated);
 - any Kubernetes mode on a live cluster, the AWS scripts, and the k8s-monitoring
   installer against a cluster (charts render only; the Alloy operator creates the
   receiver Service at install time);
 - Faro and Pyroscope against Grafana Cloud (built and type-checked only);
-- the SLO PromQL metric names against this branch's metrics.
+- Pyroscope and Faro data in Grafana (neither was enabled in this run).
 
 Deviations from the fork, on purpose: Drone CI, Renovate, `docker-compose.nocache.yml`,
 `src/frontend/Dockerfile.ci`, the buildkit change and the banner text were not

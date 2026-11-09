@@ -3,16 +3,19 @@
 #
 # SLO template. scripts/render-assets.sh substitutes ${...} placeholders from
 # .env.local and writes the result to build/grafana-assets/slo/.
-# VERIFY BEFORE RELYING ON IT: the PromQL below depends on the metric names your
-# Grafana Cloud stack ends up with (they vary with SDK and semantic-convention
-# versions). Run the query in Explore first; docs/grafana-assets.md explains how.
+# The query uses the collector's span metrics (traces_span_metrics_calls_total,
+# produced by the spanmetrics connector in the collector configs of this branch).
+# Checked against a live stack running this branch (demo 2.0.2, Grafana Cloud OTLP):
+# the SDK metrics http_server_duration_count and rpc_server_duration_count that the
+# original queries used do NOT exist there. The query returns no data until the
+# route has received requests (the load generator sends some).
 apiVersion: slo.ext.grafana.app/v1alpha1
 kind: SLO
 metadata:
   name: ib8ztiuzl4u9uymj60rw0
 spec:
   name: Browse Products Availability
-  description: HTTP success rate for product catalog browsing
+  description: Share of product-browsing requests (GET /api/products...) served by the frontend without an error
   labels:
     - key: team
       value: platform
@@ -28,4 +31,4 @@ spec:
   query:
     type: freeform
     freeform:
-      query: sum(rate(http_server_duration_count{http_route=~"/api/products.*",http_status_code!~"5.."}[$__rate_interval])) / sum(rate(http_server_duration_count{http_route=~"/api/products.*"}[$__rate_interval]))
+      query: sum(rate(traces_span_metrics_calls_total{service_name="frontend",span_name=~"GET /api/products.*",status_code!="STATUS_CODE_ERROR"}[$__rate_interval])) / sum(rate(traces_span_metrics_calls_total{service_name="frontend",span_name=~"GET /api/products.*"}[$__rate_interval]))

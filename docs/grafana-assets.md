@@ -34,16 +34,18 @@ flowchart LR
    `GRAFANA_CLOUD_PROM_DATASOURCE_UID` (default `grafanacloud-prom`; see Connections >
    Data sources > your Prometheus > the UID in the URL).
 2. **Render.** `scripts/render-assets.sh`. Undo: `scripts/render-assets.sh --clean`.
-3. **Verify the SLO queries (do not skip).** In Grafana Cloud > **Explore** > Prometheus
-   data source, run for each SLO the numerator query, for example:
+3. **Verify the SLO queries (do not skip).** The queries use the collector's span metrics,
+   `traces_span_metrics_calls_total`, filtered by `service_name="frontend"` and the span name
+   of the route (`GET /api/products`, `POST /api/checkout`, ...). They returned a value on a
+   live stack running this branch. The SDK metrics the original queries used
+   (`http_server_duration_count`, `rpc_server_duration_count`) do not exist there, and metric
+   names can differ in your stack. In Grafana Cloud > **Explore** > Prometheus data source, run
+   for each SLO, for example:
    ```promql
-   sum(rate(http_server_duration_count{http_route=~"/api/checkout.*"}[5m]))
+   sum(rate(traces_span_metrics_calls_total{service_name="frontend",span_name=~"POST /api/checkout.*"}[5m]))
    ```
-   If it returns **no data**, the metric has another name in your stack. List the
-   candidates: `{__name__=~"http_server.*duration.*"}`, then edit the query in
-   `grafana-assets/slo/*.yaml`. Metric names depend on the SDK and semantic-convention
-   versions and on how Grafana Cloud translates OTLP names; **the queries in this
-   repository were written for an older stack and have not been confirmed against this branch.**
+   A route only has data after it received requests (the load generator sends some). If you
+   get **no data**, list the span names: `count by (span_name) (traces_span_metrics_calls_total{service_name="frontend"})`.
 4. **Apply the SLOs** (preview first):
    ```bash
    gcx resources push slos.v1alpha1.slo.ext.grafana.app -p build/grafana-assets/slo --dry-run
@@ -68,5 +70,6 @@ flowchart LR
   probe. It now sends a complete order, which returns 200, but every request records a real
   (empty) order and a Kafka event, so the check is shipped with `enabled: false`. Enable it
   only if one order per probe per minute is acceptable.
+- **SLO queries:** moved from `http_server_duration_count` / `rpc_server_duration_count` (no data on this branch's stack) to span metrics; each was tested against live data. The recommendation SLO measures `GET /api/recommendations` as seen by the frontend, because the Python recommendation service emits no RPC metrics.
 - SLO metadata names (the long IDs) are kept from the originals; they are opaque
   identifiers inside your stack.
