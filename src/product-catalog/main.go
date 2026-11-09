@@ -13,6 +13,7 @@ import (
 	"net"
 	"os"
 	"os/signal"
+	"regexp"
 	"strconv"
 	"strings"
 	"sync"
@@ -52,6 +53,8 @@ var (
 	catalog           []*pb.Product
 	resource          *sdkresource.Resource
 	initResourcesOnce sync.Once
+	// Extracts the deployment name from a pod name, e.g. "product-catalog2".
+	podNamePattern = regexp.MustCompile(`-(product-catalog[0-9]*)-`)
 )
 
 const DEFAULT_RELOAD_INTERVAL = 10
@@ -339,8 +342,23 @@ func (p *productCatalog) checkProductFailure(ctx context.Context, id string) boo
 	}
 
 	client := openfeature.NewClient("productCatalog")
+
+	// Selective failure: when running in Kubernetes, a flag named
+	// "fail-<deployment>" (for example "fail-product-catalog2") makes only the
+	// pods of that deployment fail. The pod name comes from OTEL_K8S_POD_NAME.
+	if podName := os.Getenv("OTEL_K8S_POD_NAME"); podName != "" {
+		match := podNamePattern.FindStringSubmatch(podName)
+		if len(match) > 1 && match[1] != "" && getFeatureFlag(ctx, client, "fail-"+match[1]) {
+			return true
+		}
+	}
+
+	return getFeatureFlag(ctx, client, "productCatalogFailure")
+}
+
+func getFeatureFlag(ctx context.Context, client *openfeature.Client, flagName string) bool {
 	failureEnabled, _ := client.BooleanValue(
-		ctx, "productCatalogFailure", false, openfeature.EvaluationContext{},
+		ctx, flagName, false, openfeature.EvaluationContext{},
 	)
 	return failureEnabled
 }
