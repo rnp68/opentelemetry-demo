@@ -164,19 +164,25 @@ real defects, both fixed:
 The same test showed the original synthetic checkout check returns 500; it was corrected
 and ships disabled.
 
-**Grafana Cloud run (2026-11-09): attempted, did not pass.** `./start-local.sh --grafana-cloud`
-started all 21 containers with no local backends, but the collector's exports to
-`otlp-gateway-prod-us-east-2.grafana.net` all failed with **HTTP 401** (traces, metrics and
-logs). A direct request with the same credentials also gave 401, so the collector config is
-not at fault. The token's embedded region is `prod-us-east-0` while the endpoint and instance
-ID are for a `prod-us-east-2` stack: tokens only work in their own region. The script now
-tests the credentials (region match, then one request) before deploying and stops on a
-mismatch or a 401/403 (`scripts/tests/credential-check-test.sh`). Data reaching Grafana Cloud
-has therefore **not** been confirmed yet; it needs a token created for the stack's region.
+**Grafana Cloud run (2026-11-09), first attempt: failed with HTTP 401.** The collector's
+exports to `otlp-gateway-prod-us-east-2.grafana.net` failed for traces, metrics and logs, and
+a direct request with the same credentials also gave 401, so the collector config was not at
+fault. The first two tokens had been created at the organization level; a token created from
+inside the stack (stack menu > Administration > Cloud access policies) was accepted
+(traces 200, metrics 200, logs 204; a wrong password still gives 401).
+
+A note on a wrong diagnosis: I first attributed the 401 to the token's embedded region
+(`prod-us-east-0`) not matching the endpoint (`prod-us-east-2`), and added a preflight
+that stopped on that mismatch. The working token carries the same field, so the field is not
+the stack's region and that rule would have blocked a valid token. It was removed: the
+preflight now only sends one request and stops on 401/403
+(`scripts/tests/credential-check-test.sh`, which includes a regression test for this). What
+exactly made the first tokens fail is not established; the stack-level creation path is what
+is documented to work.
 
 **Still not run:**
 
-- a Grafana Cloud run with valid credentials (see above);
+- the full demo deployed in Grafana Cloud mode with the working credentials, and the data seen in Grafana (in progress at the time of writing; see below if updated);
 - any Kubernetes mode on a live cluster, the AWS scripts, and the k8s-monitoring
   installer against a cluster (charts render only; the Alloy operator creates the
   receiver Service at install time);

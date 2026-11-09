@@ -145,8 +145,8 @@ marked "yes" above. Create one at <https://grafana.com/auth/sign-up/create-user>
 If you start a script before filling these in, it stops with the same
 instructions and tells you to re-run it; nothing is half-deployed. In the
 Grafana Cloud modes the script also **tests the credentials before it deploys
-anything**: it compares the token's region with the endpoint and sends one
-request to the OTLP gateway, and stops with an explanation on a 401 or 403.
+anything**: it sends one request to the OTLP gateway with your credentials and stops
+with an explanation on a 401 or 403.
 
 ---
 
@@ -419,8 +419,7 @@ Each script has `--help`.
 | Compose: services restart or exit | memory below 8 GB | raise the memory in Docker/OrbStack settings |
 | Compose: `flagd-ui` crashes with `SECRET_KEY_BASE is missing`, `kafka` unhealthy | images pulled with the tag `latest` | set `DEMO_VERSION` (default `2.0.2`) and re-run; check `docker ps --format '{{.Image}}'` shows `:2.0.2-` tags |
 | Compose: `container name "/x" is already in use` | a stopped container from another project has the same fixed name | `docker ps -a --filter name=x` shows its project; remove it with `docker rm <id>` once you are sure it is not needed |
-| `start-local.sh` stops with `The token belongs to region 'X' but GRAFANA_OTLP_ENDPOINT points to 'Y'` | access-policy tokens only work for stacks in their own region | create the access policy for the region of the stack that `GRAFANA_OTLP_ENDPOINT` and `GRAFANA_INSTANCE_ID` come from, put the new token in `GRAFANA_CLOUD_APIKEY` |
-| `start-local.sh` stops with `Grafana Cloud rejected the credentials (HTTP 401)` | wrong instance ID, revoked/expired or truncated token | the script tests the credentials before deploying; follow the three checks it prints (`--skip-credential-check` bypasses the test) |
+| `start-local.sh` stops with `Grafana Cloud rejected the credentials (HTTP 401)` | wrong instance ID, a token not created for this stack, or a revoked, expired or truncated token | the script tests the credentials before deploying and prints three checks: same stack for endpoint and instance ID; create the token from inside the stack (stack menu > Administration > Cloud access policies) and not from the organization-level Security > Access Policies page; copy the whole token. `--skip-credential-check` bypasses the test |
 | Collector logs `401` / `403` | wrong instance ID or token, or token lacks scopes | regenerate the token with `metrics/logs/traces:write`, update `.env.local`, re-run |
 | Collector logs `no such host` | `GRAFANA_OTLP_ENDPOINT` mistyped | copy it again from the portal |
 | K8s: `No local Kubernetes context found` | no cluster | enable Kubernetes in OrbStack/Docker Desktop, or answer `y` to the minikube prompt |

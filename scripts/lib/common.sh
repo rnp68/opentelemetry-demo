@@ -184,9 +184,11 @@ require_vars() {
   fi
 }
 
-# Region embedded in a Grafana Cloud access-policy token (glc_<base64 JSON>),
-# e.g. "prod-us-east-0". Empty when it cannot be decoded. The secret part of the
-# token is never read or printed.
+# Region field embedded in a Grafana Cloud access-policy token (glc_<base64 JSON>).
+# Empty when it cannot be decoded. The secret part of the token is never read or
+# printed. NOTE: this field is NOT reliably the region of the stack the token
+# works for (a token whose field says prod-us-east-0 is accepted by a
+# prod-us-east-2 gateway), so it is only ever used as a hint, never to decide.
 token_region() {
   local b pad
   b="${1#glc_}"
@@ -197,26 +199,14 @@ token_region() {
     | LC_ALL=C sed -nE 's/.*"m":\{[^}]*"r":"([^"]+)".*/\1/p' | head -1
 }
 
-# check_grafana_cloud_credentials: verifies, before anything is deployed, that the
-# OTLP credentials are accepted. Stops (exit 1) on a proven problem; only warns
-# when it cannot tell (no network, unexpected answer). Skip: SKIP_CREDENTIAL_CHECK=true.
+# check_grafana_cloud_credentials: before anything is deployed, sends one request
+# to the OTLP gateway with the configured credentials. 401 or 403 stop the script
+# (exit 1) with the likely causes; when the test cannot be made (no curl, no
+# network) it only warns. Skip: SKIP_CREDENTIAL_CHECK=true.
 check_grafana_cloud_credentials() {
   [ "${SKIP_CREDENTIAL_CHECK:-false}" = "true" ] && { log_warn "Credential check skipped."; return 0; }
-  local host region code
+  local host code region
   host="$(printf '%s' "${GRAFANA_OTLP_ENDPOINT}" | sed -E 's#^https?://([^/]+).*#\1#')"
-  region="$(token_region "${GRAFANA_CLOUD_APIKEY}")"
-  if [ -n "${region}" ]; then
-    case "${host}" in
-      *"${region#prod-}"*) ;;
-      *)
-        log_error "The token belongs to region '${region}' but GRAFANA_OTLP_ENDPOINT points to '${host}'."
-        log_error "Tokens only work for stacks in their own region (this is what makes Grafana answer HTTP 401)."
-        log_error "Fix: in the Grafana Cloud portal open the stack that GRAFANA_OTLP_ENDPOINT and GRAFANA_INSTANCE_ID"
-        log_error "come from > Administration > Cloud access policies > Create access policy for THAT stack's region"
-        log_error "(scopes metrics:write, logs:write, traces:write) > Add token, and put it in GRAFANA_CLOUD_APIKEY."
-        exit 1 ;;
-    esac
-  fi
   if ! command -v curl >/dev/null 2>&1; then
     log_warn "curl not found; cannot test the credentials before deploying."
     return 0
@@ -228,9 +218,13 @@ check_grafana_cloud_credentials() {
   case "${code}" in
     401)
       log_error "Grafana Cloud rejected the credentials (HTTP 401) at ${host}."
-      log_error "Check, in this order: 1) GRAFANA_INSTANCE_ID is the OTLP Instance ID of the same stack as the endpoint;"
-      log_error "2) the token was created for that stack's region and has not been revoked or expired;"
-      log_error "3) the token was copied completely (no cut-off, no extra characters)."
+      log_error "Check, in this order:"
+      log_error "  1) GRAFANA_INSTANCE_ID is the OTLP Instance ID of the SAME stack as GRAFANA_OTLP_ENDPOINT;"
+      log_error "  2) the token was created from inside that stack (stack menu > Administration > Cloud access"
+      log_error "     policies), not from the organization-level Security > Access Policies page;"
+      log_error "  3) the token was copied completely and has not been revoked or expired."
+      region="$(token_region "${GRAFANA_CLOUD_APIKEY}")"
+      [ -n "${region}" ] && log_error "  (hint only: the token metadata says '${region}'; the endpoint host is '${host}')"
       exit 1 ;;
     403)
       log_error "The credentials are valid but lack permission (HTTP 403): add the scopes metrics:write, logs:write and traces:write."
