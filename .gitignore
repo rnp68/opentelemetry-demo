@@ -52,3 +52,9 @@ test/tracetesting/tracetesting-vars.yaml
 *.apk
 
 !src/currency/build
+
+# Workshop: real configuration and secrets (template: .env.example)
+.env.local
+.env.*.local
+# Rendered Grafana-side assets and temporary build output of the workshop scripts
+/build/
