@@ -50,6 +50,7 @@ is_unset() { [ -z "${1:-}" ] || [ "${1}" = "unknown" ]; }
 default_for() {
   case "$1" in
     OTEL_DEMO_CHART_VERSION)        echo "0.37.8" ;;
+    DEMO_VERSION)                   echo "2.0.2" ;;
     OTEL_DEMO_NAMESPACE)            echo "otel-demo" ;;
     OTEL_DEMO_RELEASE)              echo "opentelemetry-demo" ;;
     MINIKUBE_CPUS)                  echo "4" ;;

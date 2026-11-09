@@ -5,20 +5,23 @@
 # ${DEMO_TARGET_URL} (where Grafana Cloud's probes can reach the shop) and
 # ${DEMO_ENVIRONMENT} from .env.local.
 #
-# UNVERIFIED: this posts an order for a user with an empty cart. Whether the API
-# answers 200 for that, and whether it records an order every minute, has not
-# been checked against a running stack. Test it with one manual request before
-# enabling it (see docs/grafana-assets.md).
+# Observed against a running stack (demo 2.0.2, smoke test 2026-11-09):
+#   - the original body {"userId":"health-check"} returns HTTP 500 (no address,
+#     card or currency), so a check that expects 200 would fail on every probe;
+#   - a complete order body returns 200 even with an empty cart, but every
+#     request records a real (empty) order and a Kafka event.
+# So this check carries a complete body and is DISABLED by default; enable it
+# (enabled: true) only if you accept one order per probe per minute.
 apiVersion: synthetic-monitoring.grafana.com/v1alpha1
 kind: Check
 metadata:
   name: otel-demo-checkout
 spec:
   job: otel-demo-checkout
-  target: ${DEMO_TARGET_URL}/api/checkout
+  target: ${DEMO_TARGET_URL}/api/checkout?currencyCode=USD
   frequency: 60000
   timeout: 10000
-  enabled: true
+  enabled: false
   labels:
     app: otel-demo
     env: ${DEMO_ENVIRONMENT}
@@ -31,7 +34,7 @@ spec:
         - HTTP/2.0
       failIfNotSSL: false
       method: POST
-      body: '{"userId":"health-check"}'
+      body: '{"userId":"synthetic-check","email":"check@example.com","address":{"streetAddress":"1 Test St","city":"Testville","state":"CA","country":"US","zipCode":"12345"},"userCurrency":"USD","creditCard":{"creditCardNumber":"4432-8015-6152-0454","creditCardCvv":672,"creditCardExpirationYear":2030,"creditCardExpirationMonth":1}}'
       headers:
         - name: Content-Type
           values:

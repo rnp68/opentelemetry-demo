@@ -148,16 +148,30 @@ Commits on `workshop`, in order (`git log --oneline origin/K8s_basic..workshop`)
 
 ## 8. Verification status
 
-**Checked statically or in isolation** (everything above). **Not run:**
+**Run live (2026-11-09), Docker Desktop, `./start-local.sh --vanilla`:** all 21
+containers start on the 2.0.2 images and stay up; the shop, load generator and feature
+flag pages answer 200; `GET /api/products`, `GET /api/cart?sessionId=...`, adding an item
+to the cart and placing an order all answer 200; the noop collector receives telemetry;
+none of Jaeger, Grafana, Prometheus or OpenSearch starts. The first attempts found two
+real defects, both fixed:
 
-- the full demo stack was **not started** (Docker Compose or Kubernetes), so no
-  end-to-end check that traces, metrics and logs reach Grafana Cloud has been done;
-- nothing was deployed to AWS and `grafana-cloud-k8s-monitoring/install.sh` was not
-  run against a cluster (the chart is rendered only; the Alloy operator creates the
+- a stale container from another project held the fixed name `load-generator` (documented
+  in the troubleshooting table);
+- the upstream `.env` sets `DEMO_VERSION=latest`, so Compose pulled today's images, which do
+  not match this compose file (`flagd-ui` crashed with `SECRET_KEY_BASE is missing`, `kafka`
+  failed its health check). The workshop now defaults `DEMO_VERSION` to 2.0.2.
+
+The same test showed the original synthetic checkout check returns 500; it was corrected
+and ships disabled.
+
+**Still not run:**
+
+- `--grafana-cloud`, so no check yet that traces, metrics and logs reach Grafana Cloud;
+- any Kubernetes mode on a live cluster, the AWS scripts, and the k8s-monitoring
+  installer against a cluster (charts render only; the Alloy operator creates the
   receiver Service at install time);
-- the SLO queries were not confirmed against this branch's metric names, and the
-  synthetic checkout check is marked UNVERIFIED;
-- Faro and Pyroscope were built and type-checked, not run against Grafana Cloud.
+- Faro and Pyroscope against Grafana Cloud (built and type-checked only);
+- the SLO PromQL metric names against this branch's metrics.
 
 Deviations from the fork, on purpose: Drone CI, Renovate, `docker-compose.nocache.yml`,
 `src/frontend/Dockerfile.ci`, the buildkit change and the banner text were not

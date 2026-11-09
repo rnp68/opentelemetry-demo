@@ -414,6 +414,8 @@ Each script has `--help`.
 | `The Docker daemon is not reachable` | Docker/OrbStack not running, or both installed and fighting | Start one, quit the other, re-run |
 | `Missing configuration ... GRAFANA_...` | value not set in `.env.local` | follow the printed portal path, re-run |
 | Compose: services restart or exit | memory below 8 GB | raise the memory in Docker/OrbStack settings |
+| Compose: `flagd-ui` crashes with `SECRET_KEY_BASE is missing`, `kafka` unhealthy | images pulled with the tag `latest` | set `DEMO_VERSION` (default `2.0.2`) and re-run; check `docker ps --format '{{.Image}}'` shows `:2.0.2-` tags |
+| Compose: `container name "/x" is already in use` | a stopped container from another project has the same fixed name | `docker ps -a --filter name=x` shows its project; remove it with `docker rm <id>` once you are sure it is not needed |
 | Collector logs `401` / `403` | wrong instance ID or token, or token lacks scopes | regenerate the token with `metrics/logs/traces:write`, update `.env.local`, re-run |
 | Collector logs `no such host` | `GRAFANA_OTLP_ENDPOINT` mistyped | copy it again from the portal |
 | K8s: `No local Kubernetes context found` | no cluster | enable Kubernetes in OrbStack/Docker Desktop, or answer `y` to the minikube prompt |

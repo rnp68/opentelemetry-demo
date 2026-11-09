@@ -79,6 +79,12 @@ Default = value used when the variable is empty or `unknown`. **—** means ther
 | `MINIKUBE_CPUS` | `4` |  | start-local.sh (only when it offers to start minikube) | CPUs for a minikube cluster the script starts. |
 | `MINIKUBE_MEMORY_MB` | `8192` |  | same as MINIKUBE_CPUS | Memory in MB for that cluster. |
 
+### Demo images (Docker Compose)
+
+| Variable | Default | Secret | Used by | Meaning |
+|---|---|:---:|---|---|
+| `DEMO_VERSION` | `2.0.2` |  | start-local.sh (Compose modes), `docker compose build` | Image tag of the demo services. The upstream `.env` says `latest`, which pulls whatever upstream published last (found by the smoke test: `latest-flagd-ui` crashes without `SECRET_KEY_BASE`, `latest-kafka` fails its health check). 2.0.2 matches Helm chart 0.37.8. |
+
 ### Load generator (lean default is 5 users; upstream uses 10)
 
 | Variable | Default | Secret | Used by | Meaning |

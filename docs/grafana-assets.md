@@ -63,9 +63,10 @@ flowchart LR
   `sessionId` and `currencyCode`. Fixed.
 - **Checkout test:** placed an order without ever filling the cart. It now adds one item
   (`66VCHSJNUP`) first.
-- **Synthetic checkout check: UNVERIFIED.** It posts `{"userId":"health-check"}` and expects
-  `200`. Whether the API returns `200` for an empty cart, and whether it records an order
-  every minute, has not been observed. Send one request by hand before enabling it:
-  `curl -s -o /dev/null -w '%{http_code}\n' -X POST -H 'Content-Type: application/json' -d '{"userId":"health-check"}' "$DEMO_TARGET_URL/api/checkout"`.
+- **Synthetic checkout check:** tested against a running demo 2.0.2. The original body
+  (`{"userId":"health-check"}`) returned **500**, so the check would have failed on every
+  probe. It now sends a complete order, which returns 200, but every request records a real
+  (empty) order and a Kafka event, so the check is shipped with `enabled: false`. Enable it
+  only if one order per probe per minute is acceptable.
 - SLO metadata names (the long IDs) are kept from the originals; they are opaque
   identifiers inside your stack.
