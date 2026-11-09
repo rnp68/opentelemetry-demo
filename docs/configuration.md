@@ -113,6 +113,15 @@ Default = value used when the variable is empty or `unknown`. **—** means ther
 | `DEMO_ENVIRONMENT` | `workshop` |  | scripts/render-assets.sh | Value of the env label on SLOs and checks. |
 | `GRAFANA_CLOUD_PROM_DATASOURCE_UID` | `grafanacloud-prom` |  | scripts/render-assets.sh | UID of your stack's Prometheus data source (SLO destination). |
 
+## Format of `.env.local`
+
+One `KEY=value` per line, no spaces needed. The scripts read the file themselves; they do **not** run it as a shell script, so characters such as `$`, `&` or `#` inside a token are safe.
+
+- A value is its first word. Text after it is dropped, and the script warns about it unless it is a `# comment`.
+- Put the value in single or double quotes only if it contains spaces.
+- Lines that are not `KEY=value` (comments, blank lines, lowercase names) are ignored.
+- Test: `scripts/tests/env-parser-test.sh`.
+
 ## The `.env*` files in the repository root
 
 | File | Tracked | Who owns it | Read by |

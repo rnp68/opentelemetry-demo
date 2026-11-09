@@ -100,6 +100,41 @@ env_example_keys() {
   grep -E '^[A-Z][A-Z0-9_]*=' "${ENV_EXAMPLE}" | sed -E 's/=.*//'
 }
 
+# Reads KEY=value lines into the environment WITHOUT executing the file (so a
+# token containing $ or & is safe, and "KEY= value" with a stray space works).
+# Accepted: spaces around the value, an inline "  # comment", and one pair of
+# surrounding single or double quotes (needed only for values with spaces). Lines that are not KEY=value are ignored.
+parse_env_file() {
+  local line key val rest
+  while IFS= read -r line || [ -n "${line}" ]; do
+    case "${line}" in
+      [A-Z]*=*) ;;
+      *) continue ;;
+    esac
+    key="${line%%=*}"
+    case "${key}" in *[!A-Z0-9_]*) continue ;; esac
+    val="${line#*=}"
+    # trim leading whitespace
+    val="${val#"${val%%[![:space:]]*}"}"
+    case "${val}" in
+      \"*\"*) val="${val#\"}"; val="${val%%\"*}" ;;
+      \'*\'*) val="${val#\'}"; val="${val%%\'*}" ;;
+      *)
+        # An unquoted value is its first word: none of these variables may
+        # contain spaces. Anything after it is dropped (a comment is expected;
+        # other text is reported, so a pasted-over line is noticed).
+        rest="${val#"${val%%[[:space:]]*}"}"
+        val="${val%%[[:space:]]*}"
+        rest="${rest#"${rest%%[![:space:]]*}"}"
+        case "${rest}" in
+          ""|"#"*) ;;
+          *) log_warn "${1##*/}: ignored extra text after the value of ${key} (put the value in quotes if it contains spaces)." ;;
+        esac ;;
+    esac
+    export "${key}=${val}"
+  done < "$1"
+}
+
 # Load .env.local without overriding variables already exported in the shell,
 # then apply built-in defaults for everything that is still unset.
 load_env() {
@@ -111,10 +146,7 @@ load_env() {
     eval "__SHELL_${key}=\"\${shell_val}\""
   done
   if [ -f "${ENV_LOCAL}" ]; then
-    set -a
-    # shellcheck disable=SC1090
-    . "${ENV_LOCAL}"
-    set +a
+    parse_env_file "${ENV_LOCAL}"
   fi
   for key in $(env_example_keys); do
     eval "shell_val=\"\${__SHELL_${key}}\""
