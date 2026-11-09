@@ -54,6 +54,9 @@ values and is never committed).
 | Extension | What it gives you | Documentation |
 |-----------|-------------------|:-------------:|
 | **Deployment guide** | Click-by-click guide with a 1-click script for every step | [docs/deployment-guide.md](docs/deployment-guide.md) |
+| **Manual deployment** | Every step by hand, click by click, with a check after each step | [docs/manual-deployment.md](docs/manual-deployment.md) |
+| **Change report** | Everything that was changed, why, and how it was verified | [docs/workshop-changes.md](docs/workshop-changes.md) |
+| **Documentation index** | Which document to read for what | [docs/README.md](docs/README.md) |
 | **Grafana Cloud mode** | Docker Compose or Kubernetes without Jaeger, Prometheus, Grafana and OpenSearch; telemetry goes to Grafana Cloud | [docs/deployment-guide.md](docs/deployment-guide.md) |
 | **Faro and Pyroscope** | Browser real-user monitoring and continuous profiling of `checkout` | [docs/faro-and-pyroscope.md](docs/faro-and-pyroscope.md) |
 | **Noop modes** | Run without collecting telemetry (`--vanilla`, `--no-otel`) | [docs/otel-noop-mode.md](docs/otel-noop-mode.md) |

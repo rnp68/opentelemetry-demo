@@ -176,7 +176,7 @@ region (`prod-us-east-0`) not matching the endpoint (`prod-us-east-2`), and adde
 stopped on that mismatch. The working token carries the same field, so the rule would have blocked
 a valid token and it was removed: the preflight now only sends one request and stops on 401/403
 (`scripts/tests/credential-check-test.sh`, which includes a regression test for this). After a
-`gcx cloud login`, `gcx cloud stacks get demosrnp68` shows why: the stack's `regionSlug` is
+`gcx cloud login`, `gcx cloud stacks get <stack-slug>` shows why: the stack's `regionSlug` is
 `prod-us-east-0` (that is what the token field holds) while its `clusterSlug`, which names the OTLP
 gateway, is `prod-us-east-2`. What exactly made the first tokens fail is still not established;
 the stack-level creation path is what is documented to work.
@@ -184,7 +184,7 @@ the stack-level creation path is what is documented to work.
 **Grafana Cloud run, second attempt (2026-11-09): passed.** With the working token,
 `./start-local.sh --grafana-cloud` started 21 containers, the collector logged 0 export
 failures and 0 auth errors, and the data was read back from the stack with `gcx` (context
-`demosrnp68`): traces from `frontend-proxy`, `frontend`, `product-catalog`, `cart` and
+<the stack's gcx context>): traces from `frontend-proxy`, `frontend`, `product-catalog`, `cart` and
 `image-provider` with timestamps after the collector's start; metrics for 17 services
 (`accounting`, `ad`, `cart`, `checkout`, `currency`, `email`, `flagd`, `fraud-detection`,
 `frontend`, `frontend-proxy`, `kafka`, `load-generator`, `payment`, `product-catalog`,

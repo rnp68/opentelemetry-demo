@@ -2,6 +2,11 @@
 
 # Deployment guide
 
+> **Documents in this set:** this guide (overview, 1-click scripts) |
+> [manual-deployment.md](manual-deployment.md) (every step by hand, click by click, with checks) |
+> [workshop-changes.md](workshop-changes.md) (everything that was changed, why, and how it was verified) |
+> [configuration.md](configuration.md) (every variable). Index: [README.md](README.md).
+
 This is the master guide for the workshop branch. It takes you from an empty
 machine to a running OpenTelemetry Demo that sends its telemetry to Grafana
 Cloud. Every step can be done with a **1-click script** or by hand; both are
@@ -135,11 +140,16 @@ marked "yes" above. Create one at <https://grafana.com/auth/sign-up/create-user>
 
    | Variable | Where to find it, click by click |
    |---|---|
-   | `GRAFANA_OTLP_ENDPOINT` | <https://grafana.com> > sign in > **My Account** > your stack > **Details** (OpenTelemetry tile) > **Configure** > copy **OTLP Endpoint** (ends in `/otlp`) |
-   | `GRAFANA_INSTANCE_ID` | same page: copy **Instance ID** (a number) |
-   | `GRAFANA_CLOUD_APIKEY` | same page: **Generate now** under the token section, name it `otel-demo`, copy the token (starts with `glc_`). It is shown once; paste it into `.env.local` immediately |
+   | `GRAFANA_OTLP_ENDPOINT` | Grafana Cloud > open (Launch) your stack > **Connections** > search **OpenTelemetry** > open the tile > copy the **OTLP endpoint** (ends in `/otlp`). With `gcx`: `gcx --context <ctx> cloud stacks get <slug>` and build `https://otlp-gateway-<clusterSlug>.grafana.net/otlp` |
+   | `GRAFANA_INSTANCE_ID` | same tile, or the `id` field of `gcx cloud stacks get` (a number) |
+   | `GRAFANA_CLOUD_APIKEY` | **inside the stack**: **Administration** > **Cloud access policies** > **Create access policy** > scopes `metrics:write`, `logs:write`, `traces:write` > **Create** > **Add token** > copy the `glc_...` value (shown once) |
 
-   The token must have the scopes `metrics:write`, `logs:write` and `traces:write`.
+   The token must have the scopes `metrics:write`, `logs:write` and `traces:write`. Create it from
+   inside the stack as described, not from the organization-level page. After **adding a scope to an
+   existing policy, create a new token**: an old token did not pick the new scope up during testing.
+   Check the token once pasted: it starts with exactly `glc_` (a stray extra letter in front produced
+   `invalid token`). The full click-by-click version, with a test request for the token, is
+   [manual-deployment.md, Part C](manual-deployment.md#part-c-grafana-cloud-collect-your-connection-details).
    Never paste a token into a chat, an issue or a commit.
 
 If you start a script before filling these in, it stops with the same
@@ -184,18 +194,25 @@ Running the same command again recreates the stack in place.
 
 ### Manual equivalent
 
-1. Make sure no line of `.env.local` still says `unknown` for a value you need,
-   and delete the lines you do not use (a literal `unknown` would be passed to the
-   containers; the script avoids this by writing `build/env.resolved`).
+1. Create the file Docker Compose must read. **Never pass `.env.local` itself to Compose**: it contains
+   the placeholder `unknown` and comments, and Compose would hand the literal word `unknown` (and any
+   text after a value) to the containers. This helper writes a clean file and deploys nothing:
+   ```bash
+   scripts/make-env.sh          # writes build/env.resolved (mode 0600, git-ignored)
+   scripts/make-env.sh --check  # only lists what is set; secrets shown as "set (N chars)"
+   ```
 2. Start the stack (choose the override that matches your mode):
 
    | Mode | Command |
    |---|---|
-   | full | `docker compose --env-file .env --env-file .env.local up --force-recreate --remove-orphans --detach` |
-   | grafana-cloud | `docker compose --env-file .env --env-file .env.local -f docker-compose.yml -f docker-compose.grafana-cloud.yml up --force-recreate --remove-orphans --detach` |
-   | vanilla | `docker compose --env-file .env --env-file .env.local -f docker-compose.yml -f docker-compose.vanilla.yml up --force-recreate --remove-orphans --detach` |
-   | no-otel | `docker compose --env-file .env --env-file .env.local -f docker-compose.yml -f docker-compose.no-otel.yml up --force-recreate --remove-orphans --detach` |
-   | minimal | `docker compose --env-file .env --env-file .env.local -f docker-compose.minimal.yml up --force-recreate --remove-orphans --detach` |
+   | full | `docker compose --env-file .env --env-file build/env.resolved up --force-recreate --remove-orphans --detach` |
+   | grafana-cloud | `docker compose --env-file .env --env-file build/env.resolved -f docker-compose.yml -f docker-compose.grafana-cloud.yml up --force-recreate --remove-orphans --detach` |
+   | vanilla | `docker compose --env-file .env --env-file build/env.resolved -f docker-compose.yml -f docker-compose.vanilla.yml up --force-recreate --remove-orphans --detach` |
+   | no-otel | `docker compose --env-file .env --env-file build/env.resolved -f docker-compose.yml -f docker-compose.no-otel.yml up --force-recreate --remove-orphans --detach` |
+   | minimal | `docker compose --env-file .env --env-file build/env.resolved -f docker-compose.minimal.yml up --force-recreate --remove-orphans --detach` |
+
+   With Faro or Pyroscope configured, first run the same command with `build frontend checkout`
+   instead of `up ...`.
 
 3. Wait until `docker compose ps` shows `frontend-proxy` as `running`.
 
@@ -226,7 +243,7 @@ Feature flags (failure injection) are at <http://localhost:8080/feature>.
 
 ```bash
 ./start-local.sh --stop                # 1-click
-docker compose --env-file .env -f docker-compose.yml -f docker-compose.no-otel.yml --profile local-backends --profile tests --profile odd down --remove-orphans --volumes   # manual
+docker compose --env-file .env --env-file build/env.resolved -f docker-compose.yml -f docker-compose.no-otel.yml --profile local-backends --profile tests --profile odd down --remove-orphans --volumes   # manual
 ```
 
 ---

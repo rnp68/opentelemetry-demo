@@ -23,6 +23,7 @@ Precedence, highest first: **shell environment**, then **`.env.local`**, then th
 - The upstream `.env` (ports, image versions, ...) is never edited; `.env.local` is layered on top of it.
 - `.env.local` is listed in `.gitignore`; do not commit it. Scripts create it from `.env.example` (mode 0600) when it is missing.
 - Values without a safe default (endpoints, IDs, tokens) make the script stop and print where to find them (`require_vars`). Fix `.env.local` and re-run: the script continues from the first missing requirement.
+- `scripts/make-env.sh` writes `build/env.resolved` without deploying anything (use it for the manual route in [manual-deployment.md](manual-deployment.md)). **Never pass `.env.local` itself to Docker Compose**: it still contains the `unknown` placeholders and comments.
 - `build/env.resolved` is rewritten on every run and is gitignored; it exists so that the `unknown` placeholder never reaches a container.
 
 ## Variables
