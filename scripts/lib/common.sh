@@ -191,6 +191,11 @@ write_resolved_env() {
 build_compose_env_args() {
   COMPOSE_ENV_ARGS=( --env-file "${REPO_ROOT}/.env" )
   [ -f "${REPO_ROOT}/.env.override" ] && COMPOSE_ENV_ARGS+=( --env-file "${REPO_ROOT}/.env.override" )
+  # Java workaround for Apple Silicon (macOS 15.2+, M4): JVMs crash without
+  # -XX:UseSVE=0 (JDK-8345296). The upstream Makefile does the same.
+  if [ "$(uname -s)" = "Darwin" ] && [ "$(uname -m)" = "arm64" ] && [ -f "${REPO_ROOT}/.env.arm64" ]; then
+    COMPOSE_ENV_ARGS+=( --env-file "${REPO_ROOT}/.env.arm64" )
+  fi
   [ -f "${ENV_RESOLVED}" ] && COMPOSE_ENV_ARGS+=( --env-file "${ENV_RESOLVED}" )
   return 0
 }

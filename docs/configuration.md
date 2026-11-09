@@ -113,6 +113,19 @@ Default = value used when the variable is empty or `unknown`. **—** means ther
 | `DEMO_ENVIRONMENT` | `workshop` |  | scripts/render-assets.sh | Value of the env label on SLOs and checks. |
 | `GRAFANA_CLOUD_PROM_DATASOURCE_UID` | `grafanacloud-prom` |  | scripts/render-assets.sh | UID of your stack's Prometheus data source (SLO destination). |
 
+## The `.env*` files in the repository root
+
+| File | Tracked | Who owns it | Read by |
+|---|:---:|---|---|
+| `.env` | yes | upstream | Docker Compose and the scripts: ports, image names, service addresses |
+| `.env.override` | yes (empty) | you | Docker Compose, after `.env`; upstream's place for local overrides |
+| `.env.arm64` | yes | upstream | the scripts and the upstream Makefile, on Apple Silicon only: `_JAVA_OPTIONS=-XX:UseSVE=0` |
+| `.env.example` | yes | this workshop | nothing at run time: the template that lists every workshop variable |
+| `.env.local` | **no** (gitignored) | you | the workshop scripts: your real values and secrets |
+
+Compose receives them in this order, later files winning: `.env`, `.env.override`, `.env.arm64`
+(Apple Silicon), then `build/env.resolved` (your `.env.local` plus defaults).
+
 ## Checking your configuration
 
 - `./start-local.sh --status` loads the configuration and shows what is deployed.
