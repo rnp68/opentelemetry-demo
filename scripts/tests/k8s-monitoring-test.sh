@@ -53,6 +53,18 @@ SECONDS=0; wait_for_metric 'up' 2 1; rc=$?
 check "no data: reports not found"                      "1" "${rc}"
 check "no data: waited about the timeout (>=2 s)"       "1" "$([ "${SECONDS}" -ge 2 ] && echo 1 || echo 0)"
 
+# the data check must ask for samples newer than the install (not just any recent series)
+CAPTURED_EXPR=""
+wait_for_metric() { CAPTURED_EXPR="$1"; return 0; }
+CLUSTER=test-cluster; INSTALL_START_EPOCH=1700000123; GCX_CONTEXT=fake-stack; NO_VERIFY=false; VERIFY_MINUTES_ARG=""; K8S_MONITORING_VERIFY_MINUTES=1
+verify_cluster_data >/dev/null 2>&1
+contains "data check compares sample timestamps"        "timestamp(kube_pod_info" "${CAPTURED_EXPR}"
+contains "...against the install start time"            "> 1700000123" "${CAPTURED_EXPR}"
+contains "...for this cluster"                          'cluster="test-cluster"' "${CAPTURED_EXPR}"
+unset -f wait_for_metric
+# restore the real function for the tests below
+eval "$(declare -f wait_for_metric 2>/dev/null)"
+source "${HERE}/../grafana-cloud-k8s-monitoring/install.sh"
 NO_VERIFY=false; VERIFY_MINUTES_ARG=""; K8S_MONITORING_VERIFY_MINUTES=1
 GCX_CONTEXT=unknown
 out="$(verify_cluster_data 2>&1)"; rc=$?

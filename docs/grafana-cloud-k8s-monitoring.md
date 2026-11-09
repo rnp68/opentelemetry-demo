@@ -78,7 +78,7 @@ then rejects its login (HTTP 401).
 
 | Variable | Where to find it, click by click |
 |---|---|
-| `GRAFANA_CLOUD_TOKEN` (**secret**) | grafana.com > your org > **Access Policies** > **Create access policy**, realm: your stack, scopes `metrics:write`, `logs:write`, `traces:write`, `profiles:write` > **Create** > **Add token** > copy it (`glc_...`) |
+| `GRAFANA_CLOUD_TOKEN` (**secret**) | grafana.com > your org > **Access Policies** > **Create access policy**, realm: your stack, scopes `metrics:write`, `logs:write`, `traces:write`, `profiles:write` **and `metrics:read`** > **Create** > **Add token** > copy it (`glc_...`). `metrics:read` is for OpenCost, which reads metrics back; without it `opencost` crash-loops on a 401 and the install rolls back after 10 minutes |
 | `GRAFANA_OTLP_ENDPOINT`, `GRAFANA_INSTANCE_ID` | stack **Details** > OpenTelemetry > **Configure** |
 | `GRAFANA_CLOUD_METRICS_URL`, `GRAFANA_CLOUD_METRICS_USER` | stack **Details** > **Prometheus** > **Send Metrics**: URL ending in `/api/prom/push` and the numeric user |
 | `GRAFANA_CLOUD_LOGS_URL`, `GRAFANA_CLOUD_LOGS_USER` | stack **Details** > **Loki** > URL ending in `/loki/api/v1/push` and the user |
@@ -156,6 +156,15 @@ Switching the app off is also UI-only and does not delete any metrics: your stac
 Kubernetes > **Configuration** > **Manage app** > **Deactivate**. The script prints that path (with your
 `GRAFANA_STACK_URL` link when set) but never deactivates anything itself.
 
+## Things that went wrong on the first real install (and how to recognise them)
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| `opencost` pod in `CrashLoopBackOff`, log says `failed to query prometheus ... 401`; after 10 minutes Helm reports `opencost not ready` and rolls everything back | the token has no `metrics:read` scope (reads are rejected with `invalid scope requested`, writes still work) | add `metrics:read` to the access policy and create a fresh token on it (an existing token did not pick up the new scope) |
+| every endpoint answers `invalid token` | the token was pasted with an extra character (one case: a stray leading `g`, 213 characters instead of 212) | paste again; a real token starts with `glc_` and the installer warns when it does not |
+| `alloy-profiles` logs `failed to load eBPF tracer ... failed to determine system configs` | Docker Desktop's Linux kernel does not expose what the eBPF profiler needs (my reading; not confirmed with the vendor) | harmless for the rest; the other collectors and Java profiling are separate. Use another cluster for eBPF profiles |
+| the "data arrives" check passed within seconds | it matched series left by an earlier run | fixed: the check now needs samples newer than the install start |
+
 ## Design decisions
 
 - **Chart pinned to 4.6.0.** The original `^4` range now resolves to a chart that
@@ -167,6 +176,7 @@ Kubernetes > **Configuration** > **Manage app** > **Deactivate**. The script pri
 - **Fleet-management remote config is off.** Enabling it needs the extra scopes
   `fleet-management:read` and `fleet-management:write` on the access policy.
 - **Tested without a cluster:** `scripts/tests/k8s-monitoring-test.sh` covers the gate (including that `--yes` does not pass it), the data check with a fake `gcx`, and the decommission note. The data check was also run against a real stack with `gcx`.
+- **Verified at runtime on Docker Desktop's Kubernetes (2026-11-09):** all 12 pods Ready, cluster, node, container, cost and energy metrics in the stack. The Alloy operator created the five collectors at install time as expected.
 - **Not verified at runtime.** The chart creates the Alloy workloads through the
   Alloy operator at install time, so the receiver Service
   `<release>-alloy-receiver` can only be confirmed on a live cluster.

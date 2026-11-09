@@ -83,7 +83,7 @@ how_to_get() {
     GRAFANA_CLOUD_APIKEY)
       echo "Grafana Cloud portal > Administration > Cloud access policies > Create access policy (realm: your stack; scopes metrics:write, logs:write, traces:write) > Add token." ;;
     GRAFANA_CLOUD_TOKEN)
-      echo "Grafana Cloud portal > Administration > Cloud access policies > Create access policy (realm: your stack; scopes metrics:write, logs:write, traces:write, profiles:write) > Add token." ;;
+      echo "Grafana Cloud portal > Administration > Cloud access policies > Create access policy (realm: your stack; scopes metrics:write, logs:write, traces:write, profiles:write, and metrics:read for OpenCost) > Add token." ;;
     GRAFANA_FARO_ENDPOINT)
       echo "Grafana Cloud > Frontend Observability > Create new > copy the Collector URL." ;;
     GRAFANA_PYROSCOPE_*)

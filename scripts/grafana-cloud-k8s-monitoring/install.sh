@@ -23,7 +23,8 @@
 # docs/grafana-cloud-k8s-monitoring.md.
 #
 # The token needs the scopes metrics:write, logs:write, traces:write and
-# profiles:write. It is written to a temporary 0600 values file (never passed on
+# profiles:write, plus metrics:read: OpenCost reads metrics back to compute costs and
+# crash-loops on a 401 without it, which makes the --atomic install roll back. It is written to a temporary 0600 values file (never passed on
 # the command line, so it does not appear in `ps`) that is deleted on exit.
 #
 # Usage: scripts/grafana-cloud-k8s-monitoring/install.sh [OPTIONS]
@@ -237,8 +238,11 @@ for l in sys.stdin:
         print(((d.get("stacks",{}).get(st) or {}).get("grafana") or {}).get("server",""))
 ' 2>/dev/null || true)"
   log_step "Checking that cluster data arrives (gcx context '${GCX_CONTEXT}'${server:+, ${server}}), up to ${minutes} min"
-  if wait_for_metric "count(kube_pod_info{cluster=\"${CLUSTER}\"})" $(( minutes * 60 )) 15; then
-    log_ok "kube_pod_info for cluster '${CLUSTER}' is in Grafana Cloud: cluster data arrives."
+  # Require a sample NEWER than this install: a plain count over the last minutes would
+  # also match series left by an earlier (rolled-back or uninstalled) run.
+  local since="${INSTALL_START_EPOCH:-0}"
+  if wait_for_metric "max(timestamp(kube_pod_info{cluster=\"${CLUSTER}\"})) > ${since}" $(( minutes * 60 )) 15; then
+    log_ok "kube_pod_info for cluster '${CLUSTER}' has samples newer than this install: cluster data arrives."
   else
     log_warn "No kube_pod_info for cluster '${CLUSTER}' after ${minutes} minutes. Possible reasons:"
     log_warn "  - Kubernetes Monitoring is not activated yet (the app's home page shows an Activate panel);"
@@ -374,6 +378,7 @@ EOF
   if "${HELM[@]}" status "${K8S_MONITORING_RELEASE}" -n "${K8S_MONITORING_NAMESPACE}" >/dev/null 2>&1; then
     log_info "Release ${K8S_MONITORING_RELEASE} already exists; upgrading in place."
   fi
+  INSTALL_START_EPOCH="$(date +%s)"
   log_step "Installing ${K8S_MONITORING_RELEASE} (grafana/k8s-monitoring ${K8S_MONITORING_CHART_VERSION}) into ${K8S_MONITORING_NAMESPACE}"
   "${HELM[@]}" upgrade --install "${K8S_MONITORING_RELEASE}" grafana/k8s-monitoring \
     "${common_args[@]}" --create-namespace --atomic --timeout 10m

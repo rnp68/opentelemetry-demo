@@ -230,9 +230,23 @@ page asks for, and a dry run rendered the chart with them. Found on the way: gcx
 with this repo's variable of the same name, so every gcx call in the installer now runs without it
 (regression test in `scripts/tests/k8s-monitoring-test.sh`, which fails if the leak returns).
 
+**Kubernetes Monitoring install on Docker Desktop's Kubernetes (2026-11-09): passed on the
+second attempt.** The first attempt rolled back after 10 minutes because `opencost` could not read
+metrics back (`invalid scope requested`: the token had write scopes only); the access policy then
+needed `metrics:read`, and a freshly created token (the existing one did not pick the scope up), and
+one pasted token had a stray leading character. With a correct token the release deployed, all 12
+pods became Ready, and kube_pod_info, node, container, namespace, OpenCost cost and Kepler energy
+metrics for cluster `docker-desktop` were read back from the stack with `gcx`. `alloy-profiles` logs an
+eBPF load error on Docker Desktop's kernel (environment limit, as far as I can tell).
+
+A flaw in my own verification came out of it: the script's "cluster data arrives" check passed on
+series left by the rolled-back run. It now requires a sample newer than the install start
+(`max(timestamp(kube_pod_info{cluster=...})) > <start>`); the test fails for the old query, and the
+new one was checked against the stack with a negative control (a future start time finds nothing).
+
 **Still not run:**
 
-- the other Kubernetes modes (`--k8s`, `--k8s-vanilla`, `--k8s-clean`, `--k8s-alloy-collector`, `--k8s-alloy-forward`) and minikube / OrbStack as the cluster; the AWS scripts; and the k8s-monitoring installer against a cluster (charts render only; the Alloy operator creates the receiver Service at install time);
+- the other Kubernetes modes (`--k8s`, `--k8s-vanilla`, `--k8s-clean`, `--k8s-alloy-collector`, `--k8s-alloy-forward`) and minikube / OrbStack as the cluster; the AWS scripts; the `--k8s-alloy-forward` path through the installed Alloy receiver, and the uninstall/deactivation path of the installer;
 - Faro and Pyroscope against Grafana Cloud (built and type-checked only);
 - Pyroscope and Faro data in Grafana (neither was enabled in this run).
 
