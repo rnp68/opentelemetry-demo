@@ -66,6 +66,7 @@ default_for() {
     AWS_RESOURCE_TAG_VALUE)         echo "opentelemetry-demo" ;;
     K8S_MONITORING_CHART_VERSION)   echo "4.6.0" ;;
     K8S_MONITORING_NAMESPACE)       echo "grafana-k8s-monitoring" ;;
+    K8S_MONITORING_VERIFY_MINUTES)  echo "6" ;;
     K8S_MONITORING_RELEASE)         echo "grafana-k8s-monitoring" ;;
     ALLOY_CHART_VERSION)            echo "1.8.1" ;;
     DEMO_ENVIRONMENT)               echo "workshop" ;;
@@ -314,6 +315,17 @@ require_cmd() {
     [ -n "${hint}" ] && log_error "  Install it: ${hint}"
     return 1
   fi
+}
+
+# confirm_strict "Question?": like confirm, but --yes / ASSUME_YES never answers it.
+# For acknowledgements that are the user's own decision (for example billing).
+# Returns 1 when there is no terminal to ask on.
+confirm_strict() {
+  [ -t 0 ] || return 1
+  local reply
+  printf '%s [y/N] ' "$1"
+  read -r reply
+  [ "${reply}" = "y" ] || [ "${reply}" = "Y" ]
 }
 
 confirm() {

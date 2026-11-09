@@ -212,6 +212,15 @@ held a command string did not expand, so several counts printed `0` from command
 ran. They were discarded and re-run with literal commands, plus a control showing that a bogus
 object produces an error rather than a silent zero.
 
+**Kubernetes Monitoring activation (2026-11-09):** the app's home page showed only an
+"Activate Kubernetes Monitoring" panel. Activation is UI-only (no API in the docs) and starts
+host/container-hour billing, so `install.sh` now has an activation gate that stops until the
+user confirms (`--yes` deliberately does not), a data check through `gcx` against an explicitly
+named context, and decommission guidance. Tested with `scripts/tests/k8s-monitoring-test.sh`
+(a control that lets `--yes` pass fails the test) and on the real cluster: without an
+acknowledgement the real install stops before applying anything. The chart itself has still not
+been installed.
+
 **Still not run:**
 
 - the other Kubernetes modes (`--k8s`, `--k8s-vanilla`, `--k8s-clean`, `--k8s-alloy-collector`, `--k8s-alloy-forward`) and minikube / OrbStack as the cluster; the AWS scripts; and the k8s-monitoring installer against a cluster (charts render only; the Alloy operator creates the receiver Service at install time);

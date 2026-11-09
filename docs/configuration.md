@@ -65,6 +65,10 @@ Default = value used when the variable is empty or `unknown`. **—** means ther
 | `K8S_MONITORING_CHART_VERSION` | `4.6.0` |  | k8s-monitoring install.sh | Exact chart version of grafana/k8s-monitoring (validated with helm template). |
 | `K8S_MONITORING_NAMESPACE` | `grafana-k8s-monitoring` |  | k8s-monitoring install.sh, start-local.sh --k8s-alloy-forward | Namespace of the k8s-monitoring release. |
 | `K8S_CLUSTER_NAME` | current kubectl context |  | k8s-monitoring install.sh | Cluster identifier shown in Grafana Cloud. |
+| `GRAFANA_STACK_URL` | — |  | k8s-monitoring install.sh | Your stack's URL, e.g. `https://<stack>.grafana.net`. Only used to print or open the link to the activation page. |
+| `GCX_CONTEXT` | — |  | k8s-monitoring install.sh | The `gcx` context of **this** stack. Enables the automatic "does cluster data arrive?" check after the install. It is never guessed: unset means no automatic check. |
+| `K8S_MONITORING_ACTIVATED` | — |  | k8s-monitoring install.sh | Set to `true` once you activated Kubernetes Monitoring in the UI (this starts billing). Same as `--i-have-activated`; needed when the script has no terminal. |
+| `K8S_MONITORING_VERIFY_MINUTES` | `6` |  | k8s-monitoring install.sh | How long to wait for the cluster's `kube_pod_info` after the install. |
 | `K8S_MONITORING_RELEASE` | `grafana-k8s-monitoring` |  | k8s-monitoring install.sh, start-local.sh --k8s-alloy-forward | Helm release name; the Alloy receiver service is named `<release>`-alloy-receiver. |
 
 ### Kubernetes deployment (Helm)

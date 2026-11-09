@@ -353,7 +353,7 @@ scripts/grafana-cloud-k8s-monitoring/install.sh
 Installs `grafana/k8s-monitoring` (nodes, pods, events, logs, costs, profiles). **First
 activate Kubernetes Monitoring once in your stack's UI** (it enables host/container-hour
 billing; until then the app's home page only shows an Activate panel): see
-[the activation steps](grafana-cloud-k8s-monitoring.md#before-you-install-activate-kubernetes-monitoring-one-time-in-the-grafana-ui). It
+[the activation steps](grafana-cloud-k8s-monitoring.md#activation-one-step-only-you-can-do). It
 needs the extra values listed under "Kubernetes monitoring" in
 [configuration.md](configuration.md). Procedure and manual steps:
 [grafana-cloud-k8s-monitoring.md](grafana-cloud-k8s-monitoring.md). Afterwards,
@@ -384,7 +384,7 @@ Creates an EKS cluster and bills your AWS account. Read
 | remove the Compose deployment | `./start-local.sh --stop` | also deletes the volumes |
 | remove the Kubernetes deployment | `./start-local.sh --k8s-stop` | deletes the namespace and its secrets |
 | remove everything and start over | `./start-local.sh --reset` | undeploys both, deletes `build/`; keeps `.env.local`; asks first (`--yes` to skip) |
-| remove the cluster monitoring | `scripts/grafana-cloud-k8s-monitoring/install.sh --uninstall` | |
+| remove the cluster monitoring | `scripts/grafana-cloud-k8s-monitoring/install.sh --uninstall` | stops the data; deactivating the app is a UI step the script explains |
 | remove rendered Grafana assets | `scripts/render-assets.sh --clean` | local files only |
 | remove AWS resources | `./scripts/teardown-aws.sh` | verified, tag-based sweep |
 | go back to a step | undeploy that component, then run its script again | scripts are idempotent |
@@ -407,7 +407,7 @@ flowchart LR
 | Script | Purpose | Undeploy / reset | Next |
 |---|---|---|---|
 | `./start-local.sh` | demo on Compose or local Kubernetes | `--stop`, `--k8s-stop`, `--reset` | k8s-monitoring or `render-assets.sh` (printed at the end) |
-| `scripts/grafana-cloud-k8s-monitoring/install.sh` | cluster monitoring in Grafana Cloud | `--uninstall` | `./start-local.sh --k8s-alloy-forward` |
+| `scripts/grafana-cloud-k8s-monitoring/install.sh` | cluster monitoring in Grafana Cloud; asks you to confirm the one-time activation (billing) first and checks that data arrives | `--uninstall` (also explains how to deactivate) | `./start-local.sh --k8s-alloy-forward` |
 | `scripts/render-assets.sh` | render SLOs, synthetic checks, k6 | `--clean` | apply them: [grafana-assets.md](grafana-assets.md) |
 | `scripts/deploy-aws.sh` | demo on EKS | `scripts/teardown-aws.sh` or `--destroy` | `render-assets.sh` with the load balancer URL |
 
