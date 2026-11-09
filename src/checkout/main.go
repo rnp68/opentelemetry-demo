@@ -98,7 +98,7 @@ func initTracerProvider() *sdktrace.TracerProvider {
 		sdktrace.WithBatcher(exporter),
 		sdktrace.WithResource(initResource()),
 	)
-	otel.SetTracerProvider(tp)
+	wrapTracerProvider(tp)
 	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
 	return tp
 }
@@ -147,6 +147,14 @@ func main() {
 			log.Printf("Error shutting down tracer provider: %v", err)
 		}
 	}()
+
+	if pp := initProfilerProvider(); pp != nil {
+		defer func() {
+			if err := pp.Stop(); err != nil {
+				log.Printf("Error shutting down profiler provider: %v", err)
+			}
+		}()
+	}
 
 	mp := initMeterProvider()
 	defer func() {
