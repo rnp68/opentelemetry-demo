@@ -1,0 +1,7 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# load_test_id is the ID k6 Cloud assigns when you create the test from
+# ../cart.js; replace the 0 placeholder after creating it.
+frequency: 6h
+load_test_id: 0

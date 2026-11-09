@@ -1,0 +1,38 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Synthetic Monitoring check template. scripts/render-assets.sh substitutes
+# ${DEMO_TARGET_URL} (where Grafana Cloud's probes can reach the shop) and
+# ${DEMO_ENVIRONMENT} from .env.local.
+#
+# UNVERIFIED: this posts an order for a user with an empty cart. Whether the API
+# answers 200 for that, and whether it records an order every minute, has not
+# been checked against a running stack. Test it with one manual request before
+# enabling it (see docs/grafana-assets.md).
+apiVersion: synthetic-monitoring.grafana.com/v1alpha1
+kind: Check
+metadata:
+  name: otel-demo-checkout
+spec:
+  job: otel-demo-checkout
+  target: ${DEMO_TARGET_URL}/api/checkout
+  frequency: 60000
+  timeout: 10000
+  enabled: true
+  labels:
+    app: otel-demo
+    env: ${DEMO_ENVIRONMENT}
+  settings:
+    http:
+      validStatusCodes:
+        - 200
+      validHTTPVersions:
+        - HTTP/1.1
+        - HTTP/2.0
+      failIfNotSSL: false
+      method: POST
+      body: '{"userId":"health-check"}'
+      headers:
+        - name: Content-Type
+          values:
+            - application/json

@@ -1,0 +1,31 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# SLO template. scripts/render-assets.sh substitutes ${...} placeholders from
+# .env.local and writes the result to build/grafana-assets/slo/.
+# VERIFY BEFORE RELYING ON IT: the PromQL below depends on the metric names your
+# Grafana Cloud stack ends up with (they vary with SDK and semantic-convention
+# versions). Run the query in Explore first; docs/grafana-assets.md explains how.
+apiVersion: slo.ext.grafana.app/v1alpha1
+kind: SLO
+metadata:
+  name: ib8ztiuzl4u9uymj60rw0
+spec:
+  name: Browse Products Availability
+  description: HTTP success rate for product catalog browsing
+  labels:
+    - key: team
+      value: platform
+    - key: app
+      value: otel-demo
+    - key: env
+      value: ${DEMO_ENVIRONMENT}
+  objectives:
+    - value: 0.999
+      window: 28d
+  destinationDatasource:
+    uid: ${GRAFANA_CLOUD_PROM_DATASOURCE_UID}
+  query:
+    type: freeform
+    freeform:
+      query: sum(rate(http_server_duration_count{http_route=~"/api/products.*",http_status_code!~"5.."}[$__rate_interval])) / sum(rate(http_server_duration_count{http_route=~"/api/products.*"}[$__rate_interval]))

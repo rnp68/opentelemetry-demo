@@ -1,0 +1,28 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Synthetic Monitoring check template. scripts/render-assets.sh substitutes
+# ${DEMO_TARGET_URL} (where Grafana Cloud's probes can reach the shop) and
+# ${DEMO_ENVIRONMENT} from .env.local.
+apiVersion: synthetic-monitoring.grafana.com/v1alpha1
+kind: Check
+metadata:
+  name: otel-demo-homepage
+spec:
+  job: otel-demo-homepage
+  target: ${DEMO_TARGET_URL}/
+  frequency: 60000
+  timeout: 10000
+  enabled: true
+  labels:
+    app: otel-demo
+    env: ${DEMO_ENVIRONMENT}
+  settings:
+    http:
+      validStatusCodes:
+        - 200
+      validHTTPVersions:
+        - HTTP/1.1
+        - HTTP/2.0
+      failIfNotSSL: false
+      method: GET
