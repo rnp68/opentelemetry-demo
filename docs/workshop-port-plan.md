@@ -195,11 +195,26 @@ but the frontend's HTTP metric has no `http_route` label). The four SLOs now use
 collector's span metrics (`traces_span_metrics_calls_total`); each query returns a value on
 the live stack.
 
+**Kubernetes run (2026-11-09), `./start-local.sh --k8s-grafana-cloud` on Docker Desktop's
+Kubernetes (context `docker-desktop`, 1 node, v1.34.3): passed.** All 20 deployments became
+available (20 pods Running, none restarted), no Jaeger, Grafana, Prometheus or OpenSearch was
+deployed, the collector exported with 0 failures and 0 auth errors, the shop and
+`/api/products` answered 200 through a port-forward, and `product-catalog` received
+`OTEL_K8S_POD_NAME` through the downward API. Read back from the stack with `gcx`, filtered
+to `k8s.namespace.name=otel-demo`: 20 traces (frontend, frontend-web, frontend-proxy, currency,
+image-provider, product-catalog, recommendation) with timestamps after the collector's start,
+metrics from 17 pods, and log streams for cart, currency and recommendation. The Helm chart's
+own post-install notes still list Jaeger and Grafana URLs; those are generic chart text and are
+not deployed in this mode.
+
+A verification slip worth recording: in the first version of the check, a shell variable that
+held a command string did not expand, so several counts printed `0` from commands that never
+ran. They were discarded and re-run with literal commands, plus a control showing that a bogus
+object produces an error rather than a silent zero.
+
 **Still not run:**
 
-- any Kubernetes mode on a live cluster, the AWS scripts, and the k8s-monitoring
-  installer against a cluster (charts render only; the Alloy operator creates the
-  receiver Service at install time);
+- the other Kubernetes modes (`--k8s`, `--k8s-vanilla`, `--k8s-clean`, `--k8s-alloy-collector`, `--k8s-alloy-forward`) and minikube / OrbStack as the cluster; the AWS scripts; and the k8s-monitoring installer against a cluster (charts render only; the Alloy operator creates the receiver Service at install time);
 - Faro and Pyroscope against Grafana Cloud (built and type-checked only);
 - Pyroscope and Faro data in Grafana (neither was enabled in this run).
 
