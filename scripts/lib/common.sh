@@ -65,6 +65,8 @@ default_for() {
     AWS_RESOURCE_TAG_VALUE)         echo "opentelemetry-demo" ;;
     K8S_MONITORING_CHART_VERSION)   echo "^4" ;;
     K8S_MONITORING_NAMESPACE)       echo "grafana-k8s-monitoring" ;;
+    K8S_MONITORING_RELEASE)         echo "grafana-k8s-monitoring" ;;
+    ALLOY_CHART_VERSION)            echo "1.8.1" ;;
     DEMO_ENVIRONMENT)               echo "workshop" ;;
     GRAFANA_CLOUD_PROM_DATASOURCE_UID) echo "grafanacloud-prom" ;;
     *)                              echo "" ;;
@@ -180,16 +182,16 @@ write_resolved_env() {
     esac
     printf "%s='%s'\n" "${key}" "${val}" >> "${ENV_RESOLVED}"
   done
-  # The lean workshop default for LOCUST_USERS must override upstream .env.
   chmod 600 "${ENV_RESOLVED}"
 }
 
-# docker compose env-file arguments: upstream .env first, then our overrides.
-compose_env_args() {
-  printf '%s' "--env-file ${REPO_ROOT}/.env"
-  [ -f "${REPO_ROOT}/.env.override" ] && printf ' %s' "--env-file ${REPO_ROOT}/.env.override"
-  [ -f "${ENV_RESOLVED}" ] && printf ' %s' "--env-file ${ENV_RESOLVED}"
-  printf '\n'
+# docker compose env-file arguments, as the array COMPOSE_ENV_ARGS: upstream
+# .env first, then .env.override, then the resolved workshop values.
+build_compose_env_args() {
+  COMPOSE_ENV_ARGS=( --env-file "${REPO_ROOT}/.env" )
+  [ -f "${REPO_ROOT}/.env.override" ] && COMPOSE_ENV_ARGS+=( --env-file "${REPO_ROOT}/.env.override" )
+  [ -f "${ENV_RESOLVED}" ] && COMPOSE_ENV_ARGS+=( --env-file "${ENV_RESOLVED}" )
+  return 0
 }
 
 # ── Templating ───────────────────────────────────────────────────────────────

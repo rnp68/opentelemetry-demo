@@ -1,0 +1,52 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Grafana Cloud mode: no local backends; the chart's collector exports traces,
+# metrics and logs to Grafana Cloud over OTLP/HTTP.
+#
+# No credential is stored here. The collector reads GRAFANA_OTLP_ENDPOINT,
+# GRAFANA_INSTANCE_ID and GRAFANA_CLOUD_APIKEY from the Kubernetes secret
+# "grafana-cloud-otlp", which ./start-local.sh creates from .env.local before the
+# install. To create it by hand:
+#
+#   kubectl -n <namespace> create secret generic grafana-cloud-otlp \
+#     --from-literal=GRAFANA_OTLP_ENDPOINT=... \
+#     --from-literal=GRAFANA_INSTANCE_ID=... \
+#     --from-literal=GRAFANA_CLOUD_APIKEY=...
+#
+# Use together with values-local.yaml:
+#   helm upgrade --install ... -f values-local.yaml -f values-grafana-cloud.yaml
+
+jaeger:
+  enabled: false
+prometheus:
+  enabled: false
+grafana:
+  enabled: false
+opensearch:
+  enabled: false
+
+opentelemetry-collector:
+  extraEnvsFrom:
+    - secretRef:
+        name: grafana-cloud-otlp
+  config:
+    extensions:
+      basicauth/grafanacloud:
+        client_auth:
+          username: ${env:GRAFANA_INSTANCE_ID}
+          password: ${env:GRAFANA_CLOUD_APIKEY}
+    exporters:
+      otlphttp/grafanacloud:
+        endpoint: ${env:GRAFANA_OTLP_ENDPOINT}
+        auth:
+          authenticator: basicauth/grafanacloud
+    service:
+      extensions: [health_check, basicauth/grafanacloud]
+      pipelines:
+        traces:
+          exporters: [otlphttp/grafanacloud, spanmetrics]
+        metrics:
+          exporters: [otlphttp/grafanacloud]
+        logs:
+          exporters: [otlphttp/grafanacloud]

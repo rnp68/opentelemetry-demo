@@ -1,0 +1,37 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Alloy-forward mode: no local backends; the chart's collector forwards all
+# signals to the Alloy receiver installed by scripts/grafana-cloud-k8s-monitoring.
+# Alloy holds the Grafana Cloud credentials, so none are needed here.
+#
+# This is a template: ./start-local.sh renders it to build/ with the values of
+# K8S_MONITORING_RELEASE and K8S_MONITORING_NAMESPACE from .env.local.
+#
+# Use together with values-local.yaml:
+#   helm upgrade --install ... -f values-local.yaml -f build/values-alloy-forward.yaml
+
+jaeger:
+  enabled: false
+prometheus:
+  enabled: false
+grafana:
+  enabled: false
+opensearch:
+  enabled: false
+
+opentelemetry-collector:
+  config:
+    exporters:
+      otlphttp/alloy:
+        endpoint: http://${K8S_MONITORING_RELEASE}-alloy-receiver.${K8S_MONITORING_NAMESPACE}.svc.cluster.local:4318
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          exporters: [otlphttp/alloy, spanmetrics]
+        metrics:
+          exporters: [otlphttp/alloy]
+        logs:
+          exporters: [otlphttp/alloy]

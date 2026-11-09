@@ -1,0 +1,22 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Base Helm values for running the OpenTelemetry Demo on a local cluster
+# (minikube, Docker Desktop or OrbStack Kubernetes). Combine with one of the
+# mode files below; ./start-local.sh --k8s-<mode> does this for you.
+#
+#   values-local.yaml                 full demo with all local backends
+#   values-vanilla.yaml               no backends, noop collector
+#   values-clean.yaml                 no backends, no collector at all
+#   values-grafana-cloud.yaml         no backends, collector -> Grafana Cloud
+#   values-alloy-forward.yaml.tmpl    no backends, collector -> in-cluster Alloy
+#
+# Chart: open-telemetry/opentelemetry-demo, version OTEL_DEMO_CHART_VERSION
+# (default 0.37.8). To list the available values:
+#   helm show values open-telemetry/opentelemetry-demo --version 0.37.8
+
+# frontend-proxy as ClusterIP: reach it with kubectl port-forward.
+components:
+  frontend-proxy:
+    service:
+      type: ClusterIP

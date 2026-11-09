@@ -1,0 +1,24 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# "Clean slate" mode: application services and load generator only. Local
+# backends AND the built-in collector are disabled. The services keep their SDK
+# instrumentation but have nowhere to send telemetry until you deploy a
+# collector named "otel-collector" in the same namespace (for example Alloy with
+# values-alloy-collector.yaml); the SDKs log export errors and retry, and the
+# application keeps working.
+#
+# Use together with values-local.yaml:
+#   helm upgrade --install ... -f values-local.yaml -f values-clean.yaml
+
+jaeger:
+  enabled: false
+prometheus:
+  enabled: false
+grafana:
+  enabled: false
+opensearch:
+  enabled: false
+
+opentelemetry-collector:
+  enabled: false

@@ -1,0 +1,68 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Values for the grafana/alloy chart: run Alloy as the demo's collector. Use it
+# with values-clean.yaml (which disables the chart's own collector). The demo
+# services are pre-wired to http://otel-collector:4318, so Alloy takes that name
+# and must be installed in the same namespace as the demo.
+#
+# The OTLP endpoint, user and token are NOT stored here. Alloy reads them from
+# environment variables supplied by the secret "alloy-grafana-cloud-creds"
+# (GRAFANA_OTLP_ENDPOINT, GRAFANA_INSTANCE_ID, GRAFANA_CLOUD_APIKEY), which
+# ./start-local.sh creates from .env.local.
+#
+#   helm upgrade --install otel-collector grafana/alloy --namespace <demo ns> \
+#     -f kubernetes/values-alloy-collector.yaml
+
+fullnameOverride: otel-collector
+
+alloy:
+  configMap:
+    content: |
+      otelcol.receiver.otlp "default" {
+        grpc {
+          endpoint = "0.0.0.0:4317"
+        }
+        http {
+          endpoint = "0.0.0.0:4318"
+        }
+        output {
+          metrics = [otelcol.exporter.otlphttp.grafana_cloud.input]
+          logs    = [otelcol.exporter.otlphttp.grafana_cloud.input]
+          traces  = [otelcol.exporter.otlphttp.grafana_cloud.input]
+        }
+      }
+
+      otelcol.exporter.otlphttp "grafana_cloud" {
+        client {
+          endpoint = sys.env("GRAFANA_OTLP_ENDPOINT")
+          auth     = otelcol.auth.basic.grafana_cloud.handler
+        }
+      }
+
+      otelcol.auth.basic "grafana_cloud" {
+        username = sys.env("GRAFANA_INSTANCE_ID")
+        password = sys.env("GRAFANA_CLOUD_APIKEY")
+      }
+
+  envFrom:
+    - secretRef:
+        name: alloy-grafana-cloud-creds
+
+  extraPorts:
+    - name: otlp-grpc
+      port: 4317
+      targetPort: 4317
+      protocol: TCP
+    - name: otlp-http
+      port: 4318
+      targetPort: 4318
+      protocol: TCP
+
+service:
+  enabled: true
+  type: ClusterIP
+
+controller:
+  type: deployment
+  replicas: 1

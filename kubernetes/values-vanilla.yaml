@@ -1,0 +1,30 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# "Vanilla" mode: application services only, no local observability backends.
+# The OTel SDKs stay enabled; the collector accepts telemetry and drops it
+# (debug exporter). A clean test bed for following a Grafana Cloud / Alloy
+# Kubernetes instrumentation procedure from scratch.
+#
+# Use together with values-local.yaml:
+#   helm upgrade --install ... -f values-local.yaml -f values-vanilla.yaml
+
+jaeger:
+  enabled: false
+prometheus:
+  enabled: false
+grafana:
+  enabled: false
+opensearch:
+  enabled: false
+
+opentelemetry-collector:
+  config:
+    service:
+      pipelines:
+        traces:
+          exporters: [debug, spanmetrics]
+        metrics:
+          exporters: [debug]
+        logs:
+          exporters: [debug]
