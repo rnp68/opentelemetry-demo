@@ -32,6 +32,7 @@
 # Options
 #     --yes               do not ask for confirmation
 #     --no-build          never build the frontend/checkout images locally
+#     --skip-credential-check   do not test the Grafana Cloud credentials first
 #
 # Configuration comes from .env.local (template: .env.example); see
 # docs/configuration.md. Re-running a mode upgrades it in place.
@@ -46,17 +47,19 @@ cd "${REPO_ROOT}"
 MODE=""
 ASSUME_YES=false
 NO_BUILD=false
+SKIP_CREDENTIAL_CHECK=false
 while [ $# -gt 0 ]; do
   case "$1" in
     --yes|-y)   ASSUME_YES=true ;;
     --no-build) NO_BUILD=true ;;
+    --skip-credential-check) SKIP_CREDENTIAL_CHECK=true ;;
     --help|-h)  MODE="--help" ;;
     -*)         if [ -z "${MODE}" ]; then MODE="$1"; else die "Unexpected option: $1 (see --help)"; fi ;;
     *)          die "Unexpected argument: $1 (see --help)" ;;
   esac
   shift
 done
-export ASSUME_YES
+export ASSUME_YES SKIP_CREDENTIAL_CHECK
 
 CUSTOM_IMAGE_REPO_FRONTEND="workshop/frontend"
 CUSTOM_IMAGE_REPO_CHECKOUT="workshop/checkout"
@@ -82,7 +85,10 @@ custom_images_wanted() {
 # Mode-specific required values. Argument: grafana-cloud | none
 require_mode_config() {
   case "$1" in
-    grafana-cloud) require_vars GRAFANA_OTLP_ENDPOINT GRAFANA_INSTANCE_ID GRAFANA_CLOUD_APIKEY ;;
+    grafana-cloud)
+      require_vars GRAFANA_OTLP_ENDPOINT GRAFANA_INSTANCE_ID GRAFANA_CLOUD_APIKEY
+      log_info "Testing the Grafana Cloud credentials before deploying..."
+      check_grafana_cloud_credentials ;;
   esac
   if is_unset "${GRAFANA_PYROSCOPE_ADDR:-}" && ! is_unset "${GRAFANA_PYROSCOPE_AUTH_USER:-}"; then
     log_warn "GRAFANA_PYROSCOPE_AUTH_USER is set but GRAFANA_PYROSCOPE_ADDR is not; profiling stays off."

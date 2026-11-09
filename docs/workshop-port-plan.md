@@ -164,9 +164,19 @@ real defects, both fixed:
 The same test showed the original synthetic checkout check returns 500; it was corrected
 and ships disabled.
 
+**Grafana Cloud run (2026-11-09): attempted, did not pass.** `./start-local.sh --grafana-cloud`
+started all 21 containers with no local backends, but the collector's exports to
+`otlp-gateway-prod-us-east-2.grafana.net` all failed with **HTTP 401** (traces, metrics and
+logs). A direct request with the same credentials also gave 401, so the collector config is
+not at fault. The token's embedded region is `prod-us-east-0` while the endpoint and instance
+ID are for a `prod-us-east-2` stack: tokens only work in their own region. The script now
+tests the credentials (region match, then one request) before deploying and stops on a
+mismatch or a 401/403 (`scripts/tests/credential-check-test.sh`). Data reaching Grafana Cloud
+has therefore **not** been confirmed yet; it needs a token created for the stack's region.
+
 **Still not run:**
 
-- `--grafana-cloud`, so no check yet that traces, metrics and logs reach Grafana Cloud;
+- a Grafana Cloud run with valid credentials (see above);
 - any Kubernetes mode on a live cluster, the AWS scripts, and the k8s-monitoring
   installer against a cluster (charts render only; the Alloy operator creates the
   receiver Service at install time);
