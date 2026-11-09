@@ -1,6 +1,8 @@
+<!-- markdownlint-disable MD013 -->
+
 # Workshop Branch Port Plan
 
-Status: **in execution** · Branch: `workshop` · Base: `origin/K8s_basic` (upstream OpenTelemetry Demo 2.0.2, May 2025)
+Status: **implemented; runtime verification pending** (see section 8) · Branch: `workshop` · Base: `origin/K8s_basic` (upstream OpenTelemetry Demo 2.0.2, May 2025)
 
 This document is the plan for building the `workshop` branch: the 2025 upstream
 demo plus (1) the deployment work from the `minikube` branch and (2) the Grafana
@@ -76,21 +78,25 @@ flowchart LR
 ## 5. Phases
 
 ### Phase 0 - Preparation
+
 - Pin Helm chart: `0.37.8` (demo 2.0.2).
 - Baseline: `docker compose config` and `helm template` on the untouched base.
 - Trial-apply each fork change in a scratch worktree and classify
   clean / conflict / obsolete.
 
 ### Phase 1 - Configuration foundation
+
 - `.env.example` (tracked, every value `unknown`) and `.env.local` (gitignored).
 - Preflight helper that checks every key in `.env.example` has a value.
 
 ### Phase 2 - Fork additions
+
 - Faro browser RUM in `src/frontend`.
 - Pyroscope profiling; span profiling for `checkout`.
 - Selective failure in `product-catalog`.
 
 ### Phase 3 - Deployment tooling
+
 - Compose overrides (noop and Grafana-Cloud-only collector).
 - Helm values files.
 - `start-local.sh` and `Makefile` targets.
@@ -98,12 +104,15 @@ flowchart LR
 - Grafana Cloud k8s-monitoring installer.
 
 ### Phase 4 - Grafana-side assets
+
 - SLOs, synthetic checks, k6 tests, with all stack-specific values parameterized.
 
 ### Phase 5 - Documentation
+
 - Per-component procedures, a master deployment guide, diagrams.
 
 ### Phase 6 - Verification
+
 - Static: compose/helm/shellcheck/secret scan on every commit.
 - Runtime: compose on OrbStack, Helm on minikube, telemetry visible in
   Grafana Cloud, Faro and Pyroscope data present, SLO queries return data.
@@ -120,4 +129,37 @@ flowchart LR
 
 ## 7. Execution log
 
-_Filled in as work proceeds._
+Commits on `workshop`, in order (`git log --oneline origin/K8s_basic..workshop`):
+
+| Phase | What was done | How it was checked |
+|---|---|---|
+| 0 | Plan document | - |
+| 2 | `product-catalog`: selective failure by pod name; **fixed** the fork's regex, which could not match 2025 pod names (it needed a leading hyphen) | Go unit test; the test fails with the original pattern |
+| 2 | `checkout`: opt-in Pyroscope profiling in `profiling.go` (starts only when configured; failure to start is a warning, not an exit) | `go build`, `gofmt`; module versions chosen to avoid bumping the pinned OpenTelemetry Go libraries |
+| 2 | `frontend`: opt-in Faro (Faro 1.13.3, matching the pinned OpenTelemetry 1.30.x), null-safe helpers, one central API-error hook | `tsc --noEmit`, `next build` |
+| 1 | `.env.example`, `.gitignore`, `scripts/lib/common.sh` | exercised: defaults, precedence, `unknown` handling, template renderer, missing-value path |
+| 3 | Compose overrides (`grafana-cloud`, `vanilla`, `no-otel`) and collector configs | `docker compose config` for all three; `otelcol-contrib validate` exit 0, and exit 1 for a broken copy |
+| 3 | Helm values for 6 modes | each renders with chart 0.37.8; rendered collector configs pass `otelcol-contrib 0.131.0 validate`; Alloy chart renders |
+| 3 | `start-local.sh` and Makefile targets | shellcheck clean; the generated Helm extras tested in three configurations (this found and fixed a bug that would have deleted the frontend and checkout components) |
+| 3 | `grafana-cloud-k8s-monitoring/install.sh` | shellcheck clean; template renders and the chart renders for 5 chart versions; **chart pinned to 4.6.0** because the original `^4` now fails validation |
+| 3 | `deploy-aws.sh`, `teardown-aws.sh` | shellcheck (the original had an error: a stray character before the shebang), YAML heredocs rendered; **not run against AWS** |
+| 4 | Grafana assets as templates, `render-assets.sh` | k6 scripts pass `k6 inspect` (negative control exits 107); rendered YAML parses; cart/checkout request shapes corrected from the handler code |
+| 5 | Documentation | link and anchor check |
+
+## 8. Verification status
+
+**Checked statically or in isolation** (everything above). **Not run:**
+
+- the full demo stack was **not started** (Docker Compose or Kubernetes), so no
+  end-to-end check that traces, metrics and logs reach Grafana Cloud has been done;
+- nothing was deployed to AWS and `grafana-cloud-k8s-monitoring/install.sh` was not
+  run against a cluster (the chart is rendered only; the Alloy operator creates the
+  receiver Service at install time);
+- the SLO queries were not confirmed against this branch's metric names, and the
+  synthetic checkout check is marked UNVERIFIED;
+- Faro and Pyroscope were built and type-checked, not run against Grafana Cloud.
+
+Deviations from the fork, on purpose: Drone CI, Renovate, `docker-compose.nocache.yml`,
+`src/frontend/Dockerfile.ci`, the buildkit change and the banner text were not
+ported; the `grafana/` exports were left out; the Faro tracer replaces the
+OpenTelemetry browser tracer only when configured (the fork replaced it always).

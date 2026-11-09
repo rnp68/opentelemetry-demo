@@ -44,6 +44,31 @@ your preferred deployment method:
 - [Docker](https://opentelemetry.io/docs/demo/docker_deployment/)
 - [Kubernetes](https://opentelemetry.io/docs/demo/kubernetes_deployment/)
 
+## Workshop branch extensions
+
+The `workshop` branch of this fork adds a lean, portable way to run the demo and
+send its telemetry to Grafana Cloud. Every environment-specific value is an
+environment variable (`.env.example` is the template, `.env.local` holds your
+values and is never committed).
+
+| Extension | What it gives you | Documentation |
+|-----------|-------------------|:-------------:|
+| **Deployment guide** | Click-by-click guide with a 1-click script for every step | [docs/deployment-guide.md](docs/deployment-guide.md) |
+| **Grafana Cloud mode** | Docker Compose or Kubernetes without Jaeger, Prometheus, Grafana and OpenSearch; telemetry goes to Grafana Cloud | [docs/deployment-guide.md](docs/deployment-guide.md) |
+| **Faro and Pyroscope** | Browser real-user monitoring and continuous profiling of `checkout` | [docs/faro-and-pyroscope.md](docs/faro-and-pyroscope.md) |
+| **Noop modes** | Run without collecting telemetry (`--vanilla`, `--no-otel`) | [docs/otel-noop-mode.md](docs/otel-noop-mode.md) |
+| **Cluster monitoring** | `grafana/k8s-monitoring` installer | [docs/grafana-cloud-k8s-monitoring.md](docs/grafana-cloud-k8s-monitoring.md) |
+| **SLOs, synthetic checks, k6** | Templates rendered with your values | [docs/grafana-assets.md](docs/grafana-assets.md) |
+| **AWS EKS** | One-command deployment and verified teardown | [docs/aws-deployment.md](docs/aws-deployment.md) |
+| **Configuration reference** | Every variable, default and where to find it | [docs/configuration.md](docs/configuration.md) |
+
+```bash
+./start-local.sh --grafana-cloud     # Docker Compose, lean, to Grafana Cloud
+./start-local.sh --k8s-grafana-cloud # local Kubernetes, to Grafana Cloud
+./start-local.sh --stop              # undeploy
+./start-local.sh --help              # all modes
+```
+
 ## Documentation
 
 For detailed documentation, see [Demo Documentation][docs]. If you're curious
