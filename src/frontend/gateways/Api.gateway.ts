@@ -7,6 +7,7 @@ import request from '../utils/Request';
 import { AttributeNames } from '../utils/enums/AttributeNames';
 import SessionGateway from './Session.gateway';
 import { context, propagation } from "@opentelemetry/api";
+import { pushFaroError } from '../utils/telemetry/FaroEvents';
 
 const { userId } = SessionGateway.getSession();
 
@@ -109,9 +110,18 @@ const ApiGateway = new Proxy(Apis(), {
       const baggage = propagation.getActiveBaggage() || propagation.createBaggage();
       const newBaggage = baggage.setEntry(AttributeNames.SESSION_ID, { value: userId });
       const newContext = propagation.setBaggage(context.active(), newBaggage);
-      return context.with(newContext, () => {
+      const result: unknown = context.with(newContext, () => {
         return Reflect.apply(originalFunction, undefined, args);
       });
+
+      // Report failed API calls to Faro (no-op when Faro is not configured).
+      if (result instanceof Promise) {
+        return result.catch((error: unknown) => {
+          pushFaroError(error);
+          return Promise.reject(error);
+        });
+      }
+      return result;
     };
   },
 });

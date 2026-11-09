@@ -12,6 +12,8 @@ import ApiGateway from '../gateways/Api.gateway';
 import Banner from '../components/Banner';
 import { CypressFields } from '../utils/Cypress';
 import { useCurrency } from '../providers/Currency.provider';
+import { useEffect } from 'react';
+import { pushFaroPage } from '../utils/telemetry/FaroEvents';
 
 const Home: NextPage = () => {
   const { selectedCurrency } = useCurrency();
@@ -19,6 +21,10 @@ const Home: NextPage = () => {
     queryKey: ['products', selectedCurrency],
     queryFn: () => ApiGateway.listProducts(selectedCurrency),
   });
+
+  useEffect(() => {
+    pushFaroPage('Home');
+  }, []);
 
   return (
     <Layout>

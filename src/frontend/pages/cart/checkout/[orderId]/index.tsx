@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { NextPage } from 'next';
+import { useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -14,10 +15,17 @@ import Recommendations from '../../../../components/Recommendations';
 import AdProvider from '../../../../providers/Ad.provider';
 import * as S from '../../../../styles/Checkout.styled';
 import { IProductCheckout } from '../../../../types/Cart';
+import { pushFaroPage } from '../../../../utils/telemetry/FaroEvents';
 
 const Checkout: NextPage = () => {
   const { query } = useRouter();
   const { items = [], shippingAddress } = JSON.parse((query.order || '{}') as string) as IProductCheckout;
+
+  useEffect(() => {
+    pushFaroPage('checkout/[orderId]', {
+      orderId: typeof query.orderId === 'string' ? query.orderId : query.orderId?.join('') ?? '',
+    });
+  }, [query.orderId]);
 
   return (
     <AdProvider

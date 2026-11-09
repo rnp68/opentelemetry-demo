@@ -9,6 +9,7 @@ import CartProvider from '../providers/Cart.provider';
 import { ThemeProvider } from 'styled-components';
 import Theme from '../styles/Theme';
 import FrontendTracer from '../utils/telemetry/FrontendTracer';
+import Faro from '../utils/telemetry/FaroTracer';
 import SessionGateway from '../gateways/Session.gateway';
 import { OpenFeatureProvider, OpenFeature } from '@openfeature/react-sdk';
 import { FlagdWebProvider } from '@openfeature/flagd-web-provider';
@@ -19,13 +20,17 @@ declare global {
       NEXT_PUBLIC_PLATFORM?: string;
       NEXT_PUBLIC_OTEL_SERVICE_NAME?: string;
       NEXT_PUBLIC_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT?: string;
+      NEXT_GRAFANA_FARO_ENDPOINT?: string;
       IS_SYNTHETIC_REQUEST?: string;
     };
   }
 }
 
 if (typeof window !== 'undefined') {
-  FrontendTracer();
+  // Faro replaces the plain OpenTelemetry browser tracer when it is configured.
+  if (!Faro()) {
+    FrontendTracer();
+  }
   if (window.location) {
     const session = SessionGateway.getSession();
 

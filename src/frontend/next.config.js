@@ -24,9 +24,12 @@ const {
   OTEL_EXPORTER_OTLP_TRACES_ENDPOINT = '',
   OTEL_SERVICE_NAME = 'frontend',
   PUBLIC_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT = '',
+  GRAFANA_FARO_ENDPOINT = '',
 } = process.env;
 
 const nextConfig = {
+  // Source maps let Faro show readable browser stack traces.
+  productionBrowserSourceMaps: true,
   reactStrictMode: true,
   output: 'standalone',
   compiler: {
@@ -55,6 +58,7 @@ const nextConfig = {
     NEXT_PUBLIC_PLATFORM: ENV_PLATFORM,
     NEXT_PUBLIC_OTEL_SERVICE_NAME: OTEL_SERVICE_NAME,
     NEXT_PUBLIC_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: PUBLIC_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT,
+    NEXT_GRAFANA_FARO_ENDPOINT: GRAFANA_FARO_ENDPOINT,
   },
   images: {
     loader: "custom",

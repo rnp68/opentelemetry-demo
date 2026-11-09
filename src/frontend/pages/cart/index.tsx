@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { NextPage } from 'next';
+import { useEffect } from 'react';
 import Head from 'next/head';
 import Footer from '../../components/Footer';
 import Layout from '../../components/Layout';
@@ -11,11 +12,16 @@ import CartDetail from '../../components/Cart/CartDetail';
 import EmptyCart from '../../components/Cart/EmptyCart';
 import { useCart } from '../../providers/Cart.provider';
 import AdProvider from '../../providers/Ad.provider';
+import { pushFaroPage } from '../../utils/telemetry/FaroEvents';
 
 const Cart: NextPage = () => {
   const {
     cart: { items },
   } = useCart();
+
+  useEffect(() => {
+    pushFaroPage('Cart');
+  }, []);
 
   return (
     <AdProvider

@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react';
 import { CypressFields } from '../../utils/Cypress';
 import Input from '../Input';
 import * as S from './CheckoutForm.styled';
+import { pushFaroError } from '../../utils/telemetry/FaroEvents';
 
 const currentYear = new Date().getFullYear();
 const yearList = Array.from(new Array(20), (v, i) => i + currentYear);
@@ -193,7 +194,15 @@ const CheckoutForm = ({ onSubmit }: IProps) => {
         <Link href="/">
           <S.CartButton $type="secondary">Continue Shopping</S.CartButton>
         </Link>
-        <S.CartButton data-cy={CypressFields.CheckoutPlaceOrder} type="submit">Place Order</S.CartButton>
+        {/* Demo behavior carried over from the Grafana fork: every order click reports a
+            synthetic Faro error, so there is always an error to explore in Faro. */}
+        <S.CartButton
+          data-cy={CypressFields.CheckoutPlaceOrder}
+          type="submit"
+          onClick={() => pushFaroError(new Error('Order not visible enough'))}
+        >
+          Place Order
+        </S.CartButton>
       </S.SubmitContainer>
     </S.CheckoutForm>
   );

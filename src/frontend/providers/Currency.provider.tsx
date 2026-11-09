@@ -5,6 +5,7 @@ import { createContext, useCallback, useContext, useMemo, useState, useEffect } 
 import { useQuery } from '@tanstack/react-query';
 import ApiGateway from '../gateways/Api.gateway';
 import SessionGateway from '../gateways/Session.gateway';
+import { pushFaroEvent, pushFaroLog } from '../utils/telemetry/FaroEvents';
 
 const { currencyCode } = SessionGateway.getSession();
 
@@ -40,6 +41,8 @@ const CurrencyProvider = ({ children }: IProps) => {
   const onSelectCurrency = useCallback((currencyCode: string) => {
     setSelectedCurrency(currencyCode);
     SessionGateway.setSessionValue('currencyCode', currencyCode);
+    pushFaroEvent('currency_select', { currency: currencyCode });
+    pushFaroLog(`Currency ${currencyCode} was selected`);
   }, []);
 
   const currencyCodeList = currencyCodeListUnsorted.sort();

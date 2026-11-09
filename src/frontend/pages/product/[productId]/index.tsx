@@ -20,6 +20,7 @@ import AdProvider from '../../../providers/Ad.provider';
 import { useCart } from '../../../providers/Cart.provider';
 import * as S from '../../../styles/ProductDetail.styled';
 import { useCurrency } from '../../../providers/Currency.provider';
+import { pushFaroEvent, pushFaroPage } from '../../../utils/telemetry/FaroEvents';
 
 const quantityOptions = new Array(10).fill(0).map((_, i) => i + 1);
 
@@ -35,6 +36,9 @@ const ProductDetail: NextPage = () => {
 
   useEffect(() => {
     setQuantity(1);
+    if (productId) {
+      pushFaroPage('product/[productId]', { productId });
+    }
   }, [productId]);
 
   const {
@@ -53,6 +57,7 @@ const ProductDetail: NextPage = () => {
   ) as { data: Product };
 
   const onAddItem = useCallback(async () => {
+    pushFaroEvent('add-to-cart', { productId, quantity: String(quantity) });
     await addItem({
       productId,
       quantity,
