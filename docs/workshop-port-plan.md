@@ -244,9 +244,11 @@ series left by the rolled-back run. It now requires a sample newer than the inst
 (`max(timestamp(kube_pod_info{cluster=...})) > <start>`); the test fails for the old query, and the
 new one was checked against the stack with a negative control (a future start time finds nothing).
 
+**Decommission, run on 2026-11-09:** `./start-local.sh --k8s-stop` removed the Helm release and the `otel-demo` namespace, and `install.sh --uninstall --context docker-desktop` removed the six Helm releases of the monitoring stack. Two things were still left on the cluster and were removed by hand: the `grafana-k8s-monitoring` namespace and the cluster-scoped CRD `alloys.collectors.grafana.com` (created by the Alloy operator; no script removes it yet). Without `--context` the installer used the current kubectl context (`minikube`) and stopped because it was not running; nothing was changed by that attempt.
+
 **Still not run:**
 
-- the other Kubernetes modes (`--k8s`, `--k8s-vanilla`, `--k8s-clean`, `--k8s-alloy-collector`, `--k8s-alloy-forward`) and minikube / OrbStack as the cluster; the AWS scripts; the `--k8s-alloy-forward` path through the installed Alloy receiver, and the uninstall/deactivation path of the installer;
+- the other Kubernetes modes (`--k8s`, `--k8s-vanilla`, `--k8s-clean`, `--k8s-alloy-collector`, `--k8s-alloy-forward`) and minikube / OrbStack as the cluster; the AWS scripts; the `--k8s-alloy-forward` path through the installed Alloy receiver, and the UI deactivation step of the installer's decommission guidance (the guidance is printed; deactivating is a manual UI step);
 - Faro and Pyroscope against Grafana Cloud (built and type-checked only);
 - Pyroscope and Faro data in Grafana (neither was enabled in this run).
 

@@ -12,7 +12,7 @@ it, or undo any part of it.
 | **Base** | `origin/K8s_basic`: the upstream OpenTelemetry Demo, version 2.0.2 (2025-05), plus one commit that adds `grafana-values.yaml` |
 | **Contents** | the deployment work of the `minikube` branch (re-implemented for the 2025 code), plus the Grafana fork's Faro and Pyroscope additions |
 | **Excluded on purpose** | the `grafana/` exports (about 1,000 files from one Grafana stack), Drone CI, Renovate, `docker-compose.nocache.yml`, `src/frontend/Dockerfile.ci`, the buildkit change, the fork's banner text, `.claude/settings.json` |
-| **Pushed** | not pushed at the time of writing |
+| **Pushed** | yes: `origin/workshop` on `rnp68/opentelemetry-demo` (a public fork) |
 
 **Related documents:** [deployment-guide.md](deployment-guide.md) (overview and 1-click scripts) |
 [manual-deployment.md](manual-deployment.md) (every step by hand) | [configuration.md](configuration.md) (every variable) |

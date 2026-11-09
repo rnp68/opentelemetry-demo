@@ -79,7 +79,7 @@ Default = value used when the variable is empty or `unknown`. **—** means ther
 | `OTEL_DEMO_CHART_VERSION` | `0.37.8` |  | start-local.sh (Kubernetes modes), deploy-aws.sh | open-telemetry/opentelemetry-demo chart version; 0.37.8 ships demo 2.0.2, the version on this branch. |
 | `OTEL_DEMO_NAMESPACE` | `otel-demo` |  | start-local.sh (Kubernetes modes), deploy-aws.sh, teardown-aws.sh | Kubernetes namespace of the demo. |
 | `OTEL_DEMO_RELEASE` | `opentelemetry-demo` |  | start-local.sh (Kubernetes modes), deploy-aws.sh, teardown-aws.sh | Helm release name of the demo. |
-| `K8S_CONTEXT` | first of `orbstack`, `docker-desktop`, `minikube` that exists |  | start-local.sh, k8s-monitoring install.sh | kubectl context to use. Only local clusters are auto-selected; set this to use any other. |
+| `K8S_CONTEXT` | `start-local.sh`: first of `orbstack`, `docker-desktop`, `minikube` that exists. `install.sh`: your **current** kubectl context |  | start-local.sh, k8s-monitoring install.sh | kubectl context to use. `start-local.sh` auto-selects only local clusters. `install.sh` does not look for local clusters: it uses the current context, so set this (or pass `--context NAME`) whenever the current context is not the cluster you mean. |
 | `ALLOY_CHART_VERSION` | `1.8.1` |  | start-local.sh --k8s-alloy-collector | Chart version of grafana/alloy used by --k8s-alloy-collector. |
 | `MINIKUBE_CPUS` | `4` |  | start-local.sh (only when it offers to start minikube) | CPUs for a minikube cluster the script starts. |
 | `MINIKUBE_MEMORY_MB` | `8192` |  | same as MINIKUBE_CPUS | Memory in MB for that cluster. |
